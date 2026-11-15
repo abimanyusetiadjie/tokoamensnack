@@ -104,7 +104,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="id">
+    <html
+      lang="id"
+      className={`${geistSans.variable} ${geistMono.variable} ${inter.variable} ${playfair.variable}`}
+    >
       <head>
         <script
           type="application/ld+json"
@@ -113,9 +116,7 @@ export default function RootLayout({
           }}
         />
       </head>
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} ${inter.variable} ${playfair.variable} antialiased`}
-      >
+      <body className="font-sans antialiased">
         <Navbar />
         <main>{children}</main>
         <Footer />

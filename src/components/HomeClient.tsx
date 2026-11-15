@@ -83,11 +83,11 @@ export function HomeClient() {
             <span className="inline-flex items-center gap-2 rounded-full bg-brand-red/10 px-3.5 py-1.5 text-xs font-semibold text-brand-red mb-4">
               <Store className="w-3.5 h-3.5 shrink-0" />
               <span>
-                Terdaftar di Sisparnas Kemenpar &bull; Rating {STORE_INFO.rating}★ Google Maps
+                Sisparnas Kemenpar &bull; Rating {STORE_INFO.rating}★ Google Maps
               </span>
             </span>
 
-            <h1 className="font-inter font-extrabold text-3xl sm:text-4xl lg:text-[50px] xl:text-[56px] leading-[1.12] tracking-tight text-gray-900">
+            <h1 className="font-inter font-extrabold text-3xl sm:text-4xl lg:text-[42px] xl:text-[48px] leading-[1.18] sm:leading-[1.16] lg:leading-[1.14] tracking-tight text-gray-900">
               Oleh-Oleh <span className="text-brand-red">KHAS</span>
               <br />
               Bangka Terlengkap
@@ -138,11 +138,11 @@ export function HomeClient() {
       {/* SECTION 2: WATERMARK STRIP + OVERLAPPING ROUNDED WHITE SHEET      */}
       {/* + PROMO FLYER EMBLA CAROUSEL (1:1 Template Signature)             */}
       {/* ================================================================= */}
-      <section className="relative bg-brand-soft pt-6">
+      <section className="relative bg-brand-soft pt-12 sm:pt-14">
         {/* Subtle Repeated Vector Monogram Watermark Strip */}
         <div
           aria-hidden="true"
-          className="pointer-events-none absolute inset-x-0 top-0 h-32 opacity-20 overflow-hidden"
+          className="pointer-events-none absolute inset-x-0 top-0 h-32 opacity-30 overflow-hidden"
         >
           <MediaImage
             src="/images/banners/watermark-pattern.webp"
