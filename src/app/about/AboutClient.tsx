@@ -209,7 +209,8 @@ export function AboutClient() {
                 target="_blank"
                 rel="noopener noreferrer"
                 className={buttonVariants({
-                  className: "rounded-full w-fit text-xs sm:text-sm font-semibold bg-brand-orange hover:bg-brand-orange-dark",
+                  variant: "secondary",
+                  className: "rounded-full w-fit text-xs sm:text-sm font-semibold",
                 })}
               >
                 Konsultasi Paket Reseller

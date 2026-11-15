@@ -48,6 +48,13 @@ const PILLAR_ICONS = {
   truck: Truck,
 };
 
+const AVATAR_BG_FALLBACKS = [
+  "bg-brand-red",
+  "bg-brand-orange",
+  "bg-brand-dark",
+  "bg-brand-red-dark",
+];
+
 function QuoteGlyph({ flip = false }: { flip?: boolean }) {
   return (
     <svg
@@ -373,7 +380,7 @@ export function HomeClient() {
               dotsClassName="mt-5"
             >
               <CarouselContent>
-                {TESTIMONIALS_COLLECTION.map((testi) => (
+                {TESTIMONIALS_COLLECTION.map((testi, testiIdx) => (
                   <CarouselItem
                     key={testi.id}
                     className="basis-full sm:basis-1/2 lg:basis-1/3"
@@ -383,7 +390,9 @@ export function HomeClient() {
                         {/* Avatar + Name Header */}
                         <div className="flex items-center gap-3 mb-4">
                           <div
-                            className={`w-11 h-11 rounded-full ${testi.avatarBg} text-white font-bold text-sm flex items-center justify-center shrink-0 shadow-sm`}
+                            className={`w-11 h-11 rounded-full ${
+                              AVATAR_BG_FALLBACKS[testiIdx % AVATAR_BG_FALLBACKS.length]
+                            } text-white font-bold text-sm flex items-center justify-center shrink-0 shadow-sm`}
                           >
                             {testi.avatarInitials}
                           </div>

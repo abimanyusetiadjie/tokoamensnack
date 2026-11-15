@@ -51,24 +51,24 @@ export function Navbar() {
 
       {/* Tier 2 Sticky Main Header */}
       <header className="sticky top-0 z-40 w-full transition-colors bg-brand-soft/95 backdrop-blur-md border-b border-rose-900/5 shadow-sm">
-        <div className="h-20 px-4 sm:px-6 lg:px-[6%] xl:px-[10%] flex justify-between items-center max-w-[1600px] mx-auto gap-4">
+        <div className="h-16 sm:h-20 px-3 sm:px-6 lg:px-[6%] xl:px-[10%] flex justify-between items-center max-w-[1600px] mx-auto gap-2 sm:gap-4">
           {/* Left: Hamburger + Stacked Brand Wordmark */}
-          <div className="flex items-center gap-3 shrink-0">
+          <div className="flex items-center gap-2 sm:gap-3 min-w-0 shrink-0">
             <button
               type="button"
               onClick={() => setMobileMenuOpen(true)}
               aria-label="Buka Menu Navigasi"
-              className="lg:hidden p-2 rounded-lg hover:bg-rose-100 text-brand-dark transition-colors"
+              className="lg:hidden p-1.5 sm:p-2 rounded-lg hover:bg-rose-100 text-brand-dark transition-colors shrink-0"
             >
-              <Menu className="h-6 w-6" />
+              <Menu className="h-5 w-5 sm:h-6 sm:w-6" />
             </button>
 
-            <Link href="/" className="flex items-center gap-2.5 group shrink-0">
-              <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-brand-red text-white shadow-sm group-hover:bg-brand-red-dark transition-colors">
+            <Link href="/" className="flex items-center gap-2 sm:gap-2.5 group shrink-0">
+              <span className="flex h-8 w-8 sm:h-10 sm:w-10 items-center justify-center rounded-xl bg-brand-red text-white shadow-sm group-hover:bg-brand-red-dark transition-colors shrink-0">
                 <svg
                   viewBox="0 0 24 24"
                   fill="none"
-                  className="h-6 w-6"
+                  className="h-5 w-5 sm:h-6 sm:w-6"
                   aria-hidden="true"
                 >
                   <path
@@ -87,10 +87,10 @@ export function Navbar() {
                 </svg>
               </span>
               <span className="flex flex-col leading-none">
-                <span className="text-[10px] font-bold tracking-[0.2em] uppercase text-brand-red whitespace-nowrap">
+                <span className="text-[8px] sm:text-[10px] font-bold tracking-[0.11em] sm:tracking-[0.2em] uppercase text-brand-red whitespace-nowrap">
                   Oleh-Oleh Khas Bangka
                 </span>
-                <span className="text-xl sm:text-[22px] font-extrabold tracking-tight text-brand-dark whitespace-nowrap">
+                <span className="text-base sm:text-xl xl:text-[22px] font-extrabold tracking-tight text-brand-dark whitespace-nowrap">
                   AMEN SNACK
                 </span>
               </span>
@@ -145,11 +145,11 @@ export function Navbar() {
               href={STORE_INFO.whatsappDirectCta}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-1.5 rounded-full bg-brand-red px-3.5 sm:px-4 py-2 text-xs xl:text-sm font-semibold text-white hover:bg-brand-red-dark whitespace-nowrap shadow-sm transition-colors"
+              className="inline-flex items-center gap-1.5 rounded-full bg-brand-red px-3 sm:px-4 py-1.5 sm:py-2 text-xs xl:text-sm font-semibold text-white hover:bg-brand-red-dark whitespace-nowrap shadow-sm transition-colors"
             >
               <Phone className="h-3.5 w-3.5" />
               <span className="hidden sm:inline">Pesan WhatsApp</span>
-              <span className="sm:hidden">WhatsApp</span>
+              <span className="sm:hidden">Chat WA</span>
             </a>
           </div>
         </div>
