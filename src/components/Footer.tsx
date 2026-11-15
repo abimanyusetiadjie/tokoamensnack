@@ -5,8 +5,8 @@ import { STORE_INFO } from "@/payload/seed-data";
 
 export function Footer() {
   return (
-    <footer className="bg-gradient-to-br from-brand-red-dark via-brand-red to-brand-orange-dark text-white">
-      <div className="container mx-auto px-6 py-16 max-w-7xl">
+    <footer className="footer-gradient w-full text-white pb-6">
+      <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-[10%] py-14">
         {/* Exact 1:1 3-Column Structure from tokomama.com */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
           {/* Column 1: Customer Inquiry Hotline & Store Address */}
@@ -52,7 +52,7 @@ export function Footer() {
 
           {/* Column 2: Explore & Grow Together */}
           <div>
-            <h2 className="text-xl font-bold mb-6">Jelajahi Amen Snack</h2>
+            <h2 className="text-xl font-bold mb-6">Mari Tumbuh Bersama</h2>
             <ul className="space-y-3 text-sm text-rose-50">
               <li>
                 <Link
@@ -154,62 +154,56 @@ export function Footer() {
         </div>
 
         {/* Centered Social Media Band — 1:1 Mirror of tokomama.com */}
-        <div className="mt-12 pt-8 pb-8 border-t border-b border-white/20 flex flex-col items-center justify-center gap-3 text-center">
-          <h3 className="text-lg sm:text-xl font-bold">
+        <div className="mt-14 pt-8 border-t border-white/20 flex flex-col items-center justify-center gap-3 text-center">
+          <h3 className="text-xl font-bold mb-1">
             Follow us on social media
           </h3>
-          <div className="flex flex-wrap items-center justify-center gap-3">
+          <div className="flex flex-wrap items-center justify-center gap-4">
             <a
               href={STORE_INFO.instagramUrl}
               target="_blank"
               rel="noopener noreferrer"
               aria-label="Instagram Toko Amen Snack"
-              className="inline-flex items-center gap-2 rounded-full bg-white/15 hover:bg-white/25 px-4 py-2 text-xs font-semibold text-white transition-colors"
+              className="flex h-10 w-10 items-center justify-center rounded-full bg-white/15 hover:bg-white/25 text-white transition-colors"
             >
-              <Instagram className="h-4 w-4" />
-              {STORE_INFO.instagramHandle}
+              <Instagram className="h-5 w-5" />
             </a>
             <a
               href={STORE_INFO.shopeeUrl}
               target="_blank"
               rel="noopener noreferrer"
-              aria-label="Shopee Toko Amen Snack"
-              className="inline-flex items-center gap-2 rounded-full bg-white/15 hover:bg-white/25 px-4 py-2 text-xs font-semibold text-white transition-colors"
+              aria-label={`Shopee ${STORE_INFO.shopeeHandle}`}
+              className="flex h-10 w-10 items-center justify-center rounded-full bg-white/15 hover:bg-white/25 text-white transition-colors"
             >
-              <ShoppingBag className="h-4 w-4" />
-              Shopee: {STORE_INFO.shopeeHandle}
+              <ShoppingBag className="h-5 w-5" />
             </a>
             <a
               href={STORE_INFO.whatsappDirectCta}
               target="_blank"
               rel="noopener noreferrer"
               aria-label="WhatsApp Toko Amen Snack"
-              className="inline-flex items-center gap-2 rounded-full bg-white/15 hover:bg-white/25 px-4 py-2 text-xs font-semibold text-white transition-colors"
+              className="flex h-10 w-10 items-center justify-center rounded-full bg-white/15 hover:bg-white/25 text-white transition-colors"
             >
-              <Phone className="h-4 w-4" />
-              {STORE_INFO.phone}
+              <Phone className="h-5 w-5" />
             </a>
             <a
               href={STORE_INFO.wazeUrl}
               target="_blank"
               rel="noopener noreferrer"
               aria-label="Navigasi Waze Toko Amen Snack"
-              className="inline-flex items-center gap-2 rounded-full bg-white/15 hover:bg-white/25 px-4 py-2 text-xs font-semibold text-white transition-colors"
+              className="flex h-10 w-10 items-center justify-center rounded-full bg-white/15 hover:bg-white/25 text-white transition-colors"
             >
-              <Navigation className="h-4 w-4" />
-              Waze
+              <Navigation className="h-5 w-5" />
             </a>
           </div>
+          <p className="text-xs text-rose-100/90 mt-1">
+            Terdaftar di Sisparnas Kemenpar RI &bull; Reputasi {STORE_INFO.rating}★ ({STORE_INFO.reviewCount}+ ulasan Google Maps)
+          </p>
         </div>
 
         {/* Centered Copyright Row */}
-        <div className="mt-8 text-center text-xs sm:text-sm text-rose-100 space-y-1">
-          <p>
-            &copy; 2026 {STORE_INFO.officialName}. Terdaftar di Sisparnas Kemenpar RI.
-          </p>
-          <p className="text-rose-100/85">
-            {STORE_INFO.address} &bull; Reputasi {STORE_INFO.rating}★ ({STORE_INFO.reviewCount}+ ulasan Google Maps)
-          </p>
+        <div className="mt-8 text-center text-sm text-rose-100">
+          Copyright 2026 &copy; {STORE_INFO.officialName}
         </div>
       </div>
     </footer>

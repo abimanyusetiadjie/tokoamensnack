@@ -12,14 +12,14 @@ export function ProductCard({ product }: { product: ProductItem }) {
 
   return (
     <Card className="brand-card rounded-2xl border border-rose-100 bg-white overflow-hidden h-full flex flex-col">
-      <div className="relative w-full aspect-square bg-brand-slate">
+      <div className="relative w-full aspect-square bg-[#fafaf8]">
         <MediaImage
           src={product.imageUrl}
           alt={product.name}
           fallbackLabel={product.name}
           fill
           sizes="(min-width: 1280px) 23vw, (min-width: 768px) 32vw, 48vw"
-          className="object-contain p-3"
+          className="object-contain p-4"
         />
         <span className="absolute top-3 left-3 inline-flex items-center rounded-full bg-brand-red text-white px-2.5 py-1 text-[10px] font-bold tracking-wide shadow-sm">
           {product.badge}

@@ -51,7 +51,7 @@ export function AboutClient() {
                 fallbackLabel={STORE_INFO.name}
                 fill
                 sizes="(min-width: 1024px) 50vw, 100vw"
-                className="object-cover"
+                className="object-contain p-3"
               />
             </div>
 

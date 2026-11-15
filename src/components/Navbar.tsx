@@ -23,84 +23,88 @@ export function Navbar() {
   return (
     <>
       {/* Tier 1 Top Bar — Mirrored 1:1 from tokomama.com */}
-      <div className="hidden lg:flex h-8 bg-brand-red-dark px-6 xl:px-[100px] py-2 justify-between items-center text-white text-[12px]">
-        <div className="font-medium truncate mr-6 flex items-center gap-2">
-          <span>{STORE_INFO.announcementText}</span>
+      <div className="hidden lg:flex h-8 bg-[#BE123C] px-6 lg:px-[100px] py-2 justify-between items-center text-white">
+        <div className="text-[11px] font-medium text-rose-100 truncate mr-4">
+          {STORE_INFO.announcementText}
         </div>
-        <div className="flex items-center shrink-0">
+        <div className="flex justify-end items-center gap-6 font-inter font-semibold text-xs text-white shrink-0">
           <Link
             href="/about#supplier"
-            className="text-white/95 hover:text-amber-200 px-3.5 border-r border-white/25 whitespace-nowrap transition-colors"
+            className="hover:opacity-80 whitespace-nowrap transition-opacity"
           >
-            Mitra Pengrajin Lokal
+            Mitra Pengrajin
           </Link>
           <Link
             href="/lokasi"
-            className="text-white/95 hover:text-amber-200 px-3.5 border-r border-white/25 whitespace-nowrap transition-colors"
+            className="hover:opacity-80 whitespace-nowrap transition-opacity"
           >
-            Jam Buka &amp; Rute
+            Lokasi Sungailiat
           </Link>
-          <Link
-            href="/about#tenant"
-            className="text-white/95 hover:text-amber-200 pl-3.5 whitespace-nowrap transition-colors"
+          <a
+            href={STORE_INFO.shopeeUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hover:opacity-80 whitespace-nowrap transition-opacity"
           >
-            Reseller &amp; Grosir
-          </Link>
+            Belanja di Shopee
+          </a>
+          <a
+            href={STORE_INFO.whatsappDirectCta}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hover:opacity-80 whitespace-nowrap transition-opacity"
+          >
+            Chat WhatsApp
+          </a>
         </div>
       </div>
 
-      {/* Tier 2 Sticky Main Header */}
-      <header className="sticky top-0 z-40 w-full transition-colors bg-brand-soft/95 backdrop-blur-md border-b border-rose-900/5 shadow-sm">
-        <div className="h-16 sm:h-20 px-3 sm:px-6 lg:px-[6%] xl:px-[10%] flex justify-between items-center max-w-[1600px] mx-auto gap-2 sm:gap-4">
-          {/* Left: Hamburger + Stacked Brand Wordmark */}
-          <div className="flex items-center gap-2 sm:gap-3 min-w-0 shrink-0">
-            <button
-              type="button"
-              onClick={() => setMobileMenuOpen(true)}
-              aria-label="Buka Menu Navigasi"
-              className="lg:hidden p-1.5 sm:p-2 rounded-lg hover:bg-rose-100 text-brand-dark transition-colors shrink-0"
-            >
-              <Menu className="h-5 w-5 sm:h-6 sm:w-6" />
-            </button>
+      {/* Tier 2 Sticky Main Header — Mirrored 1:1 from tokomama.com */}
+      <header className="sticky top-0 z-40 w-full transition-colors bg-brand-soft/95 backdrop-blur-sm border-b border-black/[0.04]">
+        <div className="h-20 px-4 sm:px-6 lg:px-[10%] py-4 flex justify-between items-center max-w-[1600px] mx-auto">
+          {/* Mobile Menu Button */}
+          <button
+            type="button"
+            onClick={() => setMobileMenuOpen(true)}
+            aria-label="Buka Menu Navigasi"
+            className="lg:hidden p-2 text-brand-dark hover:bg-black/5 rounded-md transition-colors"
+          >
+            <Menu className="w-6 h-6" />
+          </button>
 
-            <Link href="/" className="flex items-center gap-2 sm:gap-2.5 group shrink-0">
-              <span className="flex h-8 w-8 sm:h-10 sm:w-10 items-center justify-center rounded-xl bg-brand-red text-white shadow-sm group-hover:bg-brand-red-dark transition-colors shrink-0">
-                <svg
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  className="h-5 w-5 sm:h-6 sm:w-6"
-                  aria-hidden="true"
-                >
-                  <path
-                    d="M4.5 9.5C4.5 6.8 6.8 5 12 5C17.2 5 19.5 6.8 19.5 9.5C19.5 14.8 16.5 19 12 19C7.5 19 4.5 14.8 4.5 9.5Z"
-                    stroke="currentColor"
-                    strokeWidth="1.9"
-                  />
-                  <path
-                    d="M8.5 13C9.3 14.3 10.6 15 12 15C13.4 15 14.7 14.3 15.5 13"
-                    stroke="#FDE68A"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                  />
-                  <circle cx="9.2" cy="10.2" r="1.1" fill="#FFFFFF" />
-                  <circle cx="14.8" cy="10.2" r="1.1" fill="#FFFFFF" />
-                </svg>
+          {/* Stacked Lowercase Friendly Brand Logo (Toko Mama signature silhouette) */}
+          <Link href="/" className="flex items-center gap-2 group shrink-0">
+            <span className="flex flex-col leading-none">
+              <span className="font-inter font-extrabold text-[11px] tracking-[0.04em] lowercase text-brand-red -mb-0.5 pl-0.5">
+                toko
               </span>
-              <span className="flex flex-col leading-none">
-                <span className="text-[8px] sm:text-[10px] font-bold tracking-[0.11em] sm:tracking-[0.2em] uppercase text-brand-red whitespace-nowrap">
-                  Oleh-Oleh Khas Bangka
-                </span>
-                <span className="text-base sm:text-xl xl:text-[22px] font-extrabold tracking-tight text-brand-dark whitespace-nowrap">
-                  AMEN SNACK
-                </span>
+              <span className="font-inter font-black text-2xl sm:text-[26px] tracking-tight lowercase text-brand-red leading-none">
+                amen snack
               </span>
-            </Link>
-          </div>
+            </span>
+            <span className="flex h-6 w-6 items-center justify-center rounded-full bg-brand-orange text-white shadow-sm group-hover:scale-105 transition-transform shrink-0">
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                className="h-4 w-4"
+                aria-hidden="true"
+              >
+                <circle cx="9" cy="10" r="1.4" fill="currentColor" />
+                <circle cx="15" cy="10" r="1.4" fill="currentColor" />
+                <path
+                  d="M8 14C9.1 15.6 10.5 16.4 12 16.4C13.5 16.4 14.9 15.6 16 14"
+                  stroke="currentColor"
+                  strokeWidth="2.1"
+                  strokeLinecap="round"
+                />
+              </svg>
+            </span>
+          </Link>
 
-          {/* Center: Single-line Navigation Links + Signature Bottom Underline */}
+          {/* Desktop Navigation — Clean Single Row matching tokomama.com */}
           <nav
             aria-label="Navigasi Utama"
-            className="hidden lg:flex items-center gap-5 xl:gap-7 shrink-0"
+            className="hidden lg:flex gap-8 items-center"
           >
             {NAV_LINKS.map((link) => {
               const isActive =
@@ -113,45 +117,29 @@ export function Navbar() {
                   key={link.href}
                   href={link.href}
                   className={cn(
-                    "relative py-1 text-[14px] xl:text-[15px] font-medium whitespace-nowrap transition-colors",
-                    isActive
-                      ? "text-brand-red font-semibold"
-                      : "text-brand-dark hover:text-brand-red"
+                    "relative font-inter font-semibold text-[15px] leading-7 py-1 whitespace-nowrap transition-opacity hover:opacity-80",
+                    isActive ? "text-brand-red" : "text-brand-red/75"
                   )}
                 >
                   {link.label}
                   {isActive && (
-                    <span className="absolute -bottom-[26px] left-0 right-0 h-[3px] rounded-full bg-brand-red" />
+                    <span className="absolute left-0 right-0 -bottom-0.5 h-[3px] rounded-full bg-brand-red" />
                   )}
                 </Link>
               );
             })}
           </nav>
 
-          {/* Right: Compact Action Pills (Zero Wrap) */}
-          <div className="flex items-center gap-2 sm:gap-2.5 shrink-0">
-            <a
-              href={STORE_INFO.shopeeUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="hidden sm:inline-flex items-center gap-1.5 rounded-full border border-brand-orange bg-white px-3.5 py-2 text-xs xl:text-sm font-semibold text-brand-orange hover:bg-orange-50 whitespace-nowrap transition-colors"
-            >
-              <ShoppingBag className="h-3.5 w-3.5" />
-              <span className="hidden xl:inline">Belanja di Shopee</span>
-              <span className="xl:hidden">Shopee</span>
-            </a>
-
-            <a
-              href={STORE_INFO.whatsappDirectCta}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-1.5 rounded-full bg-brand-red px-3 sm:px-4 py-1.5 sm:py-2 text-xs xl:text-sm font-semibold text-white hover:bg-brand-red-dark whitespace-nowrap shadow-sm transition-colors"
-            >
-              <Phone className="h-3.5 w-3.5" />
-              <span className="hidden sm:inline">Pesan WhatsApp</span>
-              <span className="sm:hidden">Chat WA</span>
-            </a>
-          </div>
+          {/* Mobile Right Quick Action */}
+          <a
+            href={STORE_INFO.whatsappDirectCta}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="lg:hidden inline-flex items-center gap-1 rounded-full bg-brand-red/10 text-brand-red px-2.5 py-1 text-[11px] font-semibold"
+          >
+            <Phone className="w-3 h-3" />
+            <span>WhatsApp</span>
+          </a>
         </div>
       </header>
 
