@@ -1,0 +1,41 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --brand-red: #e11d48;
+  --brand-red-dark: #be123c;
+  --brand-orange: #f97316;
+  --brand-orange-dark: #ea580c;
+  --brand-dark: #0f172a;
+  --brand-soft: #fff1f2;
+  --brand-slate: #f8fafc;
+  --card: #ffffff;
+  --card-foreground: #0f172a;
+  --foreground: #0f172a;
+  --background: #fff1f2;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--brand-soft);
+  color: var(--foreground);
+  overflow-x: hidden;
+}
+
+.footer-gradient {
+  background: linear-gradient(120deg, #9f1239 0%, #e11d48 58%, #f97316 100%);
+}
+
+.brand-card {
+  box-shadow: 0px 4px 14px rgba(15, 23, 42, 0.04);
+  transition: box-shadow 0.2s ease, transform 0.2s ease;
+}
+
+.brand-card:hover {
+  box-shadow: 0px 12px 26px -6px rgba(225, 29, 72, 0.12),
+    0px 8px 12px -6px rgba(15, 23, 42, 0.06);
+}

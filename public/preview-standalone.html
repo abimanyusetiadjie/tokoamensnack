@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Toko Amen Snack Sungailiat - Pusat Oleh-Oleh &amp; Camilan Khas Bangka</title>
+    <meta
+      name="description"
+      content="Pusat oleh-oleh dan camilan khas Bangka terlengkap di Jl. Muhidin No.106 Sungailiat. Sedia Kemplang Panggang, Kemplang Pasir Cap AMEN, Getas Ikan, dan produk eksklusif khas Pulau Bangka."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              "brand-red": "#E11D48",
+              "brand-red-dark": "#BE123C",
+              "brand-orange": "#F97316",
+              "brand-orange-dark": "#EA580C",
+              "brand-dark": "#0F172A",
+              "brand-soft": "#FFF1F2",
+              "brand-slate": "#F8FAFC",
+            },
+            fontFamily: {
+              sans: ["Inter", "system-ui", "sans-serif"],
+            },
+          },
+        },
+      };
+    </script>
+    <style>
+      html { scroll-behavior: smooth; }
+      body { background-color: #FFF1F2; color: #0F172A; font-family: 'Inter', system-ui, sans-serif; }
+      .footer-gradient { background: linear-gradient(120deg, #9F1239 0%, #E11D48 58%, #F97316 100%); }
+      .brand-card { box-shadow: 0 4px 14px rgba(15, 23, 42, 0.04); transition: box-shadow 0.2s ease; }
+      .brand-card:hover { box-shadow: 0 12px 26px -6px rgba(225, 29, 72, 0.12); }
+    </style>
+  </head>
+  <body class="overflow-x-hidden">
+    <!-- Seksi 1: Top Announcement Bar & Sticky Navbar -->
+    <div class="bg-brand-red text-white text-xs py-2 px-4 sm:px-6 lg:px-[10%] text-center">
+      🎉 Pusat Oleh-Oleh &amp; Camilan Khas Bangka Terlengkap di Sungailiat — Melayani Pengiriman ke Seluruh Indonesia!
+    </div>
+
+    <header class="sticky top-0 z-40 w-full bg-white/95 backdrop-blur border-b border-rose-100">
+      <div class="h-20 px-4 sm:px-6 lg:px-[10%] flex justify-between items-center max-w-[1440px] mx-auto gap-4">
+        <a href="#" class="flex flex-col leading-none">
+          <span class="text-lg sm:text-xl font-extrabold text-brand-dark">AMEN SNACK</span>
+          <span class="text-[11px] font-semibold text-brand-red mt-0.5">Oleh-Oleh Khas Bangka</span>
+        </a>
+        <nav class="hidden lg:flex items-center gap-6 text-sm font-semibold text-slate-700">
+          <a href="#" class="text-brand-red">Beranda</a>
+          <a href="#katalog" class="hover:text-brand-red">Katalog Oleh-Oleh</a>
+          <a href="#kategori" class="hover:text-brand-red">Kategori</a>
+          <a href="#keunggulan" class="hover:text-brand-red">Keunggulan</a>
+          <a href="#lokasi" class="hover:text-brand-red">Lokasi Toko</a>
+        </nav>
+        <div class="flex items-center gap-2.5">
+          <a href="https://shopee.co.id/amensnack" target="_blank" rel="noopener noreferrer" class="hidden sm:inline-flex rounded-full border border-brand-orange text-brand-orange-dark font-semibold text-xs px-4 py-2.5 hover:bg-orange-50">
+            Belanja di Shopee
+          </a>
+          <a href="https://wa.me/6281368722622?text=Halo%20Admin%20Toko%20Amen%20Snack,%20saya%20ingin%20bertanya%20katalog%20oleh-oleh%20khas%20Bangka" target="_blank" rel="noopener noreferrer" class="inline-flex rounded-full bg-brand-red hover:bg-brand-red-dark text-white font-semibold text-xs px-4 py-2.5">
+            Pesan via WhatsApp
+          </a>
+        </div>
+      </div>
+    </header>
+
+    <!-- Seksi 2: Hero -->
+    <section class="bg-brand-soft py-12 lg:py-16">
+      <div class="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-[10%] grid grid-cols-1 md:grid-cols-12 items-center gap-8">
+        <div class="md:col-span-6 space-y-5">
+          <span class="inline-block rounded-full bg-white border border-rose-200 px-3.5 py-1.5 text-xs font-semibold text-brand-red">
+            🏆 Terdaftar di Sisparnas Kemenpar — Rating 4.5★ Google Maps
+          </span>
+          <h1 class="font-extrabold text-3xl sm:text-4xl lg:text-5xl text-brand-dark leading-tight">
+            Pusat Oleh-Oleh &amp; Camilan <span class="text-brand-red">Khas Bangka</span> <span class="text-brand-orange">Terlengkap</span>
+          </h1>
+          <p class="text-sm sm:text-base text-slate-700 leading-relaxed">
+            Nikmati gurih dan renyahnya Kemplang Panggang, Kemplang Pasir Cap AMEN, Getas Ikan, hingga produk eksklusif khas Pulau Bangka. Segar setiap hari dan ramah di kantong!
+          </p>
+          <div class="flex flex-wrap gap-3 pt-2">
+            <a href="#katalog" class="rounded-full bg-brand-red hover:bg-brand-red-dark text-white font-semibold text-sm px-6 py-3.5">
+              Lihat Katalog Produk
+            </a>
+            <a href="https://wa.me/6281368722622" target="_blank" rel="noopener noreferrer" class="rounded-full bg-white border-2 border-brand-orange text-brand-dark font-semibold text-sm px-6 py-3">
+              Chat WhatsApp (0813-6872-2622)
+            </a>
+          </div>
+        </div>
+        <div class="md:col-span-6">
+          <img src="/images/hero/toko-amen-hero.webp" alt="Toko Amen Snack Sungailiat" class="w-full rounded-3xl shadow-lg border border-rose-100 bg-white" />
+        </div>
+      </div>
+    </section>
+
+    <!-- Seksi 4: Katalog Produk Unggulan -->
+    <section id="katalog" class="bg-white py-14">
+      <div class="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-[10%]">
+        <h2 class="font-bold text-2xl sm:text-3xl text-brand-dark">Oleh-Oleh &amp; Camilan Terlaris</h2>
+        <p class="text-sm text-slate-600 mt-1 mb-8">Pilihan produk favorit keluarga dan wisatawan dengan kualitas terjamin.</p>
+        <div id="productGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5"></div>
+      </div>
+    </section>
+
+    <!-- Seksi 5: Kategori -->
+    <section id="kategori" class="bg-brand-slate py-14">
+      <div class="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-[10%]">
+        <div class="text-center max-w-2xl mx-auto mb-10">
+          <h2 class="font-bold text-2xl sm:text-3xl text-brand-dark">Kategori Produk Pilihan</h2>
+          <p class="text-sm text-slate-600 mt-1">Semua oleh-oleh khas Bangka Belitung ada di Toko Amen Snack.</p>
+        </div>
+        <div id="categoryGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5"></div>
+      </div>
+    </section>
+
+    <!-- Seksi 6: Keunggulan -->
+    <section id="keunggulan" class="bg-brand-soft py-14">
+      <div class="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-[10%]">
+        <h2 class="font-bold text-2xl sm:text-3xl text-center text-brand-dark mb-10">Mengapa Belanja di Toko Amen Snack?</h2>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div class="bg-white rounded-2xl p-6 border border-rose-100">
+            <h3 class="font-bold text-lg text-brand-dark">Asli &amp; Berkualitas</h3>
+            <p class="text-sm text-slate-600 mt-2">Menghadirkan kemplang, getas, dan camilan langsung dari produsen lokal terbaik di Bangka serta produk unggulan Cap AMEN.</p>
+          </div>
+          <div class="bg-white rounded-2xl p-6 border border-rose-100">
+            <h3 class="font-bold text-lg text-brand-dark">Harga Jujur &amp; Bersahabat</h3>
+            <p class="text-sm text-slate-600 mt-2">Harga ritel yang terjangkau mulai dari Rp5.000 hingga paket oleh-oleh keluarga yang hemat.</p>
+          </div>
+          <div class="bg-white rounded-2xl p-6 border border-rose-100">
+            <h3 class="font-bold text-lg text-brand-dark">Mudah Diakses (Offline &amp; Online)</h3>
+            <p class="text-sm text-slate-600 mt-2">Lokasi strategis di Jl. Muhidin Sungailiat serta melayani pemesanan online lewat WhatsApp dan Shopee.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Seksi 7: Lokasi -->
+    <section id="lokasi" class="bg-white py-14">
+      <div class="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-[10%]">
+        <h2 class="font-bold text-2xl sm:text-3xl text-brand-dark mb-6">Kunjungi Toko Fisik Kami di Sungailiat</h2>
+        <div class="rounded-3xl bg-brand-soft/60 border border-rose-100 p-6 sm:p-8 flex flex-col lg:flex-row justify-between gap-6">
+          <div class="space-y-2 text-sm text-slate-700">
+            <h3 class="font-extrabold text-xl text-brand-dark">Toko Amen Snack — Sungailiat</h3>
+            <p>Jl. Muhidin No.106, Sungailiat, Kabupaten Bangka, Kepulauan Bangka Belitung 33211</p>
+            <p><strong>Jam Buka:</strong> Senin – Sabtu (07.00 – 21.00 WIB) | Minggu (10.00 – 15.00 WIB)</p>
+            <p><strong>Telepon / WA:</strong> 0813-6872-2622</p>
+          </div>
+          <div class="flex flex-wrap items-center gap-3 shrink-0">
+            <a href="https://www.google.com/maps/place//data=!4m2!3m1!19sChIJx6EI03XzIi4RkYWEXb-mtBk" target="_blank" rel="noopener noreferrer" class="rounded-2xl bg-brand-red text-white font-semibold text-sm px-5 py-3">
+              Buka di Google Maps
+            </a>
+            <a href="https://www.waze.com/id/live-map/directions/id/kepulauan-bangka-belitung/toko-amen-snack?to=place.ChIJx6EI03XzIi4RkYWEXb-mtBk" target="_blank" rel="noopener noreferrer" class="rounded-2xl bg-brand-orange text-white font-semibold text-sm px-5 py-3">
+              Navigasi via Waze
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Seksi 9: Footer -->
+    <footer class="footer-gradient text-white py-12">
+      <div class="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-[10%] flex flex-col md:flex-row justify-between gap-6 text-sm">
+        <div class="max-w-md space-y-2">
+          <h3 class="font-extrabold text-lg">AMEN SNACK — Oleh-Oleh Khas Bangka</h3>
+          <p class="text-rose-50/90">Toko Amen Snack adalah pusat oleh-oleh dan camilan khas Bangka di Sungailiat yang menyediakan aneka kemplang, getas, kericu, dan makanan ringan berkualitas.</p>
+        </div>
+        <div class="space-y-1 text-rose-50/90">
+          <p>Jl. Muhidin No.106 Sungailiat | WA: +62 813-6872-2622</p>
+          <p>Shopee: shopee.co.id/amensnack | IG: @toko.amensnack</p>
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      const products = [
+        { name: 'Kemplang Pasir Bantet "Cap AMEN"', category: "Kemplang Pasir", price: "Rp10.000", badge: "Signature Brand", img: "/images/products/prd-01-kemplang-pasir-cap-amen.webp" },
+        { name: "Getas Istimewa Cap Obor (250g)", category: "Getas & Kerupuk", price: "Rp20.000", badge: "Terlaris (4.9★)", img: "/images/products/prd-02-getas-cap-obor.webp" },
+        { name: "Indomie Kaldu Udang (Eksklusif Bangka)", category: "Produk Khas Bangka", price: "Rp5.000", badge: "Eksklusif Bangka", img: "/images/products/prd-03-indomie-kaldu-udang-bangka.webp" },
+        { name: "Indomie Goreng Khas Bangka", category: "Produk Khas Bangka", price: "Rp7.000", badge: "Favorit Wisatawan", img: "/images/products/prd-04-indomie-goreng-bangka.webp" },
+        { name: "Kemplang Panggang JJ 2.5 Tali Biru", category: "Kemplang Panggang", price: "Rp32.000", badge: "Best Seller", img: "/images/products/prd-05-kemplang-panggang-jj.webp" },
+        { name: "Kemplang Panggang Khas Belinyu", category: "Kemplang Panggang", price: "Rp37.000", badge: "Kualitas Premium", img: "/images/products/prd-06-kemplang-panggang-belinyu.webp" },
+        { name: "Kecap Asin Asli Bangka Cap SS (300ml)", category: "Bumbu & Terasi", price: "Rp16.000", badge: "Bumbu Kuliner", img: "/images/products/prd-07-kecap-asin-cap-ss.webp" },
+        { name: "Kopi Curah No. 1 Khas Bangka (250g)", category: "Kopi & Minuman", price: "Hubungi CS", badge: "Aroma Khas", img: "/images/products/prd-08-kopi-curah-bangka.webp" },
+      ];
+      document.getElementById("productGrid").innerHTML = products.map((p) => `
+        <div class="brand-card rounded-2xl border border-rose-100 bg-white overflow-hidden flex flex-col">
+          <div class="aspect-square bg-brand-slate p-3"><img src="${p.img}" alt="${p.name}" class="w-full h-full object-contain" /></div>
+          <div class="p-4 flex-1 flex flex-col justify-between">
+            <div>
+              <span class="text-[11px] font-bold text-brand-orange uppercase">${p.category}</span>
+              <h3 class="font-bold text-sm text-brand-dark mt-1">${p.name}</h3>
+            </div>
+            <div class="mt-3 pt-3 border-t border-rose-50 flex items-center justify-between">
+              <span class="font-extrabold text-brand-red">${p.price}</span>
+              <a href="https://wa.me/6281368722622" target="_blank" rel="noopener noreferrer" class="rounded-lg bg-brand-red text-white text-xs font-semibold px-3 py-1.5">Pesan</a>
+            </div>
+          </div>
+        </div>
+      `).join("");
+
+      const categories = [
+        ["Kemplang Panggang & Oven", "Kemplang bakar arang/oven khas Bangka lengkap dengan sambal terasi."],
+        ["Kemplang Pasir & Goreng", "Kemplang sangrai pasir bebas minyak (termasuk produk khas Cap AMEN) serta kemplang siap goreng."],
+        ["Getas & Kerupuk Ikan", "Getas ikan tenggiri renyah dan aneka kerupuk olahan laut Bangka."],
+        ["Kericu & Olahan Laut", "Camilan telur cumi (kericu) gurih dan hasil laut kering khas Pulau Bangka."],
+        ["Bumbu & Terasi Bangka", "Terasi udang asli, kecap asin khas Bangka, dan bumbu masak tradisional."],
+        ["Kopi & Produk Khas Bangka", "Kopi bubuk curah pilihan, kue tradisional, dan mi instan varian eksklusif Bangka."],
+      ];
+      document.getElementById("categoryGrid").innerHTML = categories.map(([title, desc]) => `
+        <div class="brand-card rounded-2xl border border-rose-100 bg-white p-5">
+          <h3 class="font-bold text-base text-brand-dark">${title}</h3>
+          <p class="text-xs text-slate-600 mt-1.5">${desc}</p>
+        </div>
+      `).join("");
+    </script>
+  </body>
+</html>
