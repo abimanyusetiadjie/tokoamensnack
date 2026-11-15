@@ -48,6 +48,16 @@ export interface TestimonialItem {
   role: string;
   quote: string;
   rating: number;
+  avatarInitials: string;
+  avatarBg: string;
+}
+
+export interface PropositionBannerItem {
+  id: string;
+  title: string;
+  alt: string;
+  imageUrl: string;
+  href: string;
 }
 
 export interface ValuePillarItem {
@@ -157,6 +167,18 @@ export const FLYERS_COLLECTION: FlyerItem[] = [
     ctaLabel: "Belanja di Shopee",
     ctaHref: STORE_INFO.shopeeUrl,
     isExternal: true,
+  },
+  {
+    id: "promo-paket-wisatawan",
+    title: "Kunjungi Toko Fisik di Jl. Muhidin No.106",
+    badge: "Sisparnas Kemenpar • 4.5★ Google Maps",
+    period: "Buka Setiap Hari",
+    description:
+      "Belanja langsung aneka kemplang, getas, kopi bangka, dan paket oleh-oleh keluarga di Jl. Muhidin No.106, Sungailiat.",
+    alt: "Banner Etalase Toko Amen Snack Jl. Muhidin Sungailiat",
+    imageUrl: "/images/banners/promo-paket-wisatawan.webp",
+    ctaLabel: "Petunjuk Lokasi Toko",
+    ctaHref: "/lokasi",
   },
 ];
 
@@ -358,6 +380,30 @@ export const VALUE_PILLARS: ValuePillarItem[] = [
   },
 ];
 
+export const PROPOSITION_BANNERS: PropositionBannerItem[] = [
+  {
+    id: "prop-1",
+    title: "Pusat Oleh-Oleh Resmi Sungailiat",
+    alt: "Terdaftar Sisparnas Kemenpar dengan Rating 4.5 Google Maps",
+    imageUrl: "/images/banners/proposition-1.webp",
+    href: "/lokasi",
+  },
+  {
+    id: "prop-2",
+    title: "Produksi Internal Cap AMEN",
+    alt: "House Brand Cap AMEN Kemplang Pasir Bantet & Sambal Terasi",
+    imageUrl: "/images/banners/proposition-2.webp",
+    href: "/produk?kategori=kemplang-pasir",
+  },
+  {
+    id: "prop-3",
+    title: "Toko Fisik, WhatsApp & Shopee",
+    alt: "Belanja Langsung di Sungailiat atau Pengiriman Seluruh Indonesia",
+    imageUrl: "/images/banners/proposition-3.webp",
+    href: "/katalog",
+  },
+];
+
 export const TESTIMONIALS_COLLECTION: TestimonialItem[] = [
   {
     id: "testi-1",
@@ -366,6 +412,8 @@ export const TESTIMONIALS_COLLECTION: TestimonialItem[] = [
     quote:
       "Setiap pulang liburan dari Sungailiat pasti mampir ke Toko Amen Snack. Kemplang Pasir Cap AMEN dan Getas Cap Obor-nya renyah, sambal terasinya mantap, harganya jujur!",
     rating: 5,
+    avatarInitials: "RW",
+    avatarBg: "bg-brand-red",
   },
   {
     id: "testi-2",
@@ -374,6 +422,8 @@ export const TESTIMONIALS_COLLECTION: TestimonialItem[] = [
     quote:
       "Oleh-oleh khas Bangka paling komplit di Jl. Muhidin. Bisa sekalian cari Indomie Kaldu Udang Bangka, Kecap Asin Cap SS, sampai kemplang panggang Belinyu.",
     rating: 5,
+    avatarInitials: "HS",
+    avatarBg: "bg-brand-orange",
   },
   {
     id: "testi-3",
@@ -382,6 +432,18 @@ export const TESTIMONIALS_COLLECTION: TestimonialItem[] = [
     quote:
       "Sudah langganan kirim paket kemplang ke Bandung lewat Shopee amensnack dan WhatsApp admin. Packing rapi dan aman, kemplangnya sampai dalam kondisi utuh dan segar.",
     rating: 5,
+    avatarInitials: "MP",
+    avatarBg: "bg-slate-900",
+  },
+  {
+    id: "testi-4",
+    name: "Budi Santoso",
+    role: "Kolega Wisatawan • Google Review",
+    quote:
+      "Pelayanan ramah dan staf cepat membantu pilihkan oleh-oleh khas untuk keluarga besar di Palembang. Kopi curah Bangka dan kemplang panggang JJ 2.5 selalu jadi favorit.",
+    rating: 5,
+    avatarInitials: "BS",
+    avatarBg: "bg-rose-700",
   },
 ];
 

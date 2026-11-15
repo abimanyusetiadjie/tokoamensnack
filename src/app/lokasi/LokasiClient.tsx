@@ -155,6 +155,41 @@ export function LokasiClient() {
               </div>
             </Card>
           </div>
+
+          {/* Bottom Pre-Order & Group Gift CTA Banner (1:1 Template Architecture) */}
+          <div className="mt-10 rounded-3xl bg-gradient-to-r from-brand-red-dark via-brand-red to-brand-orange-dark p-7 sm:p-10 text-white shadow-md flex flex-col md:flex-row md:items-center justify-between gap-6">
+            <div className="max-w-2xl">
+              <span className="inline-block rounded-full bg-white/15 px-3 py-1 text-[11px] font-bold uppercase tracking-wider text-amber-200 mb-2">
+                Layanan Rombongan &amp; Luar Kota
+              </span>
+              <h2 className="text-xl sm:text-2xl font-extrabold">
+                Pesan Paket Oleh-Oleh Rombongan atau Kirim Luar Pulau
+              </h2>
+              <p className="text-sm text-rose-100 mt-2 leading-relaxed">
+                Jadwalkan pengambilan paket oleh-oleh di Jl. Muhidin No.106 agar langsung siap bawa saat tiba di Sungailiat, atau kirim ke seluruh Indonesia via Shopee.
+              </p>
+            </div>
+            <div className="flex flex-wrap gap-3 shrink-0">
+              <a
+                href={STORE_INFO.whatsappDirectCta}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 rounded-full bg-white px-5 py-3 text-sm font-bold text-brand-red hover:bg-rose-50 transition-colors shadow-sm"
+              >
+                <MessageCircle className="h-4 w-4" />
+                Pre-Order via WhatsApp
+              </a>
+              <a
+                href={STORE_INFO.shopeeUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 rounded-full border border-white/40 bg-white/10 px-5 py-3 text-sm font-bold text-white hover:bg-white/20 transition-colors"
+              >
+                <ShoppingBag className="h-4 w-4" />
+                Kunjungi Shopee
+              </a>
+            </div>
+          </div>
         </div>
       </section>
     </div>

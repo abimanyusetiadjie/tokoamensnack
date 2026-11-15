@@ -14,6 +14,8 @@ type CarouselProps = {
   opts?: CarouselOptions;
   setApi?: (api: CarouselApi) => void;
   showDots?: boolean;
+  dotVariant?: "light" | "dark";
+  dotsClassName?: string;
 };
 
 type CarouselContextProps = {
@@ -41,6 +43,8 @@ function Carousel({
   opts,
   setApi,
   showDots = false,
+  dotVariant = "light",
+  dotsClassName,
   className,
   children,
   ...props
@@ -108,7 +112,7 @@ function Carousel({
       >
         {children}
         {showDots && scrollSnaps.length > 1 && (
-          <div className="flex items-center justify-center gap-2 mt-6" role="tablist">
+          <div className={cn("flex items-center justify-center gap-2 mt-6", dotsClassName)} role="tablist">
             {scrollSnaps.map((_, idx) => (
               <button
                 key={idx}
@@ -120,8 +124,12 @@ function Carousel({
                 className={cn(
                   "h-2 rounded-full transition-all",
                   selectedIndex === idx
-                    ? "w-6 bg-brand-red"
-                    : "w-2 bg-rose-200 hover:bg-rose-300"
+                    ? dotVariant === "dark"
+                      ? "w-6 bg-white"
+                      : "w-6 bg-brand-red"
+                    : dotVariant === "dark"
+                      ? "w-2 bg-white/40 hover:bg-white/70"
+                      : "w-2 bg-rose-300 hover:bg-rose-400"
                 )}
               />
             ))}

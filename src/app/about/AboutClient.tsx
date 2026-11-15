@@ -4,16 +4,22 @@ import {
   Award,
   BadgePercent,
   CheckCircle2,
+  Handshake,
   MapPin,
   MessageCircle,
   ShoppingBag,
+  Store,
   Truck,
 } from "lucide-react";
 import { PageHeroBanner } from "@/components/PageHeroBanner";
 import { Card } from "@/components/ui/card";
 import { MediaImage } from "@/components/MediaImage";
 import { buttonVariants } from "@/components/ui/button";
-import { STORE_INFO, VALUE_PILLARS } from "@/payload/seed-data";
+import {
+  PROPOSITION_BANNERS,
+  STORE_INFO,
+  VALUE_PILLARS,
+} from "@/payload/seed-data";
 
 const PILLAR_ICONS = {
   award: Award,
@@ -128,6 +134,87 @@ export function AboutClient() {
                 </Card>
               );
             })}
+          </div>
+
+          {/* 3 Visual Proposition Banners (1:1 Template Architecture) */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-5 mt-10">
+            {PROPOSITION_BANNERS.map((banner) => (
+              <Link
+                key={banner.id}
+                href={banner.href}
+                className="group relative aspect-[16/10] rounded-2xl overflow-hidden bg-white border border-rose-100 shadow-sm hover:shadow-md transition-all hover:-translate-y-0.5 block"
+              >
+                <MediaImage
+                  src={banner.imageUrl}
+                  alt={banner.alt}
+                  fill
+                  sizes="(max-width: 768px) 100vw, 33vw"
+                  className="object-cover transition-transform duration-300 group-hover:scale-[1.03]"
+                />
+              </Link>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Partnership Section (#supplier & #tenant matching template anchors) */}
+      <section className="py-14 bg-white border-t border-rose-100">
+        <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-[10%]">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <Card
+              id="supplier"
+              className="rounded-2xl border border-rose-100 bg-brand-soft/60 p-6 sm:p-8 scroll-mt-28 flex flex-col justify-between gap-4"
+            >
+              <div>
+                <div className="w-12 h-12 rounded-xl bg-white text-brand-red flex items-center justify-center shadow-sm mb-4">
+                  <Handshake className="h-6 w-6" />
+                </div>
+                <h2 className="font-inter font-bold text-xl text-brand-dark">
+                  Mitra Pengrajin Lokal &amp; Supplier Bangka
+                </h2>
+                <p className="text-sm text-slate-600 mt-2 leading-relaxed">
+                  Toko Amen Snack terbuka menjalin kerja sama dengan pengrajin kemplang, getas, kericu, terasi, dan kopi lokal terbaik di Sungailiat maupun Kabupaten Bangka.
+                </p>
+              </div>
+              <a
+                href={STORE_INFO.whatsappDirectCta}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={buttonVariants({
+                  variant: "outline",
+                  className: "rounded-full w-fit text-xs sm:text-sm font-semibold",
+                })}
+              >
+                Ajukan Titip Jual Produk
+              </a>
+            </Card>
+
+            <Card
+              id="tenant"
+              className="rounded-2xl border border-orange-100 bg-orange-50/50 p-6 sm:p-8 scroll-mt-28 flex flex-col justify-between gap-4"
+            >
+              <div>
+                <div className="w-12 h-12 rounded-xl bg-white text-brand-orange flex items-center justify-center shadow-sm mb-4">
+                  <Store className="h-6 w-6" />
+                </div>
+                <h2 className="font-inter font-bold text-xl text-brand-dark">
+                  Kemitraan Reseller, Grosir &amp; Paket Wisata
+                </h2>
+                <p className="text-sm text-slate-600 mt-2 leading-relaxed">
+                  Butuh pemesanan grosir kemplang Cap AMEN, hampers kantor, atau paket oleh-oleh rombongan wisata ke Pulau Bangka? Hubungi kami untuk harga khusus mitra.
+                </p>
+              </div>
+              <a
+                href={STORE_INFO.whatsappDirectCta}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={buttonVariants({
+                  className: "rounded-full w-fit text-xs sm:text-sm font-semibold bg-brand-orange hover:bg-brand-orange-dark",
+                })}
+              >
+                Konsultasi Paket Reseller
+              </a>
+            </Card>
           </div>
         </div>
       </section>
