@@ -33,7 +33,7 @@ export function LokasiClient() {
         <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-[10%]">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
             {/* Main Store Info Card */}
-            <Card className="lg:col-span-7 brand-card rounded-3xl p-6 sm:p-8 border border-rose-100 bg-brand-soft/45 flex flex-col justify-between gap-6">
+            <Card className="lg:col-span-7 brand-card rounded-3xl p-6 sm:p-8 border border-teal-900/10 bg-brand-soft/45 flex flex-col justify-between gap-6">
               <div className="space-y-4">
                 <div className="flex flex-wrap items-center gap-2">
                   <span className="inline-block text-xs font-bold uppercase tracking-wider text-white bg-brand-red px-3 py-1 rounded-full">
@@ -82,7 +82,7 @@ export function LokasiClient() {
                 </div>
               </div>
 
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-4 border-t border-rose-200/70">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-4 border-t border-teal-900/15">
                 <a
                   href={store.mapsUrl}
                   target="_blank"
@@ -107,7 +107,7 @@ export function LokasiClient() {
             </Card>
 
             {/* Online Order & Social Channels Card */}
-            <Card className="lg:col-span-5 rounded-3xl p-6 sm:p-8 border border-rose-100 bg-brand-dark text-white flex flex-col justify-between gap-6">
+            <Card className="lg:col-span-5 rounded-3xl p-6 sm:p-8 border border-teal-900/10 bg-brand-dark text-white flex flex-col justify-between gap-6">
               <div>
                 <span className="inline-block rounded-full bg-white/10 px-3 py-1 text-xs font-semibold text-amber-300 mb-3">
                   Pemesanan Daring &amp; Pengiriman Nasional
@@ -157,7 +157,7 @@ export function LokasiClient() {
           </div>
 
           {/* Bottom Pre-Order & Group Gift CTA Banner (1:1 Template Architecture) */}
-          <div className="mt-10 rounded-3xl bg-gradient-to-r from-brand-red-dark via-brand-red to-brand-orange-dark p-7 sm:p-10 text-white shadow-md flex flex-col md:flex-row md:items-center justify-between gap-6">
+          <div className="mt-10 rounded-3xl footer-gradient p-7 sm:p-10 text-white shadow-md flex flex-col md:flex-row md:items-center justify-between gap-6">
             <div className="max-w-2xl">
               <span className="inline-block rounded-full bg-white/15 px-3 py-1 text-[11px] font-bold uppercase tracking-wider text-amber-200 mb-2">
                 Layanan Rombongan &amp; Luar Kota
@@ -165,7 +165,7 @@ export function LokasiClient() {
               <h2 className="text-xl sm:text-2xl font-extrabold">
                 Pesan Paket Oleh-Oleh Rombongan atau Kirim Luar Pulau
               </h2>
-              <p className="text-sm text-rose-100 mt-2 leading-relaxed">
+              <p className="text-sm text-teal-100 mt-2 leading-relaxed">
                 Jadwalkan pengambilan paket oleh-oleh di Jl. Muhidin No.106 agar langsung siap bawa saat tiba di Sungailiat, atau kirim ke seluruh Indonesia via Shopee.
               </p>
             </div>
@@ -174,7 +174,7 @@ export function LokasiClient() {
                 href={STORE_INFO.whatsappDirectCta}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 rounded-full bg-white px-5 py-3 text-sm font-bold text-brand-red hover:bg-rose-50 transition-colors shadow-sm"
+                className="inline-flex items-center gap-2 rounded-full bg-white px-5 py-3 text-sm font-bold text-brand-red hover:bg-teal-50 transition-colors shadow-sm"
               >
                 <MessageCircle className="h-4 w-4" />
                 Pre-Order via WhatsApp

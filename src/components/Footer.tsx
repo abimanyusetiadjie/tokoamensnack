@@ -12,12 +12,12 @@ export function Footer() {
           {/* Column 1: Customer Inquiry Hotline & Store Address */}
           <div>
             <h2 className="text-lg sm:text-xl font-bold mb-4 sm:mb-6">Ada pertanyaan?</h2>
-            <p className="text-sm text-rose-100 mb-5 sm:mb-6 leading-relaxed">
+            <p className="text-sm text-teal-100 mb-5 sm:mb-6 leading-relaxed">
               Kami siap membantu pemesanan oleh-oleh khas Bangka untuk oleh-oleh keluarga, paket wisata, maupun pengiriman luar kota!
             </p>
             <div className="space-y-4">
               <div>
-                <p className="text-xs sm:text-sm font-semibold mb-1 text-rose-100">
+                <p className="text-xs sm:text-sm font-semibold mb-1 text-teal-100">
                   Telepon &amp; WhatsApp Admin
                 </p>
                 <a
@@ -28,13 +28,13 @@ export function Footer() {
                 >
                   {STORE_INFO.phone}
                 </a>
-                <p className="text-xs text-rose-100 mt-1">
+                <p className="text-xs text-teal-100 mt-1">
                   Senin – Sabtu ({STORE_INFO.openingHours.mondayToSaturday}) • Minggu ({STORE_INFO.openingHours.sunday})
                 </p>
               </div>
 
               <div>
-                <p className="text-xs sm:text-sm font-semibold mb-1 text-rose-100">
+                <p className="text-xs sm:text-sm font-semibold mb-1 text-teal-100">
                   Alamat Toko Fisik Sungailiat
                 </p>
                 <a
@@ -53,7 +53,7 @@ export function Footer() {
           {/* Column 2: Explore & Grow Together */}
           <div>
             <h2 className="text-lg sm:text-xl font-bold mb-4 sm:mb-6">Mari Tumbuh Bersama</h2>
-            <ul className="space-y-3 text-sm text-rose-50">
+            <ul className="space-y-3 text-sm text-teal-50">
               <li>
                 <Link
                   href="/about"
@@ -100,7 +100,7 @@ export function Footer() {
           {/* Column 3: Official Channels & Navigation */}
           <div>
             <h2 className="text-xl font-bold mb-6">Layanan Pelanggan</h2>
-            <ul className="space-y-3 text-sm text-rose-50">
+            <ul className="space-y-3 text-sm text-teal-50">
               <li>
                 <a
                   href={STORE_INFO.shopeeUrl}
@@ -196,13 +196,13 @@ export function Footer() {
               <Navigation className="h-5 w-5" />
             </a>
           </div>
-          <p className="text-xs text-rose-100/90 mt-1">
+          <p className="text-xs text-teal-100/90 mt-1">
             Terdaftar di Sisparnas Kemenpar RI &bull; Reputasi {STORE_INFO.rating}★ ({STORE_INFO.reviewCount}+ ulasan Google Maps)
           </p>
         </div>
 
         {/* Centered Copyright Row */}
-        <div className="mt-8 text-center text-sm text-rose-100">
+        <div className="mt-8 text-center text-sm text-teal-100">
           Copyright 2026 &copy; {STORE_INFO.officialName}
         </div>
       </div>

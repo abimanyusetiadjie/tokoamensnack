@@ -443,7 +443,7 @@ export const TESTIMONIALS_COLLECTION: TestimonialItem[] = [
       "Pelayanan ramah dan staf cepat membantu pilihkan oleh-oleh khas untuk keluarga besar di Palembang. Kopi curah Bangka dan kemplang panggang JJ 2.5 selalu jadi favorit.",
     rating: 5,
     avatarInitials: "BS",
-    avatarBg: "bg-rose-700",
+    avatarBg: "bg-emerald-800",
   },
 ];
 

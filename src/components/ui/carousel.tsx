@@ -129,7 +129,7 @@ function Carousel({
                       : "w-6 bg-brand-red"
                     : dotVariant === "dark"
                       ? "w-2 bg-white/40 hover:bg-white/70"
-                      : "w-2 bg-rose-300 hover:bg-rose-400"
+                      : "w-2 bg-teal-800/25 hover:bg-teal-800/45"
                 )}
               />
             ))}

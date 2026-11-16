@@ -11,7 +11,7 @@ export function ProductCard({ product }: { product: ProductItem }) {
   const waHref = getProductWhatsappUrl(product.name, product.formattedPrice);
 
   return (
-    <Card className="brand-card rounded-2xl border border-rose-100 bg-white overflow-hidden h-full flex flex-col">
+    <Card className="brand-card rounded-2xl border border-teal-900/10 bg-white overflow-hidden h-full flex flex-col">
       <div className="relative w-full aspect-square bg-[#fafaf8]">
         <MediaImage
           src={product.imageUrl}
@@ -47,7 +47,7 @@ export function ProductCard({ product }: { product: ProductItem }) {
           </p>
         </div>
 
-        <div className="pt-3 border-t border-rose-50">
+        <div className="pt-3 border-t border-teal-900/10">
           <div className="flex items-baseline justify-between mb-3">
             <span className="text-[11px] font-medium text-slate-500">Harga Acuan</span>
             <span className="font-extrabold text-base text-brand-red">

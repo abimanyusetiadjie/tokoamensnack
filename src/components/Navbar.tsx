@@ -23,8 +23,8 @@ export function Navbar() {
   return (
     <>
       {/* Tier 1 Top Bar — Mirrored 1:1 from tokomama.com */}
-      <div className="hidden lg:flex h-8 bg-[#BE123C] px-6 lg:px-[100px] py-2 justify-between items-center text-white">
-        <div className="text-[11px] font-medium text-rose-100 truncate mr-4">
+      <div className="hidden lg:flex h-8 bg-[#0B3B38] px-6 lg:px-[100px] py-2 justify-between items-center text-white">
+        <div className="text-[11px] font-medium text-teal-100 truncate mr-4">
           {STORE_INFO.announcementText}
         </div>
         <div className="flex justify-end items-center gap-6 font-inter font-semibold text-xs text-white shrink-0">
@@ -146,7 +146,7 @@ export function Navbar() {
           />
           <aside className="fixed top-0 left-0 bottom-0 w-72 max-w-[82vw] bg-brand-soft shadow-2xl p-6 flex flex-col justify-between z-10 overflow-y-auto">
             <div>
-              <div className="flex items-center justify-between pb-5 border-b border-rose-200/70">
+              <div className="flex items-center justify-between pb-5 border-b border-teal-900/15">
                 <div className="flex items-center gap-2">
                   <span className="flex flex-col leading-none">
                     <span className="font-inter font-extrabold text-[10px] lowercase text-brand-red -mb-0.5 pl-0.5">
@@ -173,7 +173,7 @@ export function Navbar() {
                   type="button"
                   onClick={() => setMobileMenuOpen(false)}
                   aria-label="Tutup Menu"
-                  className="p-2 rounded-lg hover:bg-rose-100 text-brand-red"
+                  className="p-2 rounded-lg hover:bg-teal-900/10 text-brand-red"
                 >
                   <X className="h-5 w-5" />
                 </button>
@@ -203,7 +203,7 @@ export function Navbar() {
                 })}
               </nav>
 
-              <div className="border-t border-rose-200/70 mt-5 pt-4 flex flex-col gap-1 text-xs font-semibold text-brand-red">
+              <div className="border-t border-teal-900/15 mt-5 pt-4 flex flex-col gap-1 text-xs font-semibold text-brand-red">
                 <Link
                   href="/about#supplier"
                   onClick={() => setMobileMenuOpen(false)}
@@ -221,7 +221,7 @@ export function Navbar() {
               </div>
             </div>
 
-            <div className="space-y-3 border-t border-rose-100 pt-5 mt-6">
+            <div className="space-y-3 border-t border-teal-900/10 pt-5 mt-6">
               <div className="rounded-xl bg-brand-soft p-3.5 text-xs text-brand-dark space-y-1">
                 <p className="font-bold flex items-center gap-1.5 text-brand-red">
                   <MapPin className="h-3.5 w-3.5 shrink-0" />

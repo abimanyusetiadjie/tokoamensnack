@@ -55,7 +55,7 @@ export function ProdukClient() {
       <section className="py-10 sm:py-14">
         <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-[10%]">
           {/* Filter Controls (Single clean horizontal scroll row on mobile, wrap on sm+) */}
-          <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4 pb-6 sm:pb-8 border-b border-rose-100">
+          <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4 pb-6 sm:pb-8 border-b border-teal-900/10">
             <div className="flex sm:flex-wrap items-center gap-2 overflow-x-auto pb-1 sm:pb-0 no-scrollbar">
               <button
                 type="button"
@@ -64,7 +64,7 @@ export function ProdukClient() {
                   "rounded-full px-4 py-2 text-xs font-semibold transition-colors cursor-pointer shrink-0",
                   selectedCategory === "semua"
                     ? "bg-brand-red text-white"
-                    : "bg-brand-soft text-brand-dark hover:bg-rose-100"
+                    : "bg-brand-soft text-brand-dark hover:bg-teal-900/10"
                 )}
               >
                 Semua ({PRODUCTS_COLLECTION.length})
@@ -78,7 +78,7 @@ export function ProdukClient() {
                     "rounded-full px-4 py-2 text-xs font-semibold transition-colors cursor-pointer shrink-0",
                     selectedCategory === cat.slug
                       ? "bg-brand-red text-white"
-                      : "bg-brand-soft text-brand-dark hover:bg-rose-100"
+                      : "bg-brand-soft text-brand-dark hover:bg-teal-900/10"
                   )}
                 >
                   {cat.title}
@@ -94,7 +94,7 @@ export function ProdukClient() {
                 onChange={(e) => setQuery(e.target.value)}
                 placeholder="Cari kemplang, getas, kopi..."
                 aria-label="Cari produk"
-                className="w-full rounded-full border border-rose-200 bg-brand-slate pl-10 pr-4 py-2 text-sm text-brand-dark focus:outline-none focus:border-brand-red focus:bg-white transition-colors"
+                className="w-full rounded-full border border-teal-900/20 bg-brand-slate pl-10 pr-4 py-2 text-sm text-brand-dark focus:outline-none focus:border-brand-red focus:bg-white transition-colors"
               />
             </div>
           </div>
@@ -107,7 +107,7 @@ export function ProdukClient() {
               ))}
             </div>
           ) : (
-            <div className="py-14 px-6 mt-8 rounded-2xl bg-brand-soft/60 border border-rose-100 text-center max-w-2xl mx-auto">
+            <div className="py-14 px-6 mt-8 rounded-2xl bg-brand-soft/60 border border-teal-900/10 text-center max-w-2xl mx-auto">
               <ShoppingBag className="w-10 h-10 text-brand-red mx-auto mb-3" />
               <p className="text-base font-bold text-brand-dark">
                 Stok kategori ini tersedia langsung di toko &amp; admin kami
@@ -140,7 +140,7 @@ export function ProdukClient() {
           )}
 
           {/* Category Showcase Cards */}
-          <div className="mt-16 pt-12 border-t border-rose-100">
+          <div className="mt-16 pt-12 border-t border-teal-900/10">
             <h2 className="font-inter font-bold text-2xl text-brand-dark mb-6">
               6 Kategori Utama Oleh-Oleh Khas Bangka
             </h2>
@@ -157,7 +157,7 @@ export function ProdukClient() {
                       "brand-card rounded-2xl p-5 flex items-start gap-4 border transition-colors h-full",
                       selectedCategory === category.slug
                         ? "border-brand-red bg-brand-soft"
-                        : "border-rose-100 bg-brand-slate hover:bg-brand-soft/60"
+                        : "border-teal-900/10 bg-brand-slate hover:bg-brand-soft/60"
                     )}
                   >
                     <div className="w-12 h-12 shrink-0 rounded-xl bg-gradient-to-br from-brand-red to-brand-orange text-white flex items-center justify-center shadow-sm">

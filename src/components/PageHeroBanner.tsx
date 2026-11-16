@@ -19,7 +19,7 @@ export function PageHeroBanner({
   subtitle,
 }: PageHeroBannerProps) {
   return (
-    <section className="bg-brand-soft pt-8 pb-10 sm:pt-10 sm:pb-12 border-b border-rose-100">
+    <section className="bg-brand-soft pt-8 pb-10 sm:pt-10 sm:pb-12 border-b border-teal-900/10">
       <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-[10%]">
         <nav
           aria-label="Breadcrumb"
