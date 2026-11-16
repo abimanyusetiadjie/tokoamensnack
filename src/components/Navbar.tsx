@@ -61,13 +61,13 @@ export function Navbar() {
 
       {/* Tier 2 Sticky Main Header — Mirrored 1:1 from tokomama.com */}
       <header className="sticky top-0 z-40 w-full transition-colors bg-brand-soft/95 backdrop-blur-sm border-b border-black/[0.04]">
-        <div className="h-20 px-4 sm:px-6 lg:px-[10%] py-4 flex justify-between items-center max-w-[1600px] mx-auto">
-          {/* Mobile Menu Button */}
+        <div className="relative h-16 lg:h-20 px-4 sm:px-6 lg:px-[10%] flex items-center justify-center lg:justify-between max-w-[1600px] mx-auto">
+          {/* Mobile Menu Button (left-pinned while Logo sits cleanly centered like tokomama.com) */}
           <button
             type="button"
             onClick={() => setMobileMenuOpen(true)}
             aria-label="Buka Menu Navigasi"
-            className="lg:hidden p-2 text-brand-dark hover:bg-black/5 rounded-md transition-colors"
+            className="lg:hidden absolute left-3 p-2 text-brand-dark hover:bg-black/5 rounded-md transition-colors"
           >
             <Menu className="w-6 h-6" />
           </button>
@@ -75,18 +75,18 @@ export function Navbar() {
           {/* Stacked Lowercase Friendly Brand Logo (Toko Mama signature silhouette) */}
           <Link href="/" className="flex items-center gap-2 group shrink-0">
             <span className="flex flex-col leading-none">
-              <span className="font-inter font-extrabold text-[11px] tracking-[0.04em] lowercase text-brand-red -mb-0.5 pl-0.5">
+              <span className="font-inter font-extrabold text-[10px] sm:text-[11px] tracking-[0.04em] lowercase text-brand-red -mb-0.5 pl-0.5">
                 toko
               </span>
-              <span className="font-inter font-black text-2xl sm:text-[26px] tracking-tight lowercase text-brand-red leading-none">
+              <span className="font-inter font-black text-[22px] sm:text-2xl lg:text-[26px] tracking-tight lowercase text-brand-red leading-none">
                 amen snack
               </span>
             </span>
-            <span className="flex h-6 w-6 items-center justify-center rounded-full bg-brand-orange text-white shadow-sm group-hover:scale-105 transition-transform shrink-0">
+            <span className="flex h-5 w-5 sm:h-6 sm:w-6 items-center justify-center rounded-full bg-brand-orange text-white shadow-sm group-hover:scale-105 transition-transform shrink-0">
               <svg
                 viewBox="0 0 24 24"
                 fill="none"
-                className="h-4 w-4"
+                className="h-3.5 w-3.5 sm:h-4 sm:w-4"
                 aria-hidden="true"
               >
                 <circle cx="9" cy="10" r="1.4" fill="currentColor" />
@@ -129,17 +129,6 @@ export function Navbar() {
               );
             })}
           </nav>
-
-          {/* Mobile Right Quick Action */}
-          <a
-            href={STORE_INFO.whatsappDirectCta}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="lg:hidden inline-flex items-center gap-1 rounded-full bg-brand-red/10 text-brand-red px-2.5 py-1 text-[11px] font-semibold"
-          >
-            <Phone className="w-3 h-3" />
-            <span>WhatsApp</span>
-          </a>
         </div>
       </header>
 
@@ -155,28 +144,42 @@ export function Navbar() {
             className="fixed inset-0 bg-slate-900/45 backdrop-blur-sm"
             onClick={() => setMobileMenuOpen(false)}
           />
-          <aside className="fixed top-0 left-0 bottom-0 w-72 max-w-[85vw] bg-white shadow-2xl p-6 flex flex-col justify-between z-10 overflow-y-auto">
+          <aside className="fixed top-0 left-0 bottom-0 w-72 max-w-[82vw] bg-brand-soft shadow-2xl p-6 flex flex-col justify-between z-10 overflow-y-auto">
             <div>
-              <div className="flex items-center justify-between pb-5 border-b border-rose-100">
-                <span className="flex flex-col leading-none">
-                  <span className="text-[10px] font-bold tracking-[0.18em] uppercase text-brand-red">
-                    Oleh-Oleh Khas Bangka
+              <div className="flex items-center justify-between pb-5 border-b border-rose-200/70">
+                <div className="flex items-center gap-2">
+                  <span className="flex flex-col leading-none">
+                    <span className="font-inter font-extrabold text-[10px] lowercase text-brand-red -mb-0.5 pl-0.5">
+                      toko
+                    </span>
+                    <span className="font-inter font-black text-xl lowercase text-brand-red leading-none">
+                      amen snack
+                    </span>
                   </span>
-                  <span className="text-lg font-extrabold text-brand-dark mt-0.5">
-                    AMEN SNACK
+                  <span className="flex h-5 w-5 items-center justify-center rounded-full bg-brand-orange text-white shrink-0">
+                    <svg viewBox="0 0 24 24" fill="none" className="h-3.5 w-3.5" aria-hidden="true">
+                      <circle cx="9" cy="10" r="1.4" fill="currentColor" />
+                      <circle cx="15" cy="10" r="1.4" fill="currentColor" />
+                      <path
+                        d="M8 14C9.1 15.6 10.5 16.4 12 16.4C13.5 16.4 14.9 15.6 16 14"
+                        stroke="currentColor"
+                        strokeWidth="2.1"
+                        strokeLinecap="round"
+                      />
+                    </svg>
                   </span>
-                </span>
+                </div>
                 <button
                   type="button"
                   onClick={() => setMobileMenuOpen(false)}
                   aria-label="Tutup Menu"
-                  className="p-2 rounded-lg hover:bg-rose-50 text-brand-muted hover:text-brand-dark"
+                  className="p-2 rounded-lg hover:bg-rose-100 text-brand-red"
                 >
                   <X className="h-5 w-5" />
                 </button>
               </div>
 
-              <div className="flex flex-col gap-1.5 mt-5">
+              <nav className="flex flex-col gap-1.5 mt-5">
                 {NAV_LINKS.map((link) => {
                   const isActive =
                     link.href === "/"
@@ -188,30 +191,30 @@ export function Navbar() {
                       href={link.href}
                       onClick={() => setMobileMenuOpen(false)}
                       className={cn(
-                        "rounded-xl px-4 py-3 text-base font-medium transition-colors",
+                        "rounded-xl px-4 py-2.5 text-sm font-semibold transition-colors",
                         isActive
-                          ? "bg-brand-soft text-brand-red font-semibold"
-                          : "text-brand-dark hover:bg-rose-50"
+                          ? "bg-brand-red/10 text-brand-red font-bold"
+                          : "text-brand-dark hover:bg-white/70"
                       )}
                     >
                       {link.label}
                     </Link>
                   );
                 })}
-              </div>
+              </nav>
 
-              <div className="border-t border-rose-100 mt-5 pt-4 flex flex-col gap-1 text-sm text-brand-muted">
+              <div className="border-t border-rose-200/70 mt-5 pt-4 flex flex-col gap-1 text-xs font-semibold text-brand-red">
                 <Link
                   href="/about#supplier"
                   onClick={() => setMobileMenuOpen(false)}
-                  className="px-4 py-2 hover:text-brand-red transition-colors"
+                  className="px-4 py-2 hover:opacity-80 transition-opacity"
                 >
                   Mitra Pengrajin Lokal
                 </Link>
                 <Link
                   href="/about#tenant"
                   onClick={() => setMobileMenuOpen(false)}
-                  className="px-4 py-2 hover:text-brand-red transition-colors"
+                  className="px-4 py-2 hover:opacity-80 transition-opacity"
                 >
                   Kemitraan Reseller &amp; Grosir
                 </Link>

@@ -21,7 +21,7 @@ export function LokasiClient() {
   const store = STORES_COLLECTION[0];
 
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-white overflow-x-clip">
       <PageHeroBanner
         breadcrumb="Lokasi Toko"
         badge="Amenitas Pariwisata Sisparnas Kemenpar • Rating 4.5★"

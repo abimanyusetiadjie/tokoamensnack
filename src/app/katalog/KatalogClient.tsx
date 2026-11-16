@@ -16,7 +16,7 @@ export function KatalogClient() {
   const [selectedFlyer, setSelectedFlyer] = useState<FlyerItem | null>(null);
 
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-white overflow-x-clip">
       <PageHeroBanner
         breadcrumb="Promo & Highlight"
         badge="Signature Brand Cap AMEN & Pengiriman Nasional"

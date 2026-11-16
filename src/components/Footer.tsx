@@ -5,26 +5,26 @@ import { STORE_INFO } from "@/payload/seed-data";
 
 export function Footer() {
   return (
-    <footer className="footer-gradient w-full text-white pb-6">
-      <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-[10%] py-14">
+    <footer className="footer-gradient w-full overflow-x-clip text-white pb-6">
+      <div className="max-w-[1440px] mx-auto px-5 sm:px-6 lg:px-[10%] py-10 sm:py-14">
         {/* Exact 1:1 3-Column Structure from tokomama.com */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 sm:gap-12">
           {/* Column 1: Customer Inquiry Hotline & Store Address */}
           <div>
-            <h2 className="text-xl font-bold mb-6">Ada pertanyaan?</h2>
-            <p className="text-sm text-rose-100 mb-6 leading-relaxed">
+            <h2 className="text-lg sm:text-xl font-bold mb-4 sm:mb-6">Ada pertanyaan?</h2>
+            <p className="text-sm text-rose-100 mb-5 sm:mb-6 leading-relaxed">
               Kami siap membantu pemesanan oleh-oleh khas Bangka untuk oleh-oleh keluarga, paket wisata, maupun pengiriman luar kota!
             </p>
             <div className="space-y-4">
               <div>
-                <p className="text-sm font-semibold mb-1 text-rose-100">
+                <p className="text-xs sm:text-sm font-semibold mb-1 text-rose-100">
                   Telepon &amp; WhatsApp Admin
                 </p>
                 <a
                   href={STORE_INFO.whatsappDirectCta}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-2xl font-bold text-amber-200 hover:text-white transition-colors inline-block"
+                  className="text-xl sm:text-2xl font-bold text-amber-200 hover:text-white transition-colors inline-block"
                 >
                   {STORE_INFO.phone}
                 </a>
@@ -34,14 +34,14 @@ export function Footer() {
               </div>
 
               <div>
-                <p className="text-sm font-semibold mb-1 text-rose-100">
+                <p className="text-xs sm:text-sm font-semibold mb-1 text-rose-100">
                   Alamat Toko Fisik Sungailiat
                 </p>
                 <a
                   href={STORE_INFO.googleMapsUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-sm text-white/95 hover:text-amber-200 transition-colors inline-flex items-start gap-2 leading-relaxed"
+                  className="text-sm text-white/95 hover:text-amber-200 transition-colors inline-flex items-start gap-2 leading-relaxed break-words"
                 >
                   <MapPin className="h-4 w-4 shrink-0 mt-0.5 text-amber-200" />
                   <span>{STORE_INFO.address}</span>
@@ -52,7 +52,7 @@ export function Footer() {
 
           {/* Column 2: Explore & Grow Together */}
           <div>
-            <h2 className="text-xl font-bold mb-6">Mari Tumbuh Bersama</h2>
+            <h2 className="text-lg sm:text-xl font-bold mb-4 sm:mb-6">Mari Tumbuh Bersama</h2>
             <ul className="space-y-3 text-sm text-rose-50">
               <li>
                 <Link

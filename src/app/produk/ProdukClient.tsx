@@ -44,7 +44,7 @@ export function ProdukClient() {
   }, [selectedCategory, query]);
 
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-white overflow-x-clip">
       <PageHeroBanner
         breadcrumb="Katalog Produk"
         badge="100% Asli Bangka • Cap AMEN & Produk Pilihan"
@@ -54,14 +54,14 @@ export function ProdukClient() {
 
       <section className="py-10 sm:py-14">
         <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-[10%]">
-          {/* Filter Controls */}
-          <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4 pb-8 border-b border-rose-100">
-            <div className="flex flex-wrap items-center gap-2">
+          {/* Filter Controls (Single clean horizontal scroll row on mobile, wrap on sm+) */}
+          <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4 pb-6 sm:pb-8 border-b border-rose-100">
+            <div className="flex sm:flex-wrap items-center gap-2 overflow-x-auto pb-1 sm:pb-0 no-scrollbar">
               <button
                 type="button"
                 onClick={() => setSelectedCategory("semua")}
                 className={cn(
-                  "rounded-full px-4 py-2 text-xs font-semibold transition-colors cursor-pointer",
+                  "rounded-full px-4 py-2 text-xs font-semibold transition-colors cursor-pointer shrink-0",
                   selectedCategory === "semua"
                     ? "bg-brand-red text-white"
                     : "bg-brand-soft text-brand-dark hover:bg-rose-100"
@@ -75,7 +75,7 @@ export function ProdukClient() {
                   type="button"
                   onClick={() => setSelectedCategory(cat.slug)}
                   className={cn(
-                    "rounded-full px-4 py-2 text-xs font-semibold transition-colors cursor-pointer",
+                    "rounded-full px-4 py-2 text-xs font-semibold transition-colors cursor-pointer shrink-0",
                     selectedCategory === cat.slug
                       ? "bg-brand-red text-white"
                       : "bg-brand-soft text-brand-dark hover:bg-rose-100"

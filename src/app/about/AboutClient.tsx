@@ -32,7 +32,7 @@ const PILLAR_ICONS = {
  */
 export function AboutClient() {
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-white overflow-x-clip">
       <PageHeroBanner
         breadcrumb="Tentang Kami"
         badge="Sisparnas Kemenpar • House Brand Cap AMEN"
