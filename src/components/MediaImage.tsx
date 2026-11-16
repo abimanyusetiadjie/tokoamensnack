@@ -2,44 +2,52 @@
 
 import React, { useState } from "react";
 import Image, { type ImageProps } from "next/image";
-import { ImageIcon } from "lucide-react";
+import { Package } from "lucide-react";
 import { cn } from "@/lib/utils";
 
-interface MediaImageProps extends Omit<ImageProps, "onError"> {
+interface MediaImageProps extends Omit<ImageProps, "onError" | "src"> {
+  src?: string | null;
   fallbackLabel?: string;
 }
 
 /**
  * Wrapper around Next.js Image that gracefully displays a clean branded fallback
- * card if a local placeholder or photo file is unavailable.
+ * card if an image URL is not yet uploaded or fails to load.
  */
 export function MediaImage({
+  src,
   alt,
   className,
   fallbackLabel,
   ...props
 }: MediaImageProps) {
   const [hasError, setHasError] = useState(false);
+  const cleanSrc = typeof src === "string" ? src.trim() : "";
 
-  if (hasError) {
+  if (!cleanSrc || hasError) {
     return (
       <div
         className={cn(
-          "flex flex-col items-center justify-center w-full h-full bg-brand-soft text-center p-4 border border-dashed border-brand-red/30",
+          "flex flex-col items-center justify-center w-full h-full bg-gradient-to-br from-brand-soft via-white to-amber-50/70 text-center p-4",
           className
         )}
       >
-        <ImageIcon className="w-8 h-8 text-brand-red/60 mb-2" aria-hidden="true" />
-        <span className="text-xs font-semibold text-brand-dark line-clamp-2">
+        <div className="w-11 h-11 rounded-2xl bg-brand-red/10 text-brand-red flex items-center justify-center mb-2.5">
+          <Package className="w-5 h-5" aria-hidden="true" />
+        </div>
+        <span className="text-xs font-bold text-brand-dark line-clamp-2 leading-snug max-w-[180px]">
           {fallbackLabel || alt}
         </span>
-        <span className="text-[10px] text-slate-500 mt-1">Foto produk (.webp)</span>
+        <span className="text-[10px] font-medium text-slate-500 mt-1">
+          Toko Amen Snack • Bangka
+        </span>
       </div>
     );
   }
 
   return (
     <Image
+      src={cleanSrc}
       alt={alt}
       className={className}
       onError={() => setHasError(true)}

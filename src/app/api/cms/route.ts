@@ -1,55 +1,62 @@
 import { NextResponse } from "next/server";
 import { payloadConfig } from "@/payload/payload.config";
 import {
+  getWebStoreAndKnowledge,
+  searchWebProducts,
+} from "@/lib/catalog";
+import {
   BLOGS_COLLECTION,
-  CATEGORIES_COLLECTION,
   FLYERS_COLLECTION,
-  PRODUCTS_COLLECTION,
   STORE_INFO,
   STORES_COLLECTION,
   TESTIMONIALS_COLLECTION,
   VALUE_PILLARS,
 } from "@/payload/seed-data";
 
+export const dynamic = "force-dynamic";
+
+/**
+ * Public Store CMS & Catalog Summary API (Supabase live + static brand fallbacks).
+ */
 export async function GET() {
+  const [{ store, knowledge, source }, catalog] = await Promise.all([
+    getWebStoreAndKnowledge(),
+    searchWebProducts({ featuredOnly: true, limit: 24, offset: 0 }),
+  ]);
+
   return NextResponse.json({
-    cms: "Toko Amen Snack CMS & Catalog API",
+    cms: "Toko Amen Snack CMS & Live Catalog API",
+    source,
     config: {
       collections: payloadConfig.collections.map((c) => c.slug),
       globals: payloadConfig.globals.map((g) => g.slug),
     },
     storeInfo: {
-      name: STORE_INFO.name,
-      tagline: STORE_INFO.tagline,
-      address: STORE_INFO.address,
-      phone: STORE_INFO.phone,
-      whatsappUrl: STORE_INFO.whatsappUrl,
-      instagramUrl: STORE_INFO.instagramUrl,
-      shopeeUrl: STORE_INFO.shopeeUrl,
-      wazeUrl: STORE_INFO.wazeUrl,
-      googleMapsUrl: STORE_INFO.googleMapsUrl,
-      rating: STORE_INFO.rating,
-      reviewCount: STORE_INFO.reviewCount,
-      openingHours: STORE_INFO.openingHours,
+      ...STORE_INFO,
+      name: store.name,
+      officialName: store.officialName,
+      address: store.address,
+      phone: store.phone,
+      whatsappUrl: store.whatsappUrl,
+      shopeeUrl: store.shopeeUrl,
+      wazeUrl: store.wazeUrl,
+      googleMapsUrl: store.mapsUrl,
+      openingHours: {
+        mondayToSaturday: store.openingHoursWeekday,
+        sunday: store.openingHoursSunday,
+      },
     },
-    featuredProducts: PRODUCTS_COLLECTION.map((p) => ({
-      id: p.id,
-      code: p.code,
-      name: p.name,
-      category: p.category,
-      categorySlug: p.categorySlug,
-      price: p.price,
-      formattedPrice: p.formattedPrice,
-      badge: p.badge,
-      rating: p.rating,
-      description: p.description,
-      imageUrl: p.imageUrl,
-    })),
+    knowledge,
+    totalLiveProducts:
+      catalog.categories.reduce((acc, c) => acc + c.productCount, 0) ||
+      catalog.total,
+    featuredProducts: catalog.items,
+    categories: catalog.categories,
     data: {
       storeInfo: STORE_INFO,
       flyers: FLYERS_COLLECTION,
-      products: PRODUCTS_COLLECTION,
-      categories: CATEGORIES_COLLECTION,
+      products: catalog.items,
+      categories: catalog.categories,
       valuePillars: VALUE_PILLARS,
       testimonials: TESTIMONIALS_COLLECTION,
       stores: STORES_COLLECTION,
