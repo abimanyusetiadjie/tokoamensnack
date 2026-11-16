@@ -109,14 +109,38 @@ export function ProdukClient() {
           ) : (
             <div className="py-14 px-6 mt-8 rounded-2xl bg-brand-soft/60 border border-teal-900/10 text-center max-w-2xl mx-auto">
               <ShoppingBag className="w-10 h-10 text-brand-red mx-auto mb-3" />
-              <p className="text-base font-bold text-brand-dark">
-                Stok kategori ini tersedia langsung di toko &amp; admin kami
-              </p>
-              <p className="text-sm text-slate-600 mt-1.5">
-                Silakan hubungi WhatsApp admin untuk menanyakan varian kericu, olahan laut kering,
-                atau produk oleh-oleh Bangka lainnya yang sedang ready hari ini.
-              </p>
+              {query.trim().length > 0 ? (
+                <>
+                  <p className="text-base font-bold text-brand-dark">
+                    Produk untuk kata kunci &ldquo;{query}&rdquo; tidak ditemukan
+                  </p>
+                  <p className="text-sm text-slate-600 mt-1.5">
+                    Coba ubah kata kunci pencarian Anda, atur ulang filter kategori, atau
+                    tanyakan langsung ketersediaan stok kepada admin toko kami.
+                  </p>
+                </>
+              ) : (
+                <>
+                  <p className="text-base font-bold text-brand-dark">
+                    Stok kategori ini tersedia langsung di toko &amp; admin kami
+                  </p>
+                  <p className="text-sm text-slate-600 mt-1.5">
+                    Silakan hubungi WhatsApp admin untuk menanyakan varian kericu, olahan laut
+                    kering, atau produk oleh-oleh Bangka lainnya yang sedang ready hari ini.
+                  </p>
+                </>
+              )}
               <div className="mt-5 flex flex-wrap items-center justify-center gap-3">
+                <button
+                  type="button"
+                  onClick={() => {
+                    setQuery("");
+                    setSelectedCategory("semua");
+                  }}
+                  className="inline-flex items-center gap-2 rounded-full border-2 border-brand-red bg-white hover:bg-teal-50 text-brand-red font-semibold text-xs px-5 py-2.5 transition-colors cursor-pointer"
+                >
+                  {query.trim().length > 0 ? "Reset Pencarian & Filter" : "Lihat Semua Produk"}
+                </button>
                 <a
                   href={STORE_INFO.whatsappDirectCta}
                   target="_blank"

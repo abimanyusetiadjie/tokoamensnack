@@ -101,12 +101,13 @@ export function BlogClient() {
             </div>
 
             <div className="overflow-y-auto p-6">
-              <div className="relative w-full aspect-[16/9] rounded-xl overflow-hidden mb-5 bg-brand-soft">
+              <div className="relative w-full aspect-[16/9] min-h-[180px] sm:min-h-[260px] shrink-0 rounded-xl overflow-hidden mb-5 bg-brand-soft">
                 <MediaImage
                   src={activePost.imageUrl}
                   alt={activePost.title}
                   fallbackLabel={activePost.title}
                   fill
+                  priority
                   sizes="(min-width: 768px) 640px, 100vw"
                   className="object-cover"
                 />

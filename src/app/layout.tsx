@@ -27,6 +27,7 @@ const playfair = Playfair_Display({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://tokoamensnack.vercel.app"),
   title: {
     default:
       "Toko Amen Snack Sungailiat - Pusat Oleh-Oleh & Camilan Khas Bangka",
