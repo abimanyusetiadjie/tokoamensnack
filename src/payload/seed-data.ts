@@ -118,7 +118,14 @@ export const STORE_INFO = {
   whatsappDirectCta:
     "https://wa.me/6281368722622?text=Halo%20Admin%20Toko%20Amen%20Snack,%20saya%20ingin%20bertanya%20katalog%20oleh-oleh%20khas%20Bangka",
   instagramHandle: "@toko.amensnack",
-  instagramUrl: "https://www.instagram.com/toko.amensnack/",
+  instagramUrl:
+    process.env.NEXT_PUBLIC_INSTAGRAM_URL || "https://www.instagram.com/toko.amensnack/",
+  tiktokHandle: "@toko.amensnack",
+  tiktokUrl:
+    process.env.NEXT_PUBLIC_TIKTOK_URL || "https://www.tiktok.com/@toko.amensnack",
+  facebookName: "Toko Amen Snack",
+  facebookUrl:
+    process.env.NEXT_PUBLIC_FACEBOOK_URL || "https://www.facebook.com/toko.amensnack",
   shopeeHandle: "amensnack",
   shopeeUrl: "https://shopee.co.id/amensnack",
   googleMapsPlaceId: "ChIJx6EI03XzIi4RkYWEXb-mtBk",
