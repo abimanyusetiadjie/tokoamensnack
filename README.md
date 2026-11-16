@@ -1,7 +1,6 @@
-# Toko Amen Snack — Pusat Oleh-Oleh & Camilan Khas Bangka (`1:1 Mirror Stack 'tokomama.com'`)
+# Toko Amen Snack — Pusat Oleh-Oleh & Camilan Khas Bangka 
 
-Website resmi **Toko Oleh-Oleh Khas Bangka Amen Snack** (*Jl. Muhidin No.106, Sungailiat, Kabupaten Bangka*) yang dibangun mengadaptasi secara utuh **arsitektur & struktur layout 1:1 template ritel `tokomama.com`** sesuai spesifikasi profil bisnis dan katalog pada [`project.md`](./project.md).
-
+Website resmi **Toko Oleh-Oleh Khas Bangka Amen Snack** (*Jl. Muhidin No.106, Sungailiat, Kabupaten Bangka*)
 ---
 
 ## Ringkasan Profil Bisnis & Identitas Brand
@@ -17,9 +16,9 @@ Website resmi **Toko Oleh-Oleh Khas Bangka Amen Snack** (*Jl. Muhidin No.106, Su
 
 ---
 
-## Pemetaan Arsitektur Template `tokomama.com` (1:1 Layout Parity)
+## Pemetaan Arsitektur 
 
-Seluruh pola visual utama template ritel `tokomama.com` dipertahankan dan disesuaikan menggunakan palet kuliner khas Bangka (**Primary Red `#E11D48`**, **Warm Orange `#F97316`**, **Soft Rose `#FFF1F2`**, **Dark Slate `#0F172A`**):
+ dipertahankan dan disesuaikan menggunakan palet kuliner khas Bangka (**Primary Red `#E11D48`**, **Warm Orange `#F97316`**, **Soft Rose `#FFF1F2`**, **Dark Slate `#0F172A`**):
 
 1. **Two-Tier Header & Sticky Navbar (`src/components/Navbar.tsx`)**
    - *Top announcement bar* merah tua dengan info layanan & tautan cepat kemitraan (`Mitra Pengrajin Lokal`, `Jam Buka & Rute`, `Reseller & Grosir`).
