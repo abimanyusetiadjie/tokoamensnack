@@ -60,7 +60,7 @@ const SERVICE_LINKS = [
 
 export function Footer() {
   return (
-    <footer className="footer-gradient w-full overflow-x-clip text-white pb-24 sm:pb-24 md:pb-10">
+    <footer className="footer-gradient w-full overflow-x-clip text-white border-t-[3px] border-brand-orange pb-24 sm:pb-24 md:pb-10">
       <div className="max-w-[1440px] mx-auto px-5 sm:px-6 lg:px-[10%] pt-10 sm:pt-14 pb-4">
         <div className="grid grid-cols-1 md:grid-cols-12 gap-7 md:gap-10 items-start">
           {/* Column 1: Customer Inquiry Hotline & Store Address */}
@@ -68,13 +68,13 @@ export function Footer() {
             <h2 className="text-lg sm:text-xl font-bold tracking-tight">
               Ada pertanyaan?
             </h2>
-            <p className="text-xs sm:text-sm text-teal-100/90 mt-1.5 leading-relaxed max-w-md">
+            <p className="text-xs sm:text-sm text-slate-200/90 mt-1.5 leading-relaxed max-w-md">
               Siap membantu pesanan oleh-oleh khas Bangka untuk keluarga, paket wisata, maupun kirim ke luar kota.
             </p>
 
-            <div className="mt-4 rounded-2xl bg-white/[0.07] border border-white/15 p-4 space-y-3.5">
+            <div className="mt-4 rounded-2xl bg-white/[0.08] border border-white/15 p-4 space-y-3.5">
               <div>
-                <p className="text-[11px] uppercase tracking-wider font-semibold text-teal-200/85">
+                <p className="text-[11px] uppercase tracking-wider font-semibold text-blue-100/85">
                   Telepon &amp; WhatsApp Admin
                 </p>
                 <a
@@ -86,14 +86,14 @@ export function Footer() {
                   <Phone className="h-4 w-4 shrink-0" />
                   <span>{STORE_INFO.phone}</span>
                 </a>
-                <p className="text-[11px] sm:text-xs text-teal-100/85 mt-1 leading-relaxed">
+                <p className="text-[11px] sm:text-xs text-slate-200/85 mt-1 leading-relaxed">
                   Sen–Sab {STORE_INFO.openingHours.mondayToSaturday} &bull; Minggu{" "}
                   {STORE_INFO.openingHours.sunday}
                 </p>
               </div>
 
               <div className="border-t border-white/10 pt-3">
-                <p className="text-[11px] uppercase tracking-wider font-semibold text-teal-200/85 mb-1">
+                <p className="text-[11px] uppercase tracking-wider font-semibold text-blue-100/85 mb-1">
                   Alamat Toko Sungailiat
                 </p>
                 <a
@@ -115,7 +115,7 @@ export function Footer() {
               <h2 className="text-xs sm:text-sm font-bold uppercase tracking-wider text-amber-200 mb-3 sm:mb-4">
                 Jelajahi Toko
               </h2>
-              <ul className="space-y-1 text-[13px] sm:text-sm text-teal-50/90">
+              <ul className="space-y-1 text-[13px] sm:text-sm text-slate-100/90">
                 {EXPLORE_LINKS.map((item) => (
                   <li key={item.href}>
                     <Link
@@ -133,7 +133,7 @@ export function Footer() {
               <h2 className="text-xs sm:text-sm font-bold uppercase tracking-wider text-amber-200 mb-3 sm:mb-4">
                 Layanan &amp; Akses
               </h2>
-              <ul className="space-y-1 text-[13px] sm:text-sm text-teal-50/90">
+              <ul className="space-y-1 text-[13px] sm:text-sm text-slate-100/90">
                 {SERVICE_LINKS.map((item) => (
                   <li key={item.label}>
                     {item.external ? (
@@ -166,7 +166,7 @@ export function Footer() {
             <h3 className="text-sm sm:text-base font-bold tracking-wide text-white">
               Ikuti Media Sosial Kami
             </h3>
-            <p className="text-xs text-teal-100/80 mt-0.5">
+            <p className="text-xs text-slate-200/80 mt-0.5">
               Info produk segar, promo oleh-oleh, dan kiriman luar kota
             </p>
           </div>
@@ -206,13 +206,13 @@ export function Footer() {
             </a>
           </div>
 
-          <p className="text-[11px] sm:text-xs text-teal-100/85 mt-1 leading-relaxed">
+          <p className="text-[11px] sm:text-xs text-slate-200/85 mt-1 leading-relaxed">
             Terdaftar di Sisparnas Kemenpar RI &bull; Reputasi {STORE_INFO.rating}★ ({STORE_INFO.reviewCount}+ Ulasan Google Maps)
           </p>
         </div>
 
         {/* Centered Copyright Row */}
-        <div className="mt-4 pt-3 text-center text-[11px] sm:text-sm text-teal-100/95">
+        <div className="mt-4 pt-3 text-center text-[11px] sm:text-sm text-slate-200/95">
           Copyright 2026 &copy; {STORE_INFO.officialName}
         </div>
       </div>

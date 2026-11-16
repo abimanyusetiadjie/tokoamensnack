@@ -3,17 +3,17 @@
 @tailwind utilities;
 
 :root {
-  --brand-red: #0d5c57;
-  --brand-red-dark: #09403c;
-  --brand-orange: #ea580c;
-  --brand-orange-dark: #c2410c;
-  --brand-dark: #111827;
-  --brand-soft: #fff8e8;
-  --brand-slate: #f8fafc;
+  --brand-red: #2e3677;
+  --brand-red-dark: #1c224f;
+  --brand-orange: #e93433;
+  --brand-orange-dark: #c82322;
+  --brand-dark: #0f172a;
+  --brand-soft: #f8fafc;
+  --brand-slate: #f1f5f9;
   --card: #ffffff;
-  --card-foreground: #111827;
-  --foreground: #111827;
-  --background: #fff8e8;
+  --card-foreground: #0f172a;
+  --foreground: #0f172a;
+  --background: #ffffff;
 }
 
 html {
@@ -40,7 +40,7 @@ body {
 }
 
 .footer-gradient {
-  background: linear-gradient(90deg, #0b3b38 0%, #0f625b 100%);
+  background: linear-gradient(135deg, #1b214f 0%, #2e3677 100%);
 }
 
 .brand-card {

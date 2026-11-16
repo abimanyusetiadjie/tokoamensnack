@@ -157,10 +157,10 @@ export function ChatbotWidget() {
         <div
           role="dialog"
           aria-label="Asisten Virtual Toko Amen Snack"
-          className="w-[calc(100vw-2rem)] sm:w-[390px] h-[min(76vh,540px)] bg-white rounded-3xl shadow-2xl border border-teal-900/15 flex flex-col overflow-hidden animate-in fade-in slide-in-from-bottom-4 duration-200"
+          className="w-[calc(100vw-2rem)] sm:w-[390px] h-[min(76vh,540px)] bg-white rounded-3xl shadow-2xl border border-slate-200 flex flex-col overflow-hidden animate-in fade-in slide-in-from-bottom-4 duration-200"
         >
           {/* Header */}
-          <div className="bg-brand-red text-white px-4 py-3.5 flex items-center justify-between gap-2 shrink-0">
+          <div className="bg-brand-red text-white px-4 py-3.5 flex items-center justify-between gap-2 shrink-0 border-b-2 border-brand-orange">
             <div className="flex items-center gap-2.5 min-w-0">
               <div className="w-9 h-9 rounded-full bg-white/15 border border-white/25 flex items-center justify-center shrink-0">
                 <Bot className="w-5 h-5 text-white" aria-hidden="true" />
@@ -169,7 +169,7 @@ export function ChatbotWidget() {
                 <p className="font-bold text-sm leading-tight truncate">
                   Asisten Toko Amen Snack
                 </p>
-                <p className="text-[11px] text-teal-100 flex items-center gap-1.5 mt-0.5">
+                <p className="text-[11px] text-slate-200 flex items-center gap-1.5 mt-0.5">
                   <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
                   <span>Cek Harga, Stok &amp; Jam Buka Live</span>
                 </p>
@@ -205,7 +205,7 @@ export function ChatbotWidget() {
             className="flex-1 overflow-y-auto bg-[#fafaf8] px-3.5 py-4 space-y-3"
           >
             {/* Welcome Card */}
-            <div className="bg-white border border-teal-900/10 rounded-2xl rounded-tl-sm p-3.5 shadow-2xs space-y-2.5">
+            <div className="bg-white border border-slate-200 rounded-2xl rounded-tl-sm p-3.5 shadow-2xs space-y-2.5">
               <div className="flex items-center gap-1.5 text-xs font-bold text-brand-red">
                 <Sparkles className="w-3.5 h-3.5 text-brand-orange" />
                 <span>Halo! Ada yang bisa saya bantu?</span>
@@ -222,7 +222,7 @@ export function ChatbotWidget() {
                     type="button"
                     disabled={isBusy}
                     onClick={() => handleSend(q)}
-                    className="rounded-full bg-brand-soft hover:bg-teal-100 text-brand-dark border border-teal-900/10 px-2.5 py-1 text-[11px] font-medium transition-colors cursor-pointer disabled:opacity-50"
+                    className="rounded-full bg-brand-soft hover:bg-slate-200/80 text-brand-dark border border-slate-200 px-2.5 py-1 text-[11px] font-medium transition-colors cursor-pointer disabled:opacity-50"
                   >
                     {q}
                   </button>
@@ -257,7 +257,7 @@ export function ChatbotWidget() {
                       "max-w-[88%] rounded-2xl px-3.5 py-2.5 shadow-2xs",
                       isUser
                         ? "bg-brand-red text-white rounded-tr-sm text-[13px] leading-relaxed"
-                        : "bg-white text-slate-800 border border-teal-900/10 rounded-tl-sm"
+                        : "bg-white text-slate-800 border border-slate-200 rounded-tl-sm"
                     )}
                   >
                     {isUser ? (
@@ -279,7 +279,7 @@ export function ChatbotWidget() {
 
             {isBusy && messages[messages.length - 1]?.role === "user" && (
               <div className="flex justify-start">
-                <div className="bg-white text-slate-600 border border-teal-900/10 rounded-2xl rounded-tl-sm px-3.5 py-2.5 text-xs inline-flex items-center gap-2 shadow-2xs">
+                <div className="bg-white text-slate-600 border border-slate-200 rounded-2xl rounded-tl-sm px-3.5 py-2.5 text-xs inline-flex items-center gap-2 shadow-2xs">
                   <Loader2 className="w-3.5 h-3.5 animate-spin text-brand-red" />
                   <span>Mencari info produk...</span>
                 </div>
@@ -303,7 +303,7 @@ export function ChatbotWidget() {
           </div>
 
           {/* Input Area */}
-          <div className="bg-white border-t border-teal-900/10 p-3 space-y-2 shrink-0">
+          <div className="bg-white border-t border-slate-200 p-3 space-y-2 shrink-0">
             <form
               onSubmit={(e) => {
                 e.preventDefault();
@@ -317,7 +317,7 @@ export function ChatbotWidget() {
                 onChange={(e) => setInput(e.target.value)}
                 placeholder="Tanya harga kemplang, stok, jam buka..."
                 disabled={isBusy}
-                className="flex-1 rounded-full border border-teal-900/20 bg-brand-slate px-4 py-2 text-xs sm:text-sm text-brand-dark focus:outline-none focus:border-brand-red focus:bg-white transition-colors"
+                className="flex-1 rounded-full border border-slate-300 bg-brand-slate px-4 py-2 text-xs sm:text-sm text-brand-dark focus:outline-none focus:border-brand-red focus:bg-white transition-colors"
               />
               <button
                 type="submit"
@@ -385,7 +385,7 @@ export function ChatbotWidget() {
             </>
           ) : (
             <>
-              <Sparkles className="w-4 h-4 text-brand-orange-light shrink-0" />
+              <Sparkles className="w-4 h-4 text-rose-200 shrink-0" />
               <span>Tanya Toko</span>
             </>
           )}

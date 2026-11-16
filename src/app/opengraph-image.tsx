@@ -1,3 +1,5 @@
+import fs from "node:fs";
+import path from "node:path";
 import { ImageResponse } from "next/og";
 
 export const alt =
@@ -8,10 +10,22 @@ export const size = {
 };
 export const contentType = "image/png";
 
+function getLogoDataUri(): string {
+  const logoPath = path.join(
+    process.cwd(),
+    "public",
+    "images",
+    "logo-amen-snack.png"
+  );
+  const base64 = fs.readFileSync(logoPath).toString("base64");
+  return `data:image/png;base64,${base64}`;
+}
+
 /**
  * Dynamic OpenGraph social share card (WhatsApp, Instagram, Google Share preview).
  */
 export default function OpenGraphImage() {
+  const logoSrc = getLogoDataUri();
   return new ImageResponse(
     (
       <div
@@ -21,11 +35,11 @@ export default function OpenGraphImage() {
           display: "flex",
           flexDirection: "column",
           justifyContent: "space-between",
-          backgroundColor: "#FFF8E8",
-          padding: "56px 72px",
+          backgroundColor: "#F8FAFC",
+          padding: "52px 72px",
         }}
       >
-        {/* Top Wordmark + Sisparnas Pill */}
+        {/* Top Official Logo + Sisparnas Pill */}
         <div
           style={{
             display: "flex",
@@ -34,44 +48,45 @@ export default function OpenGraphImage() {
             width: "100%",
           }}
         >
-          <div style={{ display: "flex", alignItems: "center", gap: 14 }}>
+          <div style={{ display: "flex", alignItems: "center", gap: 18 }}>
+            <img
+              src={logoSrc}
+              alt="Logo AMEN SNACK"
+              style={{
+                width: 82,
+                height: 90,
+                objectFit: "contain",
+              }}
+            />
             <div style={{ display: "flex", flexDirection: "column" }}>
               <span
                 style={{
-                  fontSize: 20,
-                  fontWeight: 800,
-                  color: "#0D5C57",
-                  lineHeight: 1,
+                  fontSize: 36,
+                  fontWeight: 900,
+                  color: "#2E3677",
+                  lineHeight: 1.05,
                 }}
               >
-                toko
+                TOKO AMEN SNACK
               </span>
               <span
                 style={{
-                  fontSize: 44,
-                  fontWeight: 900,
-                  color: "#0D5C57",
-                  lineHeight: 1,
+                  fontSize: 18,
+                  fontWeight: 700,
+                  color: "#E93433",
+                  marginTop: 4,
+                  letterSpacing: "0.04em",
                 }}
               >
-                amen snack
+                OLEH-OLEH KHAS BANGKA • SUNGAILIAT
               </span>
             </div>
-            <div
-              style={{
-                width: 34,
-                height: 34,
-                borderRadius: "9999px",
-                backgroundColor: "#EA580C",
-                display: "flex",
-              }}
-            />
           </div>
 
           <div
             style={{
               display: "flex",
-              backgroundColor: "#0D5C57",
+              backgroundColor: "#2E3677",
               color: "#FFFFFF",
               fontSize: 20,
               fontWeight: 700,
@@ -95,9 +110,9 @@ export default function OpenGraphImage() {
           <div
             style={{
               display: "flex",
-              fontSize: 64,
+              fontSize: 62,
               fontWeight: 900,
-              color: "#111827",
+              color: "#0F172A",
               lineHeight: 1.12,
             }}
           >
@@ -106,8 +121,8 @@ export default function OpenGraphImage() {
           <div
             style={{
               display: "flex",
-              fontSize: 28,
-              color: "#374151",
+              fontSize: 27,
+              color: "#475569",
               lineHeight: 1.4,
             }}
           >
@@ -121,10 +136,11 @@ export default function OpenGraphImage() {
             display: "flex",
             alignItems: "center",
             justifyContent: "space-between",
-            backgroundColor: "#0B3B38",
+            backgroundColor: "#1C224F",
             color: "#FFFFFF",
             padding: "20px 32px",
             borderRadius: "20px",
+            borderBottom: "6px solid #E93433",
           }}
         >
           <div style={{ display: "flex", fontSize: 22, fontWeight: 600 }}>
@@ -138,7 +154,7 @@ export default function OpenGraphImage() {
               color: "#FDE047",
             }}
           >
-            WA: 0813-6872-2622 | Shopee: amensnack
+            WA: 0813-6872-2622 | @toko.amensnack
           </div>
         </div>
       </div>

@@ -31,7 +31,7 @@ export function BlogClient() {
               <Card
                 key={post.id}
                 id={post.slug}
-                className="scroll-mt-28 brand-card rounded-2xl overflow-hidden border border-teal-900/10 bg-white flex flex-col"
+                className="scroll-mt-28 brand-card rounded-2xl overflow-hidden border border-slate-200/80 bg-white flex flex-col"
               >
                 <div className="relative w-full aspect-[16/10] bg-brand-soft">
                   <MediaImage
@@ -85,7 +85,7 @@ export function BlogClient() {
             onClick={(e) => e.stopPropagation()}
             className="max-w-2xl w-full bg-white rounded-2xl overflow-hidden shadow-2xl max-h-[90vh] flex flex-col"
           >
-            <div className="flex items-center justify-between px-6 py-4 border-b border-teal-900/10">
+            <div className="flex items-center justify-between px-6 py-4 border-b border-slate-200/80">
               <span className="inline-flex items-center gap-1.5 text-xs font-semibold text-brand-red">
                 <Calendar className="w-3.5 h-3.5" />
                 {activePost.publishedAt} • {activePost.readTime}
@@ -126,7 +126,7 @@ export function BlogClient() {
                 ))}
               </div>
 
-              <div className="mt-6 pt-5 border-t border-teal-900/10 flex flex-wrap gap-3">
+              <div className="mt-6 pt-5 border-t border-slate-200/80 flex flex-wrap gap-3">
                 <Link
                   href="/produk"
                   className={buttonVariants({

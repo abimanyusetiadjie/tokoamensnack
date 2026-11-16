@@ -12,7 +12,7 @@ const buttonVariants = cva(
         outline:
           "border border-brand-red text-brand-red bg-transparent hover:bg-brand-soft",
         ghost: "hover:bg-brand-soft text-brand-red",
-        icon: "bg-white text-brand-red border border-teal-900/15 shadow-md hover:bg-brand-soft",
+        icon: "bg-white text-brand-red border border-slate-200 shadow-md hover:bg-brand-soft",
       },
       size: {
         default: "h-10 px-4 py-2",

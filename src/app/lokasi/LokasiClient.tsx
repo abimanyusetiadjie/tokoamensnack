@@ -33,7 +33,7 @@ export function LokasiClient() {
         <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-[10%]">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
             {/* Main Store Info Card */}
-            <Card className="lg:col-span-7 brand-card rounded-3xl p-6 sm:p-8 border border-teal-900/10 bg-brand-soft/45 flex flex-col justify-between gap-6">
+            <Card className="lg:col-span-7 brand-card rounded-3xl p-6 sm:p-8 border border-slate-200/80 bg-brand-soft flex flex-col justify-between gap-6">
               <div className="space-y-4">
                 <div className="flex flex-wrap items-center gap-2">
                   <span className="inline-block text-xs font-bold uppercase tracking-wider text-white bg-brand-red px-3 py-1 rounded-full">
@@ -82,7 +82,7 @@ export function LokasiClient() {
                 </div>
               </div>
 
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-4 border-t border-teal-900/15">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-4 border-t border-slate-200">
                 <a
                   href={store.mapsUrl}
                   target="_blank"
@@ -97,7 +97,7 @@ export function LokasiClient() {
                   href={store.wazeUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center justify-center gap-2 rounded-2xl bg-brand-orange hover:bg-brand-orange-dark text-white font-semibold text-sm py-3.5 px-4 transition-colors"
+                  className="inline-flex items-center justify-center gap-2 rounded-2xl border-2 border-brand-red bg-white hover:bg-brand-soft text-brand-red font-semibold text-sm py-3.5 px-4 transition-colors"
                 >
                   <Navigation className="w-4 h-4" />
                   <span>Navigasi via Waze</span>
@@ -107,7 +107,7 @@ export function LokasiClient() {
             </Card>
 
             {/* Online Order & Social Channels Card */}
-            <Card className="lg:col-span-5 rounded-3xl p-6 sm:p-8 border border-teal-900/10 bg-brand-dark text-white flex flex-col justify-between gap-6">
+            <Card className="lg:col-span-5 rounded-3xl p-6 sm:p-8 border border-slate-800/10 bg-[#1C224F] text-white flex flex-col justify-between gap-6">
               <div>
                 <span className="inline-block rounded-full bg-white/10 px-3 py-1 text-xs font-semibold text-amber-300 mb-3">
                   Pemesanan Daring &amp; Pengiriman Nasional
@@ -165,7 +165,7 @@ export function LokasiClient() {
               <h2 className="text-xl sm:text-2xl font-extrabold">
                 Pesan Paket Oleh-Oleh Rombongan atau Kirim Luar Pulau
               </h2>
-              <p className="text-sm text-teal-100 mt-2 leading-relaxed">
+              <p className="text-sm text-slate-200 mt-2 leading-relaxed">
                 Jadwalkan pengambilan paket oleh-oleh di Jl. Muhidin No.106 agar langsung siap bawa saat tiba di Sungailiat, atau kirim ke seluruh Indonesia via Shopee.
               </p>
             </div>
@@ -174,7 +174,7 @@ export function LokasiClient() {
                 href={STORE_INFO.whatsappDirectCta}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 rounded-full bg-white px-5 py-3 text-sm font-bold text-brand-red hover:bg-teal-50 transition-colors shadow-sm"
+                className="inline-flex items-center gap-2 rounded-full bg-[#25D366] px-5 py-3 text-sm font-bold text-white hover:bg-[#20bd5a] transition-colors shadow-sm"
               >
                 <MessageCircle className="h-4 w-4" />
                 Pre-Order via WhatsApp

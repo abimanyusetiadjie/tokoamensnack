@@ -29,7 +29,7 @@ export function ProductCard({ product }: { product: ProductCardInput }) {
   if (unit) metaBits.push(unit);
 
   return (
-    <Card className="brand-card rounded-2xl border border-teal-900/10 bg-white overflow-hidden h-full flex flex-col">
+    <Card className="brand-card rounded-2xl border border-slate-200/80 bg-white overflow-hidden h-full flex flex-col">
       <div className="relative w-full aspect-square bg-[#fafaf8]">
         <MediaImage
           src={product.imageUrl}
@@ -40,7 +40,7 @@ export function ProductCard({ product }: { product: ProductCardInput }) {
           className="object-contain p-4"
         />
         {product.badge && (
-          <span className="absolute top-3 left-3 inline-flex items-center rounded-full bg-brand-red text-white px-2.5 py-1 text-[10px] font-bold tracking-wide shadow-sm">
+          <span className="absolute top-3 left-3 inline-flex items-center rounded-full bg-brand-orange text-white px-2.5 py-1 text-[10px] font-bold tracking-wide shadow-sm">
             {product.badge}
           </span>
         )}
@@ -60,7 +60,7 @@ export function ProductCard({ product }: { product: ProductCardInput }) {
       <div className="p-4 sm:p-5 flex-1 flex flex-col justify-between gap-3">
         <div>
           <div className="flex items-center justify-between gap-2">
-            <span className="text-[11px] font-bold uppercase tracking-wider text-brand-orange truncate">
+            <span className="text-[11px] font-bold uppercase tracking-wider text-brand-red/80 truncate">
               {product.category}
             </span>
             {metaBits.length > 0 ? (
@@ -84,7 +84,7 @@ export function ProductCard({ product }: { product: ProductCardInput }) {
           </p>
         </div>
 
-        <div className="pt-3 border-t border-teal-900/10">
+        <div className="pt-3 border-t border-slate-100">
           <div className="flex items-baseline justify-between gap-2 mb-1">
             <span className="text-[11px] font-medium text-slate-500">Harga Eceran</span>
             <span className="font-extrabold text-base text-brand-red">
@@ -94,7 +94,7 @@ export function ProductCard({ product }: { product: ProductCardInput }) {
           {wholesalePrice && (
             <div className="flex items-baseline justify-between gap-2 mb-2.5">
               <span className="text-[11px] font-medium text-slate-500">Harga Grosir</span>
-              <span className="font-bold text-xs text-brand-orange-dark bg-orange-50 px-2 py-0.5 rounded-full">
+              <span className="font-bold text-xs text-brand-orange-dark bg-rose-50 px-2 py-0.5 rounded-full">
                 {wholesalePrice}
               </span>
             </div>
@@ -106,7 +106,7 @@ export function ProductCard({ product }: { product: ProductCardInput }) {
               href={waHref}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center justify-center gap-1.5 rounded-xl bg-brand-red hover:bg-brand-red-dark text-white font-semibold text-xs py-2.5 px-2.5 transition-colors"
+              className="inline-flex items-center justify-center gap-1.5 rounded-xl bg-[#25D366] hover:bg-[#20bd5a] text-white font-semibold text-xs py-2.5 px-2.5 transition-colors shadow-xs"
             >
               <MessageCircle className="w-3.5 h-3.5 shrink-0" aria-hidden="true" />
               <span>WhatsApp</span>
@@ -115,7 +115,7 @@ export function ProductCard({ product }: { product: ProductCardInput }) {
               href={product.shopeeUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center justify-center gap-1.5 rounded-xl border border-brand-orange text-brand-orange-dark hover:bg-orange-50 font-semibold text-xs py-2.5 px-2.5 transition-colors"
+              className="inline-flex items-center justify-center gap-1.5 rounded-xl border border-brand-red/30 text-brand-red hover:bg-slate-50 font-semibold text-xs py-2.5 px-2.5 transition-colors"
             >
               <ShoppingBag className="w-3.5 h-3.5 shrink-0" aria-hidden="true" />
               <span>Shopee</span>

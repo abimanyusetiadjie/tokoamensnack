@@ -1,3 +1,5 @@
+import fs from "node:fs";
+import path from "node:path";
 import { ImageResponse } from "next/og";
 
 export const size = {
@@ -6,10 +8,22 @@ export const size = {
 };
 export const contentType = "image/png";
 
+function getLogoDataUri(): string {
+  const logoPath = path.join(
+    process.cwd(),
+    "public",
+    "images",
+    "logo-amen-snack.png"
+  );
+  const base64 = fs.readFileSync(logoPath).toString("base64");
+  return `data:image/png;base64,${base64}`;
+}
+
 /**
- * Apple Touch Icon for mobile home screen shortcuts.
+ * Apple Touch Icon for mobile home screen shortcuts using the official AMEN SNACK logo.
  */
 export default function AppleIcon() {
+  const logoSrc = getLogoDataUri();
   return new ImageResponse(
     (
       <div
@@ -17,47 +31,23 @@ export default function AppleIcon() {
           width: "100%",
           height: "100%",
           display: "flex",
-          flexDirection: "column",
           alignItems: "center",
           justifyContent: "center",
-          backgroundColor: "#FFF8E8",
+          backgroundColor: "#FFFFFF",
           borderRadius: "36px",
-          border: "8px solid #0D5C57",
+          border: "8px solid #2E3677",
+          padding: "18px",
         }}
       >
-        <div
+        <img
+          src={logoSrc}
+          alt="AMEN SNACK"
           style={{
-            display: "flex",
-            fontSize: 22,
-            fontWeight: 800,
-            color: "#0D5C57",
-            letterSpacing: "0.02em",
+            width: "100%",
+            height: "100%",
+            objectFit: "contain",
           }}
-        >
-          toko
-        </div>
-        <div
-          style={{
-            display: "flex",
-            alignItems: "center",
-            gap: 8,
-            fontSize: 34,
-            fontWeight: 900,
-            color: "#0D5C57",
-            marginTop: 2,
-          }}
-        >
-          <span>amen</span>
-          <span
-            style={{
-              width: 18,
-              height: 18,
-              borderRadius: "9999px",
-              backgroundColor: "#EA580C",
-              display: "flex",
-            }}
-          />
-        </div>
+        />
       </div>
     ),
     { ...size }

@@ -118,7 +118,7 @@ export function HomeClient({
             <div className="mt-5 sm:mt-8 flex flex-col sm:flex-row items-center justify-center md:justify-start gap-2.5 sm:gap-4">
               <a
                 href="#katalog"
-                className="w-full max-w-[328px] sm:w-auto sm:max-w-none inline-flex items-center justify-center bg-brand-red hover:bg-brand-red-dark text-white font-semibold rounded-full px-7 h-11 sm:h-12 shadow-md shadow-teal-900/20 text-sm sm:text-base transition-colors"
+                className="w-full max-w-[328px] sm:w-auto sm:max-w-none inline-flex items-center justify-center bg-brand-red hover:bg-brand-red-dark text-white font-semibold rounded-full px-7 h-11 sm:h-12 shadow-md shadow-indigo-950/15 text-sm sm:text-base transition-colors"
               >
                 <span>Lihat Katalog Produk</span>
                 <ArrowRight className="w-4 h-4 ml-1.5" />
@@ -128,7 +128,7 @@ export function HomeClient({
                 href={STORE_INFO.whatsappDirectCta}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-full max-w-[328px] sm:w-auto sm:max-w-none inline-flex items-center justify-center bg-white hover:bg-teal-50 text-brand-red border-2 border-brand-red font-semibold rounded-full px-7 h-11 sm:h-12 text-sm sm:text-base transition-colors"
+                className="w-full max-w-[328px] sm:w-auto sm:max-w-none inline-flex items-center justify-center bg-white hover:bg-brand-soft text-brand-red border-2 border-brand-red font-semibold rounded-full px-7 h-11 sm:h-12 text-sm sm:text-base transition-colors"
               >
                 <span>Hubungi Kami</span>
               </a>
@@ -213,7 +213,7 @@ export function HomeClient({
                           setSelectedFlyer(flyer);
                         }
                       }}
-                      className="group relative w-full rounded-2xl overflow-hidden bg-brand-soft border border-teal-900/10 shadow-sm cursor-pointer"
+                      className="group relative w-full rounded-2xl overflow-hidden bg-brand-soft border border-slate-200/80 shadow-sm cursor-pointer"
                     >
                       <div className="relative w-full aspect-[16/9] overflow-hidden bg-brand-soft">
                         <MediaImage
@@ -230,7 +230,7 @@ export function HomeClient({
                           </span>
                         </div>
                       </div>
-                      <div className="flex items-center justify-between gap-2 px-3.5 sm:px-4 py-2.5 sm:py-3 bg-white border-t border-teal-900/5">
+                      <div className="flex items-center justify-between gap-2 px-3.5 sm:px-4 py-2.5 sm:py-3 bg-white border-t border-slate-100">
                         <span className="font-semibold text-xs sm:text-sm text-gray-900 truncate min-w-0">
                           {flyer.title}
                         </span>
@@ -337,7 +337,7 @@ export function HomeClient({
                 <Link
                   key={cat.id}
                   href={`/produk?kategori=${cat.slug}`}
-                  className="group rounded-2xl border border-teal-900/10 bg-brand-soft/65 hover:bg-brand-soft p-3.5 sm:p-5 transition-all brand-card flex flex-col sm:flex-row items-center sm:items-start text-center sm:text-left gap-2.5 sm:gap-4"
+                  className="group rounded-2xl border border-slate-200/80 bg-brand-soft hover:bg-brand-slate/80 p-3.5 sm:p-5 transition-all brand-card flex flex-col sm:flex-row items-center sm:items-start text-center sm:text-left gap-2.5 sm:gap-4"
                 >
                   <div
                     className={`w-14 h-14 sm:w-20 sm:h-20 shrink-0 rounded-xl bg-white p-2 shadow-sm flex items-center justify-center group-hover:scale-105 transition-transform ${
@@ -373,7 +373,7 @@ export function HomeClient({
       {/* SECTION 4: SIGNATURE OVERLAPPING FULL-BLEED TESTIMONIALS BAND     */}
       {/* (overflow-x-clip keeps vertical -mb overlap without side scroll)  */}
       {/* ================================================================= */}
-      <section className="relative bg-brand-red pt-11 sm:pt-14 pb-8 overflow-x-clip">
+      <section className="relative bg-brand-red border-t-[3px] border-brand-orange pt-11 sm:pt-14 pb-8 overflow-x-clip">
         <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-[10%]">
           <div className="text-center text-white max-w-2xl mx-auto">
             <h2 className="font-inter font-bold text-2xl sm:text-3xl lg:text-4xl">
@@ -401,7 +401,7 @@ export function HomeClient({
                     key={testi.id}
                     className="basis-[88%] sm:basis-1/2 lg:basis-1/3"
                   >
-                    <Card className="brand-card bg-white rounded-2xl p-5 sm:p-6 flex flex-col justify-between h-full border border-teal-900/10 shadow-lg">
+                    <Card className="brand-card bg-white rounded-2xl p-5 sm:p-6 flex flex-col justify-between h-full border border-slate-200 shadow-lg">
                       <div>
                         {/* Header: Circular Avatar + Name + 5 Stars directly beneath Name */}
                         <div className="flex items-center gap-3 mb-3.5 sm:mb-4">
@@ -439,7 +439,7 @@ export function HomeClient({
                         </div>
                       </div>
 
-                      <div className="pt-3 mt-3 border-t border-teal-900/5 text-[11px] sm:text-xs font-medium text-brand-red truncate">
+                      <div className="pt-3 mt-3 border-t border-slate-100 text-[11px] sm:text-xs font-medium text-brand-red truncate">
                         {testi.role}
                       </div>
                     </Card>
@@ -505,7 +505,7 @@ export function HomeClient({
                   <CarouselItem key={banner.id} className="basis-[85%]">
                     <Link
                       href={banner.href}
-                      className="group relative aspect-[16/10] rounded-2xl overflow-hidden bg-white border border-teal-900/10 brand-card block"
+                      className="group relative aspect-[16/10] rounded-2xl overflow-hidden bg-white border border-slate-200/80 brand-card block"
                     >
                       <MediaImage
                         src={banner.imageUrl}
@@ -527,7 +527,7 @@ export function HomeClient({
               <Link
                 key={banner.id}
                 href={banner.href}
-                className="group relative aspect-[16/10] rounded-2xl overflow-hidden bg-white border border-teal-900/10 brand-card block"
+                className="group relative aspect-[16/10] rounded-2xl overflow-hidden bg-white border border-slate-200/80 brand-card block"
               >
                 <MediaImage
                   src={banner.imageUrl}
@@ -560,7 +560,7 @@ export function HomeClient({
             <div className="max-w-3xl mx-auto brand-card rounded-2xl p-5 sm:p-8 border border-gray-100 bg-brand-soft/35 flex flex-col justify-between">
               <div>
                 <div className="flex flex-wrap items-center justify-between gap-2 mb-3">
-                  <span className="inline-block text-[10px] sm:text-[11px] font-bold uppercase tracking-wider text-brand-red bg-white px-2.5 py-1 rounded-md border border-teal-900/10">
+                  <span className="inline-block text-[10px] sm:text-[11px] font-bold uppercase tracking-wider text-brand-red bg-white px-2.5 py-1 rounded-md border border-slate-200">
                     {featuredStore.branchCode}
                   </span>
                   <span className="inline-flex items-center gap-1 text-xs font-semibold text-amber-700">
@@ -596,8 +596,8 @@ export function HomeClient({
                 </div>
               </div>
 
-              {/* Clean Side-by-Side Action Buttons Inside Card (matching tokomama.com mobile) */}
-              <div className="mt-5 sm:mt-6 pt-4 border-t border-teal-900/10 grid grid-cols-2 sm:flex sm:flex-wrap items-center justify-between gap-2.5 sm:gap-3">
+              {/* Clean Side-by-Side Action Buttons Inside Card */}
+              <div className="mt-5 sm:mt-6 pt-4 border-t border-slate-200/80 grid grid-cols-2 sm:flex sm:flex-wrap items-center justify-between gap-2.5 sm:gap-3">
                 <a
                   href={featuredStore.mapsUrl}
                   target="_blank"
@@ -611,7 +611,7 @@ export function HomeClient({
                   href={featuredStore.wazeUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center justify-center gap-1.5 rounded-full bg-white hover:bg-teal-50 text-brand-red border border-brand-red px-4 py-2.5 text-xs font-semibold transition-colors"
+                  className="inline-flex items-center justify-center gap-1.5 rounded-full bg-white hover:bg-brand-soft text-brand-red border border-brand-red px-4 py-2.5 text-xs font-semibold transition-colors"
                 >
                   <Navigation className="w-3.5 h-3.5 shrink-0" />
                   <span>Navigasi Waze</span>
@@ -620,7 +620,7 @@ export function HomeClient({
                   href={STORE_INFO.whatsappDirectCta}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="col-span-2 sm:col-span-1 sm:ml-auto inline-flex items-center justify-center gap-1.5 text-xs font-semibold text-gray-600 hover:text-brand-red py-1 transition-colors"
+                  className="col-span-2 sm:col-span-1 sm:ml-auto inline-flex items-center justify-center gap-1.5 rounded-full bg-[#25D366] hover:bg-[#20bd5a] text-white px-4 py-2.5 text-xs font-semibold transition-colors shadow-xs"
                 >
                   <Phone className="w-3.5 h-3.5 shrink-0" />
                   <span>Hubungi Admin Toko</span>
@@ -632,7 +632,7 @@ export function HomeClient({
           <div className="mt-7 sm:mt-10 flex justify-center">
             <Link
               href="/lokasi"
-              className="inline-flex items-center justify-center gap-2 bg-brand-red hover:bg-brand-red-dark text-white rounded-full px-7 h-11 sm:h-12 font-semibold text-xs sm:text-sm shadow-md shadow-teal-900/20 transition-colors"
+              className="inline-flex items-center justify-center gap-2 bg-brand-red hover:bg-brand-red-dark text-white rounded-full px-7 h-11 sm:h-12 font-semibold text-xs sm:text-sm shadow-md shadow-indigo-950/15 transition-colors"
             >
               <span>Lihat Detail Lokasi &amp; Peta</span>
               <ArrowRight className="w-4 h-4" />
@@ -679,7 +679,7 @@ export function HomeClient({
                     href={`/blog#${post.slug}`}
                     className="group block brand-card rounded-2xl overflow-hidden bg-white h-full flex flex-col"
                   >
-                    <div className="relative aspect-[16/10] bg-teal-50 overflow-hidden">
+                    <div className="relative aspect-[16/10] bg-slate-100 overflow-hidden">
                       <MediaImage
                         src={post.imageUrl}
                         alt={post.title}

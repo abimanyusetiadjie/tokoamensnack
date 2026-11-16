@@ -44,7 +44,7 @@ export function AboutClient() {
       <section className="py-12 sm:py-16">
         <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-[10%]">
           <div className="grid grid-cols-1 lg:grid-cols-12 items-center gap-10">
-            <div className="lg:col-span-6 relative aspect-[4/3] rounded-3xl overflow-hidden bg-brand-soft border border-teal-900/10">
+            <div className="lg:col-span-6 relative aspect-[4/3] rounded-3xl overflow-hidden bg-brand-soft border border-slate-200/80">
               <MediaImage
                 src={STORE_INFO.heroImage}
                 alt={STORE_INFO.officialName}
@@ -122,7 +122,7 @@ export function AboutClient() {
               return (
                 <Card
                   key={pillar.id}
-                  className="brand-card bg-white rounded-2xl p-6 sm:p-8 border border-teal-900/10 text-center flex flex-col items-center"
+                  className="brand-card bg-white rounded-2xl p-6 sm:p-8 border border-slate-200/80 text-center flex flex-col items-center"
                 >
                   <div className="w-14 h-14 rounded-2xl bg-brand-soft text-brand-red flex items-center justify-center mb-4">
                     <Icon className="w-7 h-7" aria-hidden="true" />
@@ -142,7 +142,7 @@ export function AboutClient() {
               <Link
                 key={banner.id}
                 href={banner.href}
-                className="group relative aspect-[16/10] rounded-2xl overflow-hidden bg-white border border-teal-900/10 shadow-sm hover:shadow-md transition-all hover:-translate-y-0.5 block"
+                className="group relative aspect-[16/10] rounded-2xl overflow-hidden bg-white border border-slate-200/80 shadow-sm hover:shadow-md transition-all hover:-translate-y-0.5 block"
               >
                 <MediaImage
                   src={banner.imageUrl}
@@ -158,12 +158,12 @@ export function AboutClient() {
       </section>
 
       {/* Partnership Section (#supplier & #tenant matching template anchors) */}
-      <section className="py-14 bg-white border-t border-teal-900/10">
+      <section className="py-14 bg-white border-t border-slate-200/80">
         <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-[10%]">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <Card
               id="supplier"
-              className="rounded-2xl border border-teal-900/10 bg-brand-soft/60 p-6 sm:p-8 scroll-mt-28 flex flex-col justify-between gap-4"
+              className="rounded-2xl border border-slate-200/80 bg-brand-soft p-6 sm:p-8 scroll-mt-28 flex flex-col justify-between gap-4"
             >
               <div>
                 <div className="w-12 h-12 rounded-xl bg-white text-brand-red flex items-center justify-center shadow-sm mb-4">
@@ -191,7 +191,7 @@ export function AboutClient() {
 
             <Card
               id="tenant"
-              className="rounded-2xl border border-orange-100 bg-orange-50/50 p-6 sm:p-8 scroll-mt-28 flex flex-col justify-between gap-4"
+              className="rounded-2xl border border-rose-200/70 bg-rose-50/45 p-6 sm:p-8 scroll-mt-28 flex flex-col justify-between gap-4"
             >
               <div>
                 <div className="w-12 h-12 rounded-xl bg-white text-brand-orange flex items-center justify-center shadow-sm mb-4">
@@ -223,7 +223,7 @@ export function AboutClient() {
       {/* Online Order CTA */}
       <section className="py-14 sm:py-16 bg-white">
         <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-[10%]">
-          <Card className="rounded-3xl border border-teal-900/10 bg-brand-slate p-6 sm:p-10 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
+          <Card className="rounded-3xl border border-slate-200/80 bg-brand-soft p-6 sm:p-10 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
             <div>
               <h2 className="font-inter font-bold text-xl sm:text-2xl text-brand-dark">
                 Siap Memesan Oleh-Oleh Khas Bangka?
@@ -238,9 +238,7 @@ export function AboutClient() {
                 href={STORE_INFO.whatsappDirectCta}
                 target="_blank"
                 rel="noopener noreferrer"
-                className={buttonVariants({
-                  className: "rounded-full gap-2 text-xs sm:text-sm font-semibold",
-                })}
+                className="inline-flex items-center justify-center rounded-full bg-[#25D366] hover:bg-[#20bd5a] text-white px-5 py-2.5 gap-2 text-xs sm:text-sm font-semibold transition-colors shadow-xs"
               >
                 <MessageCircle className="w-4 h-4" />
                 Pesan via WhatsApp

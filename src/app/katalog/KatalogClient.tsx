@@ -30,7 +30,7 @@ export function KatalogClient() {
             {FLYERS_COLLECTION.map((flyer) => (
               <Card
                 key={flyer.id}
-                className="brand-card rounded-2xl overflow-hidden border border-teal-900/10 bg-white flex flex-col"
+                className="brand-card rounded-2xl overflow-hidden border border-slate-200/80 bg-white flex flex-col"
               >
                 <button
                   type="button"
@@ -106,7 +106,7 @@ export function KatalogClient() {
           </div>
 
           {/* Store CTA Banner */}
-          <div className="mt-12 rounded-2xl bg-brand-soft p-6 sm:p-8 flex flex-col md:flex-row items-start md:items-center justify-between gap-6 border border-teal-900/20">
+          <div className="mt-12 rounded-2xl bg-brand-soft p-6 sm:p-8 flex flex-col md:flex-row items-start md:items-center justify-between gap-6 border border-slate-200">
             <div>
               <h3 className="font-bold text-xl text-brand-dark">
                 Pesan Oleh-Oleh Bangka Praktis Sekarang
@@ -155,7 +155,7 @@ export function KatalogClient() {
             onClick={(e) => e.stopPropagation()}
             className="relative max-w-5xl w-full bg-white rounded-2xl overflow-hidden shadow-2xl"
           >
-            <div className="flex items-center justify-between px-5 py-3.5 border-b border-teal-900/10">
+            <div className="flex items-center justify-between px-5 py-3.5 border-b border-slate-200/80">
               <div>
                 <h3 className="font-bold text-base text-brand-dark">{selectedFlyer.title}</h3>
                 <p className="text-xs text-brand-red font-medium">{selectedFlyer.period}</p>

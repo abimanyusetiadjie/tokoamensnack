@@ -1,3 +1,5 @@
+import fs from "node:fs";
+import path from "node:path";
 import { ImageResponse } from "next/og";
 
 export const size = {
@@ -6,10 +8,22 @@ export const size = {
 };
 export const contentType = "image/png";
 
+function getLogoDataUri(): string {
+  const logoPath = path.join(
+    process.cwd(),
+    "public",
+    "images",
+    "logo-amen-snack.png"
+  );
+  const base64 = fs.readFileSync(logoPath).toString("base64");
+  return `data:image/png;base64,${base64}`;
+}
+
 /**
- * Programmatic PNG favicon matching Toko Amen Snack (Sea Teal #0D5C57 + Grilled Orange #EA580C).
+ * Programmatic PNG favicon rendering the official AMEN SNACK emblem.
  */
 export default function Icon() {
+  const logoSrc = getLogoDataUri();
   return new ImageResponse(
     (
       <div
@@ -19,31 +33,19 @@ export default function Icon() {
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
-          backgroundColor: "#0D5C57",
-          borderRadius: "8px",
-          position: "relative",
+          backgroundColor: "#FFFFFF",
+          borderRadius: "7px",
+          border: "2px solid #2E3677",
+          padding: "2px",
         }}
       >
-        <div
+        <img
+          src={logoSrc}
+          alt="AMEN SNACK"
           style={{
-            display: "flex",
-            fontSize: 16,
-            fontWeight: 900,
-            color: "#FFF8E8",
-            letterSpacing: "-0.04em",
-          }}
-        >
-          as
-        </div>
-        <div
-          style={{
-            position: "absolute",
-            top: 4,
-            right: 4,
-            width: 6,
-            height: 6,
-            borderRadius: "9999px",
-            backgroundColor: "#EA580C",
+            width: "100%",
+            height: "100%",
+            objectFit: "contain",
           }}
         />
       </div>

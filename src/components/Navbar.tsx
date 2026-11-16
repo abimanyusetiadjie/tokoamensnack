@@ -2,6 +2,7 @@
 
 import React, { useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { Menu, X, Phone, ShoppingBag, MapPin } from "lucide-react";
 import { STORE_INFO } from "@/payload/seed-data";
@@ -22,9 +23,9 @@ export function Navbar() {
 
   return (
     <>
-      {/* Tier 1 Top Bar — Mirrored 1:1 from tokomama.com */}
-      <div className="hidden lg:flex h-8 bg-[#0B3B38] px-6 lg:px-[100px] py-2 justify-between items-center text-white">
-        <div className="text-[11px] font-medium text-teal-100 truncate mr-4">
+      {/* Tier 1 Top Bar — Deep Navy Identity (#1C224F) */}
+      <div className="hidden lg:flex h-8 bg-[#1C224F] px-6 lg:px-[100px] py-2 justify-between items-center text-white">
+        <div className="text-[11px] font-medium text-slate-200 truncate mr-4">
           {STORE_INFO.announcementText}
         </div>
         <div className="flex justify-end items-center gap-6 font-inter font-semibold text-xs text-white shrink-0">
@@ -59,49 +60,40 @@ export function Navbar() {
         </div>
       </div>
 
-      {/* Tier 2 Sticky Main Header — Mirrored 1:1 from tokomama.com */}
-      <header className="sticky top-0 z-40 w-full transition-colors bg-brand-soft/95 backdrop-blur-sm border-b border-black/[0.04]">
+      {/* Tier 2 Sticky Main Header — Clean White Surface for Official Logo Contrast */}
+      <header className="sticky top-0 z-40 w-full transition-colors bg-white/95 backdrop-blur-sm border-b border-slate-200/80 shadow-[0_1px_12px_rgba(15,23,42,0.03)]">
         <div className="relative h-16 lg:h-20 px-4 sm:px-6 lg:px-[10%] flex items-center justify-center lg:justify-between max-w-[1600px] mx-auto">
-          {/* Mobile Menu Button (left-pinned while Logo sits cleanly centered like tokomama.com) */}
+          {/* Mobile Menu Button */}
           <button
             type="button"
             onClick={() => setMobileMenuOpen(true)}
             aria-label="Buka Menu Navigasi"
-            className="lg:hidden absolute left-3 p-2 text-brand-dark hover:bg-black/5 rounded-md transition-colors"
+            className="lg:hidden absolute left-3 p-2 text-brand-red hover:bg-slate-100 rounded-md transition-colors"
           >
             <Menu className="w-6 h-6" />
           </button>
 
-          {/* Stacked Lowercase Friendly Brand Logo (Toko Mama signature silhouette) */}
-          <Link href="/" className="flex items-center gap-2 group shrink-0">
+          {/* Official AMEN SNACK Logo + Wordmark */}
+          <Link href="/" className="flex items-center gap-2.5 group shrink-0">
+            <Image
+              src="/images/logo-amen-snack.png"
+              alt="Logo Resmi Toko Amen Snack"
+              width={44}
+              height={48}
+              priority
+              className="h-10 sm:h-12 w-auto object-contain group-hover:scale-105 transition-transform shrink-0"
+            />
             <span className="flex flex-col leading-none">
-              <span className="font-inter font-extrabold text-[10px] sm:text-[11px] tracking-[0.04em] lowercase text-brand-red -mb-0.5 pl-0.5">
-                toko
+              <span className="font-inter font-extrabold text-[9px] sm:text-[10px] uppercase tracking-[0.14em] text-brand-orange">
+                Oleh-Oleh Bangka
               </span>
-              <span className="font-inter font-black text-[22px] sm:text-2xl lg:text-[26px] tracking-tight lowercase text-brand-red leading-none">
-                amen snack
+              <span className="font-inter font-black text-[17px] sm:text-xl tracking-tight text-brand-red leading-tight">
+                Toko Amen Snack
               </span>
-            </span>
-            <span className="flex h-5 w-5 sm:h-6 sm:w-6 items-center justify-center rounded-full bg-brand-orange text-white shadow-sm group-hover:scale-105 transition-transform shrink-0">
-              <svg
-                viewBox="0 0 24 24"
-                fill="none"
-                className="h-3.5 w-3.5 sm:h-4 sm:w-4"
-                aria-hidden="true"
-              >
-                <circle cx="9" cy="10" r="1.4" fill="currentColor" />
-                <circle cx="15" cy="10" r="1.4" fill="currentColor" />
-                <path
-                  d="M8 14C9.1 15.6 10.5 16.4 12 16.4C13.5 16.4 14.9 15.6 16 14"
-                  stroke="currentColor"
-                  strokeWidth="2.1"
-                  strokeLinecap="round"
-                />
-              </svg>
             </span>
           </Link>
 
-          {/* Desktop Navigation — Clean Single Row matching tokomama.com */}
+          {/* Desktop Navigation — Clean Single Row with Red Active Accent */}
           <nav
             aria-label="Navigasi Utama"
             className="hidden lg:flex gap-8 items-center"
@@ -117,13 +109,15 @@ export function Navbar() {
                   key={link.href}
                   href={link.href}
                   className={cn(
-                    "relative font-inter font-semibold text-[15px] leading-7 py-1 whitespace-nowrap transition-opacity hover:opacity-80",
-                    isActive ? "text-brand-red" : "text-brand-red/75"
+                    "relative font-inter font-semibold text-[15px] leading-7 py-1 whitespace-nowrap transition-colors",
+                    isActive
+                      ? "text-brand-red font-bold"
+                      : "text-slate-600 hover:text-brand-red"
                   )}
                 >
                   {link.label}
                   {isActive && (
-                    <span className="absolute left-0 right-0 -bottom-0.5 h-[3px] rounded-full bg-brand-red" />
+                    <span className="absolute left-0 right-0 -bottom-0.5 h-[3px] rounded-full bg-brand-orange" />
                   )}
                 </Link>
               );
@@ -144,36 +138,31 @@ export function Navbar() {
             className="fixed inset-0 bg-slate-900/45 backdrop-blur-sm"
             onClick={() => setMobileMenuOpen(false)}
           />
-          <aside className="fixed top-0 left-0 bottom-0 w-72 max-w-[82vw] bg-brand-soft shadow-2xl p-6 flex flex-col justify-between z-10 overflow-y-auto">
+          <aside className="fixed top-0 left-0 bottom-0 w-72 max-w-[82vw] bg-white shadow-2xl p-6 flex flex-col justify-between z-10 overflow-y-auto">
             <div>
-              <div className="flex items-center justify-between pb-5 border-b border-teal-900/15">
-                <div className="flex items-center gap-2">
+              <div className="flex items-center justify-between pb-5 border-b border-slate-200">
+                <div className="flex items-center gap-2.5">
+                  <Image
+                    src="/images/logo-amen-snack.png"
+                    alt="Logo Resmi Toko Amen Snack"
+                    width={38}
+                    height={42}
+                    className="h-9 w-auto object-contain shrink-0"
+                  />
                   <span className="flex flex-col leading-none">
-                    <span className="font-inter font-extrabold text-[10px] lowercase text-brand-red -mb-0.5 pl-0.5">
-                      toko
+                    <span className="font-inter font-extrabold text-[9px] uppercase tracking-[0.14em] text-brand-orange">
+                      Oleh-Oleh Bangka
                     </span>
-                    <span className="font-inter font-black text-xl lowercase text-brand-red leading-none">
-                      amen snack
+                    <span className="font-inter font-black text-base text-brand-red leading-tight">
+                      Toko Amen Snack
                     </span>
-                  </span>
-                  <span className="flex h-5 w-5 items-center justify-center rounded-full bg-brand-orange text-white shrink-0">
-                    <svg viewBox="0 0 24 24" fill="none" className="h-3.5 w-3.5" aria-hidden="true">
-                      <circle cx="9" cy="10" r="1.4" fill="currentColor" />
-                      <circle cx="15" cy="10" r="1.4" fill="currentColor" />
-                      <path
-                        d="M8 14C9.1 15.6 10.5 16.4 12 16.4C13.5 16.4 14.9 15.6 16 14"
-                        stroke="currentColor"
-                        strokeWidth="2.1"
-                        strokeLinecap="round"
-                      />
-                    </svg>
                   </span>
                 </div>
                 <button
                   type="button"
                   onClick={() => setMobileMenuOpen(false)}
                   aria-label="Tutup Menu"
-                  className="p-2 rounded-lg hover:bg-teal-900/10 text-brand-red"
+                  className="p-2 rounded-lg hover:bg-slate-100 text-brand-red"
                 >
                   <X className="h-5 w-5" />
                 </button>
@@ -193,8 +182,8 @@ export function Navbar() {
                       className={cn(
                         "rounded-xl px-4 py-2.5 text-sm font-semibold transition-colors",
                         isActive
-                          ? "bg-brand-red/10 text-brand-red font-bold"
-                          : "text-brand-dark hover:bg-white/70"
+                          ? "bg-brand-red/10 text-brand-red font-bold border-l-4 border-brand-orange"
+                          : "text-brand-dark hover:bg-brand-soft"
                       )}
                     >
                       {link.label}
@@ -203,7 +192,7 @@ export function Navbar() {
                 })}
               </nav>
 
-              <div className="border-t border-teal-900/15 mt-5 pt-4 flex flex-col gap-1 text-xs font-semibold text-brand-red">
+              <div className="border-t border-slate-200 mt-5 pt-4 flex flex-col gap-1 text-xs font-semibold text-brand-red">
                 <Link
                   href="/about#supplier"
                   onClick={() => setMobileMenuOpen(false)}
@@ -221,13 +210,13 @@ export function Navbar() {
               </div>
             </div>
 
-            <div className="space-y-3 border-t border-teal-900/10 pt-5 mt-6">
-              <div className="rounded-xl bg-brand-soft p-3.5 text-xs text-brand-dark space-y-1">
+            <div className="space-y-3 border-t border-slate-200 pt-5 mt-6">
+              <div className="rounded-xl bg-brand-soft border border-slate-200 p-3.5 text-xs text-brand-dark space-y-1">
                 <p className="font-bold flex items-center gap-1.5 text-brand-red">
                   <MapPin className="h-3.5 w-3.5 shrink-0" />
                   Toko Sungailiat
                 </p>
-                <p className="text-brand-muted leading-relaxed">
+                <p className="text-slate-600 leading-relaxed">
                   {STORE_INFO.address}
                 </p>
                 <p className="font-semibold text-brand-dark pt-0.5">
@@ -239,7 +228,7 @@ export function Navbar() {
                 href={STORE_INFO.shopeeUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex w-full items-center justify-center gap-2 rounded-full border border-brand-orange px-4 py-2.5 text-sm font-semibold text-brand-orange hover:bg-orange-50"
+                className="flex w-full items-center justify-center gap-2 rounded-full border border-brand-red/30 px-4 py-2.5 text-sm font-semibold text-brand-red hover:bg-brand-soft"
               >
                 <ShoppingBag className="h-4 w-4" />
                 Shopee Official ({STORE_INFO.shopeeHandle})
@@ -249,7 +238,7 @@ export function Navbar() {
                 href={STORE_INFO.whatsappDirectCta}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex w-full items-center justify-center gap-2 rounded-full bg-brand-red px-4 py-2.5 text-sm font-semibold text-white hover:bg-brand-red-dark shadow-sm"
+                className="flex w-full items-center justify-center gap-2 rounded-full bg-[#25D366] px-4 py-2.5 text-sm font-semibold text-white hover:bg-[#20bd5a] shadow-sm"
               >
                 <Phone className="h-4 w-4" />
                 WhatsApp {STORE_INFO.phone}

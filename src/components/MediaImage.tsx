@@ -28,7 +28,7 @@ export function MediaImage({
     return (
       <div
         className={cn(
-          "flex flex-col items-center justify-center w-full h-full bg-gradient-to-br from-brand-soft via-white to-amber-50/70 text-center p-4",
+          "flex flex-col items-center justify-center w-full h-full bg-gradient-to-br from-slate-50 via-white to-slate-100/80 text-center p-4",
           className
         )}
       >
