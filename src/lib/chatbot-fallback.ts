@@ -325,3 +325,26 @@ export async function generateSmartStoreReply(userText: string): Promise<string>
 
   return parts.join("\n\n");
 }
+
+/**
+ * Converts web Markdown formatting into clean WhatsApp-native formatting
+ * (*bold*, single-line URLs with full site domain, no redundant [label](url)).
+ */
+export function formatWhatsAppMarkdown(
+  text: string,
+  siteBaseUrl = "https://tokoamensnack.vercel.app"
+): string {
+  return text
+    .replace(/\*\*([^*]+)\*\*/g, "*$1*")
+    .replace(/\[([^\]]+)\]\((\/[^)]+)\)/g, `$1: ${siteBaseUrl}$2`)
+    .replace(/\[([^\]]+)\]\((https?:\/\/[^)]+)\)/g, (_m, label, url) => {
+      if (String(url).includes("wa.me/")) {
+        return "";
+      }
+      return `${label} (${url})`;
+    })
+    .replace(/\s*·\s*\n/g, "\n")
+    .replace(/\s*·\s*$/gm, "")
+    .replace(/\n{3,}/g, "\n\n")
+    .trim();
+}

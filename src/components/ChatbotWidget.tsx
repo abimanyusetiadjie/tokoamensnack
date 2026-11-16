@@ -336,13 +336,33 @@ export function ChatbotWidget() {
             <div className="flex items-center justify-between px-1 text-[10px] text-slate-500">
               <span>Data sinkron real-time dengan toko</span>
               <a
-                href={STORE_INFO.whatsappDirectCta}
+                href={(() => {
+                  const userQueries = messages
+                    .filter((m) => m.role === "user")
+                    .slice(-4)
+                    .map((m) =>
+                      (m.parts || [])
+                        .filter(
+                          (p): p is { type: "text"; text: string } =>
+                            p.type === "text"
+                        )
+                        .map((p) => p.text)
+                        .join(" ")
+                        .trim()
+                    )
+                    .filter(Boolean);
+                  if (userQueries.length === 0) return STORE_INFO.whatsappDirectCta;
+                  const summaryText = `Halo Admin Toko Amen Snack, saya melanjutkan chat dari website:\n${userQueries
+                    .map((q) => `- ${q}`)
+                    .join("\n")}\n\nMohon bantuannya ya.`;
+                  return `${STORE_INFO.whatsappUrl}?text=${encodeURIComponent(summaryText)}`;
+                })()}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-1 font-semibold text-emerald-700 hover:underline"
               >
                 <MessageCircle className="w-3 h-3" />
-                Chat Admin WA
+                {messages.length > 0 ? "Bawa Histori ke WA Admin" : "Chat Admin WA"}
               </a>
             </div>
           </div>
