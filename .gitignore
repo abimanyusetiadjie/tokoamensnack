@@ -37,3 +37,6 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# Isolated POS / Warehouse SvelteKit module (deployed separately to VPS)
+svelte-minimarket/
