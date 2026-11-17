@@ -1,77 +1,113 @@
-# Toko Amen Snack — Pusat Oleh-Oleh & Camilan Khas Bangka 
+# Toko Amen Snack — Sungailiat, Bangka
 
-Website resmi **Toko Oleh-Oleh Khas Bangka Amen Snack** (*Jl. Muhidin No.106, Sungailiat, Kabupaten Bangka*)
----
+Website katalog resmi, **AI + WhatsApp Store Assistant**, dan ekosistem kasir terintegrasi untuk **Toko Amen Snack Sungailiat** — *Pusat Oleh-Oleh & Camilan Khas Bangka Terlengkap (Terdaftar Resmi di Sisparnas Kemenpar)*.
 
-## Ringkasan Profil Bisnis & Identitas Brand
+🌐 **Live Production Website:** [https://tokoamensnack.vercel.app](https://tokoamensnack.vercel.app)
 
-- **Nama Resmi:** Toko Amen Snack (Toko Oleh-Oleh Khas Bangka Amen Snack)
-- **Status Resmi:** Terdaftar sebagai **Amenitas Pariwisata Resmi di Kabupaten Bangka** pada Sisparnas Kementerian Pariwisata RI
-- **Reputasi:** Rating **4,5 / 5,0 bintang** (100+ ulasan Google Maps)
-- **House Brand Internal:** **Cap AMEN**
-- **Alamat Toko Fisik:** Jl. Muhidin No.106, Sungailiat, Kec. Sungai Liat, Kabupaten Bangka, Kepulauan Bangka Belitung 33211
-- **WhatsApp Business:** `0813-6872-2622` / `+62 813-6872-2622`
-- **Jam Operasional:** Senin – Sabtu `07.00 – 21.00 WIB` • Minggu `10.00 – 15.00 WIB`
-- **Kanal Resmi:** Shopee (`amensnack`), Instagram (`@toko.amensnack`), Google Maps (`ChIJx6EI03XzIi4RkYWEXb-mtBk`), Waze
+> **Catatan Handover & Dokumen Penting:**
+> - [PROJECT_HANDOVER.md](./PROJECT_HANDOVER.md) — **Baca ini terlebih dahulu** untuk memahami seluruh arsitektur, status database, konfigurasi Vercel, status POS, dan roadmap pasca-pitching.
+> - [WAHA_SETUP.md](./WAHA_SETUP.md) — Panduan menjalankan WhatsApp Chatbot Gateway (`WAHA NOWEB`) menggunakan Docker lokal atau VPS hemat RAM.
+> - [.agent/rules/windows7-hardware-constraints.md](./.agent/rules/windows7-hardware-constraints.md) — Aturan wajib kompatibilitas hardware PC kasir toko (**Windows 7 SP1 / RAM 4 GB / Chrome 109**).
 
 ---
 
-## Pemetaan Arsitektur 
+## Fitur Utama Website & Ekosistem
 
- dipertahankan dan disesuaikan menggunakan palet kuliner khas Bangka (**Primary Red `#E11D48`**, **Warm Orange `#F97316`**, **Soft Rose `#FFF1F2`**, **Dark Slate `#0F172A`**):
+1. **Identitas Brand Resmi 60-30-10 (`AMEN SNACK`):**
+   - **60% Clean White & Slate Neutral:** `#FFFFFF` / `#F8FAFC`
+   - **30% Deep Navy Blue (Logo Segitiga AS):** `#2E3677` / `#1C224F`
+   - **10% Crimson Red (Aksen Huruf S):** `#E93433` / `#C82322`
+   - Tipografi: `Plus Jakarta Sans` (heading) & `Inter` (body).
+   - Tata letak terstruktur: Top Bar informasi 3-tautan kanan, Navbar bersih dengan logo resmi `public/images/logo-amen-snack.png`, Hero banner, Slider Promo, Kategori Unggulan, Produk Terlaris, Edukasi/Blog, dan Footer lengkap.
 
-1. **Two-Tier Header & Sticky Navbar (`src/components/Navbar.tsx`)**
-   - *Top announcement bar* merah tua dengan info layanan & tautan cepat kemitraan (`Mitra Pengrajin Lokal`, `Jam Buka & Rute`, `Reseller & Grosir`).
-   - Sticky navbar 1 baris anti-wrap (`Beranda`, `Katalog`, `Produk`, `Lokasi Toko`, `Tentang Kami`, `Blog`) lengkap dengan garis indikator aktif di bawah tab dan pill CTA `Shopee` & `Pesan WhatsApp`.
-2. **Hero Split Showcase (`src/components/HomeClient.tsx` Section 1)**
-   - Lencana kredibilitas Sisparnas Kemenpar + 4.5★ Google Maps, *headline display*, tombol CTA ke katalog & WhatsApp, *trust proof strip*, serta visual *borderless* produk unggulan di sisi kanan.
-3. **Watermark Band & Overlapping Rounded White Sheet Promo Carousel (Section 2)**
-   - Strip pola watermark berulang di balik lembar putih membulat (`rounded-t-[32px]`) yang menampung **Embla `<Carousel>` Banner Promo** + modal *Lightbox ZoomIn*.
-4. **Product Showcase Carousel & Grid 6 Kategori 3x2 (Section 3)**
-   - **Embla `<Carousel>` Produk Terlaris** (`PRD-01` – `PRD-08`) lengkap dengan tombol beli per item ke WhatsApp & Shopee, diikuti grid 6 kategori (`bg-brand-soft/70`) berbingkai ikon putih persegi.
-5. **Overlapping Full-Bleed Testimonials Band (Section 4)**
-   - Seksi testimoni berlatar penuh `bg-brand-red` dengan kartu putih beravatar inisial & tanda kutip yang **menggantung tumpang-tindih (`-mb-28 md:-mb-36`)** masuk ke seksi di bawahnya.
-6. **Value Pillars & 3 Proposition Banners (Section 5)**
-   - Menerima kartu testimoni dengan padding atas lega (`pt-36 md:pt-48`), menampilkan 3 pilar keunggulan serta **3 banner proposisi visual (`PROPOSITION_BANNERS`)**.
-7. **Lokasi Toko Sungailiat & Carousel Artikel Kuliner (Section 6 & 7)**
-   - Kartu informasi lokasi fisik lengkap dengan tautan Google Maps, Waze, jam operasional, dan **Embla `<Carousel>` Artikel Kuliner Bangka**.
-8. **3-Column Footer + Centered Social Bar (`src/components/Footer.tsx`)**
-   - Gradasi merah-oranye dengan kolom `Ada pertanyaan?`, `Jelajahi Amen Snack`, `Layanan Pelanggan`, seksi `Follow us on social media`, dan catatan hak cipta.
+2. **Sinkronisasi Live Supabase PostgreSQL (`1.446` Master SKU):**
+   - Website terhubung langsung ke database PostgreSQL yang sama dengan sistem Kasir POS (`svelte-minimarket/`).
+   - Menampilkan **`1.060` produk ritel aktif** dalam **`10` kategori publik** (`12` total kategori di sistem inventaris) lengkap dengan harga eceran, harga grosir, minimum qty grosir, berat pengiriman, dan status stok *real-time*.
+   - Paginasi ketat **24 produk per halaman** agar tetap ringan di PC Windows 7 (Chrome 109 / RAM 4 GB) maupun ponsel pengunjung.
 
----
+3. **Smart Search & Sinonim Khas Bangka (`src/lib/catalog.ts`):**
+   - Pencarian server-side yang memahami variasi ejaan dan istilah lokal Bangka (`indomie` ↔ `indomi`, `amen` ↔ `ams`, `panggang` ↔ `oven`, `250 gr`/`250 gram` → `250g`, `1kg` ↔ `bal`) dengan urutan prioritas kecocokan nama produk.
 
-## Struktur Halaman & API Route
+4. **Dual-Engine AI + Deterministic Chatbot (`/api/chat`):**
+   - Mendukung **Vercel AI SDK** (`google/gemini-3-flash` via Vercel AI Gateway) serta **Smart Store Assistant Deterministik** yang tetap menjawab akurat 100% langsung dari PostgreSQL walau tanpa kuota LLM:
+     - **Multi-Turn Memory** (mengingat nama produk dari pertanyaan sebelumnya).
+     - **Perbandingan Multi-Ukuran** (`"Cek Getas 250g & 500g"`).
+     - **Kalkulator Pesanan, Estimasi Berat (kg) & Link Checkout WhatsApp Admin Otomatis** (`"Pesan 2 Getas AMS 250g"`).
 
-- `/` — Beranda lengkap 7 seksi (`src/components/HomeClient.tsx`)
-- `/katalog` — Galeri banner promo & ringkasan layanan online/offline (`src/app/katalog/`)
-- `/produk` — Katalog produk interaktif dengan pencarian & filter 6 kategori (`src/app/produk/`)
-- `/lokasi` — Informasi toko Jl. Muhidin No.106 Sungailiat, jam buka, Google Maps, Waze, & CTA pre-order (`src/app/lokasi/`)
-- `/about` — Profil Toko Amen Snack, house brand Cap AMEN, 3 banner proposisi, & seksi `#supplier` / `#tenant` (`src/app/about/`)
-- `/blog` — Panduan wisata kuliner Bangka (`src/app/blog/`)
-- `/api/cms` — Endpoint JSON terstruktur untuk data katalog, kategori, banner promo, testimoni, toko, dan artikel (`src/app/api/cms/route.ts`)
-- `/preview-standalone.html` — Pratinjau HTML statis mandiri dari seluruh halaman utama (`public/preview-standalone.html`)
+5. **WhatsApp Business Chatbot Terpadu via WAHA (`/api/webhooks/whatsapp`):**
+   - Siap dihubungkan ke container ringan **WAHA `NOWEB`** (`docker-compose.waha.yml`, hanya ~150–220 MB RAM tanpa Chromium).
+   - Mendukung resolusi ID privasi `@lid`, status `sendSeen` & `typing`, anti-echo loop, riwayat chat persisten (`wa_conversations` / `wa_messages`), serta **Smart Human-Takeover** (otomatis jeda bot 30 menit saat Admin membalas manual, `#stop`/`#admin` untuk jeda 12 jam, `#bot`/`#lanjut` untuk mengaktifkan ulang).
 
 ---
 
-## Struktur Aset Gambar (`.webp`)
+## Struktur Workspace
 
-Seluruh aset visual berada di `public/images/` dan siap diganti kapan saja dengan foto asli toko atau produk fisik tanpa mengubah kode komponen:
-
-- `public/images/hero/toko-amen-hero.webp` (960x720)
-- `public/images/banners/promo-cap-amen.webp`, `promo-pengiriman-nasional.webp`, `promo-paket-wisatawan.webp` (1200x675)
-- `public/images/banners/proposition-1.webp`, `proposition-2.webp`, `proposition-3.webp` (800x500)
-- `public/images/products/prd-01-*.webp` s.d. `prd-08-*.webp` (600x600)
-- `public/images/blog/blog-1-*.webp` s.d. `blog-3-*.webp` (960x600)
-
----
-
-## Pengembangan Lokal & Deployment
-
-```bash
-npm install
-npm run dev       # Jalankan server lokal di http://localhost:3000
-npx tsc --noEmit  # Verifikasi tipe TypeScript
-npm run build     # Bangun bundle produksi Next.js
+```text
+Toko Amen Snack/
+├── src/
+│   ├── app/
+│   │   ├── page.tsx, layout.tsx, globals.css   # Beranda & tema 60-30-10 Navy/Crimson
+│   │   ├── produk/, katalog/, lokasi/, about/, blog/
+│   │   └── api/
+│   │       ├── products/route.ts               # API katalog live Supabase
+│   │       ├── chat/route.ts                   # Chatbot Widget API
+│   │       └── webhooks/whatsapp/route.ts      # Webhook WAHA / Fonnte / Meta
+│   ├── components/                             # Navbar, Footer, HomeClient, ChatbotWidget, ProductCard
+│   ├── lib/                                    # db.ts, catalog.ts, chatbot-fallback.ts, chatbot-tools.ts, whatsapp-service.ts
+│   └── payload/seed-data.ts                    # Data fallback darurat & konten artikel blog
+├── public/images/                              # Logo resmi, hero, banner promo, proposisi, produk (.webp)
+├── svelte-minimarket/                          # Sistem Kasir POS, Gudang & Barcode (SvelteKit 2 + Tailwind v3.4, terpisah di .gitignore)
+├── .agent/rules/windows7-hardware-constraints.md
+├── docker-compose.waha.yml                     # Docker WAHA engine NOWEB (hemat RAM)
+├── WAHA_SETUP.md                               # Panduan aktivasi WhatsApp WAHA
+├── PROJECT_HANDOVER.md                         # Dokumen lengkap serah terima antar akun/tim
+└── .env.example                                # Template variabel environment
 ```
 
-Konfigurasi kontainerisasi tersedia di `Dockerfile` dan `nginx.conf`, sedangkan skema koleksi CMS didefinisikan di `src/payload/payload.config.ts` dan `src/payload/seed-data.ts`.
+---
+
+## Peta Aset Gambar (`public/images/`)
+
+- `public/images/logo-amen-snack.png` — Logo resmi segiempat/segitiga **AMEN SNACK**
+- `public/images/hero/toko-amen-hero.webp` — Ilustrasi utama nampan bambu camilan Bangka (transparan RGBA)
+- `public/images/banners/watermark-pattern.webp` — Pola watermark latar belakang Navy `#2E3677`
+- `public/images/banners/promo-cap-amen.webp` — Banner promo spesial Cap Amen
+- `public/images/banners/promo-pengiriman-nasional.webp` — Banner promo pengiriman seluruh Indonesia
+- `public/images/banners/promo-paket-wisatawan.webp` — Banner paket oleh-oleh wisatawan
+- `public/images/banners/proposition-1.webp` s.d. `proposition-3.webp` — 3 kartu proposisi keunggulan toko
+- `public/images/products/prd-01-*.webp` s.d. `prd-08-*.webp` — Visual produk unggulan (Kemplang Pasir, Getas, Indomie Kaldu Udang Bangka, dll.)
+- `public/images/blog/blog-1-*.webp` s.d. `blog-3-*.webp` — Gambar artikel blog edukasi
+
+---
+
+## Menjalankan Secara Lokal (Development)
+
+> **Prasyarat Teknis:** Wajib mempertahankan **Tailwind CSS v3.4 (`^3.4.17`)** agar tetap kompatibel 100% dengan browser Chrome 109 di PC Windows 7 kasir toko.
+
+1. Instal dependensi:
+   ```bash
+   npm install
+   ```
+2. Salin `.env.example` menjadi `.env.local` dan lengkapi koneksi database:
+   ```bash
+   cp .env.example .env.local
+   ```
+   Isi minimal `DATABASE_URL` (PostgreSQL / Supabase Pooler) dan opsional `AI_MODEL="google/gemini-3-flash"`, `AI_GATEWAY_API_KEY`, serta kredensial `WAHA_*`.
+3. Jalankan server development:
+   ```bash
+   npm run dev
+   ```
+4. Verifikasi typecheck & build produksi:
+   ```bash
+   npx tsc --noEmit
+   npm run build
+   ```
+   Buka `http://localhost:3000` di browser.
+
+---
+
+## Informasi Kontak Toko
+
+- **Alamat:** Jl. Muhidin No.106, Sungailiat, Kabupaten Bangka, Kepulauan Bangka Belitung 33211 *(Seberang Puncak Mall / Samping Warkop Papa)*
+- **WhatsApp Admin / Pemesanan:** `0813-6872-2622`
+- **Shopee Official:** `https://shopee.co.id/amensnack`
