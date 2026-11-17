@@ -35,10 +35,13 @@ export async function GET(req: Request) {
 
   return NextResponse.json({
     ok: true,
-    service: "Toko Amen Snack Multi-Provider WhatsApp Webhook",
+    service: "Toko Amen Snack WAHA WhatsApp Chatbot Webhook",
+    primaryProvider: "waha",
     supportedProviders: ["waha", "fonnte", "meta"],
+    webhookEndpoint: "/api/webhooks/whatsapp",
     configured: {
       waha: Boolean((process.env.WAHA_API_URL || "").trim()),
+      wahaSession: (process.env.WAHA_SESSION || "default").trim(),
       fonnte: Boolean(
         (process.env.FONNTE_TOKEN || "").trim() &&
           process.env.FONNTE_TOKEN !== "SIMULATION_MODE"

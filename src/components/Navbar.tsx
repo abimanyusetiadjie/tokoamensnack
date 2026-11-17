@@ -23,40 +23,27 @@ export function Navbar() {
 
   return (
     <>
-      {/* Tier 1 Top Bar — Deep Navy Identity (#1C224F) */}
-      <div className="hidden lg:flex h-8 bg-[#1C224F] px-6 lg:px-[100px] py-2 justify-between items-center text-white">
-        <div className="text-[11px] font-medium text-slate-200 truncate mr-4">
-          {STORE_INFO.announcementText}
-        </div>
-        <div className="flex justify-end items-center gap-6 font-inter font-semibold text-xs text-white shrink-0">
+      {/* Tier 1 Top Bar — Clean Right-Aligned Utility Bar matching template */}
+      <div className="hidden lg:flex h-8 bg-[#1C224F] px-6 lg:px-[10%] py-1.5 justify-end items-center text-white">
+        <div className="max-w-[1440px] w-full mx-auto flex justify-end items-center gap-6 font-inter font-medium text-xs text-white/95">
           <Link
             href="/about#supplier"
-            className="hover:opacity-80 whitespace-nowrap transition-opacity"
+            className="hover:text-amber-300 whitespace-nowrap transition-colors"
           >
             Mitra Pengrajin
           </Link>
           <Link
+            href="/about#tenant"
+            className="hover:text-amber-300 whitespace-nowrap transition-colors"
+          >
+            Kemitraan Reseller
+          </Link>
+          <Link
             href="/lokasi"
-            className="hover:opacity-80 whitespace-nowrap transition-opacity"
+            className="hover:text-amber-300 whitespace-nowrap transition-colors"
           >
             Lokasi Sungailiat
           </Link>
-          <a
-            href={STORE_INFO.shopeeUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="hover:opacity-80 whitespace-nowrap transition-opacity"
-          >
-            Belanja di Shopee
-          </a>
-          <a
-            href={STORE_INFO.whatsappDirectCta}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="hover:opacity-80 whitespace-nowrap transition-opacity"
-          >
-            Chat WhatsApp
-          </a>
         </div>
       </div>
 

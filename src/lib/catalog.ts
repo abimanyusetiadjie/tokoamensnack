@@ -380,6 +380,33 @@ export async function getWebCategories(): Promise<WebCategory[]> {
   }
 }
 
+function normalizeProductQueryTokens(raw?: string): string[] {
+  if (!raw) return [];
+  const normalized = raw
+    .trim()
+    .toLowerCase()
+    .replace(/\b(\d+)\s*(?:gr|gram|grm)\b/g, "$1g")
+    .replace(/\b(\d+)\s*kg\b/g, "$1kg")
+    .replace(/\bcap\s+amen\b/g, "amen")
+    .replace(/\s+/g, " ");
+  return normalized
+    .split(" ")
+    .filter((t) => t.length > 0)
+    .slice(0, 5);
+}
+
+function expandTokenVariants(token: string): string[] {
+  const lower = token.toLowerCase();
+  const variants = new Set<string>([lower]);
+  if (lower === "indomie") variants.add("indomi");
+  if (lower === "indomi") variants.add("indomie");
+  if (lower === "amen") variants.add("ams");
+  if (lower === "panggang") variants.add("oven");
+  if (lower === "1kg" || lower === "kg" || lower === "kilo") variants.add("bal");
+  if (lower === "camilan" || lower === "cemilan" || lower === "snack") variants.add("kripik");
+  return Array.from(variants);
+}
+
 /**
  * Searches public retail products safely (strictly excludes cost_price, base_hpp, users).
  */
@@ -426,27 +453,38 @@ export async function searchWebProducts(
       whereClauses.push(`p.price <= $${queryParams.length}`);
     }
 
-    const tokens = (params.q || "")
-      .trim()
-      .split(/\s+/)
-      .filter((t) => t.length > 0)
-      .slice(0, 5);
+    const tokens = normalizeProductQueryTokens(params.q);
+    const nameMatchConditions: string[] = [];
 
     for (const token of tokens) {
-      queryParams.push(`%${token}%`);
-      const idx = queryParams.length;
-      whereClauses.push(
-        `(p.name ILIKE $${idx} OR p.sku ILIKE $${idx} OR COALESCE(p.barcode, '') ILIKE $${idx} OR COALESCE(p.supplier_name, '') ILIKE $${idx} OR c.name ILIKE $${idx})`
-      );
+      const variants = expandTokenVariants(token);
+      const tokenOrClauses: string[] = [];
+      const tokenNameClauses: string[] = [];
+      for (const variant of variants) {
+        queryParams.push(`%${variant}%`);
+        const idx = queryParams.length;
+        tokenNameClauses.push(`p.name ILIKE $${idx}`);
+        tokenOrClauses.push(
+          `(p.name ILIKE $${idx} OR p.sku ILIKE $${idx} OR COALESCE(p.barcode, '') ILIKE $${idx} OR COALESCE(p.supplier_name, '') ILIKE $${idx} OR c.name ILIKE $${idx})`
+        );
+      }
+      whereClauses.push(`(${tokenOrClauses.join(" OR ")})`);
+      nameMatchConditions.push(`(${tokenNameClauses.join(" OR ")})`);
     }
 
     const whereSql = whereClauses.join(" AND ");
 
     let orderSql =
       "p.is_featured DESC, CASE WHEN p.wholesale_price > 0 THEN 0 ELSE 1 END, p.name ASC";
-    if (sort === "price_asc") orderSql = "p.price ASC, p.name ASC";
-    else if (sort === "price_desc") orderSql = "p.price DESC, p.name ASC";
-    else if (sort === "name_asc") orderSql = "p.name ASC";
+    if (sort === "featured" && nameMatchConditions.length > 0) {
+      orderSql = `CASE WHEN (${nameMatchConditions.join(" AND ")}) THEN 0 WHEN ${nameMatchConditions[0]} THEN 1 ELSE 2 END, p.is_featured DESC, CASE WHEN p.wholesale_price > 0 THEN 0 ELSE 1 END, p.name ASC`;
+    } else if (sort === "price_asc") {
+      orderSql = "p.price ASC, p.name ASC";
+    } else if (sort === "price_desc") {
+      orderSql = "p.price DESC, p.name ASC";
+    } else if (sort === "name_asc") {
+      orderSql = "p.name ASC";
+    }
 
     const countRows = await queryDb<{ total: number }>(
       `SELECT COUNT(*)::int AS total
@@ -540,18 +578,20 @@ function filterSeedFallback(
   offset: number
 ): CatalogSearchResult {
   const all = getSeedProductsFallback();
-  const tokens = (params.q || "")
-    .trim()
-    .toLowerCase()
-    .split(/\s+/)
-    .filter(Boolean);
+  const tokens = normalizeProductQueryTokens(params.q);
 
   let filtered = all.filter((p) => {
     if (categorySlug !== "semua" && p.categorySlug !== categorySlug) return false;
     if (params.maxPrice && (p.price || 0) > params.maxPrice) return false;
     if (tokens.length > 0) {
       const hay = `${p.name} ${p.sku} ${p.category} ${p.description}`.toLowerCase();
-      if (!tokens.every((t) => hay.includes(t))) return false;
+      if (
+        !tokens.every((t) =>
+          expandTokenVariants(t).some((variant) => hay.includes(variant))
+        )
+      ) {
+        return false;
+      }
     }
     return true;
   });

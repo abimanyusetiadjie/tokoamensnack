@@ -32,6 +32,20 @@ function extractLastUserText(messages: UIMessage[]): string {
   return "";
 }
 
+function extractHistoryEntries(
+  messages: UIMessage[]
+): { role: string; text: string }[] {
+  if (messages.length <= 1) return [];
+  return messages.slice(0, -1).map((m) => ({
+    role: m.role,
+    text: (m.parts || [])
+      .filter((p): p is { type: "text"; text: string } => p.type === "text")
+      .map((p) => p.text)
+      .join(" ")
+      .trim(),
+  }));
+}
+
 function buildTextStreamResponse(replyText: string): Response {
   const textId = `txt-${Date.now()}`;
   const stream = createUIMessageStream({
@@ -62,13 +76,14 @@ export async function POST(req: Request) {
     }
 
     const lastUserText = extractLastUserText(messages);
+    const historyEntries = extractHistoryEntries(messages);
     const hasAiGateway = Boolean(
       (process.env.AI_GATEWAY_API_KEY || "").trim() ||
         (process.env.VERCEL_OIDC_TOKEN || "").trim()
     );
 
     if (!hasAiGateway) {
-      const replyText = await generateSmartStoreReply(lastUserText);
+      const replyText = await generateSmartStoreReply(lastUserText, historyEntries);
       return buildTextStreamResponse(replyText);
     }
 
@@ -92,7 +107,7 @@ export async function POST(req: Request) {
         "[POST /api/chat] AI Gateway error, falling back to Smart DB Assistant:",
         aiErr
       );
-      const replyText = await generateSmartStoreReply(lastUserText);
+      const replyText = await generateSmartStoreReply(lastUserText, historyEntries);
       return buildTextStreamResponse(replyText);
     }
   } catch (err) {

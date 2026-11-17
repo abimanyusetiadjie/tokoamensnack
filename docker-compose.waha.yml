@@ -1,0 +1,27 @@
+services:
+  waha:
+    image: devlikeapro/waha:latest
+    container_name: amen-snack-waha
+    restart: unless-stopped
+    ports:
+      - "3005:3000"
+    environment:
+      # Engine NOWEB (tanpa Chrome headless): hemat RAM (~150-220 MB), aman di VPS 2 GB atau Docker lokal
+      - WHATSAPP_DEFAULT_ENGINE=NOWEB
+      - WAHA_PRINT_QR=true
+      - WHATSAPP_START_SESSION=default
+      # Webhook diarahkan ke Next.js Chatbot /api/webhooks/whatsapp (Vercel atau tunnel lokal)
+      - WHATSAPP_HOOK_URL=${WAHA_WEBHOOK_URL:-https://tokoamensnack.vercel.app/api/webhooks/whatsapp}
+      - WHATSAPP_HOOK_EVENTS=message,message.any,session.status
+      # Isi API Key yang kuat saat deploy produksi nanti
+      - WAHA_API_KEY=${WAHA_API_KEY:-amen_waha_local_demo}
+      - WHATSAPP_API_KEY=${WAHA_API_KEY:-amen_waha_local_demo}
+    volumes:
+      - waha_sessions:/app/.sessions
+    deploy:
+      resources:
+        limits:
+          memory: 450M
+
+volumes:
+  waha_sessions:

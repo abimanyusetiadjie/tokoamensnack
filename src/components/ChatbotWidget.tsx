@@ -28,7 +28,7 @@ const QUICK_PROMPTS = [
  * and links ([label](url)) into React nodes without dangerouslySetInnerHTML.
  */
 function renderInlineMarkdown(text: string): React.ReactNode[] {
-  const tokenRegex = /(\[[^\]]+\]\([^)]+\)|\*\*[^*]+\*\*|\*[^*\n]+\*)/g;
+  const tokenRegex = /(\[[^\]]+\]\((?:[^()\s]+|\([^)]*\))+\)|\*\*[^*]+\*\*|\*[^*\n]+\*)/g;
   const parts = text.split(tokenRegex);
 
   return parts.map((segment, index) => {

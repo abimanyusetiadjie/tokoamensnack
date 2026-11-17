@@ -146,7 +146,7 @@ export function createStoreTools(store: WebStoreProfile) {
           formattedSubtotal: formatRupiah(subtotal),
           estimatedWeightKg:
             totalGrams > 0 ? Number((totalGrams / 1000).toFixed(2)) : null,
-          whatsappUrl: `${store.whatsappUrl}?text=${encodeURIComponent(msg)}`,
+          whatsappUrl: `${store.whatsappUrl}?text=${encodeURIComponent(msg).replace(/[()]/g, (c) => (c === "(" ? "%28" : "%29"))}`,
         };
       },
     }),

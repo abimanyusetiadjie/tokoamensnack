@@ -78,6 +78,50 @@ export function verifyMetaSignature(
   }
 }
 
+function extractWahaMessageId(rawId: unknown): string | null {
+  if (!rawId) return null;
+  if (typeof rawId === "string") return rawId.trim() || null;
+  if (typeof rawId === "object") {
+    const obj = rawId as Record<string, unknown>;
+    const candidate = obj._serialized || obj.id || obj.keyId;
+    if (typeof candidate === "string" && candidate.trim()) {
+      return candidate.trim();
+    }
+  }
+  return null;
+}
+
+function extractWahaCustomerPhone(
+  payloadData: Record<string, unknown>,
+  targetJid: string
+): string {
+  const dataObj =
+    payloadData._data && typeof payloadData._data === "object"
+      ? (payloadData._data as Record<string, unknown>)
+      : null;
+  const keyObj =
+    dataObj?.key && typeof dataObj.key === "object"
+      ? (dataObj.key as Record<string, unknown>)
+      : null;
+  const infoObj =
+    dataObj?.Info && typeof dataObj.Info === "object"
+      ? (dataObj.Info as Record<string, unknown>)
+      : null;
+
+  const altJid = String(
+    keyObj?.remoteJidAlt || infoObj?.SenderAlt || infoObj?.Chat || ""
+  ).trim();
+
+  if (targetJid.endsWith("@lid") && altJid && !altJid.endsWith("@lid")) {
+    return normalizePhoneDigits(altJid);
+  }
+  return normalizePhoneDigits(targetJid);
+}
+
+function normalizeCompareText(raw: string): string {
+  return raw.replace(/\r\n/g, "\n").trim();
+}
+
 /**
  * Parses incoming webhook payloads from WAHA, Fonnte, or Meta WhatsApp Cloud API
  * into one unified structure. Returns null cleanly for status/non-chat notifications.
@@ -105,12 +149,13 @@ export function parseIncomingWaWebhook(
       !targetJid ||
       from === "status@broadcast" ||
       targetJid === "status@broadcast" ||
-      targetJid.endsWith("@g.us")
+      targetJid.endsWith("@g.us") ||
+      targetJid.endsWith("@newsletter")
     ) {
       return null;
     }
 
-    const body = String(p.body || "").trim();
+    const body = String(p.body || p.caption || "").trim();
     if (!body) return null;
 
     const dataObj =
@@ -120,9 +165,9 @@ export function parseIncomingWaWebhook(
 
     return {
       provider: "waha",
-      externalMessageId: p.id ? String(p.id) : null,
+      externalMessageId: extractWahaMessageId(p.id),
       chatId: targetJid,
-      customerPhone: normalizePhoneDigits(targetJid),
+      customerPhone: extractWahaCustomerPhone(p, targetJid),
       customerName: dataObj?.notifyName ? String(dataObj.notifyName) : null,
       fromMe,
       body,
@@ -269,8 +314,65 @@ async function buildWhatsAppReplyText(
     }
   }
 
-  const fallback = await generateSmartStoreReply(customerText);
+  const fallback = await generateSmartStoreReply(
+    customerText,
+    historyRows.map((m) => ({
+      role: m.role === "customer" ? "user" : "assistant",
+      text: m.body,
+    }))
+  );
   return formatWhatsAppMarkdown(fallback);
+}
+
+/**
+ * Sends best-effort WAHA read receipt & typing indicator so customers see
+ * natural feedback while Supabase / AI generates the store reply.
+ */
+async function sendWahaPresence(
+  event: NormalizedWaEvent,
+  mode: "start" | "stop"
+): Promise<void> {
+  if (event.provider !== "waha") return;
+  const baseUrl = (process.env.WAHA_API_URL || "").trim().replace(/\/$/, "");
+  if (!baseUrl) return;
+
+  const headers: Record<string, string> = {
+    "Content-Type": "application/json",
+    Accept: "application/json",
+  };
+  const apiKey = (process.env.WAHA_API_KEY || "").trim();
+  if (apiKey) headers["X-Api-Key"] = apiKey;
+
+  const session = event.session || (process.env.WAHA_SESSION || "default").trim();
+  const body = JSON.stringify({ session, chatId: event.chatId });
+
+  try {
+    if (mode === "start") {
+      await Promise.allSettled([
+        fetch(`${baseUrl}/api/sendSeen`, {
+          method: "POST",
+          headers,
+          body,
+          signal: AbortSignal.timeout(1200),
+        }),
+        fetch(`${baseUrl}/api/startTyping`, {
+          method: "POST",
+          headers,
+          body,
+          signal: AbortSignal.timeout(1200),
+        }),
+      ]);
+    } else {
+      await fetch(`${baseUrl}/api/stopTyping`, {
+        method: "POST",
+        headers,
+        body,
+        signal: AbortSignal.timeout(1000),
+      });
+    }
+  } catch {
+    // Non-fatal: older/minimal WAHA builds may omit typing endpoints
+  }
 }
 
 /**
@@ -311,7 +413,10 @@ export async function sendWhatsAppReply(
       if (!res.ok) {
         return { sent: false, error: `WAHA HTTP ${res.status}` };
       }
-      return { sent: true, externalMessageId: data?.id ? String(data.id) : null };
+      return {
+        sent: true,
+        externalMessageId: extractWahaMessageId(data?.id),
+      };
     }
 
     if (event.provider === "fonnte") {
@@ -451,7 +556,8 @@ export async function processNormalizedWaEvent(
       if (
         elapsedMs >= 0 &&
         elapsedMs < 45_000 &&
-        conv.last_bot_reply_text.trim() === event.body.trim()
+        normalizeCompareText(conv.last_bot_reply_text) ===
+          normalizeCompareText(event.body)
       ) {
         if (event.externalMessageId) {
           await queryDb(
@@ -560,6 +666,7 @@ export async function processNormalizedWaEvent(
       ).catch(() => {});
     }
   } else {
+    await sendWahaPresence(event, "start");
     let historyRows: { role: string; body: string }[] = [];
     if (conv) {
       try {
@@ -576,6 +683,7 @@ export async function processNormalizedWaEvent(
       } catch {}
     }
     replyText = await buildWhatsAppReplyText(event.body, historyRows);
+    await sendWahaPresence(event, "stop");
   }
 
   // Record bot reply text BEFORE sending so rapid WAHA `message.any` echo is safely recognized
