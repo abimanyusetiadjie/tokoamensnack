@@ -4,10 +4,8 @@ import {
   Award,
   BadgePercent,
   CheckCircle2,
-  Handshake,
   MapPin,
   ShoppingBag,
-  Store,
   Truck,
 } from "lucide-react";
 import { PageHeroBanner } from "@/components/PageHeroBanner";
@@ -155,69 +153,6 @@ export function AboutClient() {
                 />
               </Link>
             ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Partnership Section (#supplier & #tenant matching template anchors) */}
-      <section className="py-14 bg-white border-t border-slate-200/80">
-        <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-[10%]">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <Card
-              id="supplier"
-              className="rounded-2xl border border-slate-200/80 bg-brand-soft p-6 sm:p-8 scroll-mt-28 flex flex-col justify-between gap-4"
-            >
-              <div>
-                <div className="w-12 h-12 rounded-xl bg-white text-brand-red flex items-center justify-center shadow-sm mb-4">
-                  <Handshake className="h-6 w-6" />
-                </div>
-                <h2 className="font-inter font-bold text-xl text-brand-dark">
-                  Mitra Pengrajin Lokal &amp; Supplier Bangka
-                </h2>
-                <p className="text-sm text-slate-600 mt-2 leading-relaxed">
-                  Toko Amen Snack terbuka menjalin kerja sama dengan pengrajin kemplang, getas, kericu, terasi, dan kopi lokal terbaik di Sungailiat maupun Kabupaten Bangka.
-                </p>
-              </div>
-              <a
-                href={STORE_INFO.whatsappDirectCta}
-                target="_blank"
-                rel="noopener noreferrer"
-                className={buttonVariants({
-                  variant: "outline",
-                  className: "rounded-full w-fit text-xs sm:text-sm font-semibold",
-                })}
-              >
-                Ajukan Titip Jual Produk
-              </a>
-            </Card>
-
-            <Card
-              id="tenant"
-              className="rounded-2xl border border-rose-200/70 bg-rose-50/45 p-6 sm:p-8 scroll-mt-28 flex flex-col justify-between gap-4"
-            >
-              <div>
-                <div className="w-12 h-12 rounded-xl bg-white text-brand-orange flex items-center justify-center shadow-sm mb-4">
-                  <Store className="h-6 w-6" />
-                </div>
-                <h2 className="font-inter font-bold text-xl text-brand-dark">
-                  Kemitraan Reseller, Grosir &amp; Paket Wisata
-                </h2>
-                <p className="text-sm text-slate-600 mt-2 leading-relaxed">
-                  Butuh pemesanan grosir kemplang Cap AMEN, hampers kantor, atau paket oleh-oleh rombongan wisata ke Pulau Bangka? Hubungi kami untuk harga khusus mitra.
-                </p>
-              </div>
-              <a
-                href={STORE_INFO.whatsappDirectCta}
-                target="_blank"
-                rel="noopener noreferrer"
-                className={buttonVariants({
-                  variant: "secondary",
-                  className: "rounded-full w-fit text-xs sm:text-sm font-semibold",
-                })}
-              >
-                Konsultasi Paket Reseller
-              </a>
-            </Card>
           </div>
         </div>
       </section>

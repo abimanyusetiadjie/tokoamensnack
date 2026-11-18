@@ -194,23 +194,6 @@ export function Navbar() {
                   );
                 })}
               </nav>
-
-              <div className="border-t border-slate-200 mt-5 pt-4 flex flex-col gap-1 text-xs font-semibold text-brand-red">
-                <Link
-                  href="/about#supplier"
-                  onClick={() => setMobileMenuOpen(false)}
-                  className="px-4 py-2 hover:opacity-80 transition-opacity"
-                >
-                  Mitra Pengrajin Lokal
-                </Link>
-                <Link
-                  href="/about#tenant"
-                  onClick={() => setMobileMenuOpen(false)}
-                  className="px-4 py-2 hover:opacity-80 transition-opacity"
-                >
-                  Kemitraan Reseller &amp; Grosir
-                </Link>
-              </div>
             </div>
 
             <div className="space-y-3 border-t border-slate-200 pt-5 mt-6">

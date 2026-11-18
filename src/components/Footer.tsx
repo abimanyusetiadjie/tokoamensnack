@@ -48,7 +48,6 @@ const EXPLORE_LINKS = [
   { href: "/produk", label: "Katalog Produk" },
   { href: "/katalog", label: "Promo & Flyer" },
   { href: "/lokasi", label: "Lokasi Toko" },
-  { href: "/about#supplier", label: "Mitra & Reseller" },
 ] as const;
 
 const SERVICE_LINKS = [
