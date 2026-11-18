@@ -42,14 +42,25 @@ const AMS_HIGHLIGHT_PRODUCTS = [
   },
   {
     id: "ams-getas-bulat",
-    name: "Getas Bangka AMS Bulat (250g)",
+    name: 'Getas Bangka AMS 250g "Bulat"',
     enName: "Bangka Fish Cracker Getas AMS Round (250g)",
     tag: "Best Seller AMS",
     enTag: "AMS Bestseller",
-    description: "Kerupuk getas ikan tenggiri renyah produksi langsung Toko Amen Snack tanpa pengawet.",
-    enDescription: "Crispy mackerel getas crackers made in-house by Toko Amen Snack with zero preservatives.",
+    description: "Kerupuk getas ikan tenggiri bulat renyah produksi langsung Toko Amen Snack tanpa pengawet.",
+    enDescription: "Crispy round mackerel getas crackers made in-house by Toko Amen Snack with zero preservatives.",
     imageUrl: "/images/products/shopee/shp-022-getas-bangka-ams-250g-bulat.webp",
     shopeeUrl: "https://shopee.co.id/Getas-Bangka-AMS-250g-bulat-i.284836006.7242381399",
+  },
+  {
+    id: "ams-getas-panjang",
+    name: 'Getas Bangka "AMS" Panjang 250g',
+    enName: "Bangka Fish Cracker Getas AMS Long (250g)",
+    tag: "Produksi Langsung AMS",
+    enTag: "In-House AMS",
+    description: "Kerupuk getas ikan tenggiri model panjang 250g produksi langsung Toko Amen Snack.",
+    enDescription: "Elongated mackerel getas crackers (250g) crafted directly by Toko Amen Snack.",
+    imageUrl: "/images/products/shopee/shp-097-getas-bangka-ams-panjang-250g.webp",
+    shopeeUrl: "https://shopee.co.id/Getas-bangka-AMS-panjang-250g-i.284836006.6442376843",
   },
   {
     id: "ams-kericu-250",
@@ -210,7 +221,7 @@ export function AboutClient() {
               </Link>
             </div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
               {AMS_HIGHLIGHT_PRODUCTS.map((item) => (
                 <Card
                   key={item.id}

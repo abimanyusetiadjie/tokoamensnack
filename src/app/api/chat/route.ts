@@ -86,7 +86,7 @@ export async function POST(req: Request) {
           products: [],
           suggestions: [
             "Paket oleh-oleh < 150rb",
-            "Harga Kemplang Cap AMEN",
+            "Produk unggulan AMS",
             "Jam buka & alamat toko",
           ],
         }

@@ -22,11 +22,11 @@ export function KatalogClient() {
     <div className="min-h-screen bg-white overflow-x-clip">
       <PageHeroBanner
         breadcrumb={tx("Promo & Highlight", "Promos & Highlights")}
-        badge={tx("Signature Brand Cap AMEN & Pengiriman Nasional", "Signature Brand Cap AMEN & Nationwide Shipping")}
+        badge={tx("Produksi Langsung AMS & Pengiriman Nasional", "In-House Brand AMS & Nationwide Shipping")}
         title={tx("Sorotan Promo Toko Amen Snack", "Toko Amen Snack Promo Highlights")}
         subtitle={tx(
-          "Klik banner di bawah untuk memperbesar detail promo unggulan Cap AMEN dan layanan pengiriman oleh-oleh khas Bangka ke seluruh Indonesia.",
-          "Click any banner below to view details of Cap AMEN featured promos and nationwide Bangka souvenir shipping."
+          "Klik banner di bawah untuk memperbesar detail promo unggulan produk AMS dan layanan pengiriman oleh-oleh khas Bangka ke seluruh Indonesia.",
+          "Click any banner below to view details of featured AMS promos and nationwide Bangka souvenir shipping."
         )}
       />
 

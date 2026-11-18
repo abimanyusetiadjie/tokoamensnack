@@ -91,12 +91,12 @@ export const FLYER_EN: Record<
   { title: string; badge: string; period: string; description: string; ctaLabel: string }
 > = {
   "promo-cap-amen": {
-    title: 'Featured "Cap AMEN" Kemplang',
-    badge: "Traveler Favorite",
+    title: "Kemplang & Signature AMS Snacks",
+    badge: "In-House AMS Production",
     period: "Available Daily",
     description:
-      "Authentic Bangka sand-roasted Kemplang Pasir & Bantet by Cap AMEN with traditional shrimp-paste chili dip starting from Rp10,000.",
-    ctaLabel: "View Cap AMEN Kemplang",
+      "Getas Bangka AMS, Kericu Telor Cumi AMS, Terasi Toboali AMS & Terasi Bubuk AMS crafted directly by Toko Amen Snack.",
+    ctaLabel: "View AMS Products",
   },
   "promo-pengiriman-nasional": {
     title: "Nationwide Souvenir Delivery Across Indonesia",
@@ -123,7 +123,7 @@ export const CATEGORY_EN: Record<string, { title: string; description: string }>
   },
   "kemplang-pasir": {
     title: "Sand-Roasted & Fried Kemplang",
-    description: "Oil-free sand-roasted kemplang (including house brand Cap AMEN) and crispy fried varieties.",
+    description: "Oil-free sand-roasted kemplang and crispy fried squid & fish crackers from Bangka.",
   },
   "getas-kerupuk": {
     title: "Getas & Fish Crackers",
@@ -166,64 +166,64 @@ export const PRODUCT_EN: Record<
   { badge: string; category: string; description: string }
 > = {
   "prd-01": {
-    badge: "Signature Brand",
-    category: "Sand-Roasted Kemplang",
-    description: "In-house Cap AMEN sand-roasted kemplang served with Bangka shrimp-paste chili dip.",
+    badge: "In-House AMS",
+    category: "Spices & Terasi",
+    description: "Authentic 240g Bangka fermented shrimp paste crafted directly by AMS (121 sold).",
   },
   "prd-02": {
+    badge: "AMS Bestseller (4.9★)",
+    category: "Getas & Crackers",
+    description: "Crispy round Spanish mackerel getas crackers crafted in-house by AMS, 250g pack (375 sold).",
+  },
+  "prd-03": {
+    badge: "In-House AMS",
+    category: "Getas & Crackers",
+    description: "Crispy elongated Spanish mackerel getas crackers crafted in-house by AMS, 250g pack.",
+  },
+  "prd-04": {
+    badge: "Convenient & Pure",
+    category: "Spices & Terasi",
+    description: "Ready-to-sprinkle Bangka fermented shrimp paste powder crafted by AMS (75 sold).",
+  },
+  "prd-05": {
+    badge: "AMS Signature (4.9★)",
+    category: "Kericu & Seafood",
+    description: "Savory crunchy squid-egg kericu sticks (250g) crafted by AMS with zero preservatives (145 sold).",
+  },
+  "prd-06": {
     badge: "Bestseller (4.9★)",
     category: "Getas & Crackers",
     description: "Crispy savory mackerel fish crackers in a handy 250g pack (7,000+ sold).",
   },
-  "prd-03": {
+  "prd-07": {
     badge: "Bangka Exclusive",
     category: "Bangka Exclusives",
     description: "Prawn-broth instant noodles distributed exclusively in Bangka (1,000+ sold).",
   },
-  "prd-04": {
+  "prd-08": {
     badge: "Traveler Favorite",
     category: "Bangka Exclusives",
     description: "Special Bangka/Sumatra regional edition fried noodles loved by travelers.",
   },
-  "prd-05": {
+  "prd-09": {
     badge: "Best Seller",
     category: "Grilled Kemplang",
     description: "Crispy grilled Belinyu fish crackers Cap JJ complete with rich spicy chili sauce.",
   },
-  "prd-06": {
+  "prd-10": {
     badge: "Premium Quality",
     category: "Grilled Kemplang",
     description: "Authentic Belinyu grilled kemplang made with fresh Spanish mackerel.",
   },
-  "prd-07": {
+  "prd-11": {
     badge: "Culinary Sauce",
     category: "Spices & Terasi",
     description: "Legendary Bangka savory light soy sauce for cooking and dipping.",
   },
-  "prd-08": {
+  "prd-12": {
     badge: "Rich Aroma",
     category: "Coffee & Drinks",
     description: "No. 1 loose Bangka roasted ground coffee with bold, fragrant flavor.",
-  },
-  "prd-09": {
-    badge: "Kitchen Staple",
-    category: "Spices & Terasi",
-    description: "Authentic 240g Bangka fermented shrimp paste by AMS for rich sambal & dishes.",
-  },
-  "prd-10": {
-    badge: "Bestseller (1K+)",
-    category: "Kericu & Seafood",
-    description: "Crunchy Cap JS squid-egg kericu sticks (250g) with zero preservatives.",
-  },
-  "prd-11": {
-    badge: "Savory Topping",
-    category: "Kericu & Seafood",
-    description: "Fluffy savory Spanish mackerel floss (100g), convenient for family meals and travel.",
-  },
-  "prd-12": {
-    badge: "Traditional Sweet",
-    category: "Bangka Exclusives",
-    description: "Authentic Bangka cempedak fruit fudge (250g) with rich natural sweetness and aroma.",
   },
 };
 
@@ -249,7 +249,7 @@ export const TESTIMONIAL_EN: Record<string, { role: string; quote: string }> = {
   "testi-1": {
     role: "Traveler from Jakarta • Google Review",
     quote:
-      "Every trip to Sungailiat always ends at Toko Amen Snack. Cap AMEN sand-roasted kemplang and Cap Obor getas are super crunchy, great terasi dip, and honest prices!",
+      "Every trip to Sungailiat always ends at Toko Amen Snack. AMS Bangka Getas, AMS Kericu, and Cap Obor getas are super crunchy, great terasi dip, and honest prices!",
   },
   "testi-2": {
     role: "Sungailiat Local • Google Review",
@@ -288,8 +288,8 @@ export const BLOG_EN: Record<
       "Although all three share Spanish mackerel and tapioca flour, each cooking technique creates a distinct crunch and aroma.",
     content: [
       "Kemplang Panggang (Grilled Kemplang) is toasted over charcoal embers or baked until crisp with a smoky aroma, best paired with Bangka's sweet-spicy shrimp-paste chili dip.",
-      "Kemplang Pasir — like our signature Cap AMEN Sand-Roasted Kemplang — is roasted in hot clean sand without cooking oil, keeping it crunchy, savory, and non-greasy for long trips.",
-      "Getas are dense, bite-sized cylindrical or round fish crackers deep-fried to golden crispiness. Getas Istimewa Cap Obor is among our top sellers for its rich mackerel flavor.",
+      "Kemplang Pasir is roasted in hot clean sand without cooking oil, keeping it crunchy, savory, and non-greasy for long trips.",
+      "Getas are dense, bite-sized cylindrical or round fish crackers deep-fried to golden crispiness. Getas Bangka AMS (round & long) and Getas Istimewa Cap Obor are among our top sellers for their rich mackerel flavor.",
     ],
   },
   "blog-2": {
@@ -300,9 +300,9 @@ export const BLOG_EN: Record<
     excerpt:
       "Wondering what gifts to pack after visiting Sungailiat's beaches? Here are the 5 traveler favorites at Toko Amen Snack.",
     content: [
-      "1. Kemplang Pasir Bantet Cap AMEN & AMS Getas — Popular travel-friendly Bangka snacks available at Toko Amen Snack.",
+      "1. Getas Bangka AMS & Kericu Telor Cumi AMS — Signature in-house snacks crafted directly by Toko Amen Snack.",
       "2. Kemplang Panggang Belinyu & JJ 2.5 Blue Tie — Crisp grilled fish crackers prized for authentic Spanish mackerel flavor.",
-      "3. Getas Istimewa Cap Obor (250g) — Handy gift-sized packs easy to share with family or colleagues.",
+      "3. Terasi AMS 240g & Terasi Bubuk AMS — Authentic Bangka fermented shrimp paste produced in-house by AMS.",
       "4. Cap SS Bangka Soy Sauce & Shrimp Paste — Essential Bangka pantry staples for home cooks.",
       "5. No. 1 Bangka Coffee & Indomie Kaldu Udang — Unique local finds that bring Bangka flavor straight to your kitchen.",
     ],

@@ -8,7 +8,7 @@ export const revalidate = 60;
 export const metadata: Metadata = {
   title: "Koleksi Produk Oleh-Oleh Bangka",
   description:
-    "Koleksi produk pilihan Toko Amen Snack Sungailiat dengan foto produk asli: Kemplang Panggang, Kemplang Cap AMEN, Getas Ikan, Kericu, Terasi Bangka, Kopi Bangka, dan Indomie Kaldu Udang.",
+    "Koleksi produk pilihan Toko Amen Snack Sungailiat dengan foto produk asli: Terasi AMS, Getas Bangka AMS, Kericu Telor Cumi AMS, Kemplang Panggang, Kopi Bangka, dan Indomie Kaldu Udang.",
 };
 
 /**

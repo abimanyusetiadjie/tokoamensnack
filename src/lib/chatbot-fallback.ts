@@ -365,7 +365,7 @@ function buildProductFollowUps(opts: {
   if (!opts.isShippingOrStore) {
     candidates.push("Info kirim luar kota");
   } else {
-    candidates.push("Best seller Cap AMEN");
+    candidates.push("Best seller AMS");
   }
   return Array.from(new Set(candidates)).slice(0, 3);
 }
@@ -407,7 +407,7 @@ async function resolveSmartStoreResponse(
             "Saya siap membantu mengecek **harga eceran/grosir**, **ketersediaan stok produk**, **estimasi total pesanan**, **jam buka**, dan **pemesanan WhatsApp** secara langsung.",
             "",
             "Anda bisa tanyakan misalnya:",
-            "• *\"Harga Kemplang Cap AMEN atau Getas 250g\"*",
+            "• *\"Harga Getas Bangka AMS atau Terasi AMS\"*",
             "• *\"Indomie Kaldu Udang Bangka atau Kemplang Panggang\"*",
             "• *\"Pesan 2 Getas AMS 250g\"* atau *\"Jam buka & lokasi toko\"*",
           ].join("\n");
@@ -418,7 +418,7 @@ async function resolveSmartStoreResponse(
         products: [],
         suggestions: [
           "Paket oleh-oleh < 150rb",
-          "Harga Kemplang Cap AMEN",
+          "Produk unggulan AMS",
           "Jam buka & alamat toko",
         ],
       },
@@ -442,7 +442,7 @@ async function resolveSmartStoreResponse(
       ui: {
         products: [],
         suggestions: [
-          "Best seller Cap AMEN",
+          "Best seller AMS",
           "Produk harga grosir",
           "Paket oleh-oleh < 150rb",
         ],
@@ -554,7 +554,7 @@ async function resolveSmartStoreResponse(
   let returnedItems: WebProduct[] = [];
   let suggestions: string[] = [
     "Paket oleh-oleh < 150rb",
-    "Best seller Cap AMEN",
+    "Best seller AMS",
     "Produk harga grosir",
   ];
 
@@ -691,14 +691,14 @@ async function resolveSmartStoreResponse(
         `Maaf, kata kunci **"${keywords || trimmed}"** belum ditemukan di daftar katalog aktif kami.\n\nSilakan coba kata kunci lain atau tanyakan langsung ke admin:\n• [Tanya Stok via WhatsApp](${store.whatsappUrl}?text=${waMissing})\n• [Kunjungi Shopee Toko Amen Snack](${store.shopeeUrl})`
       );
       suggestions = [
-        "Best seller Cap AMEN",
+        "Best seller AMS",
         "Getas & Kericu Bangka",
         "Jam buka & lokasi toko",
       ];
     }
   } else {
     suggestions = [
-      "Best seller Cap AMEN",
+      "Best seller AMS",
       "Paket oleh-oleh < 150rb",
       "Produk harga grosir",
     ];

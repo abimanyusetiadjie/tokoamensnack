@@ -65,7 +65,7 @@ export const SHOPEE_CATALOG_ITEMS: ShopeeCatalogEntry[] = [
   {
     id: "shp-004",
     sku: "SHP-004",
-    name: "Kemplang Pasir bantet \"cap AMEN\"",
+    name: "Kemplang Pasir Bantet Khas Bangka",
     category: "Kemplang & Kerupuk Goreng",
     categorySlug: "kemplang-goreng",
     price: 10000,

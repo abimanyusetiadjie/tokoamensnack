@@ -128,8 +128,8 @@ export function LokasiClient() {
                 </h3>
                 <p className="text-sm text-slate-300 mt-2 leading-relaxed">
                   {tx(
-                    "Tidak sempat mampir ke Jl. Muhidin No.106 Sungailiat? Anda tetap bisa memesan Kemplang Pasir Cap AMEN, Kemplang Panggang, Getas, dan oleh-oleh khas Bangka lainnya secara online dengan pengiriman ke seluruh Indonesia.",
-                    "Can't drop by Jl. Muhidin No.106 Sungailiat? Order Cap AMEN sand-roasted kemplang, grilled kemplang, getas crackers, and Bangka snacks online with shipping across Indonesia."
+                    "Tidak sempat mampir ke Jl. Muhidin No.106 Sungailiat? Anda tetap bisa memesan Getas Bangka AMS, Kericu Telor Cumi AMS, Terasi AMS, Kemplang Panggang, dan oleh-oleh khas Bangka lainnya secara online dengan pengiriman ke seluruh Indonesia.",
+                    "Can't drop by Jl. Muhidin No.106 Sungailiat? Order Getas Bangka AMS, Kericu AMS, Terasi AMS, grilled kemplang, and Bangka snacks online with shipping across Indonesia."
                   )}
                 </p>
               </div>

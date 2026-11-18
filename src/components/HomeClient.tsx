@@ -152,7 +152,7 @@ export function HomeClient({
             <p className="mt-2.5 sm:mt-5 text-[13px] sm:text-base lg:text-lg text-gray-700 leading-relaxed max-w-xl mx-auto md:mx-0 px-2 sm:px-0">
               {tx(
                 STORE_INFO.heroSubtitle,
-                "Discover crispy Grilled Kemplang, sand-roasted Cap AMEN Kemplang, Mackerel Getas, and exclusive Bangka Island treats — fresh daily at honest prices!"
+                "Discover crispy Grilled Kemplang, Getas Bangka AMS, Kericu Telor Cumi AMS, Terasi Bangka AMS, and exclusive Bangka Island treats — fresh daily at honest prices!"
               )}
             </p>
 
@@ -221,8 +221,8 @@ export function HomeClient({
                 </h2>
                 <p className="text-xs sm:text-base text-gray-600 mt-1.5">
                   {tx(
-                    "Cek penawaran spesial produk Cap AMEN dan layanan kirim seluruh Indonesia.",
-                    "Explore special Cap AMEN offers and nationwide souvenir shipping across Indonesia."
+                    "Cek penawaran spesial produk unggulan AMS dan layanan kirim seluruh Indonesia.",
+                    "Explore special in-house AMS offers and nationwide souvenir shipping across Indonesia."
                   )}
                 </p>
               </div>

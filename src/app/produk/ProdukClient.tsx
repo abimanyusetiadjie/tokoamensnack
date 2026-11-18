@@ -220,7 +220,7 @@ export function ProdukClient({
       </Suspense>
       <PageHeroBanner
         breadcrumb={tx("Produk", "Products")}
-        badge={tx("100% Foto Asli Produk • Cap AMEN & Oleh-Oleh Bangka", "100% Real Product Photos • Cap AMEN & Bangka Souvenirs")}
+        badge={tx("100% Foto Asli Produk • Lini Produk AMS & Oleh-Oleh Bangka", "100% Real Product Photos • In-House AMS & Bangka Souvenirs")}
         title={tx("Koleksi Produk Terlengkap", "Complete Product Collection")}
         subtitle={tx(
           "Pilihan oleh-oleh khas Pulau Bangka berkualitas dengan foto asli produk tersedia langsung di Toko Amen Snack Sungailiat dan Shopee Official.",

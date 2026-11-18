@@ -126,7 +126,7 @@ export default function OpenGraphImage() {
               lineHeight: 1.4,
             }}
           >
-            Kemplang Pasir Cap AMEN | Getas Cap Obor | Kemplang Panggang JJ | Kecap Asin Cap SS | Kopi Curah Bangka
+            Getas Bangka AMS | Kericu Telor Cumi AMS | Terasi AMS | Kemplang Panggang JJ | Kopi Curah Bangka
           </div>
         </div>
 

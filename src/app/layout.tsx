@@ -21,12 +21,12 @@ export const metadata: Metadata = {
     template: "%s | Toko Amen Snack Sungailiat",
   },
   description:
-    "Pusat oleh-oleh dan camilan khas Bangka berdiri sejak 1 Juni 2007 di Jl. Muhidin No.106 Sungailiat. Sedia Kemplang Panggang, Kemplang Pasir Cap AMEN, Getas Ikan, Kericu, Kecap Asin, dan Indomie Kaldu Udang Bangka. Pesan via WhatsApp atau Shopee.",
+    "Pusat oleh-oleh dan camilan khas Bangka berdiri sejak 1 Juni 2007 di Jl. Muhidin No.106 Sungailiat. Sedia Getas Bangka AMS, Kericu Telor Cumi AMS, Terasi AMS, Kemplang Panggang, Kecap Asin, dan Indomie Kaldu Udang Bangka. Pesan via WhatsApp atau Shopee.",
   openGraph: {
     title:
       "Toko Amen Snack Sungailiat - Pusat Oleh-Oleh & Camilan Khas Bangka",
     description:
-      "Nikmati Kemplang Panggang, Kemplang Pasir Cap AMEN, Getas Ikan, hingga produk eksklusif khas Pulau Bangka. Melayani pembelian di toko & pengiriman ke seluruh Indonesia.",
+      "Nikmati Kemplang Panggang, Getas Bangka AMS, Kericu Telor Cumi AMS, Terasi AMS, hingga produk eksklusif khas Pulau Bangka. Melayani pembelian di toko & pengiriman ke seluruh Indonesia.",
     type: "website",
     locale: "id_ID",
     siteName: "Toko Amen Snack",
@@ -36,7 +36,7 @@ export const metadata: Metadata = {
     title:
       "Toko Amen Snack Sungailiat - Pusat Oleh-Oleh & Camilan Khas Bangka",
     description:
-      "Pusat oleh-oleh khas Bangka terlengkap di Sungailiat. Tersedia Cap AMEN, kemplang panggang, getas, dan camilan khas Bangka.",
+      "Pusat oleh-oleh khas Bangka terlengkap di Sungailiat. Tersedia produk produksi langsung AMS, kemplang panggang, getas, dan camilan khas Bangka.",
   },
 };
 
