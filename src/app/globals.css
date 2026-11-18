@@ -43,6 +43,33 @@ body {
   background: linear-gradient(135deg, #1b214f 0%, #2e3677 100%);
 }
 
+/* Seamless tokomama-style hero gradient scrims (pure rgba/hex for Chrome 109 safety) */
+.hero-scrim-desktop {
+  background:
+    linear-gradient(
+      90deg,
+      #f8fafc 0%,
+      rgba(248, 250, 252, 0.96) 16%,
+      rgba(248, 250, 252, 0.72) 34%,
+      rgba(248, 250, 252, 0.18) 56%,
+      rgba(248, 250, 252, 0) 76%
+    ),
+    linear-gradient(
+      0deg,
+      #f8fafc 0%,
+      rgba(248, 250, 252, 0) 14%
+    );
+}
+
+.hero-scrim-mobile {
+  background: linear-gradient(
+    180deg,
+    rgba(248, 250, 252, 0) 30%,
+    rgba(248, 250, 252, 0.78) 72%,
+    #f8fafc 100%
+  );
+}
+
 .brand-card {
   box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.04);
   transition: box-shadow 0.15s ease;

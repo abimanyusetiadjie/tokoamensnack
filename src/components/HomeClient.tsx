@@ -83,13 +83,42 @@ export function HomeClient({
   return (
     <div className="min-h-screen bg-brand-soft overflow-x-clip">
       {/* ================================================================= */}
-      {/* SECTION 1: HERO SECTION (1:1 tokomama.com Desktop & Mobile Fit)   */}
+      {/* SECTION 1: HERO SECTION (Skenario A — Full-Bleed Seamless Blend)  */}
       {/* ================================================================= */}
-      <section className="relative bg-brand-soft pt-0 pb-8 md:py-16 overflow-x-clip">
-        <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-[10%] grid grid-cols-1 md:grid-cols-12 items-center gap-3 sm:gap-8 lg:gap-12">
-          {/* Left Content Column (2nd on Mobile below Full-Bleed Hero Visual matching tokomama.com) */}
-          <div className="md:col-span-6 text-center md:text-left order-2 md:order-1 -mt-3 sm:mt-0 relative z-10">
-            <span className="inline-flex items-center gap-1.5 rounded-full bg-brand-red/10 px-3 py-1 sm:px-3.5 sm:py-1.5 text-[11px] sm:text-xs font-semibold text-brand-red mb-2.5 sm:mb-4">
+      <section className="relative bg-brand-soft md:min-h-[490px] lg:min-h-[540px] flex flex-col justify-center overflow-x-clip">
+        {/* Desktop Full-Bleed Right Store Canvas with Seamless Left Scrim (tokomama.com pattern) */}
+        <div
+          aria-hidden="true"
+          className="hidden md:block absolute inset-y-0 right-0 w-[68%] lg:w-[64%] overflow-hidden pointer-events-none"
+        >
+          <MediaImage
+            src={STORE_INFO.heroImage}
+            alt="Suasana Rak Camilan & Kemplang Gantung Asli Toko Amen Snack Sungailiat Bangka"
+            fill
+            priority
+            sizes="(min-width: 1024px) 64vw, 68vw"
+            className="object-cover object-[72%_center]"
+          />
+          <div className="hero-scrim-desktop absolute inset-0" />
+        </div>
+
+        {/* Mobile Full-Bleed Top Store Canvas with Soft Bottom Fade */}
+        <div className="md:hidden relative w-full h-[265px] sm:h-[320px] overflow-hidden">
+          <MediaImage
+            src={STORE_INFO.heroImage}
+            alt="Suasana Rak Camilan & Kemplang Gantung Asli Toko Amen Snack Sungailiat Bangka"
+            fill
+            priority
+            sizes="100vw"
+            className="object-cover object-center"
+          />
+          <div aria-hidden="true" className="hero-scrim-mobile absolute inset-0" />
+        </div>
+
+        {/* Foreground Content Column (Matches tokomama.com left text / mobile bottom layout) */}
+        <div className="relative z-10 w-full max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-[10%] -mt-7 sm:-mt-8 md:mt-0 pb-8 md:py-16">
+          <div className="md:w-[56%] lg:w-[52%] text-center md:text-left">
+            <span className="inline-flex items-center gap-1.5 rounded-full bg-white border border-slate-200/80 shadow-sm px-3 py-1 sm:px-3.5 sm:py-1.5 text-[11px] sm:text-xs font-semibold text-brand-red mb-2.5 sm:mb-4">
               <Store className="w-3.5 h-3.5 shrink-0" />
               <span>
                 Sejak {STORE_INFO.foundedDate} &bull; Sisparnas Kemenpar &bull; Rating{" "}
@@ -108,7 +137,7 @@ export function HomeClient({
             </p>
 
             {/* Mobile: compact 2-row stack (matching tokomama.com height); Desktop: 1 row */}
-            <div className="mt-5 sm:mt-8 flex flex-col sm:flex-row sm:flex-wrap lg:flex-nowrap items-center justify-center md:justify-start gap-2 sm:gap-3">
+            <div className="mt-5 sm:mt-8 flex flex-col sm:flex-row sm:flex-wrap xl:flex-nowrap items-center justify-center md:justify-start gap-2 sm:gap-3">
               <a
                 href="#katalog"
                 className="w-full max-w-[330px] sm:w-auto sm:max-w-none inline-flex items-center justify-center bg-brand-red hover:bg-brand-red-dark text-white font-semibold rounded-lg sm:rounded-xl px-4 xl:px-5 h-11 sm:h-12 shadow-md shadow-indigo-950/15 text-xs xl:text-sm whitespace-nowrap transition-colors"
@@ -138,32 +167,6 @@ export function HomeClient({
                   <span>WhatsApp</span>
                 </a>
               </div>
-            </div>
-          </div>
-
-          {/* Right Hero Visual — Foto Asli Toko (Clean Framed on Desktop, Soft-Fade Full-Bleed on Mobile) */}
-          <div className="md:col-span-6 order-1 md:order-2 flex justify-center -mx-4 sm:-mx-6 md:mx-0">
-            <div className="relative w-full h-[255px] sm:h-[320px] md:h-auto md:aspect-[3/2] md:rounded-2xl overflow-hidden md:shadow-lg md:border md:border-slate-200/80 bg-white">
-              <MediaImage
-                src={STORE_INFO.heroImage}
-                alt="Suasana Rak Camilan & Kemplang Gantung Asli Toko Amen Snack Sungailiat Bangka"
-                fill
-                priority
-                sizes="(min-width: 768px) 50vw, 100vw"
-                className="object-cover object-center"
-              />
-              <div
-                aria-hidden="true"
-                className="md:hidden pointer-events-none absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-brand-soft via-brand-soft/75 to-transparent"
-              />
-              <div
-                aria-hidden="true"
-                className="hidden md:block pointer-events-none absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-slate-950/60 to-transparent"
-              />
-              <span className="hidden md:inline-flex items-center gap-1.5 absolute bottom-3.5 left-3.5 rounded-full bg-white/95 px-3 py-1 text-xs font-semibold text-gray-900 shadow-sm">
-                <Store className="w-3.5 h-3.5 text-brand-red shrink-0" />
-                <span>Toko Fisik Resmi • Jl. Muhidin No.106 Sungailiat</span>
-              </span>
             </div>
           </div>
         </div>
