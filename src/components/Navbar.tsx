@@ -24,7 +24,7 @@ export function Navbar() {
   return (
     <>
       {/* Tier 1 Top Bar — Clean Right-Aligned Utility Bar matching template */}
-      <div className="hidden lg:flex h-8 bg-[#1C224F] px-6 lg:px-[10%] py-1.5 justify-end items-center text-white">
+      <div className="hidden lg:flex h-8 bg-[#1C224F] px-8 xl:px-[10%] py-1.5 justify-end items-center text-white">
         <div className="max-w-[1440px] w-full mx-auto flex justify-end items-center gap-6 font-inter font-medium text-xs text-white/95">
           <Link
             href="/about#supplier"
@@ -44,12 +44,21 @@ export function Navbar() {
           >
             Lokasi Sungailiat
           </Link>
+          <a
+            href={STORE_INFO.shopeeUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-1.5 text-amber-300 hover:text-white font-semibold whitespace-nowrap transition-colors"
+          >
+            <ShoppingBag className="w-3.5 h-3.5 shrink-0" />
+            <span>Shopee Official (amensnack)</span>
+          </a>
         </div>
       </div>
 
       {/* Tier 2 Sticky Main Header — Clean White Surface for Official Logo Contrast */}
       <header className="sticky top-0 z-40 w-full transition-colors bg-white/95 backdrop-blur-sm border-b border-slate-200/80 shadow-[0_1px_12px_rgba(15,23,42,0.03)]">
-        <div className="relative h-16 lg:h-20 px-4 sm:px-6 lg:px-[10%] flex items-center justify-center lg:justify-between max-w-[1600px] mx-auto">
+        <div className="relative h-16 lg:h-20 px-4 sm:px-6 lg:px-8 xl:px-[10%] flex items-center justify-center lg:justify-between max-w-[1600px] mx-auto">
           {/* Mobile Menu Button */}
           <button
             type="button"
@@ -61,41 +70,41 @@ export function Navbar() {
           </button>
 
           {/* Official AMEN SNACK Logo + Wordmark */}
-          <Link href="/" className="flex items-center gap-2.5 group shrink-0">
+          <Link href="/" className="flex items-center gap-2 sm:gap-2.5 group shrink-0">
             <Image
-              src="/images/logo-amen-snack.png"
+              src="/images/logo-amen-snack.webp"
               alt="Logo Resmi Toko Amen Snack"
               width={44}
               height={48}
               priority
-              className="h-10 sm:h-12 w-auto object-contain group-hover:scale-105 transition-transform shrink-0"
+              className="h-9 sm:h-11 lg:h-12 w-auto object-contain group-hover:scale-105 transition-transform shrink-0"
             />
             <span className="flex flex-col leading-none">
               <span className="font-inter font-extrabold text-[9px] sm:text-[10px] uppercase tracking-[0.14em] text-brand-orange">
                 Oleh-Oleh Bangka
               </span>
-              <span className="font-inter font-black text-[17px] sm:text-xl tracking-tight text-brand-red leading-tight">
+              <span className="font-inter font-black text-base sm:text-lg lg:text-xl tracking-tight text-brand-red leading-tight whitespace-nowrap">
                 Toko Amen Snack
               </span>
             </span>
           </Link>
 
-          {/* Mobile Quick Shopee CTA */}
+          {/* Mobile Quick Shopee Icon CTA (Compact so it never touches centered logo on 360px/390px) */}
           <a
             href={STORE_INFO.shopeeUrl}
             target="_blank"
             rel="noopener noreferrer"
             aria-label="Produk amen snack di Shopee Indonesia"
-            className="lg:hidden absolute right-3 inline-flex items-center gap-1 rounded-full bg-[#EE4D2D] hover:bg-[#d93d1f] text-white px-2.5 py-1.5 text-[11px] font-bold shadow-xs transition-colors"
+            title="Shopee Official amensnack"
+            className="lg:hidden absolute right-3 inline-flex items-center justify-center w-9 h-9 rounded-full bg-[#EE4D2D] hover:bg-[#d93d1f] text-white shadow-xs transition-colors"
           >
-            <ShoppingBag className="w-3.5 h-3.5 shrink-0" />
-            <span>Shopee</span>
+            <ShoppingBag className="w-4 h-4 shrink-0" />
           </a>
 
-          {/* Desktop Navigation — Clean Single Row with Red Active Accent */}
+          {/* Desktop Navigation — Clean Single Row with Red Active Accent matching tokomama.com */}
           <nav
             aria-label="Navigasi Utama"
-            className="hidden lg:flex gap-5 xl:gap-7 items-center"
+            className="hidden lg:flex gap-6 xl:gap-8 items-center"
           >
             {NAV_LINKS.map((link) => {
               const isActive =
@@ -125,7 +134,7 @@ export function Navbar() {
               href={STORE_INFO.shopeeUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-1.5 rounded-full bg-[#EE4D2D] hover:bg-[#d93d1f] text-white font-semibold text-xs px-4 py-2 whitespace-nowrap shadow-xs transition-colors shrink-0"
+              className="hidden xl:inline-flex items-center gap-1.5 rounded-lg bg-[#EE4D2D] hover:bg-[#d93d1f] text-white font-semibold text-xs px-3.5 py-2 whitespace-nowrap shadow-xs transition-colors shrink-0"
             >
               <ShoppingBag className="w-3.5 h-3.5 shrink-0" />
               <span>Shopee Official</span>
@@ -151,7 +160,7 @@ export function Navbar() {
               <div className="flex items-center justify-between pb-5 border-b border-slate-200">
                 <div className="flex items-center gap-2.5">
                   <Image
-                    src="/images/logo-amen-snack.png"
+                    src="/images/logo-amen-snack.webp"
                     alt="Logo Resmi Toko Amen Snack"
                     width={38}
                     height={42}

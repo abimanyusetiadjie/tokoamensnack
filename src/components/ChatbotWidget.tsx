@@ -20,6 +20,7 @@ import {
   X,
 } from "lucide-react";
 import { STORE_INFO, type CategoryIconName } from "@/payload/seed-data";
+import { resolveShopeeMediaMatch } from "@/lib/shopee-catalog-map";
 import { CategoryIcon } from "@/components/CategoryIcon";
 import { cn } from "@/lib/utils";
 import type {
@@ -104,32 +105,8 @@ function resolveCardThumbnail(product: ChatbotProductCard): string {
   if (product.imageUrl && product.imageUrl.trim()) {
     return product.imageUrl.trim();
   }
-  const upper = product.name.toUpperCase();
-  if (upper.includes("KALDU UDANG")) {
-    return "/images/products/prd-03-indomie-kaldu-udang-bangka.webp";
-  }
-  if (upper.includes("INDOMI GORENG") || upper.includes("INDOMIE GORENG")) {
-    return "/images/products/prd-04-indomie-goreng-bangka.webp";
-  }
-  if (upper.includes("KEMPLANG") && upper.includes("JJ")) {
-    return "/images/products/prd-05-kemplang-panggang-jj.webp";
-  }
-  if (upper.includes("KEMPLANG") && (upper.includes("PANGGANG") || upper.includes("OVEN") || upper.includes("BELINYU"))) {
-    return "/images/products/prd-06-kemplang-panggang-belinyu.webp";
-  }
-  if (upper.includes("KEMPLANG")) {
-    return "/images/products/prd-01-kemplang-pasir-cap-amen.webp";
-  }
-  if (upper.includes("GETAS")) {
-    return "/images/products/prd-02-getas-cap-obor.webp";
-  }
-  if (upper.includes("KECAP") && upper.includes("SS")) {
-    return "/images/products/prd-07-kecap-asin-cap-ss.webp";
-  }
-  if (upper.includes("KOPI CURAH")) {
-    return "/images/products/prd-08-kopi-curah-bangka.webp";
-  }
-  return "";
+  const matched = resolveShopeeMediaMatch(product.name, product.sku);
+  return matched.imageUrl || "";
 }
 
 function renderInlineMarkdown(text: string): React.ReactNode[] {
@@ -556,7 +533,7 @@ export function ChatbotWidget() {
             <div className="flex items-center gap-2 min-w-0">
               <div className="w-7 h-7 rounded-full bg-white p-0.5 flex items-center justify-center shrink-0 shadow-sm">
                 <img
-                  src="/images/logo-amen-snack.png"
+                  src="/images/logo-amen-snack.webp"
                   alt="Logo Amen Snack"
                   className="w-full h-full object-contain"
                 />
@@ -887,7 +864,7 @@ export function ChatbotWidget() {
         aria-expanded={isOpen}
         aria-label="Buka Asisten Toko & WhatsApp Toko Amen Snack"
         className={cn(
-          "items-center gap-2 rounded-full bg-brand-red hover:bg-brand-red-dark text-white font-semibold text-xs sm:text-sm pl-3.5 pr-4 h-11 sm:h-12 shadow-xl transition-transform hover:scale-105 active:scale-95 cursor-pointer border border-white/15",
+          "items-center gap-1.5 sm:gap-2 rounded-full bg-brand-red hover:bg-brand-red-dark text-white font-semibold text-xs sm:text-sm pl-3 pr-3.5 sm:pl-3.5 sm:pr-4 h-10 sm:h-12 shadow-xl transition-transform hover:scale-105 active:scale-95 cursor-pointer border border-white/15",
           isOpen ? "hidden sm:inline-flex" : "inline-flex"
         )}
       >

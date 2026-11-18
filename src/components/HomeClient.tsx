@@ -114,21 +114,21 @@ export function HomeClient({
               {STORE_INFO.heroSubtitle}
             </p>
 
-            {/* Primary & Secondary Action Pills */}
-            <div className="mt-5 sm:mt-8 flex flex-col sm:flex-row sm:flex-wrap items-center justify-center md:justify-start gap-2.5 sm:gap-3.5">
+            {/* Primary & Secondary Action Buttons — Single Row on Desktop matching tokomama.com */}
+            <div className="mt-5 sm:mt-8 flex flex-col sm:flex-row sm:flex-wrap lg:flex-nowrap items-center justify-center md:justify-start gap-2.5 sm:gap-3">
               <a
                 href="#katalog"
-                className="w-full max-w-[328px] sm:w-auto sm:max-w-none inline-flex items-center justify-center bg-brand-red hover:bg-brand-red-dark text-white font-semibold rounded-full px-6 h-11 sm:h-12 shadow-md shadow-indigo-950/15 text-sm sm:text-base transition-colors"
+                className="w-full max-w-[328px] sm:w-auto sm:max-w-none inline-flex items-center justify-center bg-brand-red hover:bg-brand-red-dark text-white font-semibold rounded-xl px-4 xl:px-5 h-11 sm:h-12 shadow-md shadow-indigo-950/15 text-xs xl:text-sm whitespace-nowrap transition-colors"
               >
                 <span>Lihat Katalog Produk</span>
-                <ArrowRight className="w-4 h-4 ml-1.5" />
+                <ArrowRight className="w-4 h-4 ml-1.5 shrink-0" />
               </a>
 
               <a
                 href={STORE_INFO.shopeeUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-full max-w-[328px] sm:w-auto sm:max-w-none inline-flex items-center justify-center gap-2 bg-[#EE4D2D] hover:bg-[#d93d1f] text-white font-semibold rounded-full px-6 h-11 sm:h-12 shadow-sm text-sm sm:text-base transition-colors"
+                className="w-full max-w-[328px] sm:w-auto sm:max-w-none inline-flex items-center justify-center gap-1.5 bg-[#EE4D2D] hover:bg-[#d93d1f] text-white font-semibold rounded-xl px-4 xl:px-5 h-11 sm:h-12 shadow-sm text-xs xl:text-sm whitespace-nowrap transition-colors"
               >
                 <ShoppingBag className="w-4 h-4 shrink-0" />
                 <span>Belanja di Shopee</span>
@@ -138,8 +138,9 @@ export function HomeClient({
                 href={STORE_INFO.whatsappDirectCta}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-full max-w-[328px] sm:w-auto sm:max-w-none inline-flex items-center justify-center bg-white hover:bg-brand-soft text-brand-red border-2 border-brand-red font-semibold rounded-full px-6 h-11 sm:h-12 text-sm sm:text-base transition-colors"
+                className="w-full max-w-[328px] sm:w-auto sm:max-w-none inline-flex items-center justify-center gap-1.5 bg-white hover:bg-brand-soft text-brand-red border-2 border-brand-red font-semibold rounded-xl px-4 xl:px-5 h-11 sm:h-12 text-xs xl:text-sm whitespace-nowrap transition-colors"
               >
+                <Phone className="w-3.5 h-3.5 shrink-0" />
                 <span>Hubungi Kami</span>
               </a>
             </div>
@@ -162,14 +163,14 @@ export function HomeClient({
       </section>
 
       {/* ================================================================= */}
-      {/* SECTION 2: WATERMARK STRIP + OVERLAPPING ROUNDED WHITE SHEET      */}
-      {/* + PROMO FLYER EMBLA CAROUSEL (1:1 Template Signature)             */}
+      {/* SECTION 2: REAL STORE SHELF STRIP + OVERLAPPING ROUNDED WHITE     */}
+      {/* SHEET + PROMO FLYER EMBLA CAROUSEL (1:1 tokomama.com Signature)   */}
       {/* ================================================================= */}
-      <section className="relative bg-brand-soft pt-8 sm:pt-14 overflow-x-clip">
-        {/* Subtle Repeated Vector Monogram Watermark Strip */}
+      <section className="relative bg-brand-soft pt-20 sm:pt-28 md:pt-32 overflow-x-clip">
+        {/* Panoramic Store Shelf & Price Tag Strip matching tokomama.com */}
         <div
           aria-hidden="true"
-          className="pointer-events-none absolute inset-x-0 top-0 h-24 sm:h-32 opacity-35 sm:opacity-30 overflow-hidden"
+          className="pointer-events-none absolute inset-x-0 top-0 h-28 sm:h-36 md:h-44 opacity-95 overflow-hidden border-y border-slate-200/80"
         >
           <MediaImage
             src="/images/banners/watermark-pattern.webp"
@@ -181,7 +182,7 @@ export function HomeClient({
         </div>
 
         {/* Rounded White Overlapping Container Sheet */}
-        <div className="relative z-10 bg-white rounded-t-[24px] sm:rounded-t-[32px] pt-8 sm:pt-14 pb-10 sm:pb-14 shadow-[0_-8px_30px_rgba(0,0,0,0.03)]">
+        <div className="relative z-10 bg-white rounded-t-[28px] sm:rounded-t-[40px] pt-8 sm:pt-14 pb-10 sm:pb-14 shadow-[0_-10px_35px_rgba(15,23,42,0.08)]">
           <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-[10%]">
             <div className="flex flex-col sm:flex-row items-center sm:items-end justify-between gap-2.5 sm:gap-4 mb-6 sm:mb-8 text-center sm:text-left">
               <div>
@@ -436,36 +437,29 @@ export function HomeClient({
                     key={testi.id}
                     className="basis-[88%] sm:basis-1/2 lg:basis-1/3"
                   >
-                    <Card className="brand-card bg-white rounded-2xl p-5 sm:p-6 flex flex-col justify-between h-full border border-slate-200 shadow-lg">
+                    <Card className="brand-card bg-white rounded-2xl p-5 sm:p-6 flex flex-col justify-between h-full border border-slate-200 shadow-lg text-center">
                       <div>
-                        {/* Header: Circular Avatar + Name + 5 Stars directly beneath Name */}
-                        <div className="flex items-center gap-3 mb-3.5 sm:mb-4">
+                        {/* Centered Rounded-2xl Avatar + Customer Name matching tokomama.com */}
+                        <div className="flex flex-col items-center mb-3 sm:mb-4">
                           <div
-                            className={`w-11 h-11 sm:w-12 sm:h-12 rounded-full ${
+                            className={`w-14 h-14 sm:w-16 sm:h-16 rounded-2xl ${
                               AVATAR_BG_FALLBACKS[testiIdx % AVATAR_BG_FALLBACKS.length]
-                            } text-white font-bold text-sm flex items-center justify-center shrink-0 shadow-sm`}
+                            } text-white font-extrabold text-base sm:text-lg flex items-center justify-center shrink-0 shadow-md`}
                           >
                             {testi.avatarInitials}
                           </div>
-                          <div className="min-w-0">
-                            <div className="font-bold text-sm sm:text-base text-gray-900 truncate">
-                              {testi.name}
-                            </div>
-                            <div className="flex items-center gap-0.5 mt-0.5">
-                              {Array.from({ length: testi.rating }).map((_, idx) => (
-                                <Star
-                                  key={idx}
-                                  className="h-3.5 w-3.5 fill-amber-400 text-amber-400"
-                                />
-                              ))}
-                            </div>
+                          <div className="font-bold text-sm sm:text-base text-gray-900 mt-2.5">
+                            {testi.name}
+                          </div>
+                          <div className="text-[11px] font-medium text-brand-red mt-0.5">
+                            {testi.role}
                           </div>
                         </div>
 
                         {/* Non-italic Quote Framed cleanly by Top-Left & Bottom-Right Quote Marks */}
-                        <div className="space-y-1">
+                        <div className="space-y-1 text-left">
                           <QuoteGlyph />
-                          <p className="text-[13px] sm:text-sm text-gray-600 leading-relaxed pl-1">
+                          <p className="text-[13px] sm:text-sm text-gray-600 leading-relaxed text-center px-2">
                             {testi.quote}
                           </p>
                           <div className="flex justify-end">
@@ -474,8 +468,14 @@ export function HomeClient({
                         </div>
                       </div>
 
-                      <div className="pt-3 mt-3 border-t border-slate-100 text-[11px] sm:text-xs font-medium text-brand-red truncate">
-                        {testi.role}
+                      {/* Centered 5 Gold Stars at Bottom matching tokomama.com */}
+                      <div className="pt-3 mt-2 flex items-center justify-center gap-1">
+                        {Array.from({ length: testi.rating }).map((_, idx) => (
+                          <Star
+                            key={idx}
+                            className="h-4 w-4 fill-amber-400 text-amber-400"
+                          />
+                        ))}
                       </div>
                     </Card>
                   </CarouselItem>
@@ -490,7 +490,7 @@ export function HomeClient({
 
       {/* ================================================================= */}
       {/* SECTION 5: VALUE PILLARS & 3 PROPOSITION BANNERS                  */}
-      {/* (Mobile horizontal pillar cards + horizontal peek proposition)    */}
+      {/* (Clean open desktop pillars matching tokomama.com + 3 banners)    */}
       {/* ================================================================= */}
       <section
         id="keunggulan"
@@ -506,21 +506,23 @@ export function HomeClient({
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-3.5 sm:gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-3.5 sm:gap-8">
             {VALUE_PILLARS.map((pillar, idx) => {
               const Icon = PILLAR_ICONS[pillar.iconName];
               return (
                 <div
                   key={pillar.id}
-                  className="brand-card bg-white rounded-2xl p-4 sm:p-6 md:p-8 flex flex-row md:flex-col items-start md:items-center text-left md:text-center gap-3.5 md:gap-0"
+                  className="bg-white md:bg-transparent rounded-2xl p-4 sm:p-6 md:p-3 border border-slate-200/70 md:border-none shadow-xs md:shadow-none flex flex-row md:flex-col items-start md:items-center text-left md:text-center gap-3.5 md:gap-0"
                 >
-                  <Icon
-                    className={`w-10 h-10 sm:w-12 sm:h-12 md:w-16 md:h-16 shrink-0 mt-0.5 md:mt-0 md:mb-4 ${
-                      idx % 2 === 0 ? "text-brand-red" : "text-brand-orange"
-                    }`}
-                  />
-                  <div className="min-w-0">
-                    <h3 className="font-inter font-bold text-base sm:text-lg text-brand-red-dark mb-1 sm:mb-2.5">
+                  <div className="w-12 h-12 sm:w-14 sm:h-14 md:w-20 md:h-20 rounded-2xl bg-brand-soft md:bg-white md:shadow-md md:border md:border-slate-100 flex items-center justify-center shrink-0 md:mb-5">
+                    <Icon
+                      className={`w-6 h-6 sm:w-8 sm:h-8 md:w-10 md:h-10 ${
+                        idx % 2 === 0 ? "text-brand-red" : "text-brand-orange"
+                      }`}
+                    />
+                  </div>
+                  <div className="min-w-0 max-w-xs">
+                    <h3 className="font-inter font-bold text-base sm:text-lg text-gray-900 mb-1 sm:mb-2">
                       {pillar.title}
                     </h3>
                     <p className="text-xs sm:text-sm text-gray-600 leading-relaxed">

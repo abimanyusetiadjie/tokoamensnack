@@ -109,15 +109,13 @@ export default function RootLayout({
       lang="id"
       className={`${geistSans.variable} ${geistMono.variable} ${inter.variable} ${playfair.variable}`}
     >
-      <head>
+      <body className="font-sans antialiased">
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
             __html: JSON.stringify(LOCAL_BUSINESS_JSON_LD),
           }}
         />
-      </head>
-      <body className="font-sans antialiased">
         <Navbar />
         <main>{children}</main>
         <Footer />
