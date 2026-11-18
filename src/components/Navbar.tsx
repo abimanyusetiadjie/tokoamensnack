@@ -28,7 +28,7 @@ export function Navbar() {
     <>
       {/* Single Clean Sticky Header (1:1 Clean Mobile Concept Applied Across Desktop & Mobile) */}
       <header className="sticky top-0 z-40 w-full transition-colors bg-white/[0.98] border-b border-slate-200/80 shadow-[0_1px_12px_rgba(15,23,42,0.03)]">
-        <div className="relative h-16 lg:h-20 px-4 sm:px-6 lg:px-8 xl:px-[10%] flex items-center justify-center lg:justify-between max-w-[1600px] mx-auto">
+        <div className="relative h-16 lg:h-20 px-4 sm:px-6 lg:px-8 xl:px-[6%] 2xl:px-[10%] flex items-center justify-center lg:justify-between lg:gap-6 max-w-[1600px] mx-auto">
           {/* Mobile Menu Button */}
           <button
             type="button"
@@ -74,14 +74,14 @@ export function Navbar() {
           {/* Desktop Navigation — Globe Switcher Left of Beranda + Clean Single Row */}
           <nav
             aria-label={tx("Navigasi Utama", "Main Navigation")}
-            className="hidden lg:flex gap-5 xl:gap-7 items-center"
+            className="hidden lg:flex items-center gap-4 xl:gap-6 lg:ml-6"
           >
             <button
               type="button"
               onClick={toggleLang}
               aria-label={isEn ? "Ganti bahasa ke Indonesia" : "Switch language to English"}
               title={isEn ? "Bahasa Indonesia (ID)" : "English (EN)"}
-              className="inline-flex items-center gap-1.5 rounded-full border border-slate-200 bg-slate-50 hover:bg-slate-100 text-slate-700 font-bold text-xs px-3 py-1.5 transition-colors cursor-pointer shrink-0 whitespace-nowrap"
+              className="inline-flex items-center gap-1 rounded-full border border-slate-200 bg-slate-50 hover:bg-slate-100 text-slate-700 font-bold text-[11px] px-2.5 py-1 transition-colors cursor-pointer shrink-0 whitespace-nowrap"
             >
               <Globe className="w-3.5 h-3.5 text-brand-red shrink-0" aria-hidden="true" />
               <span className={lang === "id" ? "text-brand-red" : "text-slate-400"}>ID</span>
