@@ -10,7 +10,13 @@ type ProductCardInput = ProductItem | WebProduct;
 /**
  * Reusable Bangka product card with retail/wholesale pricing, stock indicator, WhatsApp CTA, and Shopee link.
  */
-export function ProductCard({ product }: { product: ProductCardInput }) {
+export function ProductCard({
+  product,
+  priority = false,
+}: {
+  product: ProductCardInput;
+  priority?: boolean;
+}) {
   const waHref = getProductWhatsappUrl(product.name, product.formattedPrice);
   const wholesalePrice =
     "formattedWholesalePrice" in product ? product.formattedWholesalePrice : null;
@@ -36,6 +42,7 @@ export function ProductCard({ product }: { product: ProductCardInput }) {
           alt={product.name}
           fallbackLabel={product.name}
           fill
+          priority={priority}
           sizes="(min-width: 1280px) 23vw, (min-width: 768px) 32vw, 48vw"
           className="object-cover"
         />
