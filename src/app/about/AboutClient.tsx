@@ -35,9 +35,9 @@ export function AboutClient() {
     <div className="min-h-screen bg-white overflow-x-clip">
       <PageHeroBanner
         breadcrumb="Tentang Kami"
-        badge="Sisparnas Kemenpar • House Brand Cap AMEN"
+        badge={`Berdiri Sejak ${STORE_INFO.foundedDate} • Sisparnas Kemenpar`}
         title={`Tentang ${STORE_INFO.officialName}`}
-        subtitle="Pusat oleh-oleh khas Bangka, toko camilan, dan ritel makanan ringan di Sungailiat dengan reputasi 4,5★ di Google Maps."
+        subtitle={`Pusat oleh-oleh khas Bangka, toko camilan, dan ritel makanan ringan di Sungailiat sejak ${STORE_INFO.foundedDate} dengan reputasi 4,5★ di Google Maps.`}
       />
 
       {/* Brand Story Split */}
@@ -60,6 +60,7 @@ export function AboutClient() {
                 Oleh-Oleh 100% Asli Bangka Langsung dari Pengrajin &amp; Cap AMEN
               </h2>
               <p className="text-sm sm:text-base text-slate-600 mt-4 leading-relaxed">
+                Berdiri sejak <strong>{STORE_INFO.foundedDate}</strong>,{" "}
                 <strong>{STORE_INFO.name}</strong> terdaftar sebagai salah satu{" "}
                 <strong>Amenitas Pariwisata Resmi di Kabupaten Bangka</strong> pada Sistem
                 Informasi Kepariwisataan Nasional (Sisparnas Kementerian Pariwisata) serta
@@ -68,6 +69,7 @@ export function AboutClient() {
 
               <ul className="mt-6 space-y-3">
                 {[
+                  `Berpengalaman sejak ${STORE_INFO.foundedDate}: dipercaya wisatawan dan pelanggan oleh-oleh khas Bangka dengan reputasi 4,5★ Google Maps`,
                   "100% Asli Bangka: produk olahan hasil laut & camilan langsung dari pengrajin lokal serta Cap AMEN",
                   "Katalog Terlengkap di Sungailiat: kemplang panggang/pasir/oven/goreng, getas, kericu, terasi, kopi, dan mi khas Bangka",
                   "Melayani pembelian langsung di Jl. Muhidin No.106 maupun pengiriman nasional via WhatsApp & Shopee",

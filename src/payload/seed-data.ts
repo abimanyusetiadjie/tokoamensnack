@@ -98,13 +98,15 @@ export interface BlogPostItem {
 export const STORE_INFO = {
   name: "Toko Amen Snack",
   officialName: "Toko Oleh-Oleh Khas Bangka Amen Snack",
+  foundedDate: "1 Juni 2007",
+  foundedIsoDate: "2007-06-01",
   logoTitle: "AMEN SNACK",
   logoSubtitle: "Oleh-Oleh Khas Bangka",
   houseBrand: "Cap AMEN",
-  tagline: "Pusat Oleh-Oleh & Camilan Khas Bangka Terlengkap di Sungailiat",
+  tagline: "Pusat Oleh-Oleh & Camilan Khas Bangka Sejak 1 Juni 2007 di Sungailiat",
   announcementText:
-    "🎉 Pusat Oleh-Oleh & Camilan Khas Bangka Terlengkap di Sungailiat — Melayani Pengiriman ke Seluruh Indonesia!",
-  heroBadge: "🏆 Terdaftar di Sisparnas Kemenpar — Rating 4.5★ Google Maps",
+    "🎉 Pusat Oleh-Oleh & Camilan Khas Bangka Sejak 1 Juni 2007 di Sungailiat — Melayani Pengiriman ke Seluruh Indonesia!",
+  heroBadge: "🏆 Sejak 1 Juni 2007 • Sisparnas Kemenpar • Rating 4.5★ Google Maps",
   heroTitle: "Pusat Oleh-Oleh & Camilan Khas Bangka Terlengkap",
   heroSubtitle:
     "Nikmati gurih dan renyahnya Kemplang Panggang, Kemplang Pasir Cap AMEN, Getas Ikan, hingga produk eksklusif khas Pulau Bangka. Segar setiap hari dan ramah di kantong!",
@@ -143,7 +145,7 @@ export const STORE_INFO = {
     sunday: "10.00 – 15.00 WIB",
   },
   footerDescription:
-    "Toko Amen Snack adalah pusat oleh-oleh dan camilan khas Bangka di Sungailiat yang menyediakan aneka kemplang, getas, kericu, dan makanan ringan berkualitas.",
+    "Toko Amen Snack berdiri sejak 1 Juni 2007 sebagai pusat oleh-oleh dan camilan khas Bangka di Sungailiat yang menyediakan aneka kemplang, getas, kericu, dan makanan ringan berkualitas.",
 } as const;
 
 export function getProductWhatsappUrl(productName: string, formattedPrice?: string): string {

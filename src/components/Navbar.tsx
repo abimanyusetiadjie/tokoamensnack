@@ -24,36 +24,33 @@ export function Navbar() {
 
   return (
     <>
-      {/* Tier 1 Top Bar — Clean Right-Aligned Utility Bar matching template */}
-      <div className="hidden lg:flex h-8 bg-[#1C224F] px-8 xl:px-[10%] py-1.5 justify-end items-center text-white">
-        <div className="max-w-[1440px] w-full mx-auto flex justify-end items-center gap-6 font-inter font-medium text-xs text-white/95">
-          <Link
-            href="/about#supplier"
-            className="hover:text-amber-300 whitespace-nowrap transition-colors"
-          >
-            Mitra Pengrajin
-          </Link>
-          <Link
-            href="/about#tenant"
-            className="hover:text-amber-300 whitespace-nowrap transition-colors"
-          >
-            Kemitraan Reseller
-          </Link>
-          <Link
-            href="/lokasi"
-            className="hover:text-amber-300 whitespace-nowrap transition-colors"
-          >
-            Lokasi Sungailiat
-          </Link>
-          <a
-            href={STORE_INFO.shopeeUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-1.5 text-amber-300 hover:text-white font-semibold whitespace-nowrap transition-colors"
-          >
-            <ShoppingBag className="w-3.5 h-3.5 shrink-0" />
-            <span>Shopee Official (amensnack)</span>
-          </a>
+      {/* Tier 1 Top Bar — Store Heritage Left + Clean Quick Links Right */}
+      <div className="hidden lg:flex h-8 bg-[#1C224F] px-8 xl:px-[10%] py-1.5 items-center text-white">
+        <div className="max-w-[1440px] w-full mx-auto flex justify-between items-center gap-6 font-inter font-medium text-xs text-white/95">
+          <span className="whitespace-nowrap text-slate-200">
+            Oleh-Oleh Bangka &bull;{" "}
+            <strong className="font-semibold text-white">
+              Berdiri Sejak {STORE_INFO.foundedDate}
+            </strong>
+          </span>
+
+          <div className="flex items-center gap-6">
+            <Link
+              href="/lokasi"
+              className="hover:text-amber-300 whitespace-nowrap transition-colors"
+            >
+              Lokasi Sungailiat
+            </Link>
+            <a
+              href={STORE_INFO.shopeeUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-1.5 text-amber-300 hover:text-white font-semibold whitespace-nowrap transition-colors"
+            >
+              <ShoppingBag className="w-3.5 h-3.5 shrink-0" />
+              <span>Shopee Official (amensnack)</span>
+            </a>
+          </div>
         </div>
       </div>
 

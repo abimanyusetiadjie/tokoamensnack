@@ -166,6 +166,17 @@ const STOP_WORDS = new Set([
   "ekspedisi",
   "packing",
   "shopee",
+  "sejak",
+  "berdiri",
+  "berdirinya",
+  "kapan",
+  "lama",
+  "tahun",
+  "terpercaya",
+  "sejarah",
+  "profil",
+  "tentang",
+  "resmi",
 ]);
 
 export function buildChatbotSystemPrompt(
@@ -177,7 +188,7 @@ export function buildChatbotSystemPrompt(
     .join("\n");
 
   return [
-    `Anda adalah Asisten Virtual resmi "${store.name}" (${store.officialName}).`,
+    `Anda adalah Asisten Virtual resmi "${store.name}" (${store.officialName}), pusat oleh-oleh khas Bangka yang berdiri sejak ${store.foundedDate}.`,
     `Alamat toko: ${store.address}.`,
     `Jam operasional: ${store.openingHoursWeekday}; ${store.openingHoursSunday}.`,
     `WhatsApp Admin: ${store.phone} (${store.whatsappUrl}) | Shopee: ${store.shopeeUrl}.`,
@@ -372,7 +383,7 @@ async function resolveSmartStoreResponse(
   const { store, knowledge } = await getWebStoreAndKnowledge();
 
   const isStoreInfoIntent =
-    /\b(jam|buka|tutup|operasional|alamat|lokasi|dimana|di mana|maps|waze|kirim|ongkir|pengiriman|ekspedisi|packing|shopee|ig|instagram|tiktok|kontak|nomor|telepon|wa|whatsapp)\b/i.test(
+    /\b(jam|buka|tutup|operasional|alamat|lokasi|dimana|di mana|maps|waze|kirim|ongkir|pengiriman|ekspedisi|packing|shopee|ig|instagram|tiktok|kontak|nomor|telepon|wa|whatsapp|sejak|berdiri|kapan|lama|terpercaya|resmi|sejarah|profil|tentang)\b/i.test(
       lower
     );
 
@@ -501,6 +512,7 @@ async function resolveSmartStoreResponse(
 
   if (isStoreInfoIntent) {
     parts.push(
+      `🏆 **Tentang ${store.name}:**\nBerdiri sejak **${store.foundedDate}** di Sungailiat • Terdaftar resmi di **Sisparnas Kemenpar RI** (Rating 4.5★ Google Maps & 4.9★ Shopee Official).`,
       `📍 **Lokasi ${store.name}:**\n${store.address}`,
       `🕒 **Jam Operasional:**\n• ${store.openingHoursWeekday}\n• ${store.openingHoursSunday}`,
       `🔗 **Pemesanan & Petunjuk Arah:**\n• [Chat Admin WhatsApp (${store.phone})](${store.whatsappDirectCta})\n• [Toko Resmi Shopee](${store.shopeeUrl})\n• [Buka di Google Maps](${store.mapsUrl})`

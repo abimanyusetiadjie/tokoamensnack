@@ -39,6 +39,9 @@ export function LokasiClient() {
                   <span className="inline-block text-xs font-bold uppercase tracking-wider text-white bg-brand-red px-3 py-1 rounded-full">
                     {store.branchCode}
                   </span>
+                  <span className="inline-block text-xs font-semibold text-brand-red bg-white border border-brand-red/20 px-3 py-1 rounded-full">
+                    Sejak {STORE_INFO.foundedDate}
+                  </span>
                   <span className="inline-flex items-center gap-1 text-xs font-semibold text-amber-800 bg-amber-100 px-3 py-1 rounded-full">
                     <Star className="w-3.5 h-3.5 fill-amber-500 text-amber-500" />
                     {STORE_INFO.rating} / 5.0 ({STORE_INFO.reviewCount}+ Ulasan)

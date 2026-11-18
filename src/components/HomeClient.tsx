@@ -92,7 +92,8 @@ export function HomeClient({
             <span className="inline-flex items-center gap-1.5 rounded-full bg-brand-red/10 px-3 py-1 sm:px-3.5 sm:py-1.5 text-[11px] sm:text-xs font-semibold text-brand-red mb-2.5 sm:mb-4">
               <Store className="w-3.5 h-3.5 shrink-0" />
               <span>
-                Sisparnas Kemenpar &bull; Rating {STORE_INFO.rating}★ Google Maps
+                Sejak {STORE_INFO.foundedDate} &bull; Sisparnas Kemenpar &bull; Rating{" "}
+                {STORE_INFO.rating}★ Google Maps
               </span>
             </span>
 

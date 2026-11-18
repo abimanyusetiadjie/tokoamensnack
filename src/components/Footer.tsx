@@ -70,7 +70,9 @@ export function Footer() {
               Ada pertanyaan?
             </h2>
             <p className="text-xs sm:text-sm text-slate-200/90 mt-1.5 leading-relaxed max-w-md">
-              Siap membantu pesanan oleh-oleh khas Bangka untuk keluarga, paket wisata, maupun kirim ke luar kota.
+              Melayani oleh-oleh khas Bangka sejak{" "}
+              <strong className="text-white">{STORE_INFO.foundedDate}</strong> untuk keluarga,
+              paket wisata, maupun kirim ke luar kota.
             </p>
 
             <div className="mt-4 rounded-2xl bg-white/[0.08] border border-white/15 p-4 space-y-3.5">
@@ -208,7 +210,7 @@ export function Footer() {
           </div>
 
           <p className="text-[11px] sm:text-xs text-slate-200/85 mt-1 leading-relaxed">
-            Terdaftar di Sisparnas Kemenpar RI &bull; Reputasi {STORE_INFO.rating}★ ({STORE_INFO.reviewCount}+ Ulasan Google Maps)
+            Berdiri Sejak {STORE_INFO.foundedDate} &bull; Terdaftar di Sisparnas Kemenpar RI &bull; Reputasi {STORE_INFO.rating}★ ({STORE_INFO.reviewCount}+ Ulasan Google Maps)
           </p>
         </div>
 

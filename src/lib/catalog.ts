@@ -48,6 +48,7 @@ export interface WebStoreProfile {
   code: string;
   name: string;
   officialName: string;
+  foundedDate: string;
   address: string;
   phone: string;
   whatsappNumber: string;
@@ -294,6 +295,7 @@ export function getDefaultStoreAndKnowledge(): {
       code: "AMEN-SGL-01",
       name: STORE_INFO.name,
       officialName: STORE_INFO.officialName,
+      foundedDate: STORE_INFO.foundedDate,
       address: STORE_INFO.address,
       phone: STORE_INFO.phone,
       whatsappNumber: STORE_INFO.whatsappNumber,
@@ -308,6 +310,11 @@ export function getDefaultStoreAndKnowledge(): {
       openingHoursNote: STORE_INFO.tagline,
     },
     knowledge: [
+      {
+        topicKey: "sejarah_toko",
+        title: "Sejarah & Kepercayaan Toko Amen Snack",
+        content: `Toko Amen Snack resmi berdiri sejak ${STORE_INFO.foundedDate} di Jl. Muhidin No.106, Sungailiat, Kabupaten Bangka. Terdaftar resmi di Sisparnas Kementerian Pariwisata RI dengan rating ${STORE_INFO.rating}★ Google Maps serta lini produksi internal Cap AMEN.`,
+      },
       {
         topicKey: "jam_buka",
         title: "Jam Operasional Toko Amen Snack",
@@ -375,12 +382,27 @@ export async function getWebStoreAndKnowledge(): Promise<{
 
     const s = storeRows[0];
     const waNumber = (s?.whatsapp_number || STORE_INFO.whatsappNumber).replace(/\D/g, "");
+    const mappedKb =
+      kbRows.length > 0
+        ? kbRows.map((k) => ({
+            topicKey: k.topic_key,
+            title: k.title,
+            content: k.content,
+          }))
+        : fallback.knowledge;
+    const heritageItem = fallback.knowledge.find((k) => k.topicKey === "sejarah_toko");
+    const knowledgeWithHeritage =
+      heritageItem && !mappedKb.some((k) => k.topicKey === "sejarah_toko")
+        ? [heritageItem, ...mappedKb]
+        : mappedKb;
+
     return {
       store: s
         ? {
             code: s.code,
             name: s.name,
             officialName: s.official_name || STORE_INFO.officialName,
+            foundedDate: STORE_INFO.foundedDate,
             address: s.address || STORE_INFO.address,
             phone: s.phone || STORE_INFO.phone,
             whatsappNumber: waNumber,
@@ -398,14 +420,7 @@ export async function getWebStoreAndKnowledge(): Promise<{
               s.opening_hours_note || fallback.store.openingHoursNote,
           }
         : fallback.store,
-      knowledge:
-        kbRows.length > 0
-          ? kbRows.map((k) => ({
-              topicKey: k.topic_key,
-              title: k.title,
-              content: k.content,
-            }))
-          : fallback.knowledge,
+      knowledge: knowledgeWithHeritage,
       source: "supabase",
     };
   } catch (err) {
