@@ -144,7 +144,7 @@ export function HomeClient({
             <div className="relative w-full h-[270px] sm:h-[340px] md:h-auto md:aspect-[4/3] md:max-h-[440px]">
               <MediaImage
                 src="/images/hero/toko-amen-hero.webp"
-                alt="Etalase Produk Oleh-Oleh Khas Bangka Toko Amen Snack Sungailiat"
+                alt="Kemplang Pasir Cap AMEN Produk Unggulan Khas Bangka Toko Amen Snack Sungailiat"
                 fill
                 priority
                 sizes="(min-width: 768px) 50vw, 100vw"
