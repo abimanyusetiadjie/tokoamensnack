@@ -141,21 +141,29 @@ export function HomeClient({
             </div>
           </div>
 
-          {/* Right Hero Visual — Edge-to-Edge with Soft Bottom Fade on Mobile matching tokomama.com */}
+          {/* Right Hero Visual — Foto Asli Toko (Clean Framed on Desktop, Soft-Fade Full-Bleed on Mobile) */}
           <div className="md:col-span-6 order-1 md:order-2 flex justify-center -mx-4 sm:-mx-6 md:mx-0">
-            <div className="relative w-full h-[270px] sm:h-[340px] md:h-auto md:aspect-[4/3] md:max-h-[440px]">
+            <div className="relative w-full h-[255px] sm:h-[320px] md:h-auto md:aspect-[3/2] md:rounded-2xl overflow-hidden md:shadow-lg md:border md:border-slate-200/80 bg-white">
               <MediaImage
-                src="/images/hero/toko-amen-hero.webp"
-                alt="Kemplang Pasir Cap AMEN Produk Unggulan Khas Bangka Toko Amen Snack Sungailiat"
+                src={STORE_INFO.heroImage}
+                alt="Suasana Rak Camilan & Kemplang Gantung Asli Toko Amen Snack Sungailiat Bangka"
                 fill
                 priority
                 sizes="(min-width: 768px) 50vw, 100vw"
-                className="object-contain object-center"
+                className="object-cover object-center"
               />
               <div
                 aria-hidden="true"
-                className="md:hidden pointer-events-none absolute inset-x-0 bottom-0 h-14 bg-gradient-to-t from-brand-soft via-brand-soft/65 to-transparent"
+                className="md:hidden pointer-events-none absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-brand-soft via-brand-soft/75 to-transparent"
               />
+              <div
+                aria-hidden="true"
+                className="hidden md:block pointer-events-none absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-slate-950/60 to-transparent"
+              />
+              <span className="hidden md:inline-flex items-center gap-1.5 absolute bottom-3.5 left-3.5 rounded-full bg-white/95 px-3 py-1 text-xs font-semibold text-gray-900 shadow-sm">
+                <Store className="w-3.5 h-3.5 text-brand-red shrink-0" />
+                <span>Toko Fisik Resmi • Jl. Muhidin No.106 Sungailiat</span>
+              </span>
             </div>
           </div>
         </div>
@@ -589,11 +597,11 @@ export function HomeClient({
 
           {featuredStore && (
             <div className="max-w-5xl mx-auto brand-card rounded-2xl overflow-hidden border border-gray-100 bg-brand-soft/35 grid grid-cols-1 lg:grid-cols-12 items-stretch">
-              {featuredStore.imageUrl && (
+              {(featuredStore.galleryImages?.[1]?.url || featuredStore.imageUrl) && (
                 <div className="lg:col-span-6 relative aspect-[3/2] lg:aspect-auto lg:min-h-[340px] bg-slate-100 overflow-hidden">
                   <MediaImage
-                    src={featuredStore.imageUrl}
-                    alt={`${featuredStore.name} — Jl. Muhidin No.106 Sungailiat`}
+                    src={featuredStore.galleryImages?.[1]?.url || featuredStore.imageUrl!}
+                    alt={`${featuredStore.name} — Area Kasir & Stok Kemplang Khas Bangka`}
                     fallbackLabel={featuredStore.name}
                     fill
                     sizes="(min-width: 1024px) 520px, 100vw"
@@ -602,7 +610,7 @@ export function HomeClient({
                   <div className="pointer-events-none absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-slate-950/60 to-transparent" />
                   <span className="absolute bottom-3 left-3 inline-flex items-center gap-1.5 rounded-full bg-white/95 px-3 py-1 text-[11px] font-semibold text-gray-900 shadow-sm">
                     <Store className="w-3.5 h-3.5 text-brand-red shrink-0" />
-                    <span>Foto Asli Toko Sungailiat</span>
+                    <span>Area Kasir &amp; Stok Toko Sungailiat</span>
                   </span>
                 </div>
               )}

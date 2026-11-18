@@ -118,7 +118,7 @@ export const STORE_INFO = {
   heroTitle: "Pusat Oleh-Oleh & Camilan Khas Bangka Terlengkap",
   heroSubtitle:
     "Nikmati gurih dan renyahnya Kemplang Panggang, Kemplang Pasir Cap AMEN, Getas Ikan, hingga produk eksklusif khas Pulau Bangka. Segar setiap hari dan ramah di kantong!",
-  heroImage: "/images/hero/toko-amen-hero.webp",
+  heroImage: "/images/stores/toko-lorong-kemplang.webp",
   address:
     "Jl. Muhidin No.106, Sungailiat, Kec. Sungai Liat, Kabupaten Bangka, Kepulauan Bangka Belitung 33211, Indonesia",
   shortAddress: "Jl. Muhidin No.106, Sungailiat, Kab. Bangka 33211",
