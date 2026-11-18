@@ -110,7 +110,7 @@ export const STORE_INFO = {
   foundedIsoDate: "2007-06-01",
   logoTitle: "AMEN SNACK",
   logoSubtitle: "Oleh-Oleh Khas Bangka",
-  houseBrand: "Cap AMEN",
+  houseBrand: "AMS",
   tagline: "Pusat Oleh-Oleh & Camilan Khas Bangka Sejak 1 Juni 2007 di Sungailiat",
   announcementText:
     "🎉 Pusat Oleh-Oleh & Camilan Khas Bangka Sejak 1 Juni 2007 di Sungailiat — Melayani Pengiriman ke Seluruh Indonesia!",
@@ -166,10 +166,10 @@ export const FLYERS_COLLECTION: FlyerItem[] = [
   {
     id: "promo-cap-amen",
     title: 'Produk Spesial "Cap AMEN"',
-    badge: "Signature House Brand",
+    badge: "Pilihan Favorit Wisatawan",
     period: "Tersedia Setiap Hari",
     description:
-      "Kemplang Goreng Pasir & Bantet produksi internal Cap AMEN lengkap dengan sambal terasi khas Bangka mulai Rp10.000.",
+      "Kemplang Goreng Pasir & Bantet Cap AMEN yang renyah lengkap dengan sambal terasi khas Bangka mulai Rp10.000.",
     alt: 'Banner Promo Produk Spesial Cap AMEN Toko Amen Snack',
     imageUrl: "/images/banners/promo-cap-amen.webp",
     ctaLabel: "Lihat Kemplang Cap AMEN",
@@ -447,7 +447,7 @@ export const VALUE_PILLARS: ValuePillarItem[] = [
     id: "pillar-1",
     title: "Asli & Berkualitas",
     description:
-      "Menghadirkan kemplang, getas, dan camilan langsung dari produsen lokal terbaik di Bangka serta produk unggulan Cap AMEN.",
+      "Menghadirkan kemplang, getas, kericu, dan terasi produksi langsung Toko Amen Snack bermerek AMS serta pilihan terbaik pengrajin lokal Bangka.",
     iconName: "award",
   },
   {
@@ -476,10 +476,10 @@ export const PROPOSITION_BANNERS: PropositionBannerItem[] = [
   },
   {
     id: "prop-2",
-    title: "Produksi Internal Cap AMEN",
-    alt: "House Brand Cap AMEN Kemplang Pasir Bantet & Sambal Terasi",
+    title: "Produksi Internal AMS",
+    alt: "Produk Produksi Langsung AMS Toko Amen Snack — Getas, Kericu & Terasi Khas Bangka",
     imageUrl: "/images/banners/proposition-2.webp",
-    href: "/produk?kategori=kemplang-pasir",
+    href: "/about",
   },
   {
     id: "prop-3",
@@ -592,7 +592,7 @@ export const BLOGS_COLLECTION: BlogPostItem[] = [
     excerpt:
       "Bingung memilih buah tangan sepulang dari wisata pantai di Sungailiat? Ini daftar 5 produk khas Bangka yang paling sering diborong wisatawan.",
     content: [
-      "1. Kemplang Pasir Bantet Cap AMEN — Camilan house brand khas Toko Amen Snack yang praktis dibawa perjalanan jauh dan sudah dilengkapi sambal terasi.",
+      "1. Kemplang Pasir Bantet Cap AMEN & Getas AMS — Camilan favorit khas Toko Amen Snack yang praktis dibawa perjalanan jauh.",
       "2. Kemplang Panggang Belinyu & JJ 2.5 Tali Biru — Primadona pecinta kerupuk ikan panggang dengan tekstur renyah dan rasa ikan tenggiri asli.",
       "3. Getas Istimewa Cap Obor (250g) — Kemasan pas untuk dibagikan kepada keluarga atau rekan kerja di kantor.",
       "4. Kecap Asin Asli Bangka Cap SS & Terasi Udang — Bumbu legendaris yang wajib dibawa pulang bagi penggemar masakan rumahan khas Bangka.",

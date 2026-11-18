@@ -28,8 +28,55 @@ const PILLAR_ICONS = {
   truck: Truck,
 };
 
+const AMS_HIGHLIGHT_PRODUCTS = [
+  {
+    id: "ams-terasi-240",
+    name: "Terasi AMS Asli Bangka (240g)",
+    enName: "Authentic Bangka Shrimp Paste AMS (240g)",
+    tag: "Produksi Langsung AMS",
+    enTag: "In-House AMS",
+    description: "Terasi udang rebon murni buatan Toko Amen Snack dengan aroma gurih autentik.",
+    enDescription: "Pure fermented shrimp paste crafted directly by Toko Amen Snack with rich savory aroma.",
+    imageUrl: "/images/products/shopee/shp-019-terasi-ams-240g.webp",
+    shopeeUrl: "https://shopee.co.id/Terasi-AMS-240g-i.284836006.8490717110",
+  },
+  {
+    id: "ams-getas-bulat",
+    name: "Getas Bangka AMS Bulat (250g)",
+    enName: "Bangka Fish Cracker Getas AMS Round (250g)",
+    tag: "Best Seller AMS",
+    enTag: "AMS Bestseller",
+    description: "Kerupuk getas ikan tenggiri renyah produksi langsung Toko Amen Snack tanpa pengawet.",
+    enDescription: "Crispy mackerel getas crackers made in-house by Toko Amen Snack with zero preservatives.",
+    imageUrl: "/images/products/shopee/shp-022-getas-bangka-ams-250g-bulat.webp",
+    shopeeUrl: "https://shopee.co.id/Getas-Bangka-AMS-250g-bulat-i.284836006.7242381399",
+  },
+  {
+    id: "ams-kericu-250",
+    name: "Kericu Stick Telor Cumi AMS (250g)",
+    enName: "Squid-Egg Kericu Sticks AMS (250g)",
+    tag: "Andalan AMS",
+    enTag: "AMS Signature",
+    description: "Stik kericu telur cumi renyah & gurih olahan dapur produksi Toko Amen Snack Sungailiat.",
+    enDescription: "Savory crunchy squid-egg kericu sticks crafted by Toko Amen Snack's own production kitchen.",
+    imageUrl: "/images/products/shopee/shp-058-kericu-stick-telor-cumi-ams-250g.webp",
+    shopeeUrl: "https://shopee.co.id/Kericu-Stick-Telor-Cumi-AMS-250g-i.284836006.5642388968",
+  },
+  {
+    id: "ams-terasi-bubuk",
+    name: "Terasi Bubuk Praktis AMS",
+    enName: "Ready-to-Use Shrimp Paste Powder AMS",
+    tag: "Praktis & Higienis",
+    enTag: "Convenient & Pure",
+    description: "Terasi Bangka siap tabur dalam bentuk bubuk halus produksi internal bermerek AMS.",
+    enDescription: "Finely milled ready-to-cook Bangka terasi powder produced exclusively under the AMS label.",
+    imageUrl: "/images/products/shopee/shp-041-terasi-bubuk-ams.webp",
+    shopeeUrl: "https://shopee.co.id/Terasi-Bubuk-AMS-i.284836006.4258560015",
+  },
+] as const;
+
 /**
- * About page detailing Toko Amen Snack Bangka profile, Sisparnas status, Cap AMEN brand, and value pillars.
+ * About page detailing Toko Amen Snack Bangka profile, Sisparnas status, direct AMS in-house products, and value pillars.
  */
 export function AboutClient() {
   const { isEn, tx } = useLanguage();
@@ -67,8 +114,8 @@ export function AboutClient() {
             <div className="lg:col-span-6">
               <h2 className="font-inter font-bold text-2xl sm:text-3xl text-brand-dark leading-snug">
                 {tx(
-                  "Oleh-Oleh 100% Asli Bangka Langsung dari Pengrajin & Cap AMEN",
-                  "100% Authentic Bangka Souvenirs from Local Artisans & House Brand Cap AMEN"
+                  "Oleh-Oleh 100% Asli Bangka Langsung dari Pengrajin & Produksi AMS",
+                  "100% Authentic Bangka Souvenirs from Local Artisans & In-House Brand AMS"
                 )}
               </h2>
               <p className="text-sm sm:text-base text-slate-600 mt-4 leading-relaxed">
@@ -76,24 +123,28 @@ export function AboutClient() {
                 <strong>{tx(STORE_INFO.foundedDate, FOUNDED_DATE_EN)}</strong>,{" "}
                 <strong>{STORE_INFO.name}</strong>{" "}
                 {tx(
-                  "terdaftar sebagai salah satu Amenitas Pariwisata Resmi di Kabupaten Bangka pada Sistem Informasi Kepariwisataan Nasional (Sisparnas Kementerian Pariwisata) serta memiliki lini produk internal",
-                  "is officially listed as a Tourism Amenity in Bangka Regency on Indonesia's Ministry of Tourism Sisparnas directory and produces our signature line"
+                  "terdaftar sebagai salah satu Amenitas Pariwisata Resmi di Kabupaten Bangka pada Sistem Informasi Kepariwisataan Nasional (Sisparnas Kementerian Pariwisata) serta memproduksi langsung lini produk internal bermerek",
+                  "is officially listed as a Tourism Amenity in Bangka Regency on Indonesia's Ministry of Tourism Sisparnas directory and produces our in-house signature line branded"
                 )}{" "}
-                <strong>&ldquo;Cap AMEN&rdquo;</strong>.
+                <strong className="text-brand-red">&ldquo;AMS&rdquo;</strong>{" "}
+                {tx(
+                  "(Amen Snack) seperti Terasi AMS, Getas AMS, dan Kericu Telor Cumi AMS.",
+                  "(Amen Snack), including AMS Shrimp Paste (Terasi), AMS Getas Crackers, and AMS Squid-Egg Kericu."
+                )}
               </p>
 
               <ul className="mt-6 space-y-3">
                 {(isEn
                   ? [
                       `Trusted heritage since ${FOUNDED_DATE_EN} with a 4.5★ Google Maps reputation among travelers`,
-                      "100% Authentic Bangka snacks crafted by local makers alongside house brand Cap AMEN",
-                      "Sungailiat's fullest selection: grilled/sand-roasted/fried kemplang, getas, kericu, terasi, coffee, and Bangka noodles",
+                      "Direct In-House Brand AMS: produced directly by Toko Amen Snack for guaranteed freshness, hygiene, and consistent taste",
+                      "Sungailiat's fullest selection: grilled/sand-roasted/fried kemplang, AMS getas & kericu, AMS terasi, coffee, and Bangka noodles",
                       "Available for walk-in shopping at Jl. Muhidin No.106 or nationwide delivery via WhatsApp & Shopee",
                     ]
                   : [
                       `Berpengalaman sejak ${STORE_INFO.foundedDate}: dipercaya wisatawan dan pelanggan oleh-oleh khas Bangka dengan reputasi 4,5★ Google Maps`,
-                      "100% Asli Bangka: produk olahan hasil laut & camilan langsung dari pengrajin lokal serta Cap AMEN",
-                      "Katalog Terlengkap di Sungailiat: kemplang panggang/pasir/oven/goreng, getas, kericu, terasi, kopi, dan mi khas Bangka",
+                      "Produk Produksi Langsung AMS: diolah langsung oleh Toko Amen Snack untuk menjaga kesegaran, kehigienisan, dan mutu rasa asli Bangka",
+                      "Katalog Terlengkap di Sungailiat: produk AMS (Terasi, Getas, Kericu, Rusip, Ampiang), aneka Kemplang Panggang & Pasir, kopi, dan mi khas Bangka",
                       "Melayani pembelian langsung di Jl. Muhidin No.106 maupun pengiriman nasional via WhatsApp & Shopee",
                     ]
                 ).map((point) => (
@@ -124,6 +175,82 @@ export function AboutClient() {
                   {tx("Kunjungi Toko di Sungailiat", "Visit Store in Sungailiat")}
                 </Link>
               </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Direct Production AMS Highlight */}
+      <section className="bg-white pb-14 sm:pb-16">
+        <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-[10%]">
+          <div className="rounded-3xl border border-slate-200/80 bg-brand-soft/60 p-6 sm:p-10">
+            <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-7">
+              <div className="max-w-2xl">
+                <span className="inline-block rounded-full bg-brand-red text-white text-[11px] font-bold uppercase tracking-wider px-3 py-1 mb-2.5">
+                  {tx("Produksi Langsung Toko Amen Snack", "In-House Production by Toko Amen Snack")}
+                </span>
+                <h2 className="font-inter font-bold text-2xl sm:text-3xl text-brand-dark">
+                  {tx("Highlight Lini Produk Unggulan AMS", "Featured In-House Products: AMS Series")}
+                </h2>
+                <p className="text-xs sm:text-sm text-slate-600 mt-1.5 leading-relaxed">
+                  {tx(
+                    "Produk berlabel AMS diolah dan dikemas langsung oleh Toko Amen Snack Sungailiat — menjaga standar kesegaran harian, kebersihan kemasan, serta cita rasa otentik Bangka.",
+                    "Items carrying the AMS label are crafted and packed directly by Toko Amen Snack Sungailiat — guaranteeing daily freshness, hygienic packing, and authentic Bangka flavor."
+                  )}
+                </p>
+              </div>
+              <Link
+                href="/produk"
+                className={buttonVariants({
+                  variant: "outline",
+                  className: "rounded-full text-xs sm:text-sm font-semibold shrink-0 bg-white",
+                })}
+              >
+                {tx("Jelajahi Semua Produk AMS", "Explore All AMS Products")}
+              </Link>
+            </div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+              {AMS_HIGHLIGHT_PRODUCTS.map((item) => (
+                <Card
+                  key={item.id}
+                  className="brand-card rounded-2xl overflow-hidden border border-slate-200/80 bg-white flex flex-col justify-between"
+                >
+                  <div>
+                    <div className="relative aspect-square bg-slate-50 overflow-hidden">
+                      <MediaImage
+                        src={item.imageUrl}
+                        alt={isEn ? item.enName : item.name}
+                        fill
+                        sizes="(min-width: 1024px) 22vw, (min-width: 640px) 45vw, 90vw"
+                        className="object-cover"
+                      />
+                      <span className="absolute top-3 left-3 inline-flex items-center rounded-full bg-brand-orange text-white px-2.5 py-1 text-[10px] font-bold tracking-wide shadow-sm">
+                        {isEn ? item.enTag : item.tag}
+                      </span>
+                    </div>
+                    <div className="p-4">
+                      <h3 className="font-bold text-sm text-brand-dark leading-snug">
+                        {isEn ? item.enName : item.name}
+                      </h3>
+                      <p className="text-xs text-slate-600 mt-1.5 leading-relaxed line-clamp-3">
+                        {isEn ? item.enDescription : item.description}
+                      </p>
+                    </div>
+                  </div>
+                  <div className="px-4 pb-4 pt-1">
+                    <a
+                      href={item.shopeeUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="w-full inline-flex items-center justify-center gap-1.5 rounded-xl border border-[#EE4D2D]/35 text-[#EE4D2D] hover:bg-orange-50 font-semibold text-xs py-2 transition-colors"
+                    >
+                      <ShoppingBag className="w-3.5 h-3.5 shrink-0" />
+                      <span>{tx("Beli di Shopee Official", "Shop on Official Shopee")}</span>
+                    </a>
+                  </div>
+                </Card>
+              ))}
             </div>
           </div>
         </div>

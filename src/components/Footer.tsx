@@ -47,7 +47,7 @@ function FacebookIcon({ className }: { className?: string }) {
 }
 
 const EXPLORE_LINKS = [
-  { href: "/about", idLabel: "Tentang Cap AMEN", enLabel: "About Cap AMEN" },
+  { href: "/about", idLabel: "Tentang Toko & AMS", enLabel: "About Store & AMS" },
   { href: "/produk", idLabel: "Katalog Produk", enLabel: "Product Catalog" },
   { href: "/katalog", idLabel: "Promo & Flyer", enLabel: "Promos & Flyers" },
   { href: "/lokasi", idLabel: "Lokasi Toko", enLabel: "Store Location" },

@@ -91,11 +91,11 @@ export const FLYER_EN: Record<
   { title: string; badge: string; period: string; description: string; ctaLabel: string }
 > = {
   "promo-cap-amen": {
-    title: 'Signature "Cap AMEN" Products',
-    badge: "Signature House Brand",
+    title: 'Featured "Cap AMEN" Kemplang',
+    badge: "Traveler Favorite",
     period: "Available Daily",
     description:
-      "Authentic Bangka sand-roasted Kemplang Pasir & Bantet crafted in-house by Cap AMEN with traditional shrimp-paste chili dip starting from Rp10,000.",
+      "Authentic Bangka sand-roasted Kemplang Pasir & Bantet by Cap AMEN with traditional shrimp-paste chili dip starting from Rp10,000.",
     ctaLabel: "View Cap AMEN Kemplang",
   },
   "promo-pengiriman-nasional": {
@@ -231,7 +231,7 @@ export const PILLAR_EN: Record<string, { title: string; description: string }> =
   "pillar-1": {
     title: "Authentic & Quality-Checked",
     description:
-      "Sourced directly from Bangka's finest local artisans alongside our own signature Cap AMEN production.",
+      "Featuring our own direct in-house AMS snacks and condiments alongside Bangka's finest local makers.",
   },
   "pillar-2": {
     title: "Honest Retail & Wholesale Prices",
@@ -300,7 +300,7 @@ export const BLOG_EN: Record<
     excerpt:
       "Wondering what gifts to pack after visiting Sungailiat's beaches? Here are the 5 traveler favorites at Toko Amen Snack.",
     content: [
-      "1. Kemplang Pasir Bantet Cap AMEN — Our travel-friendly house brand snack complete with traditional shrimp-paste dip.",
+      "1. Kemplang Pasir Bantet Cap AMEN & AMS Getas — Popular travel-friendly Bangka snacks available at Toko Amen Snack.",
       "2. Kemplang Panggang Belinyu & JJ 2.5 Blue Tie — Crisp grilled fish crackers prized for authentic Spanish mackerel flavor.",
       "3. Getas Istimewa Cap Obor (250g) — Handy gift-sized packs easy to share with family or colleagues.",
       "4. Cap SS Bangka Soy Sauce & Shrimp Paste — Essential Bangka pantry staples for home cooks.",
