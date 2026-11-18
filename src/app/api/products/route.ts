@@ -1,16 +1,49 @@
 import { NextResponse } from "next/server";
-import { normalizeCategorySlug, searchWebProducts } from "@/lib/catalog";
+import {
+  getPaginatedCuratedPhotoProducts,
+  normalizeCategorySlug,
+  searchWebProducts,
+} from "@/lib/catalog";
 
 export const dynamic = "force-dynamic";
 
 /**
- * Public catalog search & filter endpoint backed by live Supabase products.
+ * Public catalog search & filter endpoint backed by curated Shopee photo catalog or live Supabase products.
  */
 export async function GET(req: Request) {
   try {
     const { searchParams } = new URL(req.url);
-    const q = searchParams.get("q") || "";
     const category = normalizeCategorySlug(searchParams.get("kategori"));
+
+    if (searchParams.get("curated") === "1") {
+      const limit = Math.min(Math.max(Number(searchParams.get("limit") || 8), 1), 24);
+      const offset = Math.max(Number(searchParams.get("offset") || 0), 0);
+      const result = getPaginatedCuratedPhotoProducts({
+        categorySlug: category,
+        offset,
+        limit,
+      });
+
+      return NextResponse.json(
+        {
+          source: "curated",
+          offset,
+          limit,
+          total: result.total,
+          hasMore: result.hasMore,
+          activeCategoryTitle: result.activeCategoryTitle,
+          categories: result.categories,
+          items: result.items,
+        },
+        {
+          headers: {
+            "Cache-Control": "public, s-maxage=60, stale-while-revalidate=300",
+          },
+        }
+      );
+    }
+
+    const q = searchParams.get("q") || "";
     const page = Math.max(Number(searchParams.get("page") || 1), 1);
     const limit = Math.min(Math.max(Number(searchParams.get("limit") || 24), 1), 60);
     const offset = (page - 1) * limit;

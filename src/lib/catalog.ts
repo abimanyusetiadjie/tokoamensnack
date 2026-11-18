@@ -1,4 +1,5 @@
 import { isDatabaseConfigured, queryDb } from "@/lib/db";
+import { normalizeCategorySlug } from "@/lib/category-utils";
 import {
   SHOPEE_CATALOG_ITEMS,
   resolveShopeeMediaMatch,
@@ -87,14 +88,7 @@ export interface CatalogSearchResult {
   source: "supabase" | "seed";
 }
 
-const LEGACY_CATEGORY_ALIASES: Record<string, string> = {
-  all: "semua",
-  "kemplang-pasir": "kemplang-goreng",
-  "getas-kerupuk": "getas-ampiang-kericu",
-  "kericu-olahan-laut": "getas-ampiang-kericu",
-  "bumbu-terasi": "terasi-bumbu-laut",
-  "kopi-produk-khas": "kopi-sirup-minuman",
-};
+export { normalizeCategorySlug };
 
 const CATEGORY_TITLES: Record<string, string> = {
   "kemplang-panggang": "Kemplang Panggang & Oven",
@@ -108,12 +102,6 @@ const CATEGORY_TITLES: Record<string, string> = {
   "sembako-harian": "Sembako & Kebutuhan Harian",
   "kaos-souvenir": "Kaos & Souvenir Khas Bangka",
 };
-
-export function normalizeCategorySlug(raw?: string | null): string {
-  const clean = (raw || "semua").trim().toLowerCase();
-  if (!clean) return "semua";
-  return LEGACY_CATEGORY_ALIASES[clean] || clean;
-}
 
 export function resolveCategoryIcon(slug: string): CategoryIconName {
   switch (slug) {
@@ -136,24 +124,65 @@ export function formatRupiah(amount: number): string {
   return `Rp${Math.round(amount).toLocaleString("id-ID")}`;
 }
 
-/**
- * Returns only verified products with real WebP photos (curated flagship + Shopee in-stock),
- * optionally filtered by normalized category slug and capped at max 24 items for fast rendering.
- */
-export function getCuratedPhotoProducts(
-  categorySlug?: string | null,
-  limit = 24
-): { items: WebProduct[]; activeCategoryTitle: string | null } {
-  const safeLimit = Math.min(Math.max(Number(limit || 24), 1), 24);
-  const normalizedCategory = normalizeCategorySlug(categorySlug);
+export interface CuratedCategorySummary {
+  slug: string;
+  title: string;
+  count: number;
+}
+
+export interface PaginatedCuratedResult {
+  items: WebProduct[];
+  total: number;
+  hasMore: boolean;
+  activeCategoryTitle: string | null;
+  categories: CuratedCategorySummary[];
+}
+
+function getAllCuratedPhotoProducts(): WebProduct[] {
   const seedItems = getSeedProductsFallback();
   const seenUrls = new Set(seedItems.map((item) => item.shopeeUrl));
   const shopeeItems = getShopeeWebProducts().filter(
     (item) => Boolean(item.imageUrl) && !seenUrls.has(item.shopeeUrl)
   );
-  const allWithPhotos = [...seedItems, ...shopeeItems].filter((p) =>
+  return [...seedItems, ...shopeeItems].filter((p) =>
     Boolean(p.imageUrl && p.imageUrl.trim())
   );
+}
+
+/**
+ * Returns verified real-photo products paginated in lightweight batches (default 8, max 24)
+ * for smooth staged rendering on low-spec devices (Windows 7 Chrome 109 / Firefox 115 ESR).
+ */
+export function getPaginatedCuratedPhotoProducts(options: {
+  categorySlug?: string | null;
+  offset?: number;
+  limit?: number;
+} = {}): PaginatedCuratedResult {
+  const safeLimit = Math.min(Math.max(Number(options.limit || 8), 1), 24);
+  const safeOffset = Math.max(Number(options.offset || 0), 0);
+  const normalizedCategory = normalizeCategorySlug(options.categorySlug);
+  const allWithPhotos = getAllCuratedPhotoProducts();
+
+  const catCounts = new Map<string, number>();
+  for (const item of allWithPhotos) {
+    const slug = normalizeCategorySlug(item.categorySlug);
+    catCounts.set(slug, (catCounts.get(slug) || 0) + 1);
+  }
+
+  const orderedSlugs = Array.from(
+    new Set([
+      ...CATEGORIES_COLLECTION.map((c) => normalizeCategorySlug(c.slug)),
+      ...Array.from(catCounts.keys()),
+    ])
+  );
+
+  const categories: CuratedCategorySummary[] = orderedSlugs
+    .filter((slug) => (catCounts.get(slug) || 0) > 0)
+    .map((slug) => ({
+      slug,
+      title: CATEGORY_TITLES[slug] || slug,
+      count: catCounts.get(slug) || 0,
+    }));
 
   const filtered =
     normalizedCategory === "semua"
@@ -167,10 +196,31 @@ export function getCuratedPhotoProducts(
       ? null
       : CATEGORY_TITLES[normalizedCategory] || filtered[0]?.category || normalizedCategory;
 
+  const sliced = filtered.slice(safeOffset, safeOffset + safeLimit);
+
   return {
-    items: filtered.slice(0, safeLimit),
+    items: sliced,
+    total: filtered.length,
+    hasMore: safeOffset + sliced.length < filtered.length,
     activeCategoryTitle,
+    categories,
   };
+}
+
+/**
+ * Returns only verified products with real WebP photos (curated flagship + Shopee in-stock),
+ * optionally filtered by normalized category slug and capped at max 24 items for fast rendering.
+ */
+export function getCuratedPhotoProducts(
+  categorySlug?: string | null,
+  limit = 24
+): { items: WebProduct[]; activeCategoryTitle: string | null } {
+  const { items, activeCategoryTitle } = getPaginatedCuratedPhotoProducts({
+    categorySlug,
+    offset: 0,
+    limit,
+  });
+  return { items, activeCategoryTitle };
 }
 
 export function resolveMatchedProductMedia(

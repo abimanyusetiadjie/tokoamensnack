@@ -1,24 +1,25 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import dynamic from "next/dynamic";
 import { Loader2, Sparkles } from "lucide-react";
 import { WhatsAppIcon } from "@/components/WhatsAppIcon";
 
-const LazyChatbotWidget = dynamic(
-  () => import("@/components/ChatbotWidget").then((mod) => mod.ChatbotWidget),
-  { ssr: false }
-);
+type ChatbotWidgetComponent = React.ComponentType<{
+  initialOpen?: boolean;
+  initialPrompt?: string | null;
+}>;
 
 /**
  * Lightweight lazy-mounted Store Assistant launcher so @ai-sdk/react and catalog maps
- * never bloat initial JS parse time on Windows 7 / Chrome 109 until opened or prewarmed.
+ * never bloat initial JS parse time on Windows 7 / Chrome 109 until hovered or opened.
  */
 export function WhatsAppFab() {
   const [shouldLoad, setShouldLoad] = useState(false);
   const [wantsOpen, setWantsOpen] = useState(false);
   const [queuedPrompt, setQueuedPrompt] = useState<string | null>(null);
-  const [chunkReady, setChunkReady] = useState(false);
+  const [LoadedWidget, setLoadedWidget] = useState<ChatbotWidgetComponent | null>(
+    null
+  );
 
   useEffect(() => {
     const onOpenChat = (event: Event) => {
@@ -34,23 +35,28 @@ export function WhatsAppFab() {
   }, []);
 
   useEffect(() => {
-    if (!shouldLoad) return;
+    if (!shouldLoad || LoadedWidget) return;
     let active = true;
     import("@/components/ChatbotWidget")
-      .then(() => {
-        if (active) setChunkReady(true);
+      .then((mod) => {
+        if (active) {
+          setLoadedWidget(() => mod.ChatbotWidget);
+        }
       })
       .catch(() => {
-        if (active) setChunkReady(true);
+        if (active) {
+          setWantsOpen(false);
+          setShouldLoad(false);
+        }
       });
     return () => {
       active = false;
     };
-  }, [shouldLoad]);
+  }, [shouldLoad, LoadedWidget]);
 
-  if (shouldLoad && chunkReady) {
+  if (LoadedWidget) {
     return (
-      <LazyChatbotWidget
+      <LoadedWidget
         initialOpen={wantsOpen}
         initialPrompt={queuedPrompt}
       />
@@ -72,7 +78,7 @@ export function WhatsAppFab() {
         aria-label="Buka Asisten Toko & WhatsApp Toko Amen Snack"
         className="inline-flex items-center justify-center gap-2 rounded-full bg-brand-red hover:bg-brand-red-dark text-white font-semibold text-xs sm:text-sm w-12 h-12 sm:w-auto sm:h-12 sm:pl-3.5 sm:pr-4 shadow-xl transition-transform hover:scale-105 active:scale-95 cursor-pointer border border-white/15"
       >
-        {wantsOpen && !chunkReady ? (
+        {wantsOpen ? (
           <Loader2 className="w-4 h-4 animate-spin shrink-0" />
         ) : (
           <span className="relative flex items-center justify-center">
