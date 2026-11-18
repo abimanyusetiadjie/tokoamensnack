@@ -68,6 +68,12 @@ export interface ValuePillarItem {
   iconName: "award" | "badgePercent" | "truck";
 }
 
+export interface StoreGalleryItem {
+  url: string;
+  alt: string;
+  caption: string;
+}
+
 export interface StoreItem {
   id: number;
   branchCode: string;
@@ -81,6 +87,8 @@ export interface StoreItem {
   openingHoursSunday: string;
   placeId: string;
   featuredOnHomepage: boolean;
+  imageUrl?: string;
+  galleryImages?: StoreGalleryItem[];
 }
 
 export interface BlogPostItem {
@@ -540,6 +548,19 @@ export const STORES_COLLECTION: StoreItem[] = [
     openingHoursSunday: "10.00 – 15.00 WIB",
     placeId: STORE_INFO.googleMapsPlaceId,
     featuredOnHomepage: true,
+    imageUrl: "/images/stores/toko-lorong-kemplang.webp",
+    galleryImages: [
+      {
+        url: "/images/stores/toko-lorong-kemplang.webp",
+        alt: "Suasana lorong rak camilan dan kemplang gantung asli di Toko Amen Snack Sungailiat",
+        caption: "Lorong Rak Camilan & Kemplang Gantung Khas Bangka",
+      },
+      {
+        url: "/images/stores/toko-interior-kasir.webp",
+        alt: "Interior Toko Amen Snack Sungailiat dengan stok kemplang melimpah dan layanan kasir aktif",
+        caption: "Area Kasir & Stok Kemplang Segar Setiap Hari",
+      },
+    ],
   },
 ];
 

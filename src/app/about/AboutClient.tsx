@@ -44,14 +44,14 @@ export function AboutClient() {
       <section className="py-12 sm:py-16">
         <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-[10%]">
           <div className="grid grid-cols-1 lg:grid-cols-12 items-center gap-10">
-            <div className="lg:col-span-6 relative aspect-[4/3] rounded-3xl overflow-hidden bg-brand-soft border border-slate-200/80">
+            <div className="lg:col-span-6 relative aspect-[3/2] rounded-3xl overflow-hidden bg-brand-soft border border-slate-200/80 shadow-md">
               <MediaImage
-                src={STORE_INFO.heroImage}
-                alt={STORE_INFO.officialName}
+                src="/images/stores/toko-interior-kasir.webp"
+                alt={`Suasana interior dan layanan kasir ${STORE_INFO.officialName}`}
                 fallbackLabel={STORE_INFO.name}
                 fill
                 sizes="(min-width: 1024px) 50vw, 100vw"
-                className="object-contain p-3"
+                className="object-cover"
               />
             </div>
 

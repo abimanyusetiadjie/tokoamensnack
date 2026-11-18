@@ -588,74 +588,98 @@ export function HomeClient({
           </div>
 
           {featuredStore && (
-            <div className="max-w-3xl mx-auto brand-card rounded-2xl p-5 sm:p-8 border border-gray-100 bg-brand-soft/35 flex flex-col justify-between">
-              <div>
-                <div className="flex flex-wrap items-center justify-between gap-2 mb-3">
-                  <span className="inline-block text-[10px] sm:text-[11px] font-bold uppercase tracking-wider text-brand-red bg-white px-2.5 py-1 rounded-md border border-slate-200">
-                    {featuredStore.branchCode}
-                  </span>
-                  <span className="inline-flex items-center gap-1 text-xs font-semibold text-amber-700">
-                    <Star className="w-3.5 h-3.5 fill-amber-400 text-amber-400" />
-                    {STORE_INFO.rating}★ ({STORE_INFO.reviewCount}+ Ulasan)
+            <div className="max-w-5xl mx-auto brand-card rounded-2xl overflow-hidden border border-gray-100 bg-brand-soft/35 grid grid-cols-1 lg:grid-cols-12 items-stretch">
+              {featuredStore.imageUrl && (
+                <div className="lg:col-span-6 relative aspect-[3/2] lg:aspect-auto lg:min-h-[340px] bg-slate-100 overflow-hidden">
+                  <MediaImage
+                    src={featuredStore.imageUrl}
+                    alt={`${featuredStore.name} — Jl. Muhidin No.106 Sungailiat`}
+                    fallbackLabel={featuredStore.name}
+                    fill
+                    sizes="(min-width: 1024px) 520px, 100vw"
+                    className="object-cover object-center"
+                  />
+                  <div className="pointer-events-none absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-slate-950/60 to-transparent" />
+                  <span className="absolute bottom-3 left-3 inline-flex items-center gap-1.5 rounded-full bg-white/95 px-3 py-1 text-[11px] font-semibold text-gray-900 shadow-sm">
+                    <Store className="w-3.5 h-3.5 text-brand-red shrink-0" />
+                    <span>Foto Asli Toko Sungailiat</span>
                   </span>
                 </div>
+              )}
 
-                <h3 className="font-inter font-bold text-base sm:text-xl text-gray-900">
-                  {featuredStore.name}
-                </h3>
-
-                <p className="text-xs sm:text-sm text-gray-600 mt-2.5 leading-relaxed flex items-start gap-2">
-                  <MapPin className="w-4 h-4 text-brand-red shrink-0 mt-0.5" />
-                  <span className="min-w-0 break-words">{featuredStore.address}</span>
-                </p>
-
-                <div className="mt-3.5 space-y-1.5 sm:space-y-2 text-xs text-gray-600">
-                  <div className="flex items-center gap-2">
-                    <Phone className="w-3.5 h-3.5 text-brand-red shrink-0" />
-                    <span className="font-semibold text-gray-900">
-                      {featuredStore.phone}
+              <div
+                className={`${
+                  featuredStore.imageUrl ? "lg:col-span-6" : "lg:col-span-12"
+                } p-5 sm:p-8 flex flex-col justify-between`}
+              >
+                <div>
+                  <div className="flex flex-wrap items-center justify-between gap-2 mb-3">
+                    <span className="inline-block text-[10px] sm:text-[11px] font-bold uppercase tracking-wider text-brand-red bg-white px-2.5 py-1 rounded-md border border-slate-200">
+                      {featuredStore.branchCode}
+                    </span>
+                    <span className="inline-flex items-center gap-1 text-xs font-semibold text-amber-700">
+                      <Star className="w-3.5 h-3.5 fill-amber-400 text-amber-400" />
+                      {STORE_INFO.rating}★ ({STORE_INFO.reviewCount}+ Ulasan)
                     </span>
                   </div>
-                  <div className="flex items-start gap-2">
-                    <Clock className="w-3.5 h-3.5 text-brand-orange shrink-0 mt-0.5" />
-                    <span>
-                      {liveOpeningHoursWeekday && liveOpeningHoursSunday
-                        ? `${liveOpeningHoursWeekday} • ${liveOpeningHoursSunday}`
-                        : `Senin – Sabtu (${featuredStore.openingHoursWeekday}) • Minggu (${featuredStore.openingHoursSunday})`}
-                    </span>
+
+                  <h3 className="font-inter font-bold text-base sm:text-xl text-gray-900">
+                    {featuredStore.name}
+                  </h3>
+
+                  <p className="text-xs sm:text-sm text-gray-600 mt-2.5 leading-relaxed flex items-start gap-2">
+                    <MapPin className="w-4 h-4 text-brand-red shrink-0 mt-0.5" />
+                    <span className="min-w-0 break-words">{featuredStore.address}</span>
+                  </p>
+
+                  <div className="mt-3.5 space-y-1.5 sm:space-y-2 text-xs text-gray-600">
+                    <div className="flex items-center gap-2">
+                      <Phone className="w-3.5 h-3.5 text-brand-red shrink-0" />
+                      <span className="font-semibold text-gray-900">
+                        {featuredStore.phone}
+                      </span>
+                    </div>
+                    <div className="flex items-start gap-2">
+                      <Clock className="w-3.5 h-3.5 text-brand-orange shrink-0 mt-0.5" />
+                      <span>
+                        {liveOpeningHoursWeekday && liveOpeningHoursSunday
+                          ? `${liveOpeningHoursWeekday} • ${liveOpeningHoursSunday}`
+                          : `Senin – Sabtu (${featuredStore.openingHoursWeekday}) • Minggu (${featuredStore.openingHoursSunday})`}
+                      </span>
+                    </div>
                   </div>
                 </div>
-              </div>
 
-              {/* Clean Side-by-Side Action Buttons Inside Card */}
-              <div className="mt-5 sm:mt-6 pt-4 border-t border-slate-200/80 grid grid-cols-2 sm:flex sm:flex-wrap items-center justify-between gap-2.5 sm:gap-3">
-                <a
-                  href={featuredStore.mapsUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center justify-center gap-1.5 rounded-lg sm:rounded-xl bg-brand-red hover:bg-brand-red-dark text-white px-4 py-2.5 text-xs font-semibold transition-colors shadow-sm"
-                >
-                  <MapPin className="w-3.5 h-3.5 shrink-0" />
-                  <span>Google Maps</span>
-                </a>
-                <a
-                  href={featuredStore.wazeUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center justify-center gap-1.5 rounded-lg sm:rounded-xl bg-white hover:bg-brand-soft text-brand-red border border-brand-red px-4 py-2.5 text-xs font-semibold transition-colors"
-                >
-                  <Navigation className="w-3.5 h-3.5 shrink-0" />
-                  <span>Navigasi Waze</span>
-                </a>
-                <a
-                  href={STORE_INFO.whatsappDirectCta}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="col-span-2 sm:col-span-1 sm:ml-auto inline-flex items-center justify-center gap-1.5 rounded-lg sm:rounded-xl bg-[#25D366] hover:bg-[#20bd5a] text-white px-4 py-2.5 text-xs font-semibold transition-colors shadow-xs"
-                >
-                  <WhatsAppIcon className="w-4 h-4 shrink-0" />
-                  <span>WhatsApp Toko</span>
-                </a>
+                {/* Clean Side-by-Side Action Buttons Inside Card */}
+                <div className="mt-5 sm:mt-6 pt-4 border-t border-slate-200/80 grid grid-cols-2 sm:flex sm:flex-wrap items-center gap-2.5">
+                  <a
+                    href={featuredStore.mapsUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center justify-center gap-1.5 rounded-lg sm:rounded-xl bg-brand-red hover:bg-brand-red-dark text-white px-3.5 py-2.5 text-xs font-semibold transition-colors shadow-sm whitespace-nowrap"
+                  >
+                    <MapPin className="w-3.5 h-3.5 shrink-0" />
+                    <span>Google Maps</span>
+                  </a>
+                  <a
+                    href={featuredStore.wazeUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center justify-center gap-1.5 rounded-lg sm:rounded-xl bg-white hover:bg-brand-soft text-brand-red border border-brand-red px-3.5 py-2.5 text-xs font-semibold transition-colors whitespace-nowrap"
+                  >
+                    <Navigation className="w-3.5 h-3.5 shrink-0" />
+                    <span>Navigasi Waze</span>
+                  </a>
+                  <a
+                    href={STORE_INFO.whatsappDirectCta}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="col-span-2 sm:col-span-1 sm:ml-auto inline-flex items-center justify-center gap-1.5 rounded-lg sm:rounded-xl bg-[#25D366] hover:bg-[#20bd5a] text-white px-3.5 py-2.5 text-xs font-semibold transition-colors shadow-sm whitespace-nowrap"
+                  >
+                    <WhatsAppIcon className="w-4 h-4 shrink-0" />
+                    <span>WhatsApp Toko</span>
+                  </a>
+                </div>
               </div>
             </div>
           )}

@@ -10,6 +10,7 @@ import {
   Star,
 } from "lucide-react";
 import { PageHeroBanner } from "@/components/PageHeroBanner";
+import { MediaImage } from "@/components/MediaImage";
 import { Card } from "@/components/ui/card";
 import { WhatsAppIcon } from "@/components/WhatsAppIcon";
 import { STORE_INFO, STORES_COLLECTION } from "@/payload/seed-data";
@@ -158,6 +159,41 @@ export function LokasiClient() {
               </div>
             </Card>
           </div>
+
+          {/* Real Store Photo Showcase */}
+          {store.galleryImages && store.galleryImages.length > 0 && (
+            <div className="mt-10">
+              <div className="mb-5">
+                <h2 className="font-inter font-bold text-xl sm:text-2xl text-brand-dark">
+                  Suasana Toko Fisik di Sungailiat
+                </h2>
+                <p className="text-xs sm:text-sm text-slate-600 mt-1">
+                  Foto asli area display camilan khas Bangka dan meja kasir di {store.name}.
+                </p>
+              </div>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                {store.galleryImages.map((photo) => (
+                  <div
+                    key={photo.url}
+                    className="brand-card rounded-2xl overflow-hidden border border-slate-200/80 bg-white"
+                  >
+                    <div className="relative aspect-[3/2] bg-slate-100">
+                      <MediaImage
+                        src={photo.url}
+                        alt={photo.alt}
+                        fill
+                        sizes="(min-width: 768px) 50vw, 100vw"
+                        className="object-cover"
+                      />
+                    </div>
+                    <p className="px-4 py-3 text-xs sm:text-sm font-semibold text-brand-dark">
+                      {photo.caption}
+                    </p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
 
           {/* Bottom Pre-Order & Group Gift CTA Banner (1:1 Template Architecture) */}
           <div className="mt-10 rounded-3xl footer-gradient p-7 sm:p-10 text-white shadow-md flex flex-col md:flex-row md:items-center justify-between gap-6">
