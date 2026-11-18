@@ -123,10 +123,12 @@ export const STORE_INFO = {
     process.env.NEXT_PUBLIC_INSTAGRAM_URL || "https://www.instagram.com/toko.amensnack/",
   tiktokHandle: "@toko.amensnack",
   tiktokUrl:
-    process.env.NEXT_PUBLIC_TIKTOK_URL || "https://www.tiktok.com/@toko.amensnack",
+    process.env.NEXT_PUBLIC_TIKTOK_URL ||
+    "https://www.tiktok.com/@toko.amensnack?_r=1&_t=ZS-9BV7T8gyFhE",
   facebookName: "Toko Amen Snack",
   facebookUrl:
-    process.env.NEXT_PUBLIC_FACEBOOK_URL || "https://www.facebook.com/toko.amensnack",
+    process.env.NEXT_PUBLIC_FACEBOOK_URL ||
+    "https://www.facebook.com/share/1CKvjnWQpM/",
   shopeeHandle: "amensnack",
   shopeeUrl: "https://shopee.co.id/amensnack",
   googleMapsPlaceId: "ChIJx6EI03XzIi4RkYWEXb-mtBk",

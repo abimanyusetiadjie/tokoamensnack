@@ -82,7 +82,12 @@ const LOCAL_BUSINESS_JSON_LD = {
     reviewCount: STORE_INFO.reviewCount,
   },
   hasMap: STORE_INFO.googleMapsUrl,
-  sameAs: [STORE_INFO.instagramUrl, STORE_INFO.shopeeUrl],
+  sameAs: [
+    STORE_INFO.instagramUrl,
+    STORE_INFO.tiktokUrl,
+    STORE_INFO.facebookUrl,
+    STORE_INFO.shopeeUrl,
+  ],
 };
 
 export default function RootLayout({
