@@ -17,7 +17,7 @@
 }
 
 html {
-  scroll-behavior: smooth;
+  scroll-behavior: auto;
   overflow-x: clip;
   max-width: 100%;
 }
@@ -25,7 +25,7 @@ html {
 body {
   background-color: var(--brand-soft);
   color: var(--foreground);
-  font-family: var(--font-inter), var(--font-geist-sans), system-ui, -apple-system, sans-serif;
+  font-family: var(--font-inter), system-ui, -apple-system, sans-serif;
   overflow-x: clip;
   max-width: 100%;
 }
@@ -45,7 +45,11 @@ body {
 
 .brand-card {
   box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.04);
-  transition: box-shadow 0.2s ease, transform 0.2s ease;
+  transition: box-shadow 0.15s ease;
+}
+
+.card-contain {
+  contain: layout style;
 }
 
 .brand-card:hover {

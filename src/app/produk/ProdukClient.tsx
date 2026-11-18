@@ -1,8 +1,9 @@
 import React from "react";
 import Link from "next/link";
-import { ArrowLeft, MessageCircle, ShoppingBag } from "lucide-react";
+import { ArrowLeft, ShoppingBag } from "lucide-react";
 import { PageHeroBanner } from "@/components/PageHeroBanner";
 import { ProductCard } from "@/components/ProductCard";
+import { WhatsAppIcon } from "@/components/WhatsAppIcon";
 import { STORE_INFO } from "@/payload/seed-data";
 import type { WebProduct } from "@/lib/catalog";
 
@@ -99,8 +100,8 @@ export function ProdukClient({
                 rel="noopener noreferrer"
                 className="inline-flex items-center justify-center gap-2 rounded-xl bg-[#25D366] hover:bg-[#20bd5a] text-white font-semibold text-xs sm:text-sm px-5 py-3 shadow-xs transition-colors"
               >
-                <MessageCircle className="w-4 h-4 shrink-0" />
-                <span>Chat WhatsApp</span>
+                <WhatsAppIcon className="w-4 h-4 shrink-0" />
+                <span>WhatsApp</span>
               </a>
             </div>
           </div>

@@ -8,7 +8,6 @@ import {
   Gift,
   Loader2,
   MapPin,
-  MessageCircle,
   Minus,
   Plus,
   RotateCcw,
@@ -22,6 +21,7 @@ import {
 import { STORE_INFO, type CategoryIconName } from "@/payload/seed-data";
 import { resolveShopeeMediaMatch } from "@/lib/shopee-catalog-map";
 import { CategoryIcon } from "@/components/CategoryIcon";
+import { WhatsAppIcon } from "@/components/WhatsAppIcon";
 import { cn } from "@/lib/utils";
 import type {
   ChatbotProductCard,
@@ -370,9 +370,10 @@ function ChatbotProductCardRow({
             )}`}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center rounded-full border border-brand-red/30 px-2.5 py-1 text-[11px] font-semibold text-brand-red hover:bg-slate-50"
+            className="inline-flex items-center gap-1 rounded-full bg-[#25D366] hover:bg-[#20bd5a] px-2.5 py-1 text-[11px] font-semibold text-white transition-colors"
           >
-            Tanya WA
+            <WhatsAppIcon className="w-3.5 h-3.5 shrink-0" />
+            <span>WhatsApp</span>
           </a>
         )}
       </div>
@@ -383,12 +384,19 @@ function ChatbotProductCardRow({
 /**
  * Floating Store Assistant Chatbot (Single Launcher -> WA Header -> 4 Scenario Cards -> Max 3 Product Cards + Weight/Price Estimator -> 2-3 Follow-Up Chips).
  */
-export function ChatbotWidget() {
-  const [isOpen, setIsOpen] = useState(false);
+export function ChatbotWidget({
+  initialOpen = false,
+  initialPrompt = null,
+}: {
+  initialOpen?: boolean;
+  initialPrompt?: string | null;
+} = {}) {
+  const [isOpen, setIsOpen] = useState(initialOpen);
   const [input, setInput] = useState("");
   const [cart, setCart] = useState<Record<string, CartEntry>>({});
   const [showCartDetails, setShowCartDetails] = useState(false);
   const scrollRef = useRef<HTMLDivElement | null>(null);
+  const initialPromptSentRef = useRef(false);
 
   const transport = useMemo(
     () => new DefaultChatTransport({ api: "/api/chat" }),
@@ -400,6 +408,15 @@ export function ChatbotWidget() {
   });
 
   const isBusy = status === "submitted" || status === "streaming";
+
+  useEffect(() => {
+    const cleanPrompt = initialPrompt?.trim();
+    if (cleanPrompt && !initialPromptSentRef.current && !isBusy) {
+      initialPromptSentRef.current = true;
+      setIsOpen(true);
+      sendMessage({ text: cleanPrompt });
+    }
+  }, [initialPrompt, isBusy, sendMessage]);
 
   useEffect(() => {
     const handler = (event: Event) => {
@@ -554,10 +571,10 @@ export function ChatbotWidget() {
                 href={waCheckoutHref}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-1 rounded-full bg-[#25D366] hover:bg-[#20bd5a] text-white text-[11px] font-bold px-2 py-1 shadow-sm transition-colors whitespace-nowrap"
+                className="inline-flex items-center gap-1.5 rounded-full bg-[#25D366] hover:bg-[#20bd5a] text-white text-[11px] font-bold px-2.5 py-1 shadow-sm transition-colors whitespace-nowrap"
               >
-                <MessageCircle className="w-3 h-3 shrink-0" />
-                <span>Chat WA Admin</span>
+                <WhatsAppIcon className="w-3.5 h-3.5 shrink-0" />
+                <span>WhatsApp</span>
               </a>
 
               {(messages.length > 0 || totalCartItems > 0) && (
@@ -747,9 +764,10 @@ export function ChatbotWidget() {
                   href={waCheckoutHref}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="font-bold underline"
+                  className="inline-flex items-center gap-1 font-bold underline"
                 >
-                  Chat WA Admin
+                  <WhatsAppIcon className="w-3.5 h-3.5 shrink-0 text-[#25D366]" />
+                  <span>WhatsApp</span>
                 </a>
                 .
               </div>
@@ -815,9 +833,10 @@ export function ChatbotWidget() {
                   href={waCheckoutHref}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1 rounded-full bg-[#25D366] hover:bg-[#20bd5a] text-white font-bold text-xs px-3 py-1.5 shadow-sm transition-colors shrink-0"
+                  className="inline-flex items-center gap-1.5 rounded-full bg-[#25D366] hover:bg-[#20bd5a] text-white font-bold text-xs px-3 py-1.5 shadow-sm transition-colors shrink-0"
                 >
-                  <span>Kirim ke WA &rarr;</span>
+                  <WhatsAppIcon className="w-3.5 h-3.5 shrink-0" />
+                  <span>WhatsApp &rarr;</span>
                 </a>
               </div>
             </div>
@@ -876,8 +895,8 @@ export function ChatbotWidget() {
         ) : (
           <>
             <span className="relative flex items-center justify-center">
-              <Sparkles className="w-5 h-5 sm:w-4 sm:h-4 text-amber-300 shrink-0" />
-              <span className="absolute -top-0.5 -right-0.5 w-2 h-2 rounded-full bg-[#25D366] ring-2 ring-[#2E3677]" />
+              <WhatsAppIcon className="w-5 h-5 sm:w-4 sm:h-4 text-[#25D366] shrink-0" />
+              <Sparkles className="w-2.5 h-2.5 text-amber-300 absolute -top-1 -right-1 shrink-0" />
             </span>
             <span className="hidden sm:inline">Tanya Toko</span>
           </>

@@ -1,7 +1,8 @@
 import React from "react";
-import { MessageCircle, ShoppingBag, Star } from "lucide-react";
+import { ShoppingBag, Star } from "lucide-react";
 import { Card } from "@/components/ui/card";
 import { MediaImage } from "@/components/MediaImage";
+import { WhatsAppIcon } from "@/components/WhatsAppIcon";
 import { getProductWhatsappUrl, type ProductItem } from "@/payload/seed-data";
 import type { WebProduct } from "@/lib/catalog";
 
@@ -35,7 +36,7 @@ export function ProductCard({
   if (unit) metaBits.push(unit);
 
   return (
-    <Card className="brand-card rounded-2xl border border-slate-200/80 bg-white overflow-hidden h-full flex flex-col">
+    <Card className="brand-card card-contain rounded-2xl border border-slate-200/80 bg-white overflow-hidden h-full flex flex-col">
       <div className="relative w-full aspect-square bg-slate-50 overflow-hidden">
         <MediaImage
           src={product.imageUrl}
@@ -43,7 +44,10 @@ export function ProductCard({
           fallbackLabel={product.name}
           fill
           priority={priority}
-          sizes="(min-width: 1280px) 23vw, (min-width: 768px) 32vw, 48vw"
+          loading={priority ? "eager" : "lazy"}
+          decoding="async"
+          quality={72}
+          sizes="(min-width: 1024px) 256px, (min-width: 640px) 240px, 46vw"
           className="object-cover"
         />
         {product.badge && (
@@ -115,7 +119,7 @@ export function ProductCard({
               rel="noopener noreferrer"
               className="inline-flex items-center justify-center gap-1.5 rounded-xl bg-[#25D366] hover:bg-[#20bd5a] text-white font-semibold text-xs py-2.5 px-2.5 transition-colors shadow-xs"
             >
-              <MessageCircle className="w-3.5 h-3.5 shrink-0" aria-hidden="true" />
+              <WhatsAppIcon className="w-4 h-4 shrink-0" />
               <span>WhatsApp</span>
             </a>
             <a

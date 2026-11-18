@@ -31,6 +31,7 @@ import {
   type FlyerItem,
 } from "@/payload/seed-data";
 import { MediaImage } from "@/components/MediaImage";
+import { WhatsAppIcon } from "@/components/WhatsAppIcon";
 import { Card } from "@/components/ui/card";
 import {
   Carousel,
@@ -132,8 +133,8 @@ export function HomeClient({
                   rel="noopener noreferrer"
                   className="inline-flex items-center justify-center gap-1.5 bg-white hover:bg-brand-soft text-brand-red border-2 border-brand-red font-semibold rounded-lg sm:rounded-xl px-3 sm:px-4 xl:px-5 h-11 sm:h-12 text-xs xl:text-sm whitespace-nowrap transition-colors"
                 >
-                  <Phone className="w-3.5 h-3.5 shrink-0" />
-                  <span>Hubungi Kami</span>
+                  <WhatsAppIcon className="w-4 h-4 text-[#25D366] shrink-0" />
+                  <span>WhatsApp</span>
                 </a>
               </div>
             </div>
@@ -304,7 +305,7 @@ export function HomeClient({
                   key={product.id}
                   className="basis-1/2 sm:basis-1/3 md:basis-1/4 lg:basis-1/5"
                 >
-                  <div className="group flex flex-col rounded-2xl bg-white border border-gray-100 brand-card overflow-hidden transition-all hover:-translate-y-1 h-full">
+                  <div className="group flex flex-col rounded-2xl bg-white border border-gray-100 brand-card card-contain overflow-hidden transition-shadow duration-150 h-full">
                     <Link
                       href={`/produk?kategori=${product.categorySlug}`}
                       className="block flex-1"
@@ -372,7 +373,7 @@ export function HomeClient({
               <Link
                 key={cat.id}
                 href={`/produk?kategori=${cat.slug}`}
-                className="group rounded-2xl border border-slate-200/70 bg-white hover:border-brand-red/30 p-3.5 sm:p-6 transition-all brand-card flex flex-col items-center text-center gap-3 sm:gap-4"
+                className="group rounded-2xl border border-slate-200/70 bg-white hover:border-brand-red/30 p-3.5 sm:p-6 transition-colors brand-card card-contain flex flex-col items-center text-center gap-3 sm:gap-4"
               >
                 <div className="relative w-28 h-28 sm:w-36 sm:h-36 rounded-xl overflow-hidden bg-slate-50 shrink-0">
                   <MediaImage
@@ -651,8 +652,8 @@ export function HomeClient({
                   rel="noopener noreferrer"
                   className="col-span-2 sm:col-span-1 sm:ml-auto inline-flex items-center justify-center gap-1.5 rounded-lg sm:rounded-xl bg-[#25D366] hover:bg-[#20bd5a] text-white px-4 py-2.5 text-xs font-semibold transition-colors shadow-xs"
                 >
-                  <Phone className="w-3.5 h-3.5 shrink-0" />
-                  <span>Hubungi Admin Toko</span>
+                  <WhatsAppIcon className="w-4 h-4 shrink-0" />
+                  <span>WhatsApp Toko</span>
                 </a>
               </div>
             </div>
@@ -748,7 +749,7 @@ export function HomeClient({
       {/* ================================================================= */}
       {selectedFlyer && (
         <div
-          className="fixed inset-0 z-50 flex items-center justify-center bg-black/75 p-4 backdrop-blur-sm animate-in fade-in duration-200"
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 p-4"
           role="dialog"
           aria-modal="true"
           onClick={() => setSelectedFlyer(null)}
@@ -811,10 +812,10 @@ export function HomeClient({
                   href={STORE_INFO.whatsappDirectCta}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center justify-center gap-2 rounded-full bg-brand-red px-5 py-2.5 text-xs font-bold text-white hover:bg-brand-red-dark"
+                  className="inline-flex items-center justify-center gap-2 rounded-full bg-[#25D366] px-5 py-2.5 text-xs font-bold text-white hover:bg-[#20bd5a]"
                 >
-                  <ShoppingBag className="h-4 w-4" />
-                  Pesan Sekarang
+                  <WhatsAppIcon className="h-4 w-4 shrink-0" />
+                  <span>WhatsApp</span>
                 </a>
               </div>
             </div>

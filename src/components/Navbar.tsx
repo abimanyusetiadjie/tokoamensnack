@@ -4,7 +4,8 @@ import React, { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
-import { Menu, X, Phone, ShoppingBag, MapPin } from "lucide-react";
+import { Menu, X, ShoppingBag, MapPin } from "lucide-react";
+import { WhatsAppIcon } from "@/components/WhatsAppIcon";
 import { STORE_INFO } from "@/payload/seed-data";
 import { cn } from "@/lib/utils";
 
@@ -56,8 +57,8 @@ export function Navbar() {
         </div>
       </div>
 
-      {/* Tier 2 Sticky Main Header — Clean White Surface for Official Logo Contrast */}
-      <header className="sticky top-0 z-40 w-full transition-colors bg-white/95 backdrop-blur-sm border-b border-slate-200/80 shadow-[0_1px_12px_rgba(15,23,42,0.03)]">
+      {/* Tier 2 Sticky Main Header — Clean White Surface for Official Logo Contrast (no backdrop blur for smooth Win7 scroll) */}
+      <header className="sticky top-0 z-40 w-full transition-colors bg-white/[0.98] border-b border-slate-200/80 shadow-[0_1px_12px_rgba(15,23,42,0.03)]">
         <div className="relative h-16 lg:h-20 px-4 sm:px-6 lg:px-8 xl:px-[10%] flex items-center justify-center lg:justify-between max-w-[1600px] mx-auto">
           {/* Mobile Menu Button */}
           <button
@@ -140,7 +141,7 @@ export function Navbar() {
           aria-label="Menu Mobile"
         >
           <div
-            className="fixed inset-0 bg-slate-900/45 backdrop-blur-sm"
+            className="fixed inset-0 bg-slate-900/60"
             onClick={() => setMobileMenuOpen(false)}
           />
           <aside className="fixed top-0 left-0 bottom-0 w-72 max-w-[82vw] bg-white shadow-2xl p-6 flex flex-col justify-between z-10 overflow-y-auto">
@@ -245,8 +246,8 @@ export function Navbar() {
                 rel="noopener noreferrer"
                 className="flex w-full items-center justify-center gap-2 rounded-full bg-[#25D366] px-4 py-2.5 text-sm font-semibold text-white hover:bg-[#20bd5a] shadow-sm"
               >
-                <Phone className="h-4 w-4" />
-                WhatsApp {STORE_INFO.phone}
+                <WhatsAppIcon className="h-4 w-4 shrink-0" />
+                <span>WhatsApp {STORE_INFO.phone}</span>
               </a>
             </div>
           </aside>

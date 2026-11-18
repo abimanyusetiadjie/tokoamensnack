@@ -2,10 +2,11 @@
 
 import React, { useState } from "react";
 import Link from "next/link";
-import { ArrowRight, Calendar, MessageCircle, X } from "lucide-react";
+import { ArrowRight, Calendar, X } from "lucide-react";
 import { PageHeroBanner } from "@/components/PageHeroBanner";
 import { Card } from "@/components/ui/card";
 import { MediaImage } from "@/components/MediaImage";
+import { WhatsAppIcon } from "@/components/WhatsAppIcon";
 import { buttonVariants } from "@/components/ui/button";
 import { BLOGS_COLLECTION, STORE_INFO, type BlogPostItem } from "@/payload/seed-data";
 
@@ -79,7 +80,7 @@ export function BlogClient() {
           aria-modal="true"
           aria-label={activePost.title}
           onClick={() => setActivePost(null)}
-          className="fixed inset-0 z-50 bg-slate-900/75 backdrop-blur-sm flex items-center justify-center p-4"
+          className="fixed inset-0 z-50 bg-slate-900/80 flex items-center justify-center p-4"
         >
           <div
             onClick={(e) => e.stopPropagation()}
@@ -144,8 +145,8 @@ export function BlogClient() {
                     className: "rounded-full text-xs font-semibold gap-1.5",
                   })}
                 >
-                  <MessageCircle className="w-3.5 h-3.5" />
-                  Tanya Admin WhatsApp
+                  <WhatsAppIcon className="w-3.5 h-3.5 text-[#25D366] shrink-0" />
+                  <span>WhatsApp</span>
                 </a>
               </div>
             </div>

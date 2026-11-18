@@ -49,6 +49,7 @@ export function MediaImage({
     <Image
       src={cleanSrc}
       alt={alt}
+      decoding={props.decoding ?? "async"}
       className={className}
       onError={() => setHasError(true)}
       {...props}

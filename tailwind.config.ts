@@ -23,10 +23,10 @@ const config: Config = {
         background: "var(--background)",
       },
       fontFamily: {
-        sans: ["var(--font-geist-sans)", "var(--font-inter)", "system-ui", "sans-serif"],
-        mono: ["var(--font-geist-mono)", "monospace"],
-        serif: ["var(--font-playfair)", "serif"],
-        inter: ["var(--font-inter)", "var(--font-geist-sans)", "sans-serif"],
+        sans: ["var(--font-inter)", "system-ui", "sans-serif"],
+        mono: ["ui-monospace", "SFMono-Regular", "monospace"],
+        serif: ["Georgia", "serif"],
+        inter: ["var(--font-inter)", "system-ui", "sans-serif"],
       },
       borderRadius: {
         brand: "1rem",

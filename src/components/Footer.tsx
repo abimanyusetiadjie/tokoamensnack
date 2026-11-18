@@ -1,6 +1,7 @@
 import React from "react";
 import Link from "next/link";
-import { MapPin, Phone } from "lucide-react";
+import { MapPin } from "lucide-react";
+import { WhatsAppIcon } from "@/components/WhatsAppIcon";
 import { STORE_INFO } from "@/payload/seed-data";
 
 function InstagramIcon({ className }: { className?: string }) {
@@ -83,8 +84,8 @@ export function Footer() {
                   rel="noopener noreferrer"
                   className="mt-1 inline-flex items-center gap-2 text-lg sm:text-xl font-bold text-amber-200 hover:text-white transition-colors"
                 >
-                  <Phone className="h-4 w-4 shrink-0" />
-                  <span>{STORE_INFO.phone}</span>
+                  <WhatsAppIcon className="h-5 w-5 shrink-0 text-[#25D366]" />
+                  <span>WhatsApp {STORE_INFO.phone}</span>
                 </a>
                 <p className="text-[11px] sm:text-xs text-slate-200/85 mt-1 leading-relaxed">
                   Sen–Sab {STORE_INFO.openingHours.mondayToSaturday} &bull; Minggu{" "}

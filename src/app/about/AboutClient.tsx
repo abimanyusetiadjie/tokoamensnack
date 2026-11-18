@@ -6,7 +6,6 @@ import {
   CheckCircle2,
   Handshake,
   MapPin,
-  MessageCircle,
   ShoppingBag,
   Store,
   Truck,
@@ -14,6 +13,7 @@ import {
 import { PageHeroBanner } from "@/components/PageHeroBanner";
 import { Card } from "@/components/ui/card";
 import { MediaImage } from "@/components/MediaImage";
+import { WhatsAppIcon } from "@/components/WhatsAppIcon";
 import { buttonVariants } from "@/components/ui/button";
 import {
   PROPOSITION_BANNERS,
@@ -240,8 +240,8 @@ export function AboutClient() {
                 rel="noopener noreferrer"
                 className="inline-flex items-center justify-center rounded-full bg-[#25D366] hover:bg-[#20bd5a] text-white px-5 py-2.5 gap-2 text-xs sm:text-sm font-semibold transition-colors shadow-xs"
               >
-                <MessageCircle className="w-4 h-4" />
-                Pesan via WhatsApp
+                <WhatsAppIcon className="w-4 h-4 shrink-0" />
+                <span>WhatsApp</span>
               </a>
               <a
                 href={STORE_INFO.shopeeUrl}

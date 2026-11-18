@@ -4,7 +4,6 @@ import {
   ExternalLink,
   Instagram,
   MapPin,
-  MessageCircle,
   Navigation,
   Phone,
   ShoppingBag,
@@ -12,6 +11,7 @@ import {
 } from "lucide-react";
 import { PageHeroBanner } from "@/components/PageHeroBanner";
 import { Card } from "@/components/ui/card";
+import { WhatsAppIcon } from "@/components/WhatsAppIcon";
 import { STORE_INFO, STORES_COLLECTION } from "@/payload/seed-data";
 
 /**
@@ -129,8 +129,8 @@ export function LokasiClient() {
                   rel="noopener noreferrer"
                   className="w-full inline-flex items-center justify-center gap-2 rounded-2xl bg-[#25D366] hover:bg-[#20bd5a] text-white font-bold text-sm py-3.5 px-5 transition-colors"
                 >
-                  <MessageCircle className="w-4 h-4" />
-                  <span>Pesan via WhatsApp ({STORE_INFO.phone})</span>
+                  <WhatsAppIcon className="w-4 h-4 shrink-0" />
+                  <span>WhatsApp ({STORE_INFO.phone})</span>
                 </a>
 
                 <a
@@ -176,8 +176,8 @@ export function LokasiClient() {
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 rounded-full bg-[#25D366] px-5 py-3 text-sm font-bold text-white hover:bg-[#20bd5a] transition-colors shadow-sm"
               >
-                <MessageCircle className="h-4 w-4" />
-                Pre-Order via WhatsApp
+                <WhatsAppIcon className="h-4 w-4 shrink-0" />
+                <span>WhatsApp</span>
               </a>
               <a
                 href={STORE_INFO.shopeeUrl}
