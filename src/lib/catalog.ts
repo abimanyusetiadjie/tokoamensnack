@@ -136,6 +136,43 @@ export function formatRupiah(amount: number): string {
   return `Rp${Math.round(amount).toLocaleString("id-ID")}`;
 }
 
+/**
+ * Returns only verified products with real WebP photos (curated flagship + Shopee in-stock),
+ * optionally filtered by normalized category slug and capped at max 24 items for fast rendering.
+ */
+export function getCuratedPhotoProducts(
+  categorySlug?: string | null,
+  limit = 24
+): { items: WebProduct[]; activeCategoryTitle: string | null } {
+  const safeLimit = Math.min(Math.max(Number(limit || 24), 1), 24);
+  const normalizedCategory = normalizeCategorySlug(categorySlug);
+  const seedItems = getSeedProductsFallback();
+  const seenUrls = new Set(seedItems.map((item) => item.shopeeUrl));
+  const shopeeItems = getShopeeWebProducts().filter(
+    (item) => Boolean(item.imageUrl) && !seenUrls.has(item.shopeeUrl)
+  );
+  const allWithPhotos = [...seedItems, ...shopeeItems].filter((p) =>
+    Boolean(p.imageUrl && p.imageUrl.trim())
+  );
+
+  const filtered =
+    normalizedCategory === "semua"
+      ? allWithPhotos
+      : allWithPhotos.filter(
+          (p) => normalizeCategorySlug(p.categorySlug) === normalizedCategory
+        );
+
+  const activeCategoryTitle =
+    normalizedCategory === "semua"
+      ? null
+      : CATEGORY_TITLES[normalizedCategory] || filtered[0]?.category || normalizedCategory;
+
+  return {
+    items: filtered.slice(0, safeLimit),
+    activeCategoryTitle,
+  };
+}
+
 export function resolveMatchedProductMedia(
   imageUrl: string | null,
   name: string,

@@ -30,7 +30,6 @@ import {
   BLOGS_COLLECTION,
   type FlyerItem,
 } from "@/payload/seed-data";
-import type { WebCategory } from "@/lib/catalog";
 import { MediaImage } from "@/components/MediaImage";
 import { CategoryIcon } from "@/components/CategoryIcon";
 import { Card } from "@/components/ui/card";
@@ -69,24 +68,17 @@ function QuoteGlyph({ flip = false }: { flip?: boolean }) {
 }
 
 interface HomeClientProps {
-  liveCategories?: WebCategory[];
-  totalLiveProducts?: number;
   liveOpeningHoursWeekday?: string;
   liveOpeningHoursSunday?: string;
 }
 
 export function HomeClient({
-  liveCategories,
-  totalLiveProducts,
   liveOpeningHoursWeekday,
   liveOpeningHoursSunday,
 }: HomeClientProps = {}) {
   const [selectedFlyer, setSelectedFlyer] = useState<FlyerItem | null>(null);
   const featuredStore = STORES_COLLECTION[0];
-  const displayCategories =
-    liveCategories && liveCategories.length > 0
-      ? liveCategories
-      : CATEGORIES_COLLECTION.map((c) => ({ ...c, productCount: 0 }));
+  const displayCategories = CATEGORIES_COLLECTION;
 
   return (
     <div className="min-h-screen bg-brand-soft overflow-x-clip">
@@ -290,11 +282,7 @@ export function HomeClient({
                 href="/produk"
                 className="inline-flex items-center gap-1.5 text-xs sm:text-sm font-semibold text-brand-red hover:text-brand-red-dark transition-colors"
               >
-                <span>
-                  {totalLiveProducts && totalLiveProducts > 0
-                    ? `Jelajahi ${totalLiveProducts.toLocaleString("id-ID")} Produk`
-                    : "Jelajahi Semua Produk"}
-                </span>
+                <span>Lihat Semua Produk</span>
                 <ArrowRight className="w-4 h-4" />
               </Link>
             </div>
@@ -392,11 +380,6 @@ export function HomeClient({
                     <p className="text-[11px] sm:text-xs text-gray-600 mt-1 line-clamp-2 leading-relaxed">
                       {cat.description}
                     </p>
-                    {cat.productCount > 0 && (
-                      <span className="inline-block mt-1.5 text-[10px] font-bold text-brand-red">
-                        {cat.productCount} varian tersedia
-                      </span>
-                    )}
                   </div>
                 </Link>
               ))}
