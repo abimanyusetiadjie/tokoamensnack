@@ -7,7 +7,7 @@ import { usePathname } from "next/navigation";
 import { Menu, X, ShoppingBag, MapPin, Globe } from "lucide-react";
 import { WhatsAppIcon } from "@/components/WhatsAppIcon";
 import { STORE_INFO } from "@/payload/seed-data";
-import { FOUNDED_DATE_EN, NAV_LABELS_EN, useLanguage } from "@/lib/i18n";
+import { NAV_LABELS_EN, useLanguage } from "@/lib/i18n";
 import { cn } from "@/lib/utils";
 
 const NAV_LINKS = [
@@ -26,49 +26,7 @@ export function Navbar() {
 
   return (
     <>
-      {/* Tier 1 Top Bar — Store Heritage Left + Clean Quick Links & Language Switch Right */}
-      <div className="hidden lg:flex h-8 bg-[#1C224F] px-8 xl:px-[10%] py-1.5 items-center text-white">
-        <div className="max-w-[1440px] w-full mx-auto flex justify-between items-center gap-6 font-inter font-medium text-xs text-white/95">
-          <span className="whitespace-nowrap text-slate-200">
-            {tx("Oleh-Oleh Bangka", "Bangka Souvenirs")} &bull;{" "}
-            <strong className="font-semibold text-white">
-              {tx(`Berdiri Sejak ${STORE_INFO.foundedDate}`, `Est. ${FOUNDED_DATE_EN}`)}
-            </strong>
-          </span>
-
-          <div className="flex items-center gap-5">
-            <Link
-              href="/lokasi"
-              className="hover:text-amber-300 whitespace-nowrap transition-colors"
-            >
-              {tx("Lokasi Sungailiat", "Sungailiat Store")}
-            </Link>
-            <a
-              href={STORE_INFO.shopeeUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-1.5 text-amber-300 hover:text-white font-semibold whitespace-nowrap transition-colors"
-            >
-              <ShoppingBag className="w-3.5 h-3.5 shrink-0" />
-              <span>Shopee Official (amensnack)</span>
-            </a>
-            <button
-              type="button"
-              onClick={toggleLang}
-              aria-label={isEn ? "Ganti bahasa ke Indonesia" : "Switch language to English"}
-              title={isEn ? "Bahasa Indonesia (ID)" : "English (EN)"}
-              className="inline-flex items-center gap-1 rounded-full bg-white/10 hover:bg-white/20 border border-white/20 px-2.5 py-0.5 text-[11px] font-bold text-white transition-colors cursor-pointer whitespace-nowrap"
-            >
-              <Globe className="w-3 h-3 shrink-0 text-amber-300" aria-hidden="true" />
-              <span className={lang === "id" ? "text-amber-300" : "text-white/65"}>ID</span>
-              <span className="text-white/45">/</span>
-              <span className={lang === "en" ? "text-amber-300" : "text-white/65"}>EN</span>
-            </button>
-          </div>
-        </div>
-      </div>
-
-      {/* Tier 2 Sticky Main Header — Clean White Surface for Official Logo Contrast (no backdrop blur for smooth Win7 scroll) */}
+      {/* Single Clean Sticky Header (1:1 Clean Mobile Concept Applied Across Desktop & Mobile) */}
       <header className="sticky top-0 z-40 w-full transition-colors bg-white/[0.98] border-b border-slate-200/80 shadow-[0_1px_12px_rgba(15,23,42,0.03)]">
         <div className="relative h-16 lg:h-20 px-4 sm:px-6 lg:px-8 xl:px-[10%] flex items-center justify-center lg:justify-between max-w-[1600px] mx-auto">
           {/* Mobile Menu Button */}
@@ -113,11 +71,23 @@ export function Navbar() {
             <span>{lang.toUpperCase()}</span>
           </button>
 
-          {/* Desktop Navigation — Clean Single Row with Red Active Accent matching tokomama.com */}
+          {/* Desktop Navigation — Globe Switcher Left of Beranda + Clean Single Row */}
           <nav
             aria-label={tx("Navigasi Utama", "Main Navigation")}
-            className="hidden lg:flex gap-6 xl:gap-8 items-center"
+            className="hidden lg:flex gap-5 xl:gap-7 items-center"
           >
+            <button
+              type="button"
+              onClick={toggleLang}
+              aria-label={isEn ? "Ganti bahasa ke Indonesia" : "Switch language to English"}
+              title={isEn ? "Bahasa Indonesia (ID)" : "English (EN)"}
+              className="inline-flex items-center gap-1.5 rounded-full border border-slate-200 bg-slate-50 hover:bg-slate-100 text-slate-700 font-bold text-xs px-3 py-1.5 transition-colors cursor-pointer shrink-0 whitespace-nowrap"
+            >
+              <Globe className="w-3.5 h-3.5 text-brand-red shrink-0" aria-hidden="true" />
+              <span className={lang === "id" ? "text-brand-red" : "text-slate-400"}>ID</span>
+              <span className="text-slate-300">/</span>
+              <span className={lang === "en" ? "text-brand-red" : "text-slate-400"}>EN</span>
+            </button>
             {NAV_LINKS.map((link) => {
               const isActive =
                 link.href === "/"
