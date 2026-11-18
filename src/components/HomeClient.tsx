@@ -32,6 +32,16 @@ import {
 } from "@/payload/seed-data";
 import { MediaImage } from "@/components/MediaImage";
 import { WhatsAppIcon } from "@/components/WhatsAppIcon";
+import {
+  BLOG_EN,
+  CATEGORY_EN,
+  FLYER_EN,
+  FOUNDED_DATE_EN,
+  PILLAR_EN,
+  PRODUCT_EN,
+  TESTIMONIAL_EN,
+  useLanguage,
+} from "@/lib/i18n";
 import { Card } from "@/components/ui/card";
 import {
   Carousel,
@@ -76,6 +86,7 @@ export function HomeClient({
   liveOpeningHoursWeekday,
   liveOpeningHoursSunday,
 }: HomeClientProps = {}) {
+  const { isEn, tx } = useLanguage();
   const [selectedFlyer, setSelectedFlyer] = useState<FlyerItem | null>(null);
   const featuredStore = STORES_COLLECTION[0];
   const displayCategories = CATEGORIES_COLLECTION;
@@ -120,17 +131,29 @@ export function HomeClient({
           <div className="md:w-[56%] lg:w-[52%] text-center md:text-left">
             <span className="inline-flex items-center gap-1.5 rounded-full bg-white border border-slate-200/80 shadow-sm px-3.5 py-1.5 text-[11px] sm:text-xs font-semibold text-brand-red mb-2.5 sm:mb-4 whitespace-nowrap">
               <Store className="w-3.5 h-3.5 shrink-0" />
-              <span>Sejak {STORE_INFO.foundedDate}</span>
+              <span>{tx(`Sejak ${STORE_INFO.foundedDate}`, `Est. ${FOUNDED_DATE_EN}`)}</span>
             </span>
 
             <h1 className="font-inter font-extrabold text-[27px] sm:text-4xl lg:text-[42px] xl:text-[48px] leading-[1.16] lg:leading-[1.14] tracking-tight text-gray-900">
-              Oleh-Oleh <span className="text-brand-red">KHAS</span>
-              <br />
-              Bangka Terlengkap
+              {tx(
+                <>
+                  Oleh-Oleh <span className="text-brand-red">KHAS</span>
+                  <br />
+                  Bangka Terlengkap
+                </>,
+                <>
+                  Authentic <span className="text-brand-red">BANGKA</span>
+                  <br />
+                  Souvenirs &amp; Snacks
+                </>
+              )}
             </h1>
 
             <p className="mt-2.5 sm:mt-5 text-[13px] sm:text-base lg:text-lg text-gray-700 leading-relaxed max-w-xl mx-auto md:mx-0 px-2 sm:px-0">
-              {STORE_INFO.heroSubtitle}
+              {tx(
+                STORE_INFO.heroSubtitle,
+                "Discover crispy Grilled Kemplang, sand-roasted Cap AMEN Kemplang, Mackerel Getas, and exclusive Bangka Island treats — fresh daily at honest prices!"
+              )}
             </p>
 
             {/* Mobile: compact 2-row stack (matching tokomama.com height); Desktop: 1 row */}
@@ -139,7 +162,7 @@ export function HomeClient({
                 href="#katalog"
                 className="w-full max-w-[330px] sm:w-auto sm:max-w-none inline-flex items-center justify-center bg-brand-red hover:bg-brand-red-dark text-white font-semibold rounded-lg sm:rounded-xl px-4 xl:px-5 h-11 sm:h-12 shadow-md shadow-indigo-950/15 text-xs xl:text-sm whitespace-nowrap transition-colors"
               >
-                <span>Lihat Katalog Produk</span>
+                <span>{tx("Lihat Katalog Produk", "Browse Product Catalog")}</span>
                 <ArrowRight className="w-4 h-4 ml-1.5 shrink-0" />
               </a>
 
@@ -151,7 +174,7 @@ export function HomeClient({
                   className="inline-flex items-center justify-center gap-1.5 bg-[#EE4D2D] hover:bg-[#d93d1f] text-white font-semibold rounded-lg sm:rounded-xl px-3 sm:px-4 xl:px-5 h-11 sm:h-12 shadow-sm text-xs xl:text-sm whitespace-nowrap transition-colors"
                 >
                   <ShoppingBag className="w-3.5 h-3.5 sm:w-4 sm:h-4 shrink-0" />
-                  <span>Shopee Resmi</span>
+                  <span>{tx("Shopee Resmi", "Official Shopee")}</span>
                 </a>
 
                 <a
@@ -194,17 +217,20 @@ export function HomeClient({
             <div className="flex flex-col sm:flex-row items-center sm:items-end justify-between gap-2.5 sm:gap-4 mb-6 sm:mb-8 text-center sm:text-left">
               <div>
                 <h2 className="font-inter font-bold text-2xl sm:text-3xl lg:text-4xl text-gray-900">
-                  Promo &amp; Produk Unggulan
+                  {tx("Promo & Produk Unggulan", "Featured Promos & Highlights")}
                 </h2>
                 <p className="text-xs sm:text-base text-gray-600 mt-1.5">
-                  Cek penawaran spesial produk Cap AMEN dan layanan kirim seluruh Indonesia.
+                  {tx(
+                    "Cek penawaran spesial produk Cap AMEN dan layanan kirim seluruh Indonesia.",
+                    "Explore special Cap AMEN offers and nationwide souvenir shipping across Indonesia."
+                  )}
                 </p>
               </div>
               <Link
                 href="/katalog"
                 className="inline-flex items-center gap-1.5 text-xs sm:text-sm font-semibold text-brand-red hover:text-brand-red-dark transition-colors shrink-0"
               >
-                <span>Lihat Semua Katalog</span>
+                <span>{tx("Lihat Semua Katalog", "View All Promos")}</span>
                 <ArrowRight className="w-4 h-4" />
               </Link>
             </div>
@@ -216,7 +242,9 @@ export function HomeClient({
               className="w-full"
             >
               <CarouselContent>
-                {FLYERS_COLLECTION.map((flyer) => (
+                {FLYERS_COLLECTION.map((flyer) => {
+                  const enFlyer = isEn ? FLYER_EN[flyer.id] : undefined;
+                  return (
                   <CarouselItem
                     key={flyer.id}
                     className="basis-full md:basis-[85%] lg:basis-[78%]"
@@ -244,22 +272,23 @@ export function HomeClient({
                         <div className="hidden sm:flex absolute inset-0 bg-black/0 group-hover:bg-black/15 transition-colors items-center justify-center">
                           <span className="opacity-0 group-hover:opacity-100 transition-opacity inline-flex items-center gap-2 rounded-full bg-white/95 text-gray-900 px-4 py-2 text-xs font-semibold shadow-lg">
                             <ZoomIn className="w-4 h-4 text-brand-red" />
-                            Perbesar Banner Promo
+                            {tx("Perbesar Banner Promo", "Enlarge Promo Banner")}
                           </span>
                         </div>
                       </div>
                       <div className="flex items-center justify-between gap-2 px-3.5 sm:px-4 py-2.5 sm:py-3 bg-white border-t border-slate-100">
                         <span className="font-semibold text-xs sm:text-sm text-gray-900 truncate min-w-0">
-                          {flyer.title}
+                          {enFlyer?.title ?? flyer.title}
                         </span>
                         <span className="inline-flex items-center gap-1 text-[11px] sm:text-xs font-medium text-brand-red shrink-0">
                           <Calendar className="w-3 h-3 sm:w-3.5 sm:h-3.5" />
-                          {flyer.period}
+                          {enFlyer?.period ?? flyer.period}
                         </span>
                       </div>
                     </div>
                   </CarouselItem>
-                ))}
+                  );
+                })}
               </CarouselContent>
               <CarouselPrevious className="hidden sm:inline-flex left-3" />
               <CarouselNext className="hidden sm:inline-flex right-3" />
@@ -277,10 +306,13 @@ export function HomeClient({
           <div className="flex flex-col sm:flex-row items-center sm:items-end justify-between gap-2.5 sm:gap-4 mb-6 sm:mb-8 text-center sm:text-left">
             <div>
               <h2 className="font-inter font-bold text-2xl sm:text-3xl lg:text-4xl text-gray-900">
-                Oleh-Oleh &amp; Camilan Terlaris
+                {tx("Oleh-Oleh & Camilan Terlaris", "Bestselling Souvenirs & Snacks")}
               </h2>
               <p className="text-xs sm:text-base text-gray-600 mt-1.5">
-                Pilihan produk favorit keluarga dan wisatawan khas Pulau Bangka.
+                {tx(
+                  "Pilihan produk favorit keluarga dan wisatawan khas Pulau Bangka.",
+                  "Top picks loved by families and travelers visiting Bangka Island."
+                )}
               </p>
             </div>
             <div className="flex items-center justify-center sm:justify-end gap-4 shrink-0">
@@ -297,7 +329,7 @@ export function HomeClient({
                 href="/produk"
                 className="inline-flex items-center gap-1.5 text-xs sm:text-sm font-semibold text-brand-red hover:text-brand-red-dark transition-colors"
               >
-                <span>Lihat Semua Produk</span>
+                <span>{tx("Lihat Semua Produk", "View All Products")}</span>
                 <ArrowRight className="w-4 h-4" />
               </Link>
             </div>
@@ -309,7 +341,9 @@ export function HomeClient({
             className="w-full"
           >
             <CarouselContent>
-              {PRODUCTS_COLLECTION.map((product) => (
+              {PRODUCTS_COLLECTION.map((product) => {
+                const enProd = isEn ? PRODUCT_EN[product.id] : undefined;
+                return (
                 <CarouselItem
                   key={product.id}
                   className="basis-1/2 sm:basis-1/3 md:basis-1/4 lg:basis-1/5"
@@ -330,7 +364,7 @@ export function HomeClient({
                       </div>
                       <div className="p-3 sm:p-3.5 pb-1">
                         <span className="text-[10px] sm:text-[11px] font-bold uppercase tracking-wider text-brand-red block truncate">
-                          {product.badge}
+                          {enProd?.badge ?? product.badge}
                         </span>
                         <h3 className="font-semibold text-xs sm:text-sm text-gray-900 line-clamp-2 mt-1 min-h-[34px] sm:min-h-[40px]">
                           {product.name}
@@ -345,7 +379,7 @@ export function HomeClient({
                         href={product.shopeeUrl}
                         target="_blank"
                         rel="noopener noreferrer"
-                        aria-label={`Beli ${product.name} di Shopee`}
+                        aria-label={tx(`Beli ${product.name} di Shopee`, `Buy ${product.name} on Shopee`)}
                         className="inline-flex items-center gap-1 rounded-lg bg-orange-50 hover:bg-[#EE4D2D] text-[#EE4D2D] hover:text-white border border-[#EE4D2D]/25 px-2.5 py-1 text-[10px] font-bold transition-colors shrink-0"
                       >
                         <ShoppingBag className="w-3 h-3 shrink-0" />
@@ -354,7 +388,8 @@ export function HomeClient({
                     </div>
                   </div>
                 </CarouselItem>
-              ))}
+                );
+              })}
             </CarouselContent>
             <CarouselPrevious className="hidden md:inline-flex -left-4" />
             <CarouselNext className="hidden md:inline-flex -right-4" />
@@ -370,15 +405,20 @@ export function HomeClient({
         <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-[10%]">
           <div className="text-center max-w-2xl mx-auto mb-6 sm:mb-9">
             <h2 className="font-inter font-bold text-2xl sm:text-3xl lg:text-4xl text-brand-red">
-              Kategori Produk Pilihan
+              {tx("Kategori Produk Pilihan", "Featured Product Categories")}
             </h2>
             <p className="text-xs sm:text-base text-gray-600 mt-1.5">
-              Lengkap! Semua oleh-oleh khas Bangka Belitung ada di Toko Amen Snack.
+              {tx(
+                "Lengkap! Semua oleh-oleh khas Bangka Belitung ada di Toko Amen Snack.",
+                "Complete selection! Find every Bangka Belitung souvenir at Toko Amen Snack."
+              )}
             </p>
           </div>
 
           <div className="grid grid-cols-2 md:grid-cols-3 gap-3 sm:gap-5">
-            {displayCategories.map((cat) => (
+            {displayCategories.map((cat) => {
+              const enCat = isEn ? CATEGORY_EN[cat.slug] : undefined;
+              return (
               <Link
                 key={cat.id}
                 href={`/produk?kategori=${cat.slug}`}
@@ -387,7 +427,7 @@ export function HomeClient({
                 <div className="relative w-28 h-28 sm:w-36 sm:h-36 rounded-xl overflow-hidden bg-slate-50 shrink-0">
                   <MediaImage
                     src={cat.imageUrl}
-                    alt={cat.title}
+                    alt={enCat?.title ?? cat.title}
                     fill
                     sizes="(min-width: 768px) 160px, 120px"
                     className="object-cover group-hover:scale-105 transition-transform duration-300"
@@ -395,14 +435,15 @@ export function HomeClient({
                 </div>
                 <div className="min-w-0">
                   <h3 className="font-inter font-bold text-[13px] sm:text-base text-brand-red group-hover:text-brand-red-dark transition-colors leading-snug">
-                    {cat.title}
+                    {enCat?.title ?? cat.title}
                   </h3>
                   <p className="text-[11px] sm:text-xs text-gray-600 mt-1 line-clamp-2 leading-relaxed">
-                    {cat.description}
+                    {enCat?.description ?? cat.description}
                   </p>
                 </div>
               </Link>
-            ))}
+              );
+            })}
           </div>
         </div>
       </section>
@@ -415,12 +456,12 @@ export function HomeClient({
         <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-[10%]">
           <div className="text-center text-white max-w-2xl mx-auto">
             <h2 className="font-inter font-bold text-2xl sm:text-3xl lg:text-4xl">
-              Kata Pelanggan &amp; Wisatawan
+              {tx("Kata Pelanggan & Wisatawan", "What Customers & Travelers Say")}
             </h2>
             <p className="mt-2 sm:mt-2.5 text-xs sm:text-base text-white/90">
-              Dipercaya wisatawan dan pelanggan online dengan reputasi{" "}
+              {tx("Dipercaya wisatawan dan pelanggan online dengan reputasi", "Trusted by travelers and online shoppers with a")}{" "}
               <strong className="text-white">
-                {STORE_INFO.rating}★ ({STORE_INFO.reviewCount}+ ulasan Google Maps)
+                {STORE_INFO.rating}★ ({STORE_INFO.reviewCount}+ {tx("ulasan Google Maps", "Google Maps reviews")})
               </strong>
               .
             </p>
@@ -434,7 +475,9 @@ export function HomeClient({
               dotsClassName="mt-4 sm:mt-5"
             >
               <CarouselContent>
-                {TESTIMONIALS_COLLECTION.map((testi, testiIdx) => (
+                {TESTIMONIALS_COLLECTION.map((testi, testiIdx) => {
+                  const enTesti = isEn ? TESTIMONIAL_EN[testi.id] : undefined;
+                  return (
                   <CarouselItem
                     key={testi.id}
                     className="basis-[82%] sm:basis-1/2 lg:basis-1/3"
@@ -454,7 +497,7 @@ export function HomeClient({
                             {testi.name}
                           </div>
                           <div className="text-[11px] font-medium text-brand-red mt-0.5">
-                            {testi.role}
+                            {enTesti?.role ?? testi.role}
                           </div>
                         </div>
 
@@ -462,7 +505,7 @@ export function HomeClient({
                         <div className="space-y-1 text-left">
                           <QuoteGlyph />
                           <p className="text-[13px] sm:text-sm text-gray-600 leading-relaxed text-center px-2">
-                            {testi.quote}
+                            {enTesti?.quote ?? testi.quote}
                           </p>
                           <div className="flex justify-end">
                             <QuoteGlyph flip />
@@ -481,7 +524,8 @@ export function HomeClient({
                       </div>
                     </Card>
                   </CarouselItem>
-                ))}
+                  );
+                })}
               </CarouselContent>
               <CarouselPrevious className="hidden md:inline-flex -left-4" />
               <CarouselNext className="hidden md:inline-flex -right-4" />
@@ -501,16 +545,20 @@ export function HomeClient({
         <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-[10%]">
           <div className="text-center max-w-2xl mx-auto mb-8 sm:mb-12">
             <h2 className="font-inter font-bold text-2xl sm:text-3xl lg:text-4xl text-brand-red">
-              Mengapa Belanja di Toko Amen Snack?
+              {tx("Mengapa Belanja di Toko Amen Snack?", "Why Shop at Toko Amen Snack?")}
             </h2>
             <p className="text-xs sm:text-base text-gray-600 mt-1.5 sm:mt-2">
-              Tiga pilar komitmen kami menjaga kualitas oleh-oleh khas Bangka untuk keluarga Anda.
+              {tx(
+                "Tiga pilar komitmen kami menjaga kualitas oleh-oleh khas Bangka untuk keluarga Anda.",
+                "Three core pillars behind our authentic Bangka flavors and service."
+              )}
             </p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
             {VALUE_PILLARS.map((pillar, idx) => {
               const Icon = PILLAR_ICONS[pillar.iconName];
+              const enPillar = isEn ? PILLAR_EN[pillar.id] : undefined;
               return (
                 <div
                   key={pillar.id}
@@ -525,10 +573,10 @@ export function HomeClient({
                   </div>
                   <div className="min-w-0 max-w-xs">
                     <h3 className="font-inter font-bold text-base sm:text-lg text-gray-900 mb-1 sm:mb-2">
-                      {pillar.title}
+                      {enPillar?.title ?? pillar.title}
                     </h3>
                     <p className="text-xs sm:text-sm text-gray-600 leading-relaxed">
-                      {pillar.description}
+                      {enPillar?.description ?? pillar.description}
                     </p>
                   </div>
                 </div>
@@ -588,10 +636,13 @@ export function HomeClient({
         <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-[10%]">
           <div className="text-center max-w-2xl mx-auto mb-7 sm:mb-10">
             <h2 className="font-inter font-bold text-2xl sm:text-3xl lg:text-4xl text-gray-900">
-              Kunjungi Toko Fisik Kami
+              {tx("Kunjungi Toko Fisik Kami", "Visit Our Physical Store")}
             </h2>
             <p className="text-xs sm:text-base text-gray-600 mt-1.5 sm:mt-2">
-              Temukan Toko Amen Snack di pusat kota Sungailiat, Bangka Belitung!
+              {tx(
+                "Temukan Toko Amen Snack di pusat kota Sungailiat, Bangka Belitung!",
+                "Find Toko Amen Snack right in downtown Sungailiat, Bangka Belitung!"
+              )}
             </p>
           </div>
 
@@ -610,7 +661,7 @@ export function HomeClient({
                   <div className="pointer-events-none absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-slate-950/60 to-transparent" />
                   <span className="absolute bottom-3 left-3 inline-flex items-center gap-1.5 rounded-full bg-white/95 px-3 py-1 text-[11px] font-semibold text-gray-900 shadow-sm">
                     <Store className="w-3.5 h-3.5 text-brand-red shrink-0" />
-                    <span>Area Kasir &amp; Stok Toko Sungailiat</span>
+                    <span>{tx("Area Kasir & Stok Toko Sungailiat", "Sungailiat Store & Cashier Counter")}</span>
                   </span>
                 </div>
               )}
@@ -623,11 +674,11 @@ export function HomeClient({
                 <div>
                   <div className="flex flex-wrap items-center justify-between gap-2 mb-3">
                     <span className="inline-block text-[10px] sm:text-[11px] font-bold uppercase tracking-wider text-brand-red bg-white px-2.5 py-1 rounded-md border border-slate-200">
-                      {featuredStore.branchCode}
+                      {tx(featuredStore.branchCode, "SUNGAILIAT FLAGSHIP")}
                     </span>
                     <span className="inline-flex items-center gap-1 text-xs font-semibold text-amber-700">
                       <Star className="w-3.5 h-3.5 fill-amber-400 text-amber-400" />
-                      {STORE_INFO.rating}★ ({STORE_INFO.reviewCount}+ Ulasan)
+                      {STORE_INFO.rating}★ ({STORE_INFO.reviewCount}+ {tx("Ulasan", "Reviews")})
                     </span>
                   </div>
 
@@ -652,7 +703,7 @@ export function HomeClient({
                       <span>
                         {liveOpeningHoursWeekday && liveOpeningHoursSunday
                           ? `${liveOpeningHoursWeekday} • ${liveOpeningHoursSunday}`
-                          : `Senin – Sabtu (${featuredStore.openingHoursWeekday}) • Minggu (${featuredStore.openingHoursSunday})`}
+                          : `${tx("Senin – Sabtu", "Mon – Sat")} (${featuredStore.openingHoursWeekday}) • ${tx("Minggu", "Sun")} (${featuredStore.openingHoursSunday})`}
                       </span>
                     </div>
                   </div>
@@ -676,7 +727,7 @@ export function HomeClient({
                     className="inline-flex items-center justify-center gap-1.5 rounded-lg sm:rounded-xl bg-white hover:bg-brand-soft text-brand-red border border-brand-red px-3.5 py-2.5 text-xs font-semibold transition-colors whitespace-nowrap"
                   >
                     <Navigation className="w-3.5 h-3.5 shrink-0" />
-                    <span>Navigasi Waze</span>
+                    <span>{tx("Navigasi Waze", "Waze Route")}</span>
                   </a>
                   <a
                     href={STORE_INFO.whatsappDirectCta}
@@ -685,7 +736,7 @@ export function HomeClient({
                     className="col-span-2 sm:col-span-1 sm:ml-auto inline-flex items-center justify-center gap-1.5 rounded-lg sm:rounded-xl bg-[#25D366] hover:bg-[#20bd5a] text-white px-3.5 py-2.5 text-xs font-semibold transition-colors shadow-sm whitespace-nowrap"
                   >
                     <WhatsAppIcon className="w-4 h-4 shrink-0" />
-                    <span>WhatsApp Toko</span>
+                    <span>{tx("WhatsApp Toko", "Store WhatsApp")}</span>
                   </a>
                 </div>
               </div>
@@ -697,7 +748,7 @@ export function HomeClient({
               href="/lokasi"
               className="inline-flex items-center justify-center gap-2 bg-brand-red hover:bg-brand-red-dark text-white rounded-lg sm:rounded-xl px-7 h-11 sm:h-12 font-semibold text-xs sm:text-sm shadow-md shadow-indigo-950/15 transition-colors"
             >
-              <span>Lihat Detail Lokasi &amp; Peta</span>
+              <span>{tx("Lihat Detail Lokasi & Peta", "Store Location & Map Details")}</span>
               <ArrowRight className="w-4 h-4" />
             </Link>
           </div>
@@ -712,17 +763,20 @@ export function HomeClient({
           <div className="flex flex-col sm:flex-row items-center sm:items-end justify-between gap-2.5 sm:gap-4 mb-6 sm:mb-8 text-center sm:text-left">
             <div>
               <h2 className="font-inter font-bold text-2xl sm:text-3xl lg:text-4xl text-brand-red">
-                Cerita &amp; Kuliner Khas Bangka
+                {tx("Cerita & Kuliner Khas Bangka", "Bangka Culinary Stories")}
               </h2>
               <p className="text-xs sm:text-base text-gray-600 mt-1.5">
-                Panduan memilih kemplang asli, rekomendasi wisata kuliner Sungailiat, dan tips pengiriman.
+                {tx(
+                  "Panduan memilih kemplang asli, rekomendasi wisata kuliner Sungailiat, dan tips pengiriman.",
+                  "Guides to authentic kemplang crackers, Sungailiat treats, and travel packing tips."
+                )}
               </p>
             </div>
             <Link
               href="/blog"
               className="inline-flex items-center gap-1.5 text-xs sm:text-sm font-semibold text-brand-red hover:text-brand-red-dark transition-colors shrink-0"
             >
-              <span>Baca Semua Artikel</span>
+              <span>{tx("Baca Semua Artikel", "Read All Articles")}</span>
               <ArrowRight className="w-4 h-4" />
             </Link>
           </div>
@@ -733,7 +787,9 @@ export function HomeClient({
             className="w-full"
           >
             <CarouselContent>
-              {BLOGS_COLLECTION.map((post) => (
+              {BLOGS_COLLECTION.map((post) => {
+                const enPost = isEn ? BLOG_EN[post.id] : undefined;
+                return (
                 <CarouselItem
                   key={post.id}
                   className="basis-[54%] sm:basis-1/2 md:basis-1/3"
@@ -745,7 +801,7 @@ export function HomeClient({
                     <div className="relative aspect-[16/10] bg-slate-100 overflow-hidden">
                       <MediaImage
                         src={post.imageUrl}
-                        alt={post.title}
+                        alt={enPost?.title ?? post.title}
                         fill
                         sizes="(min-width: 768px) 33vw, 55vw"
                         className="object-cover group-hover:scale-105 transition-transform duration-300"
@@ -754,22 +810,23 @@ export function HomeClient({
                     <div className="p-3 sm:p-5 flex-1 flex flex-col justify-between">
                       <div>
                         <span className="text-[10px] sm:text-xs font-medium text-brand-orange block truncate">
-                          {post.category} &bull; {post.readTime}
+                          {enPost?.category ?? post.category} &bull; {enPost?.readTime ?? post.readTime}
                         </span>
                         <h3 className="font-inter font-bold text-xs sm:text-lg text-gray-900 mt-1 sm:mt-2 line-clamp-2 group-hover:text-brand-red transition-colors">
-                          {post.title}
+                          {enPost?.title ?? post.title}
                         </h3>
                         <p className="hidden sm:line-clamp-2 text-xs sm:text-sm text-gray-600 mt-2">
-                          {post.excerpt}
+                          {enPost?.excerpt ?? post.excerpt}
                         </p>
                       </div>
                       <span className="mt-2 sm:mt-4 inline-flex items-center gap-1 text-[11px] sm:text-xs font-semibold text-brand-red">
-                        Baca <span className="hidden sm:inline">selengkapnya</span> <ArrowRight className="w-3 h-3 sm:w-3.5 sm:h-3.5" />
+                        {tx("Baca", "Read")} <span className="hidden sm:inline">{tx("selengkapnya", "more")}</span> <ArrowRight className="w-3 h-3 sm:w-3.5 sm:h-3.5" />
                       </span>
                     </div>
                   </Link>
                 </CarouselItem>
-              ))}
+                );
+              })}
             </CarouselContent>
             <CarouselPrevious className="hidden md:inline-flex -left-4" />
             <CarouselNext className="hidden md:inline-flex -right-4" />
@@ -780,7 +837,9 @@ export function HomeClient({
       {/* ================================================================= */}
       {/* FLYER LIGHTBOX MODAL                                              */}
       {/* ================================================================= */}
-      {selectedFlyer && (
+      {selectedFlyer && (() => {
+        const enFlyer = isEn ? FLYER_EN[selectedFlyer.id] : undefined;
+        return (
         <div
           className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 p-4"
           role="dialog"
@@ -794,16 +853,16 @@ export function HomeClient({
             <div className="flex items-center justify-between px-4 sm:px-5 py-3 sm:py-3.5 border-b border-gray-100">
               <div className="min-w-0 pr-2">
                 <h3 className="font-bold text-sm sm:text-base text-gray-900 truncate">
-                  {selectedFlyer.title}
+                  {enFlyer?.title ?? selectedFlyer.title}
                 </h3>
                 <span className="text-[11px] sm:text-xs text-gray-500">
-                  {selectedFlyer.badge} &bull; {selectedFlyer.period}
+                  {enFlyer?.badge ?? selectedFlyer.badge} &bull; {enFlyer?.period ?? selectedFlyer.period}
                 </span>
               </div>
               <button
                 type="button"
                 onClick={() => setSelectedFlyer(null)}
-                aria-label="Tutup"
+                aria-label={tx("Tutup", "Close")}
                 className="p-2 rounded-full hover:bg-gray-100 transition-colors cursor-pointer shrink-0"
               >
                 <X className="w-5 h-5 text-gray-600" />
@@ -819,7 +878,7 @@ export function HomeClient({
             </div>
             <div className="px-4 sm:px-5 py-3.5 sm:py-4 bg-white border-t border-gray-100 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
               <p className="text-xs sm:text-sm text-gray-600">
-                {selectedFlyer.description}
+                {enFlyer?.description ?? selectedFlyer.description}
               </p>
               <div className="flex flex-wrap items-center gap-2 shrink-0">
                 {selectedFlyer.isExternal ? (
@@ -830,7 +889,7 @@ export function HomeClient({
                     className="inline-flex items-center justify-center gap-1.5 rounded-full bg-[#EE4D2D] hover:bg-[#d93d1f] px-4 py-2.5 text-xs font-bold text-white transition-colors"
                   >
                     <ShoppingBag className="h-3.5 w-3.5" />
-                    {selectedFlyer.ctaLabel}
+                    {enFlyer?.ctaLabel ?? selectedFlyer.ctaLabel}
                   </a>
                 ) : (
                   <Link
@@ -838,7 +897,7 @@ export function HomeClient({
                     onClick={() => setSelectedFlyer(null)}
                     className="inline-flex items-center justify-center gap-1.5 rounded-full border border-brand-red/30 text-brand-red hover:bg-brand-soft px-4 py-2.5 text-xs font-bold transition-colors"
                   >
-                    {selectedFlyer.ctaLabel}
+                    {enFlyer?.ctaLabel ?? selectedFlyer.ctaLabel}
                   </Link>
                 )}
                 <a
@@ -854,7 +913,8 @@ export function HomeClient({
             </div>
           </div>
         </div>
-      )}
+        );
+      })()}
     </div>
   );
 }

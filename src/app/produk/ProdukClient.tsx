@@ -14,6 +14,7 @@ import { PageHeroBanner } from "@/components/PageHeroBanner";
 import { ProductCard } from "@/components/ProductCard";
 import { STORE_INFO } from "@/payload/seed-data";
 import { normalizeCategorySlug } from "@/lib/category-utils";
+import { CATALOG_SLUG_EN, useLanguage } from "@/lib/i18n";
 import type { CuratedCategorySummary, WebProduct } from "@/lib/catalog";
 
 const BATCH_SIZE = 8;
@@ -68,6 +69,7 @@ export function ProdukClient({
   categories,
 }: ProdukClientProps) {
   const router = useRouter();
+  const { isEn, tx } = useLanguage();
 
   const [activeCategory, setActiveCategory] = useState<string>("semua");
   const [activeCategoryTitle, setActiveCategoryTitle] = useState<string | null>(null);
@@ -217,10 +219,13 @@ export function ProdukClient({
         <CategoryUrlSync onCategoryChange={handleUrlCategorySync} />
       </Suspense>
       <PageHeroBanner
-        breadcrumb="Produk"
-        badge="100% Foto Asli Produk • Cap AMEN & Oleh-Oleh Bangka"
-        title="Koleksi Produk Terlengkap"
-        subtitle="Pilihan oleh-oleh khas Pulau Bangka berkualitas dengan foto asli produk tersedia langsung di Toko Amen Snack Sungailiat dan Shopee Official."
+        breadcrumb={tx("Produk", "Products")}
+        badge={tx("100% Foto Asli Produk • Cap AMEN & Oleh-Oleh Bangka", "100% Real Product Photos • Cap AMEN & Bangka Souvenirs")}
+        title={tx("Koleksi Produk Terlengkap", "Complete Product Collection")}
+        subtitle={tx(
+          "Pilihan oleh-oleh khas Pulau Bangka berkualitas dengan foto asli produk tersedia langsung di Toko Amen Snack Sungailiat dan Shopee Official.",
+          "Authentic Bangka Island souvenirs with verified product photos, available at Toko Amen Snack Sungailiat and Official Shopee."
+        )}
       />
 
       <section className="py-8 sm:py-12">
@@ -239,10 +244,13 @@ export function ProdukClient({
                   : "bg-white text-slate-700 border-slate-200 hover:border-brand-red/40 hover:text-brand-red"
               }`}
             >
-              Semua ({initialTotal})
+              {tx("Semua", "All")} ({initialTotal})
             </button>
             {categories.map((cat) => {
               const isSelected = activeCategory === cat.slug;
+              const catLabel = isEn
+                ? CATALOG_SLUG_EN[cat.slug] || cat.title
+                : cat.title;
               return (
                 <button
                   key={cat.slug}
@@ -254,7 +262,7 @@ export function ProdukClient({
                       : "bg-white text-slate-700 border-slate-200 hover:border-brand-red/40 hover:text-brand-red"
                   }`}
                 >
-                  {cat.title} ({cat.count})
+                  {catLabel} ({cat.count})
                 </button>
               );
             })}
@@ -265,20 +273,25 @@ export function ProdukClient({
             <span>
               {activeCategoryTitle ? (
                 <>
-                  Kategori:{" "}
-                  <strong className="text-brand-red">{activeCategoryTitle}</strong>{" "}
+                  {tx("Kategori", "Category")}:{" "}
+                  <strong className="text-brand-red">
+                    {isEn ? CATALOG_SLUG_EN[activeCategory] || activeCategoryTitle : activeCategoryTitle}
+                  </strong>{" "}
                   &bull;{" "}
                 </>
               ) : null}
-              Menampilkan{" "}
+              {tx("Menampilkan", "Showing")}{" "}
               <strong className="text-brand-dark">
                 {rangeStart}–{rangeEnd}
               </strong>{" "}
-              dari <strong className="text-brand-dark">{total}</strong> produk
-              berfoto asli
+              {tx("dari", "of")} <strong className="text-brand-dark">{total}</strong>{" "}
+              {tx("produk berfoto asli", "products with real photos")}
             </span>
             <span className="inline-flex items-center gap-1.5 rounded-full bg-brand-soft px-2.5 py-1 text-[11px] font-semibold text-brand-red">
-              Tahap {processStep} &bull; Muat Bertahap per {BATCH_SIZE} Produk
+              {tx(
+                `Tahap ${processStep} • Muat Bertahap per ${BATCH_SIZE} Produk`,
+                `Step ${processStep} • Staged Load (${BATCH_SIZE}/batch)`
+              )}
             </span>
           </div>
 
@@ -296,21 +309,24 @@ export function ProdukClient({
             <div className="py-12 px-6 rounded-2xl bg-white border border-slate-200/80 text-center max-w-md mx-auto">
               <Loader2 className="w-7 h-7 text-brand-red mx-auto mb-2.5 animate-spin" />
               <p className="text-sm font-semibold text-brand-dark">
-                Memuat 8 produk kategori...
+                {tx("Memuat 8 produk kategori...", "Loading 8 category products...")}
               </p>
             </div>
           ) : (
             <div className="py-12 px-6 rounded-2xl bg-white border border-slate-200/80 text-center max-w-xl mx-auto">
               <ShoppingBag className="w-9 h-9 text-brand-red mx-auto mb-3" />
               <p className="text-sm sm:text-base font-bold text-brand-dark">
-                Produk untuk kategori ini sedang diperbarui
+                {tx(
+                  "Produk untuk kategori ini sedang diperbarui",
+                  "Products for this category are being updated"
+                )}
               </p>
               <button
                 type="button"
                 onClick={() => handleSelectCategory("semua")}
                 className="mt-4 inline-flex items-center gap-2 rounded-xl bg-brand-red hover:bg-brand-red-dark text-white font-semibold text-xs px-5 py-2.5 transition-colors cursor-pointer"
               >
-                Lihat Semua Produk
+                {tx("Lihat Semua Produk", "View All Products")}
               </button>
             </div>
           )}
@@ -328,7 +344,7 @@ export function ProdukClient({
                   className="inline-flex items-center gap-1.5 rounded-full bg-white hover:bg-slate-50 border border-slate-300 text-brand-dark font-semibold text-xs sm:text-sm px-5 py-2.5 shadow-xs transition-colors cursor-pointer disabled:opacity-50"
                 >
                   <ChevronLeft className="w-4 h-4" />
-                  <span>Halaman Sebelumnya</span>
+                  <span>{tx("Halaman Sebelumnya", "Previous Page")}</span>
                 </button>
               )}
 
@@ -342,19 +358,19 @@ export function ProdukClient({
                   {isLoadingBatch ? (
                     <>
                       <Loader2 className="w-4 h-4 animate-spin" />
-                      <span>Memuat Batch...</span>
+                      <span>{tx("Memuat Batch...", "Loading Batch...")}</span>
                     </>
                   ) : (
                     <>
                       <Plus className="w-4 h-4" />
                       <span>
-                        Muat{" "}
+                        {tx("Muat", "Load")}{" "}
                         {Math.min(
                           BATCH_SIZE,
                           total - (windowStart + items.length),
                           MAX_DOM_WINDOW - items.length
                         )}{" "}
-                        Produk Berikutnya
+                        {tx("Produk Berikutnya", "More Products")}
                       </span>
                     </>
                   )}
@@ -369,9 +385,9 @@ export function ProdukClient({
                   className="inline-flex items-center gap-2 rounded-full bg-brand-red hover:bg-brand-red-dark text-white font-semibold text-xs sm:text-sm px-6 py-3 shadow-md transition-colors cursor-pointer disabled:opacity-60"
                 >
                   <span>
-                    Produk {windowStart + MAX_DOM_WINDOW + 1}–
+                    {tx("Produk", "Products")} {windowStart + MAX_DOM_WINDOW + 1}–
                     {Math.min(windowStart + MAX_DOM_WINDOW + BATCH_SIZE, total)}{" "}
-                    Berikutnya
+                    {tx("Berikutnya", "Next")}
                   </span>
                   <ChevronRight className="w-4 h-4" />
                 </button>
@@ -383,11 +399,18 @@ export function ProdukClient({
           <div className="mt-12 rounded-2xl bg-white border border-slate-200/80 p-6 sm:p-8 flex flex-col md:flex-row items-start md:items-center justify-between gap-5 brand-card">
             <div>
               <h2 className="font-inter font-bold text-lg sm:text-xl text-brand-dark">
-                Ingin Cek Varian Lain atau Pesan Partai Besar?
+                {tx(
+                  "Ingin Cek Varian Lain atau Pesan Partai Besar?",
+                  "Looking for Other Variants or Bulk Wholesale Orders?"
+                )}
               </h2>
               <p className="text-xs sm:text-sm text-slate-600 mt-1 max-w-2xl leading-relaxed">
-                Belanja praktis dengan pengiriman nasional lewat toko resmi{" "}
-                <strong>Shopee amensnack</strong> atau hubungi langsung Admin WhatsApp kami di{" "}
+                {tx(
+                  "Belanja praktis dengan pengiriman nasional lewat toko resmi",
+                  "Order easily with nationwide shipping via our official store"
+                )}{" "}
+                <strong>Shopee amensnack</strong>{" "}
+                {tx("atau hubungi langsung Admin WhatsApp kami di", "or message our WhatsApp team directly at")}{" "}
                 <strong>{STORE_INFO.phone}</strong>.
               </p>
             </div>
@@ -408,7 +431,7 @@ export function ProdukClient({
                 className="inline-flex items-center justify-center gap-2 rounded-xl bg-[#25D366] hover:bg-[#20bd5a] text-white font-semibold text-xs sm:text-sm px-5 py-3 shadow-xs transition-colors"
               >
                 <MessageCircle className="w-4 h-4 shrink-0" />
-                <span>Chat WhatsApp</span>
+                <span>{tx("Chat WhatsApp", "WhatsApp Chat")}</span>
               </a>
             </div>
           </div>

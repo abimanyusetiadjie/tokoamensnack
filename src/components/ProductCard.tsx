@@ -1,9 +1,12 @@
+"use client";
+
 import React from "react";
 import { ShoppingBag, Star } from "lucide-react";
 import { Card } from "@/components/ui/card";
 import { MediaImage } from "@/components/MediaImage";
 import { WhatsAppIcon } from "@/components/WhatsAppIcon";
 import { getProductWhatsappUrl, type ProductItem } from "@/payload/seed-data";
+import { CATALOG_SLUG_EN, useLanguage } from "@/lib/i18n";
 import type { WebProduct } from "@/lib/catalog";
 
 type ProductCardInput = ProductItem | WebProduct;
@@ -18,7 +21,12 @@ export function ProductCard({
   product: ProductCardInput;
   priority?: boolean;
 }) {
+  const { isEn, tx } = useLanguage();
   const waHref = getProductWhatsappUrl(product.name, product.formattedPrice);
+  const categoryLabel =
+    isEn && product.categorySlug
+      ? CATALOG_SLUG_EN[product.categorySlug] || product.category
+      : product.category;
   const wholesalePrice =
     "formattedWholesalePrice" in product ? product.formattedWholesalePrice : null;
   const stock = "stock" in product ? product.stock : null;
@@ -63,7 +71,7 @@ export function ProductCard({
                 : "bg-rose-50/95 text-rose-700 border-rose-200"
             }`}
           >
-            {stock > 0 ? "Stok Ready" : "Stok Habis"}
+            {stock > 0 ? tx("Stok Ready", "In Stock") : tx("Stok Habis", "Out of Stock")}
           </span>
         )}
       </div>
@@ -72,7 +80,7 @@ export function ProductCard({
         <div>
           <div className="flex items-center justify-between gap-2">
             <span className="text-[11px] font-bold uppercase tracking-wider text-brand-red/80 truncate">
-              {product.category}
+              {categoryLabel}
             </span>
             {metaBits.length > 0 ? (
               <span className="text-[10px] font-semibold text-slate-500 shrink-0">
@@ -97,14 +105,18 @@ export function ProductCard({
 
         <div className="pt-3 border-t border-slate-100">
           <div className="flex items-baseline justify-between gap-2 mb-1">
-            <span className="text-[11px] font-medium text-slate-500">Harga Eceran</span>
+            <span className="text-[11px] font-medium text-slate-500">
+              {tx("Harga Eceran", "Retail Price")}
+            </span>
             <span className="font-extrabold text-base text-brand-red">
               {product.formattedPrice}
             </span>
           </div>
           {wholesalePrice && (
             <div className="flex items-baseline justify-between gap-2 mb-2.5">
-              <span className="text-[11px] font-medium text-slate-500">Harga Grosir</span>
+              <span className="text-[11px] font-medium text-slate-500">
+                {tx("Harga Grosir", "Wholesale Price")}
+              </span>
               <span className="font-bold text-xs text-brand-orange-dark bg-rose-50 px-2 py-0.5 rounded-full">
                 {wholesalePrice}
               </span>
@@ -126,7 +138,7 @@ export function ProductCard({
               href={product.shopeeUrl}
               target="_blank"
               rel="noopener noreferrer"
-              aria-label={`Beli ${product.name} di Shopee`}
+              aria-label={tx(`Beli ${product.name} di Shopee`, `Buy ${product.name} on Shopee`)}
               className="inline-flex items-center justify-center gap-1.5 rounded-xl border border-[#EE4D2D]/35 text-[#EE4D2D] hover:bg-orange-50 font-semibold text-xs py-2.5 px-2.5 transition-colors"
             >
               <ShoppingBag className="w-3.5 h-3.5 shrink-0" aria-hidden="true" />

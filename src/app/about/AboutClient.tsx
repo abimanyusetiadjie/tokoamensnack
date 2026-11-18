@@ -1,3 +1,5 @@
+"use client";
+
 import React from "react";
 import Link from "next/link";
 import {
@@ -18,6 +20,7 @@ import {
   STORE_INFO,
   VALUE_PILLARS,
 } from "@/payload/seed-data";
+import { FOUNDED_DATE_EN, PILLAR_EN, useLanguage } from "@/lib/i18n";
 
 const PILLAR_ICONS = {
   award: Award,
@@ -29,13 +32,21 @@ const PILLAR_ICONS = {
  * About page detailing Toko Amen Snack Bangka profile, Sisparnas status, Cap AMEN brand, and value pillars.
  */
 export function AboutClient() {
+  const { isEn, tx } = useLanguage();
+
   return (
     <div className="min-h-screen bg-white overflow-x-clip">
       <PageHeroBanner
-        breadcrumb="Tentang Kami"
-        badge={`Berdiri Sejak ${STORE_INFO.foundedDate} • Sisparnas Kemenpar`}
-        title={`Tentang ${STORE_INFO.officialName}`}
-        subtitle={`Pusat oleh-oleh khas Bangka, toko camilan, dan ritel makanan ringan di Sungailiat sejak ${STORE_INFO.foundedDate} dengan reputasi 4,5★ di Google Maps.`}
+        breadcrumb={tx("Tentang Kami", "About Us")}
+        badge={tx(
+          `Berdiri Sejak ${STORE_INFO.foundedDate} • Sisparnas Kemenpar`,
+          `Est. ${FOUNDED_DATE_EN} • Registered on Sisparnas Kemenpar`
+        )}
+        title={tx(`Tentang ${STORE_INFO.officialName}`, `About ${STORE_INFO.officialName}`)}
+        subtitle={tx(
+          `Pusat oleh-oleh khas Bangka, toko camilan, dan ritel makanan ringan di Sungailiat sejak ${STORE_INFO.foundedDate} dengan reputasi 4,5★ di Google Maps.`,
+          `Sungailiat's authentic Bangka souvenir center and snack store since ${FOUNDED_DATE_EN}, rated 4.5★ on Google Maps.`
+        )}
       />
 
       {/* Brand Story Split */}
@@ -55,23 +66,37 @@ export function AboutClient() {
 
             <div className="lg:col-span-6">
               <h2 className="font-inter font-bold text-2xl sm:text-3xl text-brand-dark leading-snug">
-                Oleh-Oleh 100% Asli Bangka Langsung dari Pengrajin &amp; Cap AMEN
+                {tx(
+                  "Oleh-Oleh 100% Asli Bangka Langsung dari Pengrajin & Cap AMEN",
+                  "100% Authentic Bangka Souvenirs from Local Artisans & House Brand Cap AMEN"
+                )}
               </h2>
               <p className="text-sm sm:text-base text-slate-600 mt-4 leading-relaxed">
-                Berdiri sejak <strong>{STORE_INFO.foundedDate}</strong>,{" "}
-                <strong>{STORE_INFO.name}</strong> terdaftar sebagai salah satu{" "}
-                <strong>Amenitas Pariwisata Resmi di Kabupaten Bangka</strong> pada Sistem
-                Informasi Kepariwisataan Nasional (Sisparnas Kementerian Pariwisata) serta
-                memiliki lini produk internal <strong>&ldquo;Cap AMEN&rdquo;</strong>.
+                {tx("Berdiri sejak", "Established since")}{" "}
+                <strong>{tx(STORE_INFO.foundedDate, FOUNDED_DATE_EN)}</strong>,{" "}
+                <strong>{STORE_INFO.name}</strong>{" "}
+                {tx(
+                  "terdaftar sebagai salah satu Amenitas Pariwisata Resmi di Kabupaten Bangka pada Sistem Informasi Kepariwisataan Nasional (Sisparnas Kementerian Pariwisata) serta memiliki lini produk internal",
+                  "is officially listed as a Tourism Amenity in Bangka Regency on Indonesia's Ministry of Tourism Sisparnas directory and produces our signature line"
+                )}{" "}
+                <strong>&ldquo;Cap AMEN&rdquo;</strong>.
               </p>
 
               <ul className="mt-6 space-y-3">
-                {[
-                  `Berpengalaman sejak ${STORE_INFO.foundedDate}: dipercaya wisatawan dan pelanggan oleh-oleh khas Bangka dengan reputasi 4,5★ Google Maps`,
-                  "100% Asli Bangka: produk olahan hasil laut & camilan langsung dari pengrajin lokal serta Cap AMEN",
-                  "Katalog Terlengkap di Sungailiat: kemplang panggang/pasir/oven/goreng, getas, kericu, terasi, kopi, dan mi khas Bangka",
-                  "Melayani pembelian langsung di Jl. Muhidin No.106 maupun pengiriman nasional via WhatsApp & Shopee",
-                ].map((point) => (
+                {(isEn
+                  ? [
+                      `Trusted heritage since ${FOUNDED_DATE_EN} with a 4.5★ Google Maps reputation among travelers`,
+                      "100% Authentic Bangka snacks crafted by local makers alongside house brand Cap AMEN",
+                      "Sungailiat's fullest selection: grilled/sand-roasted/fried kemplang, getas, kericu, terasi, coffee, and Bangka noodles",
+                      "Available for walk-in shopping at Jl. Muhidin No.106 or nationwide delivery via WhatsApp & Shopee",
+                    ]
+                  : [
+                      `Berpengalaman sejak ${STORE_INFO.foundedDate}: dipercaya wisatawan dan pelanggan oleh-oleh khas Bangka dengan reputasi 4,5★ Google Maps`,
+                      "100% Asli Bangka: produk olahan hasil laut & camilan langsung dari pengrajin lokal serta Cap AMEN",
+                      "Katalog Terlengkap di Sungailiat: kemplang panggang/pasir/oven/goreng, getas, kericu, terasi, kopi, dan mi khas Bangka",
+                      "Melayani pembelian langsung di Jl. Muhidin No.106 maupun pengiriman nasional via WhatsApp & Shopee",
+                    ]
+                ).map((point) => (
                   <li key={point} className="flex items-start gap-2.5 text-sm text-slate-700">
                     <CheckCircle2 className="w-5 h-5 text-brand-red shrink-0 mt-0.5" />
                     <span>{point}</span>
@@ -86,7 +111,7 @@ export function AboutClient() {
                     className: "rounded-full font-semibold text-sm",
                   })}
                 >
-                  Lihat Katalog Produk
+                  {tx("Lihat Katalog Produk", "Browse Product Catalog")}
                 </Link>
                 <Link
                   href="/lokasi"
@@ -96,7 +121,7 @@ export function AboutClient() {
                   })}
                 >
                   <MapPin className="w-4 h-4" />
-                  Kunjungi Toko di Sungailiat
+                  {tx("Kunjungi Toko di Sungailiat", "Visit Store in Sungailiat")}
                 </Link>
               </div>
             </div>
@@ -109,16 +134,20 @@ export function AboutClient() {
         <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-[10%]">
           <div className="text-center max-w-2xl mx-auto">
             <h2 className="font-inter font-bold text-2xl sm:text-3xl text-brand-dark">
-              Mengapa Belanja di Toko Amen Snack?
+              {tx("Mengapa Belanja di Toko Amen Snack?", "Why Shop at Toko Amen Snack?")}
             </h2>
             <p className="text-sm sm:text-base text-slate-600 mt-2">
-              Tiga nilai utama yang menjaga kualitas rasa, harga bersahabat, dan kemudahan belanja.
+              {tx(
+                "Tiga nilai utama yang menjaga kualitas rasa, harga bersahabat, dan kemudahan belanja.",
+                "Three core values behind our consistent taste, fair pricing, and convenient service."
+              )}
             </p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-10">
             {VALUE_PILLARS.map((pillar) => {
               const Icon = PILLAR_ICONS[pillar.iconName];
+              const enPillar = isEn ? PILLAR_EN[pillar.id] : undefined;
               return (
                 <Card
                   key={pillar.id}
@@ -127,9 +156,11 @@ export function AboutClient() {
                   <div className="w-14 h-14 rounded-2xl bg-brand-soft text-brand-red flex items-center justify-center mb-4">
                     <Icon className="w-7 h-7" aria-hidden="true" />
                   </div>
-                  <h3 className="font-bold text-lg text-brand-dark">{pillar.title}</h3>
+                  <h3 className="font-bold text-lg text-brand-dark">
+                    {enPillar?.title ?? pillar.title}
+                  </h3>
                   <p className="text-sm text-slate-600 mt-2 leading-relaxed">
-                    {pillar.description}
+                    {enPillar?.description ?? pillar.description}
                   </p>
                 </Card>
               );
@@ -163,11 +194,13 @@ export function AboutClient() {
           <Card className="rounded-3xl border border-slate-200/80 bg-brand-soft p-6 sm:p-10 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
             <div>
               <h2 className="font-inter font-bold text-xl sm:text-2xl text-brand-dark">
-                Siap Memesan Oleh-Oleh Khas Bangka?
+                {tx("Siap Memesan Oleh-Oleh Khas Bangka?", "Ready to Order Authentic Bangka Souvenirs?")}
               </h2>
               <p className="text-sm text-slate-600 mt-2 max-w-xl">
-                Konsultasikan pilihan kemplang, getas, atau paket oleh-oleh keluarga dengan admin
-                kami atau checkout langsung melalui Shopee Official Store.
+                {tx(
+                  "Konsultasikan pilihan kemplang, getas, atau paket oleh-oleh keluarga dengan admin kami atau checkout langsung melalui Shopee Official Store.",
+                  "Ask our team about kemplang, getas crackers, and family gift hampers via WhatsApp, or check out on Official Shopee."
+                )}
               </p>
             </div>
             <div className="flex flex-wrap gap-3 shrink-0">
@@ -190,7 +223,7 @@ export function AboutClient() {
                 })}
               >
                 <ShoppingBag className="w-4 h-4" />
-                Belanja di Shopee
+                {tx("Belanja di Shopee", "Shop on Shopee")}
               </a>
             </div>
           </Card>

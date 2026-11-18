@@ -4,9 +4,10 @@ import React, { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
-import { Menu, X, ShoppingBag, MapPin } from "lucide-react";
+import { Menu, X, ShoppingBag, MapPin, Globe } from "lucide-react";
 import { WhatsAppIcon } from "@/components/WhatsAppIcon";
 import { STORE_INFO } from "@/payload/seed-data";
+import { FOUNDED_DATE_EN, NAV_LABELS_EN, useLanguage } from "@/lib/i18n";
 import { cn } from "@/lib/utils";
 
 const NAV_LINKS = [
@@ -21,25 +22,26 @@ const NAV_LINKS = [
 export function Navbar() {
   const pathname = usePathname();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const { lang, isEn, toggleLang, tx } = useLanguage();
 
   return (
     <>
-      {/* Tier 1 Top Bar — Store Heritage Left + Clean Quick Links Right */}
+      {/* Tier 1 Top Bar — Store Heritage Left + Clean Quick Links & Language Switch Right */}
       <div className="hidden lg:flex h-8 bg-[#1C224F] px-8 xl:px-[10%] py-1.5 items-center text-white">
         <div className="max-w-[1440px] w-full mx-auto flex justify-between items-center gap-6 font-inter font-medium text-xs text-white/95">
           <span className="whitespace-nowrap text-slate-200">
-            Oleh-Oleh Bangka &bull;{" "}
+            {tx("Oleh-Oleh Bangka", "Bangka Souvenirs")} &bull;{" "}
             <strong className="font-semibold text-white">
-              Berdiri Sejak {STORE_INFO.foundedDate}
+              {tx(`Berdiri Sejak ${STORE_INFO.foundedDate}`, `Est. ${FOUNDED_DATE_EN}`)}
             </strong>
           </span>
 
-          <div className="flex items-center gap-6">
+          <div className="flex items-center gap-5">
             <Link
               href="/lokasi"
               className="hover:text-amber-300 whitespace-nowrap transition-colors"
             >
-              Lokasi Sungailiat
+              {tx("Lokasi Sungailiat", "Sungailiat Store")}
             </Link>
             <a
               href={STORE_INFO.shopeeUrl}
@@ -50,6 +52,18 @@ export function Navbar() {
               <ShoppingBag className="w-3.5 h-3.5 shrink-0" />
               <span>Shopee Official (amensnack)</span>
             </a>
+            <button
+              type="button"
+              onClick={toggleLang}
+              aria-label={isEn ? "Ganti bahasa ke Indonesia" : "Switch language to English"}
+              title={isEn ? "Bahasa Indonesia (ID)" : "English (EN)"}
+              className="inline-flex items-center gap-1 rounded-full bg-white/10 hover:bg-white/20 border border-white/20 px-2.5 py-0.5 text-[11px] font-bold text-white transition-colors cursor-pointer whitespace-nowrap"
+            >
+              <Globe className="w-3 h-3 shrink-0 text-amber-300" aria-hidden="true" />
+              <span className={lang === "id" ? "text-amber-300" : "text-white/65"}>ID</span>
+              <span className="text-white/45">/</span>
+              <span className={lang === "en" ? "text-amber-300" : "text-white/65"}>EN</span>
+            </button>
           </div>
         </div>
       </div>
@@ -61,7 +75,7 @@ export function Navbar() {
           <button
             type="button"
             onClick={() => setMobileMenuOpen(true)}
-            aria-label="Buka Menu Navigasi"
+            aria-label={tx("Buka Menu Navigasi", "Open Navigation Menu")}
             className="lg:hidden absolute left-3 p-2 text-brand-red hover:bg-slate-100 rounded-md transition-colors"
           >
             <Menu className="w-6 h-6" />
@@ -71,7 +85,7 @@ export function Navbar() {
           <Link href="/" className="flex items-center gap-2 sm:gap-2.5 group shrink-0">
             <Image
               src="/images/logo-amen-snack.webp"
-              alt="Logo Resmi Toko Amen Snack"
+              alt={tx("Logo Resmi Toko Amen Snack", "Toko Amen Snack Official Logo")}
               width={44}
               height={48}
               priority
@@ -79,7 +93,7 @@ export function Navbar() {
             />
             <span className="flex flex-col leading-none">
               <span className="font-inter font-extrabold text-[9px] sm:text-[10px] uppercase tracking-[0.14em] text-brand-orange">
-                Oleh-Oleh Bangka
+                {tx("Oleh-Oleh Bangka", "Bangka Souvenirs")}
               </span>
               <span className="font-inter font-black text-base sm:text-lg lg:text-xl tracking-tight text-brand-red leading-tight whitespace-nowrap">
                 Toko Amen Snack
@@ -87,9 +101,21 @@ export function Navbar() {
             </span>
           </Link>
 
+          {/* Mobile Right Language Switcher — Globe + Active Lang Code (ID / EN) */}
+          <button
+            type="button"
+            onClick={toggleLang}
+            aria-label={isEn ? "Ganti bahasa ke Indonesia" : "Switch language to English"}
+            title={isEn ? "Bahasa Indonesia (ID)" : "English (EN)"}
+            className="lg:hidden absolute right-3 inline-flex items-center gap-1 rounded-full border border-slate-200 bg-slate-50 hover:bg-slate-100 text-brand-red font-bold text-[11px] px-2.5 py-1.5 transition-colors cursor-pointer shrink-0"
+          >
+            <Globe className="w-3.5 h-3.5 shrink-0" aria-hidden="true" />
+            <span>{lang.toUpperCase()}</span>
+          </button>
+
           {/* Desktop Navigation — Clean Single Row with Red Active Accent matching tokomama.com */}
           <nav
-            aria-label="Navigasi Utama"
+            aria-label={tx("Navigasi Utama", "Main Navigation")}
             className="hidden lg:flex gap-6 xl:gap-8 items-center"
           >
             {NAV_LINKS.map((link) => {
@@ -109,7 +135,7 @@ export function Navbar() {
                       : "text-slate-600 hover:text-brand-red"
                   )}
                 >
-                  {link.label}
+                  {isEn ? NAV_LABELS_EN[link.href] || link.label : link.label}
                   {isActive && (
                     <span className="absolute left-0 right-0 -bottom-0.5 h-[3px] rounded-full bg-brand-orange" />
                   )}
@@ -189,7 +215,7 @@ export function Navbar() {
                           : "text-brand-dark hover:bg-brand-soft"
                       )}
                     >
-                      {link.label}
+                      {isEn ? NAV_LABELS_EN[link.href] || link.label : link.label}
                     </Link>
                   );
                 })}
@@ -200,13 +226,13 @@ export function Navbar() {
               <div className="rounded-xl bg-brand-soft border border-slate-200 p-3.5 text-xs text-brand-dark space-y-1">
                 <p className="font-bold flex items-center gap-1.5 text-brand-red">
                   <MapPin className="h-3.5 w-3.5 shrink-0" />
-                  Toko Sungailiat
+                  {tx("Toko Sungailiat", "Sungailiat Store")}
                 </p>
                 <p className="text-slate-600 leading-relaxed">
                   {STORE_INFO.address}
                 </p>
                 <p className="font-semibold text-brand-dark pt-0.5">
-                  Senin – Sabtu: {STORE_INFO.openingHours.mondayToSaturday}
+                  {tx("Senin – Sabtu", "Mon – Sat")}: {STORE_INFO.openingHours.mondayToSaturday}
                 </p>
               </div>
 

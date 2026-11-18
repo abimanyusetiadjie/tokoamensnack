@@ -22,6 +22,7 @@ import { STORE_INFO, type CategoryIconName } from "@/payload/seed-data";
 import { resolveShopeeMediaMatch } from "@/lib/shopee-catalog-map";
 import { CategoryIcon } from "@/components/CategoryIcon";
 import { WhatsAppIcon } from "@/components/WhatsAppIcon";
+import { useLanguage } from "@/lib/i18n";
 import { cn } from "@/lib/utils";
 import type {
   ChatbotProductCard,
@@ -37,7 +38,9 @@ const SCENARIO_BUTTONS = [
   {
     id: "paket",
     title: "Paket Oleh-Oleh",
+    enTitle: "Gift Packages",
     subtitle: "Favorit & budget < Rp150rb",
+    enSubtitle: "Favorites & < Rp150K budget",
     prompt: "Rekomendasi paket oleh-oleh Bangka terlaris budget di bawah 150rb",
     icon: Gift,
     tone: "text-brand-red bg-slate-100",
@@ -45,7 +48,9 @@ const SCENARIO_BUTTONS = [
   {
     id: "grosir",
     title: "Harga Ecer & Grosir",
+    enTitle: "Retail & Wholesale",
     subtitle: "Cap AMEN & paket reseller",
+    enSubtitle: "Cap AMEN & reseller packs",
     prompt: "Produk best seller Cap AMEN dan harga grosir",
     icon: Tag,
     tone: "text-brand-orange-dark bg-rose-50",
@@ -53,7 +58,9 @@ const SCENARIO_BUTTONS = [
   {
     id: "kirim",
     title: "Kirim Luar Pulau",
+    enTitle: "Nationwide Shipping",
     subtitle: "Packing aman, berat & Shopee",
+    enSubtitle: "Safe packing, weight & Shopee",
     prompt: "Info pengiriman luar kota, estimasi berat paket, dan Shopee",
     icon: Truck,
     tone: "text-brand-red bg-slate-100",
@@ -61,7 +68,9 @@ const SCENARIO_BUTTONS = [
   {
     id: "lokasi",
     title: "Lokasi & Jam Buka",
+    enTitle: "Location & Hours",
     subtitle: "Jl. Muhidin Sungailiat",
+    enSubtitle: "Jl. Muhidin Sungailiat",
     prompt: "Alamat lengkap, jam buka toko, dan Google Maps",
     icon: MapPin,
     tone: "text-brand-orange-dark bg-rose-50",
@@ -391,6 +400,7 @@ export function ChatbotWidget({
   initialOpen?: boolean;
   initialPrompt?: string | null;
 } = {}) {
+  const { isEn, tx } = useLanguage();
   const [isOpen, setIsOpen] = useState(initialOpen);
   const [input, setInput] = useState("");
   const [cart, setCart] = useState<Record<string, CartEntry>>({});
@@ -557,11 +567,11 @@ export function ChatbotWidget({
               </div>
               <div className="min-w-0">
                 <p className="font-bold text-[13px] leading-tight whitespace-nowrap">
-                  Asisten Amen Snack
+                  {tx("Asisten Amen Snack", "Amen Snack Assistant")}
                 </p>
                 <p className="text-[10px] text-slate-200 flex items-center gap-1 mt-0.5 truncate">
                   <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 shrink-0" />
-                  <span>Online &bull; Katalog Live</span>
+                  <span>{tx("Online • Katalog Live", "Online • Live Catalog")}</span>
                 </p>
               </div>
             </div>
@@ -615,10 +625,18 @@ export function ChatbotWidget({
                 <div className="bg-white border border-slate-200 rounded-2xl rounded-tl-sm p-3.5 shadow-sm space-y-1.5">
                   <div className="flex items-center gap-1.5 text-xs font-bold text-brand-red">
                     <Sparkles className="w-3.5 h-3.5 text-brand-orange shrink-0" />
-                    <span>Halo! Mau cari oleh-oleh khas Bangka apa?</span>
+                    <span>
+                      {tx(
+                        "Halo! Mau cari oleh-oleh khas Bangka apa?",
+                        "Hi! Looking for Bangka souvenirs or snacks?"
+                      )}
+                    </span>
                   </div>
                   <p className="text-xs text-slate-600 leading-relaxed">
-                    Pilih skenario keperluan di bawah ini atau langsung ketik nama camilan yang ingin dicek harga &amp; stoknya.
+                    {tx(
+                      "Pilih skenario keperluan di bawah ini atau langsung ketik nama camilan yang ingin dicek harga & stoknya.",
+                      "Choose a quick topic below or type any snack name to check prices & stock."
+                    )}
                   </p>
                 </div>
 
@@ -643,10 +661,10 @@ export function ChatbotWidget({
                         </span>
                         <div className="min-w-0">
                           <p className="text-xs font-bold text-brand-dark leading-snug">
-                            {sc.title}
+                            {isEn ? sc.enTitle : sc.title}
                           </p>
                           <p className="text-[11px] text-slate-500 mt-0.5 leading-snug">
-                            {sc.subtitle}
+                            {isEn ? sc.enSubtitle : sc.subtitle}
                           </p>
                         </div>
                       </button>
@@ -855,14 +873,17 @@ export function ChatbotWidget({
                 type="text"
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
-                placeholder="Ketik kemplang, getas 250g, kopi..."
+                placeholder={tx(
+                  "Ketik kemplang, getas 250g, kopi...",
+                  "Search kemplang, getas 250g, coffee..."
+                )}
                 disabled={isBusy}
                 className="flex-1 rounded-full border border-slate-300 bg-brand-slate px-3.5 py-2 text-xs text-brand-dark focus:outline-none focus:border-brand-red focus:bg-white transition-colors"
               />
               <button
                 type="submit"
                 disabled={isBusy || !input.trim()}
-                aria-label="Kirim pesan"
+                aria-label={tx("Kirim pesan", "Send message")}
                 className="h-9 w-9 rounded-full bg-brand-red hover:bg-brand-red-dark disabled:opacity-45 text-white flex items-center justify-center transition-colors shrink-0 cursor-pointer"
               >
                 {isBusy ? (
@@ -881,7 +902,10 @@ export function ChatbotWidget({
         type="button"
         onClick={() => setIsOpen((prev) => !prev)}
         aria-expanded={isOpen}
-        aria-label="Buka Asisten Toko & WhatsApp Toko Amen Snack"
+        aria-label={tx(
+          "Buka Asisten Toko & WhatsApp Toko Amen Snack",
+          "Open Store Assistant & WhatsApp Toko Amen Snack"
+        )}
         className={cn(
           "items-center justify-center gap-2 rounded-full bg-brand-red hover:bg-brand-red-dark text-white font-semibold text-xs sm:text-sm w-12 h-12 sm:w-auto sm:h-12 sm:pl-3.5 sm:pr-4 shadow-xl transition-transform hover:scale-105 active:scale-95 cursor-pointer border border-white/15",
           isOpen ? "hidden sm:inline-flex" : "inline-flex"
@@ -890,7 +914,7 @@ export function ChatbotWidget({
         {isOpen ? (
           <>
             <X className="w-4 h-4 shrink-0" />
-            <span className="hidden sm:inline">Tutup Chat</span>
+            <span className="hidden sm:inline">{tx("Tutup Chat", "Close Chat")}</span>
           </>
         ) : (
           <>
@@ -898,7 +922,7 @@ export function ChatbotWidget({
               <WhatsAppIcon className="w-5 h-5 sm:w-4 sm:h-4 text-[#25D366] shrink-0" />
               <Sparkles className="w-2.5 h-2.5 text-amber-300 absolute -top-1 -right-1 shrink-0" />
             </span>
-            <span className="hidden sm:inline">Tanya Toko</span>
+            <span className="hidden sm:inline">{tx("Tanya Toko", "Ask Store")}</span>
           </>
         )}
       </button>

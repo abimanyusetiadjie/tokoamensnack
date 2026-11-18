@@ -3,6 +3,7 @@
 import React, { useEffect, useState } from "react";
 import { Loader2, Sparkles } from "lucide-react";
 import { WhatsAppIcon } from "@/components/WhatsAppIcon";
+import { useLanguage } from "@/lib/i18n";
 
 type ChatbotWidgetComponent = React.ComponentType<{
   initialOpen?: boolean;
@@ -14,6 +15,7 @@ type ChatbotWidgetComponent = React.ComponentType<{
  * never bloat initial JS parse time on Windows 7 / Chrome 109 until hovered or opened.
  */
 export function WhatsAppFab() {
+  const { tx } = useLanguage();
   const [shouldLoad, setShouldLoad] = useState(false);
   const [wantsOpen, setWantsOpen] = useState(false);
   const [queuedPrompt, setQueuedPrompt] = useState<string | null>(null);
@@ -75,7 +77,10 @@ export function WhatsAppFab() {
           setShouldLoad(true);
         }}
         aria-expanded={false}
-        aria-label="Buka Asisten Toko & WhatsApp Toko Amen Snack"
+        aria-label={tx(
+          "Buka Asisten Toko & WhatsApp Toko Amen Snack",
+          "Open Store Assistant & WhatsApp Toko Amen Snack"
+        )}
         className="inline-flex items-center justify-center gap-2 rounded-full bg-brand-red hover:bg-brand-red-dark text-white font-semibold text-xs sm:text-sm w-12 h-12 sm:w-auto sm:h-12 sm:pl-3.5 sm:pr-4 shadow-xl transition-transform hover:scale-105 active:scale-95 cursor-pointer border border-white/15"
       >
         {wantsOpen ? (
@@ -86,7 +91,7 @@ export function WhatsAppFab() {
             <Sparkles className="w-2.5 h-2.5 text-amber-300 absolute -top-1 -right-1 shrink-0" />
           </span>
         )}
-        <span className="hidden sm:inline">Tanya Toko</span>
+        <span className="hidden sm:inline">{tx("Tanya Toko", "Ask Store")}</span>
       </button>
     </div>
   );

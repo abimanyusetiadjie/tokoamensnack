@@ -1,8 +1,11 @@
+"use client";
+
 import React from "react";
 import Link from "next/link";
 import { MapPin } from "lucide-react";
 import { WhatsAppIcon } from "@/components/WhatsAppIcon";
 import { STORE_INFO } from "@/payload/seed-data";
+import { FOUNDED_DATE_EN, useLanguage } from "@/lib/i18n";
 
 function InstagramIcon({ className }: { className?: string }) {
   return (
@@ -44,21 +47,23 @@ function FacebookIcon({ className }: { className?: string }) {
 }
 
 const EXPLORE_LINKS = [
-  { href: "/about", label: "Tentang Cap AMEN" },
-  { href: "/produk", label: "Katalog Produk" },
-  { href: "/katalog", label: "Promo & Flyer" },
-  { href: "/lokasi", label: "Lokasi Toko" },
+  { href: "/about", idLabel: "Tentang Cap AMEN", enLabel: "About Cap AMEN" },
+  { href: "/produk", idLabel: "Katalog Produk", enLabel: "Product Catalog" },
+  { href: "/katalog", idLabel: "Promo & Flyer", enLabel: "Promos & Flyers" },
+  { href: "/lokasi", idLabel: "Lokasi Toko", enLabel: "Store Location" },
 ] as const;
 
 const SERVICE_LINKS = [
-  { href: STORE_INFO.shopeeUrl, label: "Shopee Official", external: true },
-  { href: STORE_INFO.whatsappDirectCta, label: "Chat WhatsApp", external: true },
-  { href: STORE_INFO.googleMapsUrl, label: "Google Maps", external: true },
-  { href: STORE_INFO.wazeUrl, label: "Rute via Waze", external: true },
-  { href: "/blog", label: "Panduan Kuliner", external: false },
+  { href: STORE_INFO.shopeeUrl, idLabel: "Shopee Official", enLabel: "Official Shopee", external: true },
+  { href: STORE_INFO.whatsappDirectCta, idLabel: "Chat WhatsApp", enLabel: "WhatsApp Chat", external: true },
+  { href: STORE_INFO.googleMapsUrl, idLabel: "Google Maps", enLabel: "Google Maps", external: true },
+  { href: STORE_INFO.wazeUrl, idLabel: "Rute via Waze", enLabel: "Directions via Waze", external: true },
+  { href: "/blog", idLabel: "Panduan Kuliner", enLabel: "Culinary Guide", external: false },
 ] as const;
 
 export function Footer() {
+  const { tx } = useLanguage();
+
   return (
     <footer className="footer-gradient w-full overflow-x-clip text-white border-t-[3px] border-brand-orange pb-24 sm:pb-24 md:pb-10">
       <div className="max-w-[1440px] mx-auto px-5 sm:px-6 lg:px-[10%] pt-10 sm:pt-14 pb-4">
@@ -66,18 +71,23 @@ export function Footer() {
           {/* Column 1: Customer Inquiry Hotline & Store Address */}
           <div className="md:col-span-5">
             <h2 className="text-lg sm:text-xl font-bold tracking-tight">
-              Ada pertanyaan?
+              {tx("Ada pertanyaan?", "Have a question?")}
             </h2>
             <p className="text-xs sm:text-sm text-slate-200/90 mt-1.5 leading-relaxed max-w-md">
-              Melayani oleh-oleh khas Bangka sejak{" "}
-              <strong className="text-white">{STORE_INFO.foundedDate}</strong> untuk keluarga,
-              paket wisata, maupun kirim ke luar kota.
+              {tx("Melayani oleh-oleh khas Bangka sejak", "Serving authentic Bangka souvenirs since")}{" "}
+              <strong className="text-white">
+                {tx(STORE_INFO.foundedDate, FOUNDED_DATE_EN)}
+              </strong>{" "}
+              {tx(
+                "untuk keluarga, paket wisata, maupun kirim ke luar kota.",
+                "for families, tour groups, and nationwide delivery."
+              )}
             </p>
 
             <div className="mt-4 rounded-2xl bg-white/[0.08] border border-white/15 p-4 space-y-3.5">
               <div>
                 <p className="text-[11px] uppercase tracking-wider font-semibold text-blue-100/85">
-                  Telepon &amp; WhatsApp Admin
+                  {tx("Telepon & WhatsApp Admin", "Phone & Admin WhatsApp")}
                 </p>
                 <a
                   href={STORE_INFO.whatsappDirectCta}
@@ -89,14 +99,14 @@ export function Footer() {
                   <span>WhatsApp {STORE_INFO.phone}</span>
                 </a>
                 <p className="text-[11px] sm:text-xs text-slate-200/85 mt-1 leading-relaxed">
-                  Sen–Sab {STORE_INFO.openingHours.mondayToSaturday} &bull; Minggu{" "}
-                  {STORE_INFO.openingHours.sunday}
+                  {tx("Sen–Sab", "Mon–Sat")} {STORE_INFO.openingHours.mondayToSaturday} &bull;{" "}
+                  {tx("Minggu", "Sunday")} {STORE_INFO.openingHours.sunday}
                 </p>
               </div>
 
               <div className="border-t border-white/10 pt-3">
                 <p className="text-[11px] uppercase tracking-wider font-semibold text-blue-100/85 mb-1">
-                  Alamat Toko Sungailiat
+                  {tx("Alamat Toko Sungailiat", "Sungailiat Store Address")}
                 </p>
                 <a
                   href={STORE_INFO.googleMapsUrl}
@@ -115,7 +125,7 @@ export function Footer() {
           <div className="md:col-span-7 grid grid-cols-2 gap-6 sm:gap-10 pt-6 border-t border-white/15 md:border-t-0 md:pt-0">
             <div>
               <h2 className="text-xs sm:text-sm font-bold uppercase tracking-wider text-amber-200 mb-3 sm:mb-4">
-                Jelajahi Toko
+                {tx("Jelajahi Toko", "Explore Store")}
               </h2>
               <ul className="space-y-1 text-[13px] sm:text-sm text-slate-100/90">
                 {EXPLORE_LINKS.map((item) => (
@@ -124,7 +134,7 @@ export function Footer() {
                       href={item.href}
                       className="inline-flex py-1.5 hover:text-amber-200 transition-colors"
                     >
-                      {item.label}
+                      {tx(item.idLabel, item.enLabel)}
                     </Link>
                   </li>
                 ))}
@@ -133,11 +143,11 @@ export function Footer() {
 
             <div>
               <h2 className="text-xs sm:text-sm font-bold uppercase tracking-wider text-amber-200 mb-3 sm:mb-4">
-                Layanan &amp; Akses
+                {tx("Layanan & Akses", "Services & Access")}
               </h2>
               <ul className="space-y-1 text-[13px] sm:text-sm text-slate-100/90">
                 {SERVICE_LINKS.map((item) => (
-                  <li key={item.label}>
+                  <li key={item.idLabel}>
                     {item.external ? (
                       <a
                         href={item.href}
@@ -145,14 +155,14 @@ export function Footer() {
                         rel="noopener noreferrer"
                         className="inline-flex py-1.5 hover:text-amber-200 transition-colors"
                       >
-                        {item.label}
+                        {tx(item.idLabel, item.enLabel)}
                       </a>
                     ) : (
                       <Link
                         href={item.href}
                         className="inline-flex py-1.5 hover:text-amber-200 transition-colors"
                       >
-                        {item.label}
+                        {tx(item.idLabel, item.enLabel)}
                       </Link>
                     )}
                   </li>
@@ -166,10 +176,13 @@ export function Footer() {
         <div className="mt-8 sm:mt-10 pt-6 sm:pt-8 border-t border-white/15 flex flex-col items-center justify-center gap-3.5 text-center">
           <div>
             <h3 className="text-sm sm:text-base font-bold tracking-wide text-white">
-              Ikuti Media Sosial Kami
+              {tx("Ikuti Media Sosial Kami", "Follow Our Social Media")}
             </h3>
             <p className="text-xs text-slate-200/80 mt-0.5">
-              Info produk segar, promo oleh-oleh, dan kiriman luar kota
+              {tx(
+                "Info produk segar, promo oleh-oleh, dan kiriman luar kota",
+                "Fresh batch updates, souvenir deals, and nationwide shipping"
+              )}
             </p>
           </div>
 
@@ -209,7 +222,10 @@ export function Footer() {
           </div>
 
           <p className="text-[11px] sm:text-xs text-slate-200/85 mt-1 leading-relaxed">
-            Berdiri Sejak {STORE_INFO.foundedDate} &bull; Terdaftar di Sisparnas Kemenpar RI &bull; Reputasi {STORE_INFO.rating}★ ({STORE_INFO.reviewCount}+ Ulasan Google Maps)
+            {tx(
+              `Berdiri Sejak ${STORE_INFO.foundedDate} • Terdaftar di Sisparnas Kemenpar RI • Reputasi ${STORE_INFO.rating}★ (${STORE_INFO.reviewCount}+ Ulasan Google Maps)`,
+              `Est. ${FOUNDED_DATE_EN} • Registered on Sisparnas Kemenpar RI • Rated ${STORE_INFO.rating}★ (${STORE_INFO.reviewCount}+ Google Maps Reviews)`
+            )}
           </p>
         </div>
 

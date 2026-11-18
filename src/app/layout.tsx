@@ -4,6 +4,7 @@ import "./globals.css";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import { WhatsAppFab } from "@/components/WhatsAppFab";
+import { LanguageProvider } from "@/lib/i18n";
 import { STORE_INFO } from "@/payload/seed-data";
 
 const inter = Inter({
@@ -105,10 +106,12 @@ export default function RootLayout({
             __html: JSON.stringify(LOCAL_BUSINESS_JSON_LD),
           }}
         />
-        <Navbar />
-        <main>{children}</main>
-        <Footer />
-        <WhatsAppFab />
+        <LanguageProvider>
+          <Navbar />
+          <main>{children}</main>
+          <Footer />
+          <WhatsAppFab />
+        </LanguageProvider>
       </body>
     </html>
   );

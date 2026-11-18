@@ -1,6 +1,9 @@
+"use client";
+
 import React from "react";
 import Link from "next/link";
 import { ChevronRight } from "lucide-react";
+import { useLanguage } from "@/lib/i18n";
 
 interface PageHeroBannerProps {
   breadcrumb: string;
@@ -18,6 +21,8 @@ export function PageHeroBanner({
   title,
   subtitle,
 }: PageHeroBannerProps) {
+  const { tx } = useLanguage();
+
   return (
     <section className="bg-brand-soft pt-8 pb-10 sm:pt-10 sm:pb-12 border-b border-slate-200/80">
       <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-[10%]">
@@ -26,7 +31,7 @@ export function PageHeroBanner({
           className="flex items-center gap-1.5 text-xs font-medium text-slate-500 mb-3"
         >
           <Link href="/" className="hover:text-brand-red transition-colors">
-            Beranda
+            {tx("Beranda", "Home")}
           </Link>
           <ChevronRight className="w-3.5 h-3.5" />
           <span className="text-brand-red font-semibold">{breadcrumb}</span>

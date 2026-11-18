@@ -9,26 +9,34 @@ import { MediaImage } from "@/components/MediaImage";
 import { WhatsAppIcon } from "@/components/WhatsAppIcon";
 import { buttonVariants } from "@/components/ui/button";
 import { BLOGS_COLLECTION, STORE_INFO, type BlogPostItem } from "@/payload/seed-data";
+import { BLOG_EN, useLanguage } from "@/lib/i18n";
 
 /**
  * Culinary stories & Bangka souvenir guide page.
  */
 export function BlogClient() {
+  const { isEn, tx } = useLanguage();
   const [activePost, setActivePost] = useState<BlogPostItem | null>(null);
+  const activeEn = activePost && isEn ? BLOG_EN[activePost.id] : undefined;
 
   return (
     <div className="min-h-screen bg-white overflow-x-clip">
       <PageHeroBanner
-        breadcrumb="Cerita & Kuliner"
-        badge="Edukasi Oleh-Oleh Khas Bangka"
-        title="Cerita & Kuliner Khas Bangka"
-        subtitle="Kenali perbedaan kemplang panggang, kemplang pasir, getas ikan, hingga oleh-oleh unik wajib bawa saat berkunjung ke Sungailiat."
+        breadcrumb={tx("Cerita & Kuliner", "Culinary Stories")}
+        badge={tx("Edukasi Oleh-Oleh Khas Bangka", "Authentic Bangka Souvenir Guide")}
+        title={tx("Cerita & Kuliner Khas Bangka", "Bangka Culinary Stories")}
+        subtitle={tx(
+          "Kenali perbedaan kemplang panggang, kemplang pasir, getas ikan, hingga oleh-oleh unik wajib bawa saat berkunjung ke Sungailiat.",
+          "Explore differences between grilled kemplang, sand-roasted kemplang, mackerel getas, and must-buy souvenirs from Sungailiat."
+        )}
       />
 
       <section className="py-12 sm:py-16">
         <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-[10%]">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {BLOGS_COLLECTION.map((post) => (
+            {BLOGS_COLLECTION.map((post) => {
+              const enPost = isEn ? BLOG_EN[post.id] : undefined;
+              return (
               <Card
                 key={post.id}
                 id={post.slug}
@@ -37,8 +45,8 @@ export function BlogClient() {
                 <div className="relative w-full aspect-[16/10] bg-brand-soft">
                   <MediaImage
                     src={post.imageUrl}
-                    alt={post.title}
-                    fallbackLabel={post.title}
+                    alt={enPost?.title ?? post.title}
+                    fallbackLabel={enPost?.title ?? post.title}
                     fill
                     sizes="(min-width: 1024px) 33vw, 50vw"
                     className="object-cover"
@@ -48,13 +56,13 @@ export function BlogClient() {
                   <div>
                     <span className="inline-flex items-center gap-1.5 text-xs font-semibold text-brand-orange">
                       <Calendar className="w-3.5 h-3.5" />
-                      {post.publishedAt} • {post.readTime}
+                      {enPost?.publishedAt ?? post.publishedAt} • {enPost?.readTime ?? post.readTime}
                     </span>
                     <h2 className="font-bold text-lg text-brand-dark mt-2 leading-snug">
-                      {post.title}
+                      {enPost?.title ?? post.title}
                     </h2>
                     <p className="text-sm text-slate-600 mt-2.5 leading-relaxed">
-                      {post.excerpt}
+                      {enPost?.excerpt ?? post.excerpt}
                     </p>
                   </div>
 
@@ -63,12 +71,13 @@ export function BlogClient() {
                     onClick={() => setActivePost(post)}
                     className="mt-5 inline-flex items-center gap-1.5 text-xs font-semibold text-brand-red hover:text-brand-red-dark cursor-pointer w-fit"
                   >
-                    <span>Baca Artikel Lengkap</span>
+                    <span>{tx("Baca Artikel Lengkap", "Read Full Article")}</span>
                     <ArrowRight className="w-3.5 h-3.5" />
                   </button>
                 </div>
               </Card>
-            ))}
+              );
+            })}
           </div>
         </div>
       </section>
@@ -78,7 +87,7 @@ export function BlogClient() {
         <div
           role="dialog"
           aria-modal="true"
-          aria-label={activePost.title}
+          aria-label={activeEn?.title ?? activePost.title}
           onClick={() => setActivePost(null)}
           className="fixed inset-0 z-50 bg-slate-900/80 flex items-center justify-center p-4"
         >
@@ -89,12 +98,12 @@ export function BlogClient() {
             <div className="flex items-center justify-between px-6 py-4 border-b border-slate-200/80">
               <span className="inline-flex items-center gap-1.5 text-xs font-semibold text-brand-red">
                 <Calendar className="w-3.5 h-3.5" />
-                {activePost.publishedAt} • {activePost.readTime}
+                {activeEn?.publishedAt ?? activePost.publishedAt} • {activeEn?.readTime ?? activePost.readTime}
               </span>
               <button
                 type="button"
                 onClick={() => setActivePost(null)}
-                aria-label="Tutup artikel"
+                aria-label={tx("Tutup artikel", "Close article")}
                 className="p-1.5 rounded-full hover:bg-brand-soft text-slate-600 cursor-pointer"
               >
                 <X className="w-5 h-5" />
@@ -105,8 +114,8 @@ export function BlogClient() {
               <div className="relative w-full aspect-[16/10] min-h-[180px] sm:min-h-[260px] shrink-0 rounded-xl overflow-hidden mb-5 bg-brand-soft">
                 <MediaImage
                   src={activePost.imageUrl}
-                  alt={activePost.title}
-                  fallbackLabel={activePost.title}
+                  alt={activeEn?.title ?? activePost.title}
+                  fallbackLabel={activeEn?.title ?? activePost.title}
                   fill
                   priority
                   sizes="(min-width: 768px) 640px, 100vw"
@@ -114,13 +123,13 @@ export function BlogClient() {
                 />
               </div>
               <h3 className="font-inter font-bold text-xl sm:text-2xl text-brand-dark leading-snug">
-                {activePost.title}
+                {activeEn?.title ?? activePost.title}
               </h3>
               <p className="text-sm sm:text-base text-slate-700 mt-4 leading-relaxed font-medium">
-                {activePost.excerpt}
+                {activeEn?.excerpt ?? activePost.excerpt}
               </p>
               <div className="mt-4 space-y-3">
-                {activePost.content.map((paragraph, index) => (
+                {(activeEn?.content ?? activePost.content).map((paragraph, index) => (
                   <p key={index} className="text-sm text-slate-600 leading-relaxed">
                     {paragraph}
                   </p>
@@ -134,7 +143,7 @@ export function BlogClient() {
                     className: "rounded-full text-xs font-semibold",
                   })}
                 >
-                  Lihat Katalog Produk
+                  {tx("Lihat Katalog Produk", "Browse Product Catalog")}
                 </Link>
                 <a
                   href={STORE_INFO.whatsappDirectCta}

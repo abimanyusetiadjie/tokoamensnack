@@ -9,26 +9,33 @@ import { MediaImage } from "@/components/MediaImage";
 import { WhatsAppIcon } from "@/components/WhatsAppIcon";
 import { buttonVariants } from "@/components/ui/button";
 import { FLYERS_COLLECTION, STORE_INFO, type FlyerItem } from "@/payload/seed-data";
+import { FLYER_EN, useLanguage } from "@/lib/i18n";
 
 /**
  * Promo & Highlight catalog view for Toko Amen Snack Bangka.
  */
 export function KatalogClient() {
+  const { isEn, tx } = useLanguage();
   const [selectedFlyer, setSelectedFlyer] = useState<FlyerItem | null>(null);
 
   return (
     <div className="min-h-screen bg-white overflow-x-clip">
       <PageHeroBanner
-        breadcrumb="Promo & Highlight"
-        badge="Signature Brand Cap AMEN & Pengiriman Nasional"
-        title="Sorotan Promo Toko Amen Snack"
-        subtitle="Klik banner di bawah untuk memperbesar detail promo unggulan Cap AMEN dan layanan pengiriman oleh-oleh khas Bangka ke seluruh Indonesia."
+        breadcrumb={tx("Promo & Highlight", "Promos & Highlights")}
+        badge={tx("Signature Brand Cap AMEN & Pengiriman Nasional", "Signature Brand Cap AMEN & Nationwide Shipping")}
+        title={tx("Sorotan Promo Toko Amen Snack", "Toko Amen Snack Promo Highlights")}
+        subtitle={tx(
+          "Klik banner di bawah untuk memperbesar detail promo unggulan Cap AMEN dan layanan pengiriman oleh-oleh khas Bangka ke seluruh Indonesia.",
+          "Click any banner below to view details of Cap AMEN featured promos and nationwide Bangka souvenir shipping."
+        )}
       />
 
       <section className="py-12 sm:py-16">
         <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-[10%]">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-            {FLYERS_COLLECTION.map((flyer) => (
+            {FLYERS_COLLECTION.map((flyer) => {
+              const enFlyer = isEn ? FLYER_EN[flyer.id] : undefined;
+              return (
               <Card
                 key={flyer.id}
                 className="brand-card rounded-2xl overflow-hidden border border-slate-200/80 bg-white flex flex-col"
@@ -41,7 +48,7 @@ export function KatalogClient() {
                   <MediaImage
                     src={flyer.imageUrl}
                     alt={flyer.alt}
-                    fallbackLabel={flyer.title}
+                    fallbackLabel={enFlyer?.title ?? flyer.title}
                     fill
                     sizes="(min-width: 1024px) 45vw, 100vw"
                     className="object-cover"
@@ -49,7 +56,7 @@ export function KatalogClient() {
                   <div className="absolute inset-0 bg-slate-900/0 group-hover:bg-slate-900/20 transition-colors flex items-center justify-center">
                     <span className="opacity-0 group-hover:opacity-100 transition-opacity inline-flex items-center gap-2 rounded-full bg-white text-brand-dark px-4 py-2 text-xs font-semibold shadow-md">
                       <ZoomIn className="w-4 h-4 text-brand-red" />
-                      Perbesar Banner
+                      {tx("Perbesar Banner", "Enlarge Banner")}
                     </span>
                   </div>
                 </button>
@@ -58,11 +65,13 @@ export function KatalogClient() {
                   <div>
                     <span className="inline-flex items-center gap-1.5 text-xs font-medium text-brand-red mb-1.5">
                       <Calendar className="w-3.5 h-3.5" />
-                      {flyer.period}
+                      {enFlyer?.period ?? flyer.period}
                     </span>
-                    <h2 className="font-bold text-lg text-brand-dark">{flyer.title}</h2>
+                    <h2 className="font-bold text-lg text-brand-dark">
+                      {enFlyer?.title ?? flyer.title}
+                    </h2>
                     <p className="text-sm text-slate-600 mt-1.5 leading-relaxed">
-                      {flyer.description}
+                      {enFlyer?.description ?? flyer.description}
                     </p>
                   </div>
 
@@ -75,7 +84,7 @@ export function KatalogClient() {
                         className: "rounded-full text-xs cursor-pointer",
                       })}
                     >
-                      Perbesar Banner
+                      {tx("Perbesar Banner", "Enlarge Banner")}
                     </button>
                     {flyer.isExternal ? (
                       <a
@@ -87,7 +96,7 @@ export function KatalogClient() {
                         })}
                       >
                         <ShoppingBag className="w-3.5 h-3.5" />
-                        <span>{flyer.ctaLabel}</span>
+                        <span>{enFlyer?.ctaLabel ?? flyer.ctaLabel}</span>
                       </a>
                     ) : (
                       <Link
@@ -96,25 +105,26 @@ export function KatalogClient() {
                           className: "rounded-full text-xs gap-1.5",
                         })}
                       >
-                        <span>{flyer.ctaLabel}</span>
+                        <span>{enFlyer?.ctaLabel ?? flyer.ctaLabel}</span>
                         <ExternalLink className="w-3.5 h-3.5" />
                       </Link>
                     )}
                   </div>
                 </div>
               </Card>
-            ))}
+              );
+            })}
           </div>
 
           {/* Store CTA Banner */}
           <div className="mt-12 rounded-2xl bg-brand-soft p-6 sm:p-8 flex flex-col md:flex-row items-start md:items-center justify-between gap-6 border border-slate-200">
             <div>
               <h3 className="font-bold text-xl text-brand-dark">
-                Pesan Oleh-Oleh Bangka Praktis Sekarang
+                {tx("Pesan Oleh-Oleh Bangka Praktis Sekarang", "Order Bangka Souvenirs Easily Today")}
               </h3>
               <p className="text-sm text-slate-600 mt-1">
-                Kunjungi langsung toko kami di {STORE_INFO.shortAddress} atau pesan cepat lewat
-                WhatsApp &amp; Shopee Official Store.
+                {tx("Kunjungi langsung toko kami di", "Visit our physical store at")} {STORE_INFO.shortAddress}{" "}
+                {tx("atau pesan cepat lewat WhatsApp & Shopee Official Store.", "or order directly via WhatsApp & Official Shopee.")}
               </p>
             </div>
             <div className="flex flex-wrap gap-3 shrink-0">
@@ -125,7 +135,7 @@ export function KatalogClient() {
                 })}
               >
                 <MapPin className="w-4 h-4" />
-                Lokasi Sungailiat
+                {tx("Lokasi Sungailiat", "Sungailiat Store")}
               </Link>
               <a
                 href={STORE_INFO.whatsappDirectCta}
