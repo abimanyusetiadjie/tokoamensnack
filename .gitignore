@@ -41,3 +41,6 @@ next-env.d.ts
 
 # Isolated POS / Warehouse SvelteKit module (deployed separately to VPS)
 svelte-minimarket/
+
+# Local raw source photos before WebP compression to public/images/
+raw-images/

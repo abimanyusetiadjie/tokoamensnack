@@ -30,14 +30,14 @@ export function ProductCard({ product }: { product: ProductCardInput }) {
 
   return (
     <Card className="brand-card rounded-2xl border border-slate-200/80 bg-white overflow-hidden h-full flex flex-col">
-      <div className="relative w-full aspect-square bg-[#fafaf8]">
+      <div className="relative w-full aspect-square bg-slate-50 overflow-hidden">
         <MediaImage
           src={product.imageUrl}
           alt={product.name}
           fallbackLabel={product.name}
           fill
           sizes="(min-width: 1280px) 23vw, (min-width: 768px) 32vw, 48vw"
-          className="object-contain p-4"
+          className="object-cover"
         />
         {product.badge && (
           <span className="absolute top-3 left-3 inline-flex items-center rounded-full bg-brand-orange text-white px-2.5 py-1 text-[10px] font-bold tracking-wide shadow-sm">
@@ -115,7 +115,8 @@ export function ProductCard({ product }: { product: ProductCardInput }) {
               href={product.shopeeUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center justify-center gap-1.5 rounded-xl border border-brand-red/30 text-brand-red hover:bg-slate-50 font-semibold text-xs py-2.5 px-2.5 transition-colors"
+              aria-label={`Beli ${product.name} di Shopee`}
+              className="inline-flex items-center justify-center gap-1.5 rounded-xl border border-[#EE4D2D]/35 text-[#EE4D2D] hover:bg-orange-50 font-semibold text-xs py-2.5 px-2.5 transition-colors"
             >
               <ShoppingBag className="w-3.5 h-3.5 shrink-0" aria-hidden="true" />
               <span>Shopee</span>

@@ -115,20 +115,30 @@ export function HomeClient({
             </p>
 
             {/* Primary & Secondary Action Pills */}
-            <div className="mt-5 sm:mt-8 flex flex-col sm:flex-row items-center justify-center md:justify-start gap-2.5 sm:gap-4">
+            <div className="mt-5 sm:mt-8 flex flex-col sm:flex-row sm:flex-wrap items-center justify-center md:justify-start gap-2.5 sm:gap-3.5">
               <a
                 href="#katalog"
-                className="w-full max-w-[328px] sm:w-auto sm:max-w-none inline-flex items-center justify-center bg-brand-red hover:bg-brand-red-dark text-white font-semibold rounded-full px-7 h-11 sm:h-12 shadow-md shadow-indigo-950/15 text-sm sm:text-base transition-colors"
+                className="w-full max-w-[328px] sm:w-auto sm:max-w-none inline-flex items-center justify-center bg-brand-red hover:bg-brand-red-dark text-white font-semibold rounded-full px-6 h-11 sm:h-12 shadow-md shadow-indigo-950/15 text-sm sm:text-base transition-colors"
               >
                 <span>Lihat Katalog Produk</span>
                 <ArrowRight className="w-4 h-4 ml-1.5" />
               </a>
 
               <a
+                href={STORE_INFO.shopeeUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-full max-w-[328px] sm:w-auto sm:max-w-none inline-flex items-center justify-center gap-2 bg-[#EE4D2D] hover:bg-[#d93d1f] text-white font-semibold rounded-full px-6 h-11 sm:h-12 shadow-sm text-sm sm:text-base transition-colors"
+              >
+                <ShoppingBag className="w-4 h-4 shrink-0" />
+                <span>Belanja di Shopee</span>
+              </a>
+
+              <a
                 href={STORE_INFO.whatsappDirectCta}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-full max-w-[328px] sm:w-auto sm:max-w-none inline-flex items-center justify-center bg-white hover:bg-brand-soft text-brand-red border-2 border-brand-red font-semibold rounded-full px-7 h-11 sm:h-12 text-sm sm:text-base transition-colors"
+                className="w-full max-w-[328px] sm:w-auto sm:max-w-none inline-flex items-center justify-center bg-white hover:bg-brand-soft text-brand-red border-2 border-brand-red font-semibold rounded-full px-6 h-11 sm:h-12 text-sm sm:text-base transition-colors"
               >
                 <span>Hubungi Kami</span>
               </a>
@@ -215,7 +225,7 @@ export function HomeClient({
                       }}
                       className="group relative w-full rounded-2xl overflow-hidden bg-brand-soft border border-slate-200/80 shadow-sm cursor-pointer"
                     >
-                      <div className="relative w-full aspect-[16/9] overflow-hidden bg-brand-soft">
+                      <div className="relative w-full aspect-[16/10] overflow-hidden bg-brand-soft">
                         <MediaImage
                           src={flyer.imageUrl}
                           alt={flyer.alt}
@@ -265,17 +275,28 @@ export function HomeClient({
                 Pilihan produk favorit keluarga dan wisatawan khas Pulau Bangka.
               </p>
             </div>
-            <Link
-              href="/produk"
-              className="inline-flex items-center gap-1.5 text-xs sm:text-sm font-semibold text-brand-red hover:text-brand-red-dark transition-colors shrink-0"
-            >
-              <span>
-                {totalLiveProducts && totalLiveProducts > 0
-                  ? `Jelajahi ${totalLiveProducts.toLocaleString("id-ID")} Produk`
-                  : "Jelajahi Semua Produk"}
-              </span>
-              <ArrowRight className="w-4 h-4" />
-            </Link>
+            <div className="flex flex-wrap items-center gap-3 sm:gap-4 shrink-0">
+              <a
+                href={STORE_INFO.shopeeUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1.5 rounded-full bg-[#EE4D2D] hover:bg-[#d93d1f] text-white text-xs font-semibold px-3.5 py-2 shadow-xs transition-colors"
+              >
+                <ShoppingBag className="w-3.5 h-3.5 shrink-0" />
+                <span>Shopee amensnack</span>
+              </a>
+              <Link
+                href="/produk"
+                className="inline-flex items-center gap-1.5 text-xs sm:text-sm font-semibold text-brand-red hover:text-brand-red-dark transition-colors"
+              >
+                <span>
+                  {totalLiveProducts && totalLiveProducts > 0
+                    ? `Jelajahi ${totalLiveProducts.toLocaleString("id-ID")} Produk`
+                    : "Jelajahi Semua Produk"}
+                </span>
+                <ArrowRight className="w-4 h-4" />
+              </Link>
+            </div>
           </div>
 
           <Carousel
@@ -289,31 +310,45 @@ export function HomeClient({
                   key={product.id}
                   className="basis-1/2 sm:basis-1/3 md:basis-1/4 lg:basis-1/5"
                 >
-                  <Link
-                    href={`/produk?kategori=${product.categorySlug}`}
-                    className="group block rounded-2xl bg-white border border-gray-100 brand-card overflow-hidden transition-all hover:-translate-y-1 h-full"
-                  >
-                    <div className="relative aspect-square bg-[#fafaf8] overflow-hidden">
-                      <MediaImage
-                        src={product.imageUrl}
-                        alt={product.name}
-                        fill
-                        sizes="(min-width: 1024px) 20vw, 45vw"
-                        className="object-contain p-3 sm:p-4 group-hover:scale-105 transition-transform duration-300"
-                      />
-                    </div>
-                    <div className="p-3 sm:p-3.5">
-                      <span className="text-[10px] sm:text-[11px] font-bold uppercase tracking-wider text-brand-red block truncate">
-                        {product.badge}
-                      </span>
-                      <h3 className="font-semibold text-xs sm:text-sm text-gray-900 line-clamp-2 mt-1 min-h-[34px] sm:min-h-[40px]">
-                        {product.name}
-                      </h3>
-                      <p className="text-xs font-bold text-gray-700 mt-1.5 sm:mt-2">
+                  <div className="group flex flex-col rounded-2xl bg-white border border-gray-100 brand-card overflow-hidden transition-all hover:-translate-y-1 h-full">
+                    <Link
+                      href={`/produk?kategori=${product.categorySlug}`}
+                      className="block flex-1"
+                    >
+                      <div className="relative aspect-square bg-slate-50 overflow-hidden">
+                        <MediaImage
+                          src={product.imageUrl}
+                          alt={product.name}
+                          fill
+                          sizes="(min-width: 1024px) 20vw, 45vw"
+                          className="object-cover group-hover:scale-105 transition-transform duration-300"
+                        />
+                      </div>
+                      <div className="p-3 sm:p-3.5 pb-1">
+                        <span className="text-[10px] sm:text-[11px] font-bold uppercase tracking-wider text-brand-red block truncate">
+                          {product.badge}
+                        </span>
+                        <h3 className="font-semibold text-xs sm:text-sm text-gray-900 line-clamp-2 mt-1 min-h-[34px] sm:min-h-[40px]">
+                          {product.name}
+                        </h3>
+                      </div>
+                    </Link>
+                    <div className="px-3 sm:px-3.5 pb-3 sm:pb-3.5 pt-1.5 flex items-center justify-between gap-2">
+                      <p className="text-xs font-bold text-gray-800">
                         {product.formattedPrice}
                       </p>
+                      <a
+                        href={product.shopeeUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        aria-label={`Beli ${product.name} di Shopee`}
+                        className="inline-flex items-center gap-1 rounded-full bg-orange-50 hover:bg-[#EE4D2D] text-[#EE4D2D] hover:text-white border border-[#EE4D2D]/25 px-2.5 py-1 text-[10px] font-bold transition-colors shrink-0"
+                      >
+                        <ShoppingBag className="w-3 h-3 shrink-0" />
+                        <span>Shopee</span>
+                      </a>
                     </div>
-                  </Link>
+                  </div>
                 </CarouselItem>
               ))}
             </CarouselContent>
@@ -746,7 +781,7 @@ export function HomeClient({
                 <X className="w-5 h-5 text-gray-600" />
               </button>
             </div>
-            <div className="relative w-full aspect-[16/9] bg-gray-100">
+            <div className="relative w-full aspect-[16/10] bg-gray-100">
               <MediaImage
                 src={selectedFlyer.imageUrl}
                 alt={selectedFlyer.alt}
@@ -758,15 +793,36 @@ export function HomeClient({
               <p className="text-xs sm:text-sm text-gray-600">
                 {selectedFlyer.description}
               </p>
-              <a
-                href={STORE_INFO.whatsappDirectCta}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center justify-center gap-2 shrink-0 rounded-full bg-brand-red px-5 py-2.5 text-xs font-bold text-white hover:bg-brand-red-dark"
-              >
-                <ShoppingBag className="h-4 w-4" />
-                Pesan Sekarang
-              </a>
+              <div className="flex flex-wrap items-center gap-2 shrink-0">
+                {selectedFlyer.isExternal ? (
+                  <a
+                    href={selectedFlyer.ctaHref}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center justify-center gap-1.5 rounded-full bg-[#EE4D2D] hover:bg-[#d93d1f] px-4 py-2.5 text-xs font-bold text-white transition-colors"
+                  >
+                    <ShoppingBag className="h-3.5 w-3.5" />
+                    {selectedFlyer.ctaLabel}
+                  </a>
+                ) : (
+                  <Link
+                    href={selectedFlyer.ctaHref}
+                    onClick={() => setSelectedFlyer(null)}
+                    className="inline-flex items-center justify-center gap-1.5 rounded-full border border-brand-red/30 text-brand-red hover:bg-brand-soft px-4 py-2.5 text-xs font-bold transition-colors"
+                  >
+                    {selectedFlyer.ctaLabel}
+                  </Link>
+                )}
+                <a
+                  href={STORE_INFO.whatsappDirectCta}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center justify-center gap-2 rounded-full bg-brand-red px-5 py-2.5 text-xs font-bold text-white hover:bg-brand-red-dark"
+                >
+                  <ShoppingBag className="h-4 w-4" />
+                  Pesan Sekarang
+                </a>
+              </div>
             </div>
           </div>
         </div>

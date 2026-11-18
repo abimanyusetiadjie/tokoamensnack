@@ -25,6 +25,7 @@ interface ProdukClientProps {
   initialCategories: WebCategory[];
   initialCategory: string;
   initialQuery: string;
+  initialShopeeOnly?: boolean;
   dataSource: "supabase" | "seed";
 }
 
@@ -48,6 +49,7 @@ export function ProdukClient({
   initialCategories,
   initialCategory,
   initialQuery,
+  initialShopeeOnly = false,
   dataSource,
 }: ProdukClientProps) {
   const searchParams = useSearchParams();
@@ -57,6 +59,7 @@ export function ProdukClient({
   const [selectedCategory, setSelectedCategory] = useState<string>(initialCategory);
   const [query, setQuery] = useState<string>(initialQuery);
   const [wholesaleOnly, setWholesaleOnly] = useState<boolean>(false);
+  const [shopeeOnly, setShopeeOnly] = useState<boolean>(initialShopeeOnly);
   const [sort, setSort] = useState<SortOption>("featured");
   const [page, setPage] = useState<number>(1);
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -70,6 +73,7 @@ export function ProdukClient({
       q: string;
       category: string;
       grosir: boolean;
+      shopee: boolean;
       sortBy: SortOption;
       pageNum: number;
       append: boolean;
@@ -84,6 +88,7 @@ export function ProdukClient({
           sp.set("kategori", opts.category);
         }
         if (opts.grosir) sp.set("grosir", "1");
+        if (opts.shopee) sp.set("shopee", "1");
         sp.set("sort", opts.sortBy);
         sp.set("page", String(opts.pageNum));
         sp.set("limit", "24");
@@ -106,11 +111,15 @@ export function ProdukClient({
     []
   );
 
-  // Sync URL query params (?kategori=...&q=...) if user navigates client-side
+  // Sync URL query params (?kategori=...&q=...&shopee=1) if user navigates client-side
   useEffect(() => {
     const paramCat = searchParams.get("kategori");
+    const paramShopee = searchParams.get("shopee") === "1";
     if (paramCat && paramCat !== selectedCategory) {
       setSelectedCategory(paramCat);
+    }
+    if (paramShopee !== shopeeOnly) {
+      setShopeeOnly(paramShopee);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [searchParams]);
@@ -127,13 +136,14 @@ export function ProdukClient({
         q: query,
         category: selectedCategory,
         grosir: wholesaleOnly,
+        shopee: shopeeOnly,
         sortBy: sort,
         pageNum: 1,
         append: false,
       });
     }, 250);
     return () => clearTimeout(timer);
-  }, [query, selectedCategory, wholesaleOnly, sort, fetchProducts]);
+  }, [query, selectedCategory, wholesaleOnly, shopeeOnly, sort, fetchProducts]);
 
   const handleLoadMore = () => {
     const nextPage = page + 1;
@@ -142,6 +152,7 @@ export function ProdukClient({
       q: query,
       category: selectedCategory,
       grosir: wholesaleOnly,
+      shopee: shopeeOnly,
       sortBy: sort,
       pageNum: nextPage,
       append: true,
@@ -211,7 +222,34 @@ export function ProdukClient({
             <div className="flex flex-wrap items-center gap-2.5">
               <button
                 type="button"
-                onClick={() => setWholesaleOnly((prev) => !prev)}
+                onClick={() => {
+                  setShopeeOnly((prev) => {
+                    const next = !prev;
+                    if (next) setWholesaleOnly(false);
+                    setSelectedCategory("semua");
+                    return next;
+                  });
+                }}
+                className={cn(
+                  "inline-flex items-center gap-1.5 rounded-full px-4 py-2 text-xs font-semibold border transition-colors cursor-pointer",
+                  shopeeOnly
+                    ? "bg-[#EE4D2D] text-white border-[#EE4D2D] shadow-xs"
+                    : "bg-white text-[#EE4D2D] border-[#EE4D2D]/40 hover:bg-orange-50"
+                )}
+              >
+                <ShoppingBag className="w-3.5 h-3.5" />
+                <span>Etalase Shopee (108)</span>
+              </button>
+
+              <button
+                type="button"
+                onClick={() => {
+                  setWholesaleOnly((prev) => {
+                    const next = !prev;
+                    if (next) setShopeeOnly(false);
+                    return next;
+                  });
+                }}
                 className={cn(
                   "inline-flex items-center gap-1.5 rounded-full px-4 py-2 text-xs font-semibold border transition-colors cursor-pointer",
                   wholesaleOnly
@@ -222,6 +260,16 @@ export function ProdukClient({
                 <Tag className="w-3.5 h-3.5" />
                 <span>Harga Grosir</span>
               </button>
+
+              <a
+                href={STORE_INFO.shopeeUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1.5 rounded-full bg-brand-red hover:bg-brand-red-dark text-white px-4 py-2 text-xs font-semibold transition-colors"
+              >
+                <ShoppingBag className="w-3.5 h-3.5" />
+                <span>Shopee amensnack</span>
+              </a>
 
               <select
                 value={sort}
@@ -314,6 +362,7 @@ export function ProdukClient({
                     setQuery("");
                     setSelectedCategory("semua");
                     setWholesaleOnly(false);
+                    setShopeeOnly(false);
                   }}
                   className="inline-flex items-center gap-2 rounded-full border-2 border-brand-red bg-white hover:bg-brand-soft text-brand-red font-semibold text-xs px-5 py-2.5 transition-colors cursor-pointer"
                 >

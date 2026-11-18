@@ -14,15 +14,17 @@ export const metadata: Metadata = {
 export default async function ProdukPage({
   searchParams,
 }: {
-  searchParams: Promise<{ kategori?: string; q?: string }>;
+  searchParams: Promise<{ kategori?: string; q?: string; shopee?: string }>;
 }) {
   const sp = await searchParams;
   const initialCategory = normalizeCategorySlug(sp?.kategori);
   const initialQuery = (sp?.q || "").trim();
+  const initialShopeeOnly = sp?.shopee === "1";
 
   const initialData = await searchWebProducts({
     q: initialQuery,
     category: initialCategory,
+    shopeeOnly: initialShopeeOnly,
     sort: "featured",
     limit: 24,
     offset: 0,
@@ -36,6 +38,7 @@ export default async function ProdukPage({
         initialCategories={initialData.categories}
         initialCategory={initialCategory}
         initialQuery={initialQuery}
+        initialShopeeOnly={initialShopeeOnly}
         dataSource={initialData.source}
       />
     </Suspense>

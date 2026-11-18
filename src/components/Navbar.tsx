@@ -80,10 +80,22 @@ export function Navbar() {
             </span>
           </Link>
 
+          {/* Mobile Quick Shopee CTA */}
+          <a
+            href={STORE_INFO.shopeeUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Produk amen snack di Shopee Indonesia"
+            className="lg:hidden absolute right-3 inline-flex items-center gap-1 rounded-full bg-[#EE4D2D] hover:bg-[#d93d1f] text-white px-2.5 py-1.5 text-[11px] font-bold shadow-xs transition-colors"
+          >
+            <ShoppingBag className="w-3.5 h-3.5 shrink-0" />
+            <span>Shopee</span>
+          </a>
+
           {/* Desktop Navigation — Clean Single Row with Red Active Accent */}
           <nav
             aria-label="Navigasi Utama"
-            className="hidden lg:flex gap-8 items-center"
+            className="hidden lg:flex gap-5 xl:gap-7 items-center"
           >
             {NAV_LINKS.map((link) => {
               const isActive =
@@ -109,6 +121,15 @@ export function Navbar() {
                 </Link>
               );
             })}
+            <a
+              href={STORE_INFO.shopeeUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-1.5 rounded-full bg-[#EE4D2D] hover:bg-[#d93d1f] text-white font-semibold text-xs px-4 py-2 whitespace-nowrap shadow-xs transition-colors shrink-0"
+            >
+              <ShoppingBag className="w-3.5 h-3.5 shrink-0" />
+              <span>Shopee Official</span>
+            </a>
           </nav>
         </div>
       </header>

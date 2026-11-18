@@ -1,5 +1,9 @@
 import { isDatabaseConfigured, queryDb } from "@/lib/db";
 import {
+  SHOPEE_CATALOG_ITEMS,
+  resolveShopeeMediaMatch,
+} from "@/lib/shopee-catalog-map";
+import {
   CATEGORIES_COLLECTION,
   PRODUCTS_COLLECTION,
   STORE_INFO,
@@ -69,6 +73,7 @@ export interface CatalogSearchParams {
   featuredOnly?: boolean;
   wholesaleOnly?: boolean;
   inStockOnly?: boolean;
+  shopeeOnly?: boolean;
   maxPrice?: number;
   sort?: "featured" | "price_asc" | "price_desc" | "name_asc";
   limit?: number;
@@ -131,40 +136,27 @@ export function formatRupiah(amount: number): string {
   return `Rp${Math.round(amount).toLocaleString("id-ID")}`;
 }
 
+export function resolveMatchedProductMedia(
+  imageUrl: string | null,
+  name: string,
+  sku: string
+): { imageUrl: string; shopeeUrl: string } {
+  const shopeeMatch = resolveShopeeMediaMatch(name, sku);
+  if (imageUrl && imageUrl.trim()) {
+    return {
+      imageUrl: imageUrl.trim(),
+      shopeeUrl: shopeeMatch.shopeeUrl,
+    };
+  }
+  return shopeeMatch;
+}
+
 export function resolveMatchedProductImage(
   imageUrl: string | null,
   name: string,
   sku: string
 ): string {
-  if (imageUrl && imageUrl.trim()) {
-    return imageUrl.trim();
-  }
-  const upper = name.toUpperCase();
-  if (sku === "AMN-0575" || upper.includes("KEMPLANG AMEN")) {
-    return "/images/products/prd-01-kemplang-pasir-cap-amen.webp";
-  }
-  if (upper.includes("GETAS OBOR")) {
-    return "/images/products/prd-02-getas-cap-obor.webp";
-  }
-  if (upper.includes("KALDU UDANG")) {
-    return "/images/products/prd-03-indomie-kaldu-udang-bangka.webp";
-  }
-  if (upper.includes("INDOMI GORENG") || upper.includes("INDOMIE GORENG")) {
-    return "/images/products/prd-04-indomie-goreng-bangka.webp";
-  }
-  if (upper.includes("KEMPLANG") && upper.includes("JJ")) {
-    return "/images/products/prd-05-kemplang-panggang-jj.webp";
-  }
-  if (upper.includes("KEMPLANG") && upper.includes("BELINYU")) {
-    return "/images/products/prd-06-kemplang-panggang-belinyu.webp";
-  }
-  if (upper.includes("KECAP") && upper.includes("SS")) {
-    return "/images/products/prd-07-kecap-asin-cap-ss.webp";
-  }
-  if (sku === "AMN-0805" || upper.includes("KOPI CURAH")) {
-    return "/images/products/prd-08-kopi-curah-bangka.webp";
-  }
-  return "";
+  return resolveMatchedProductMedia(imageUrl, name, sku).imageUrl;
 }
 
 function getSeedCategoriesFallback(): WebCategory[] {
@@ -418,6 +410,10 @@ export async function searchWebProducts(
   const categorySlug = normalizeCategorySlug(params.category);
   const sort = params.sort || "featured";
 
+  if (params.shopeeOnly) {
+    return filterShopeeCatalog(params, categorySlug, limit, offset);
+  }
+
   if (!isDatabaseConfigured()) {
     return filterSeedFallback(params, categorySlug, limit, offset);
   }
@@ -532,6 +528,7 @@ export async function searchWebProducts(
       const priceNum = Number(row.price || 0);
       const wholesaleNum = Number(row.wholesale_price || 0);
       const catTitle = CATEGORY_TITLES[row.category_slug] || row.category_slug;
+      const media = resolveMatchedProductMedia(row.image_url, row.name, row.sku);
       return {
         id: row.id,
         sku: row.sku,
@@ -558,8 +555,8 @@ export async function searchWebProducts(
         rating: 4.8,
         description:
           row.description || `${row.name} - Oleh-oleh & camilan Toko Amen Snack.`,
-        imageUrl: resolveMatchedProductImage(row.image_url, row.name, row.sku),
-        shopeeUrl: STORE_INFO.shopeeUrl,
+        imageUrl: media.imageUrl,
+        shopeeUrl: media.shopeeUrl,
         isFeatured: Boolean(row.is_featured),
       };
     });
@@ -571,16 +568,19 @@ export async function searchWebProducts(
   }
 }
 
-function filterSeedFallback(
+/**
+ * Shared in-memory filter/sort/pagination pipeline used for Shopee catalog & seed fallback.
+ */
+function applyMemoryCatalogFilter(
+  sourceItems: WebProduct[],
   params: CatalogSearchParams,
   categorySlug: string,
   limit: number,
   offset: number
-): CatalogSearchResult {
-  const all = getSeedProductsFallback();
+): { items: WebProduct[]; total: number } {
   const tokens = normalizeProductQueryTokens(params.q);
 
-  let filtered = all.filter((p) => {
+  let filtered = sourceItems.filter((p) => {
     if (categorySlug !== "semua" && p.categorySlug !== categorySlug) return false;
     if (params.maxPrice && (p.price || 0) > params.maxPrice) return false;
     if (tokens.length > 0) {
@@ -607,6 +607,95 @@ function filterSeedFallback(
   return {
     items: filtered.slice(offset, offset + limit),
     total: filtered.length,
+  };
+}
+
+function getShopeeWebProducts(): WebProduct[] {
+  return SHOPEE_CATALOG_ITEMS.filter((item) => item.inStock).map((item) => ({
+    id: item.id,
+    sku: item.sku,
+    barcode: null,
+    name: item.name,
+    supplierName: `Shopee ${STORE_INFO.shopeeHandle}`,
+    category: item.category,
+    categorySlug: item.categorySlug,
+    price: item.price,
+    wholesalePrice: null,
+    formattedPrice: item.formattedPrice,
+    formattedWholesalePrice: null,
+    stock: 25,
+    unit: "Pcs",
+    weightGrams: null,
+    badge: item.sold ? `Shopee • ${item.sold}` : "Shopee Resmi",
+    rating: item.rating,
+    description: `${item.name} — Tersedia langsung di toko resmi Shopee Toko Amen Snack (${STORE_INFO.shopeeHandle})${item.sold ? `, ${item.sold}` : ""}.`,
+    imageUrl: item.imageUrl,
+    shopeeUrl: item.shopeeUrl,
+    isFeatured: true,
+  }));
+}
+
+function getShopeeCategories(shopeeProducts: WebProduct[]): WebCategory[] {
+  const counts = new Map<string, { title: string; count: number }>();
+  for (const p of shopeeProducts) {
+    const existing = counts.get(p.categorySlug);
+    if (existing) {
+      existing.count += 1;
+    } else {
+      counts.set(p.categorySlug, { title: p.category, count: 1 });
+    }
+  }
+  return Array.from(counts.entries()).map(([slug, info], idx) => ({
+    id: `shp-cat-${idx + 1}`,
+    slug,
+    title: info.title,
+    description: `Produk resmi Shopee ${STORE_INFO.shopeeHandle} kategori ${info.title}.`,
+    iconName: resolveCategoryIcon(slug),
+    sortOrder: idx + 1,
+    productCount: info.count,
+  }));
+}
+
+function filterShopeeCatalog(
+  params: CatalogSearchParams,
+  categorySlug: string,
+  limit: number,
+  offset: number
+): CatalogSearchResult {
+  const allShopee = getShopeeWebProducts();
+  const { items, total } = applyMemoryCatalogFilter(
+    allShopee,
+    params,
+    categorySlug,
+    limit,
+    offset
+  );
+  return {
+    items,
+    total,
+    categories: getShopeeCategories(allShopee),
+    source: isDatabaseConfigured() ? "supabase" : "seed",
+  };
+}
+
+function filterSeedFallback(
+  params: CatalogSearchParams,
+  categorySlug: string,
+  limit: number,
+  offset: number
+): CatalogSearchResult {
+  const all = getSeedProductsFallback();
+  const { items, total } = applyMemoryCatalogFilter(
+    all,
+    params,
+    categorySlug,
+    limit,
+    offset
+  );
+
+  return {
+    items,
+    total,
     categories: getSeedCategoriesFallback(),
     source: "seed",
   };

@@ -23,12 +23,14 @@ export async function GET(req: Request) {
         : "featured";
     const wholesaleOnly = searchParams.get("grosir") === "1";
     const inStockOnly = searchParams.get("ready") === "1";
+    const shopeeOnly = searchParams.get("shopee") === "1";
 
     const result = await searchWebProducts({
       q,
       category,
       wholesaleOnly,
       inStockOnly,
+      shopeeOnly,
       sort,
       limit,
       offset,
