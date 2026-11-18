@@ -857,29 +857,29 @@ export function ChatbotWidget() {
         </div>
       )}
 
-      {/* Single Unified Launcher Pill at Bottom-Right */}
+      {/* Compact circular FAB on mobile (matching tokomama.com WA circle footprint), pill on desktop */}
       <button
         type="button"
         onClick={() => setIsOpen((prev) => !prev)}
         aria-expanded={isOpen}
         aria-label="Buka Asisten Toko & WhatsApp Toko Amen Snack"
         className={cn(
-          "items-center gap-1.5 sm:gap-2 rounded-full bg-brand-red hover:bg-brand-red-dark text-white font-semibold text-xs sm:text-sm pl-3 pr-3.5 sm:pl-3.5 sm:pr-4 h-10 sm:h-12 shadow-xl transition-transform hover:scale-105 active:scale-95 cursor-pointer border border-white/15",
+          "items-center justify-center gap-2 rounded-full bg-brand-red hover:bg-brand-red-dark text-white font-semibold text-xs sm:text-sm w-12 h-12 sm:w-auto sm:h-12 sm:pl-3.5 sm:pr-4 shadow-xl transition-transform hover:scale-105 active:scale-95 cursor-pointer border border-white/15",
           isOpen ? "hidden sm:inline-flex" : "inline-flex"
         )}
       >
         {isOpen ? (
           <>
             <X className="w-4 h-4 shrink-0" />
-            <span>Tutup Chat</span>
+            <span className="hidden sm:inline">Tutup Chat</span>
           </>
         ) : (
           <>
             <span className="relative flex items-center justify-center">
-              <Sparkles className="w-4 h-4 text-amber-300 shrink-0" />
+              <Sparkles className="w-5 h-5 sm:w-4 sm:h-4 text-amber-300 shrink-0" />
               <span className="absolute -top-0.5 -right-0.5 w-2 h-2 rounded-full bg-[#25D366] ring-2 ring-[#2E3677]" />
             </span>
-            <span>Tanya Toko</span>
+            <span className="hidden sm:inline">Tanya Toko</span>
           </>
         )}
       </button>

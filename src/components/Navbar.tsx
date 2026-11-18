@@ -69,7 +69,7 @@ export function Navbar() {
             <Menu className="w-6 h-6" />
           </button>
 
-          {/* Official AMEN SNACK Logo + Wordmark */}
+          {/* Official AMEN SNACK Logo + Wordmark (cleanly centered on mobile matching tokomama.com) */}
           <Link href="/" className="flex items-center gap-2 sm:gap-2.5 group shrink-0">
             <Image
               src="/images/logo-amen-snack.webp"
@@ -88,18 +88,6 @@ export function Navbar() {
               </span>
             </span>
           </Link>
-
-          {/* Mobile Quick Shopee Icon CTA (Compact so it never touches centered logo on 360px/390px) */}
-          <a
-            href={STORE_INFO.shopeeUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="Produk amen snack di Shopee Indonesia"
-            title="Shopee Official amensnack"
-            className="lg:hidden absolute right-3 inline-flex items-center justify-center w-9 h-9 rounded-full bg-[#EE4D2D] hover:bg-[#d93d1f] text-white shadow-xs transition-colors"
-          >
-            <ShoppingBag className="w-4 h-4 shrink-0" />
-          </a>
 
           {/* Desktop Navigation — Clean Single Row with Red Active Accent matching tokomama.com */}
           <nav

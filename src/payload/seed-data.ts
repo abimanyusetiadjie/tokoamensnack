@@ -40,6 +40,7 @@ export interface CategoryItem {
   title: string;
   description: string;
   iconName: CategoryIconName;
+  imageUrl?: string;
 }
 
 export interface TestimonialItem {
@@ -197,6 +198,7 @@ export const CATEGORIES_COLLECTION: CategoryItem[] = [
     description:
       "Kemplang bakar arang/oven khas Bangka lengkap dengan sambal terasi.",
     iconName: "flame",
+    imageUrl: "/images/products/prd-06-kemplang-panggang-belinyu.webp",
   },
   {
     id: "cat-2",
@@ -205,6 +207,7 @@ export const CATEGORIES_COLLECTION: CategoryItem[] = [
     description:
       "Kemplang sangrai pasir bebas minyak (termasuk produk khas Cap AMEN) serta kemplang siap goreng.",
     iconName: "cookie",
+    imageUrl: "/images/products/prd-01-kemplang-pasir-cap-amen.webp",
   },
   {
     id: "cat-3",
@@ -213,6 +216,7 @@ export const CATEGORIES_COLLECTION: CategoryItem[] = [
     description:
       "Getas ikan tenggiri renyah dan aneka kerupuk olahan laut Bangka.",
     iconName: "fish",
+    imageUrl: "/images/products/prd-02-getas-cap-obor.webp",
   },
   {
     id: "cat-4",
@@ -221,6 +225,7 @@ export const CATEGORIES_COLLECTION: CategoryItem[] = [
     description:
       "Camilan telur cumi (kericu) gurih dan hasil laut kering khas Pulau Bangka.",
     iconName: "sparkles",
+    imageUrl: "/images/products/shopee/shp-046-kericu-stick-telor-cumi-cap-js-250g.webp",
   },
   {
     id: "cat-5",
@@ -229,6 +234,7 @@ export const CATEGORIES_COLLECTION: CategoryItem[] = [
     description:
       "Terasi udang asli, kecap asin khas Bangka, dan bumbu masak tradisional.",
     iconName: "utensils",
+    imageUrl: "/images/products/shopee/shp-019-terasi-ams-240g.webp",
   },
   {
     id: "cat-6",
@@ -237,6 +243,7 @@ export const CATEGORIES_COLLECTION: CategoryItem[] = [
     description:
       "Kopi bubuk curah pilihan, kue tradisional, dan mi instan varian eksklusif Bangka.",
     iconName: "coffee",
+    imageUrl: "/images/products/prd-08-kopi-curah-bangka.webp",
   },
 ];
 
