@@ -114,7 +114,7 @@ export const STORE_INFO = {
   tagline: "Pusat Oleh-Oleh & Camilan Khas Bangka Sejak 1 Juni 2007 di Sungailiat",
   announcementText:
     "🎉 Pusat Oleh-Oleh & Camilan Khas Bangka Sejak 1 Juni 2007 di Sungailiat — Melayani Pengiriman ke Seluruh Indonesia!",
-  heroBadge: "🏆 Sejak 1 Juni 2007 • Sisparnas Kemenpar • Rating 4.5★ Google Maps",
+  heroBadge: "Sejak 1 Juni 2007",
   heroTitle: "Pusat Oleh-Oleh & Camilan Khas Bangka Terlengkap",
   heroSubtitle:
     "Nikmati gurih dan renyahnya Kemplang Panggang, Kemplang Pasir Cap AMEN, Getas Ikan, hingga produk eksklusif khas Pulau Bangka. Segar setiap hari dan ramah di kantong!",

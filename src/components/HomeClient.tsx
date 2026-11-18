@@ -118,12 +118,9 @@ export function HomeClient({
         {/* Foreground Content Column (Matches tokomama.com left text / mobile bottom layout) */}
         <div className="relative z-10 w-full max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-[10%] -mt-7 sm:-mt-8 md:mt-0 pb-8 md:py-16">
           <div className="md:w-[56%] lg:w-[52%] text-center md:text-left">
-            <span className="inline-flex items-center gap-1.5 rounded-full bg-white border border-slate-200/80 shadow-sm px-3 py-1 sm:px-3.5 sm:py-1.5 text-[11px] sm:text-xs font-semibold text-brand-red mb-2.5 sm:mb-4">
+            <span className="inline-flex items-center gap-1.5 rounded-full bg-white border border-slate-200/80 shadow-sm px-3.5 py-1.5 text-[11px] sm:text-xs font-semibold text-brand-red mb-2.5 sm:mb-4 whitespace-nowrap">
               <Store className="w-3.5 h-3.5 shrink-0" />
-              <span>
-                Sejak {STORE_INFO.foundedDate} &bull; Sisparnas Kemenpar &bull; Rating{" "}
-                {STORE_INFO.rating}★ Google Maps
-              </span>
+              <span>Sejak {STORE_INFO.foundedDate}</span>
             </span>
 
             <h1 className="font-inter font-extrabold text-[27px] sm:text-4xl lg:text-[42px] xl:text-[48px] leading-[1.16] lg:leading-[1.14] tracking-tight text-gray-900">
