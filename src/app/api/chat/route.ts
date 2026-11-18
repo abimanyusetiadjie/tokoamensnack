@@ -11,7 +11,8 @@ import { getWebStoreAndKnowledge } from "@/lib/catalog";
 import { createStoreTools } from "@/lib/chatbot-tools";
 import {
   buildChatbotSystemPrompt,
-  generateSmartStoreReply,
+  generateSmartStoreWebReply,
+  type ChatbotUiPayload,
 } from "@/lib/chatbot-fallback";
 
 export const dynamic = "force-dynamic";
@@ -46,7 +47,10 @@ function extractHistoryEntries(
   }));
 }
 
-function buildTextStreamResponse(replyText: string): Response {
+function buildTextStreamResponse(
+  replyText: string,
+  uiData?: ChatbotUiPayload
+): Response {
   const textId = `txt-${Date.now()}`;
   const stream = createUIMessageStream({
     execute: ({ writer }) => {
@@ -55,6 +59,12 @@ function buildTextStreamResponse(replyText: string): Response {
       writer.write({ type: "text-start", id: textId });
       writer.write({ type: "text-delta", id: textId, delta: replyText });
       writer.write({ type: "text-end", id: textId });
+      if (uiData && (uiData.products.length > 0 || uiData.suggestions.length > 0)) {
+        writer.write({
+          type: "data-store-ui",
+          data: uiData,
+        });
+      }
       writer.write({ type: "finish-step" });
       writer.write({ type: "finish", finishReason: "stop" });
     },
@@ -71,7 +81,15 @@ export async function POST(req: Request) {
 
     if (messages.length === 0) {
       return buildTextStreamResponse(
-        "Halo! Silakan tanyakan harga, ketersediaan stok, rekomendasi oleh-oleh khas Bangka, atau jam buka Toko Amen Snack."
+        "Halo! Pilih salah satu skenario belanja di atas atau tanyakan harga, stok, dan rekomendasi oleh-oleh khas Bangka.",
+        {
+          products: [],
+          suggestions: [
+            "Paket oleh-oleh < 150rb",
+            "Harga Kemplang Cap AMEN",
+            "Jam buka & alamat toko",
+          ],
+        }
       );
     }
 
@@ -83,8 +101,11 @@ export async function POST(req: Request) {
     );
 
     if (!hasAiGateway) {
-      const replyText = await generateSmartStoreReply(lastUserText, historyEntries);
-      return buildTextStreamResponse(replyText);
+      const smartReply = await generateSmartStoreWebReply(
+        lastUserText,
+        historyEntries
+      );
+      return buildTextStreamResponse(smartReply.text, smartReply.ui);
     }
 
     const { store, knowledge } = await getWebStoreAndKnowledge();
@@ -107,8 +128,11 @@ export async function POST(req: Request) {
         "[POST /api/chat] AI Gateway error, falling back to Smart DB Assistant:",
         aiErr
       );
-      const replyText = await generateSmartStoreReply(lastUserText, historyEntries);
-      return buildTextStreamResponse(replyText);
+      const smartReply = await generateSmartStoreWebReply(
+        lastUserText,
+        historyEntries
+      );
+      return buildTextStreamResponse(smartReply.text, smartReply.ui);
     }
   } catch (err) {
     console.error("[POST /api/chat]", err);

@@ -13,6 +13,33 @@ export interface ChatHistoryEntry {
   text: string;
 }
 
+export interface ChatbotProductCard {
+  id: string;
+  sku: string;
+  name: string;
+  category: string;
+  categorySlug: string;
+  price: number | null;
+  formattedPrice: string;
+  wholesalePrice: number | null;
+  formattedWholesalePrice: string | null;
+  stock: number;
+  unit: string;
+  weightGrams: number | null;
+  imageUrl: string;
+  shopeeUrl: string;
+}
+
+export interface ChatbotUiPayload {
+  products: ChatbotProductCard[];
+  suggestions: string[];
+}
+
+export interface SmartWebReplyResult {
+  text: string;
+  ui: ChatbotUiPayload;
+}
+
 const STOP_WORDS = new Set([
   "halo",
   "hai",
@@ -137,6 +164,8 @@ const STOP_WORDS = new Set([
   "kota",
   "pulau",
   "ekspedisi",
+  "packing",
+  "shopee",
 ]);
 
 export function buildChatbotSystemPrompt(
@@ -156,7 +185,7 @@ export function buildChatbotSystemPrompt(
     "",
     "ATURAN WAJIB:",
     "1. Jawab dalam Bahasa Indonesia yang ramah, ringkas, jelas, dan membantu.",
-    "2. JANGAN PERNAH mengarang harga, stok, atau SKU. Selalu panggil tool `searchProducts` terlebih dahulu sebelum menyebut harga atau ketersediaan barang.",
+    "2. JANGAN PERNAH mengarang harga, stok, atau SKU. Selalu panggil tool `searchProducts` (maksimal limit 3) terlebih dahulu sebelum menyebut harga atau ketersediaan barang.",
     "3. Untuk jam buka, alamat, Google Maps, Waze, pengiriman, atau Shopee, panggil `getStoreProfile`.",
     "4. Saat menampilkan produk, sebutkan nama persis produk, harga ritel, harga grosir (jika tersedia), ukuran/gramasi (jika ada), dan status stok (`Stok Ready` / `Habis`).",
     "5. Jangan pernah membocorkan atau membahas harga modal/HPP maupun data internal toko.",
@@ -267,6 +296,25 @@ function encodeWaText(text: string): string {
   );
 }
 
+function toChatbotProductCards(items: WebProduct[], max = 3): ChatbotProductCard[] {
+  return items.slice(0, max).map((p) => ({
+    id: p.id,
+    sku: p.sku,
+    name: p.name,
+    category: p.category,
+    categorySlug: p.categorySlug,
+    price: p.price,
+    formattedPrice: p.formattedPrice,
+    wholesalePrice: p.wholesalePrice,
+    formattedWholesalePrice: p.formattedWholesalePrice,
+    stock: p.stock,
+    unit: p.unit,
+    weightGrams: p.weightGrams,
+    imageUrl: p.imageUrl,
+    shopeeUrl: p.shopeeUrl,
+  }));
+}
+
 function formatProductBullets(items: WebProduct[], waUrl: string): string {
   return items
     .map((p) => {
@@ -283,20 +331,48 @@ function formatProductBullets(items: WebProduct[], waUrl: string): string {
     .join("\n\n");
 }
 
+function buildProductFollowUps(opts: {
+  items: WebProduct[];
+  wholesaleOnly: boolean;
+  isShippingOrStore: boolean;
+  hasMultiWeights: boolean;
+}): string[] {
+  const candidates: string[] = [];
+  const first = opts.items[0];
+  if (first) {
+    const shortName = first.name.split(/\s+/).slice(0, 2).join(" ");
+    candidates.push(`Pesan 2 ${shortName}`);
+    if (!opts.hasMultiWeights && /\b(getas|kemplang|kericu|ampiang)\b/i.test(first.name)) {
+      candidates.push(`Cek ${shortName} 250g & 500g`);
+    }
+  }
+  if (!opts.wholesaleOnly) {
+    candidates.push("Produk harga grosir");
+  } else {
+    candidates.push("Paket oleh-oleh < 150rb");
+  }
+  if (!opts.isShippingOrStore) {
+    candidates.push("Info kirim luar kota");
+  } else {
+    candidates.push("Best seller Cap AMEN");
+  }
+  return Array.from(new Set(candidates)).slice(0, 3);
+}
+
 /**
- * Deterministic Supabase-backed store assistant used when an LLM Gateway key
- * is not yet configured (reused across Web Chatbot & WAHA WhatsApp Webhook).
+ * Shared smart resolution engine for both WhatsApp (text-only) and Web Widget (rich UI cards + follow-up chips).
  */
-export async function generateSmartStoreReply(
+async function resolveSmartStoreResponse(
   userText: string,
-  history: ChatHistoryEntry[] = []
-): Promise<string> {
+  history: ChatHistoryEntry[],
+  mode: "web" | "whatsapp"
+): Promise<SmartWebReplyResult> {
   const trimmed = userText.trim();
   const lower = trimmed.toLowerCase();
   const { store, knowledge } = await getWebStoreAndKnowledge();
 
   const isStoreInfoIntent =
-    /\b(jam|buka|tutup|operasional|alamat|lokasi|dimana|di mana|maps|waze|kirim|ongkir|pengiriman|ekspedisi|shopee|ig|instagram|tiktok|kontak|nomor|telepon|wa|whatsapp)\b/i.test(
+    /\b(jam|buka|tutup|operasional|alamat|lokasi|dimana|di mana|maps|waze|kirim|ongkir|pengiriman|ekspedisi|packing|shopee|ig|instagram|tiktok|kontak|nomor|telepon|wa|whatsapp)\b/i.test(
       lower
     );
 
@@ -311,16 +387,31 @@ export async function generateSmartStoreReply(
     );
 
   if (isGreetingOnly) {
-    return [
-      `Halo! Selamat datang di **${store.name}** Sungailiat.`,
-      "",
-      "Saya siap membantu mengecek **harga eceran/grosir**, **ketersediaan stok produk**, **estimasi total pesanan**, **jam buka**, dan **pemesanan WhatsApp** secara langsung.",
-      "",
-      "Anda bisa tanyakan misalnya:",
-      "• *\"Harga Kemplang Cap AMEN atau Getas 250g\"*",
-      "• *\"Indomie Kaldu Udang Bangka atau Kemplang Panggang\"*",
-      "• *\"Pesan 2 Getas AMS 250g\"* atau *\"Jam buka & lokasi toko\"*",
-    ].join("\n");
+    const text =
+      mode === "web"
+        ? `Halo! Selamat datang di **${store.name}** Sungailiat. Silakan pilih salah satu rekomendasi di bawah atau langsung ketik nama camilan yang Anda cari.`
+        : [
+            `Halo! Selamat datang di **${store.name}** Sungailiat.`,
+            "",
+            "Saya siap membantu mengecek **harga eceran/grosir**, **ketersediaan stok produk**, **estimasi total pesanan**, **jam buka**, dan **pemesanan WhatsApp** secara langsung.",
+            "",
+            "Anda bisa tanyakan misalnya:",
+            "• *\"Harga Kemplang Cap AMEN atau Getas 250g\"*",
+            "• *\"Indomie Kaldu Udang Bangka atau Kemplang Panggang\"*",
+            "• *\"Pesan 2 Getas AMS 250g\"* atau *\"Jam buka & lokasi toko\"*",
+          ].join("\n");
+
+    return {
+      text,
+      ui: {
+        products: [],
+        suggestions: [
+          "Paket oleh-oleh < 150rb",
+          "Harga Kemplang Cap AMEN",
+          "Jam buka & alamat toko",
+        ],
+      },
+    };
   }
 
   if (isCatalogSummaryIntent && !extractOrderIntent(trimmed)) {
@@ -330,11 +421,22 @@ export async function generateSmartStoreReply(
       .slice(0, 6)
       .map((c) => `• **${c.title}** (${c.productCount} varian)`)
       .join("\n");
-    return [
-      `Saat ini tersedia **${totalActive.toLocaleString("id-ID")} varian produk aktif** di katalog online **${store.name}** Sungailiat dalam **${categories.length} kategori**:`,
-      catLines,
-      `Lihat lengkap & filter harga grosir di [Katalog Produk](/produk), atau ketik nama camilan yang dicari (mis. *kemplang amen*, *getas 500g*, *kopi bangka*).`,
-    ].join("\n\n");
+
+    return {
+      text: [
+        `Saat ini tersedia **${totalActive.toLocaleString("id-ID")} varian produk aktif** di katalog online **${store.name}** Sungailiat dalam **${categories.length} kategori**:`,
+        catLines,
+        `Lihat lengkap & filter harga grosir di [Katalog Produk](/produk), atau ketik nama camilan yang dicari.`,
+      ].join("\n\n"),
+      ui: {
+        products: [],
+        suggestions: [
+          "Best seller Cap AMEN",
+          "Produk harga grosir",
+          "Paket oleh-oleh < 150rb",
+        ],
+      },
+    };
   }
 
   const orderIntent = extractOrderIntent(trimmed);
@@ -370,14 +472,27 @@ export async function generateSmartStoreReply(
           : "";
         const weightHint =
           totalGrams > 0 ? `\n• Estimasi Berat Total: **${(totalGrams / 1000).toFixed(2)} kg**` : "";
-        return [
-          `🧾 **Estimasi Pesanan Toko Amen Snack:**\n• Produk: **${chosen.name}**\n• Jumlah: **${qty} ${chosen.unit}**\n• Harga Eceran: **${chosen.formattedPrice}** / ${chosen.unit}${wholesaleHint}${weightHint}\n• Estimasi Subtotal: **${formatRupiah(subtotal)}**\n\n👉 [Konfirmasi Pesanan via WhatsApp Admin](${store.whatsappUrl}?text=${waOrderMsg})`,
-          orderRes.items.length > 1
-            ? `**Pilihan varian serupa:**\n${formatProductBullets(orderRes.items.slice(1), store.whatsappUrl)}`
-            : "",
-        ]
-          .filter(Boolean)
-          .join("\n\n");
+
+        const baseReceipt = `🧾 **Estimasi Pesanan Toko Amen Snack:**\n• Produk: **${chosen.name}**\n• Jumlah: **${qty} ${chosen.unit}**\n• Harga Eceran: **${chosen.formattedPrice}** / ${chosen.unit}${wholesaleHint}${weightHint}\n• Estimasi Subtotal: **${formatRupiah(subtotal)}**\n\n👉 [Konfirmasi Pesanan via WhatsApp Admin](${store.whatsappUrl}?text=${waOrderMsg})`;
+
+        const text =
+          mode === "whatsapp" && orderRes.items.length > 1
+            ? `${baseReceipt}\n\n**Pilihan varian serupa:**\n${formatProductBullets(orderRes.items.slice(1), store.whatsappUrl)}`
+            : mode === "web"
+              ? `${baseReceipt}\n\nTekan **+ Tambah** di kartu bawah jika ingin menggabungkan beberapa produk sekaligus ke kalkulator pesanan.`
+              : baseReceipt;
+
+        return {
+          text,
+          ui: {
+            products: toChatbotProductCards(orderRes.items, 3),
+            suggestions: [
+              "Tambah Kemplang AMEN",
+              "Produk harga grosir",
+              "Info kirim luar kota",
+            ],
+          },
+        };
       }
     }
   }
@@ -393,7 +508,7 @@ export async function generateSmartStoreReply(
     const shippingKb = knowledge.find((k) => k.topicKey === "grosir_pengiriman");
     if (
       shippingKb &&
-      /\b(kirim|ongkir|pengiriman|ekspedisi|luar|grosir|paket)\b/i.test(lower)
+      /\b(kirim|ongkir|pengiriman|ekspedisi|luar|grosir|paket|packing|shopee)\b/i.test(lower)
     ) {
       parts.push(`📦 **Info Pengiriman & Grosir:**\n${shippingKb.content}`);
     }
@@ -419,18 +534,22 @@ export async function generateSmartStoreReply(
     }
   }
 
-  const shouldSearchProducts =
-    keywords.length > 0 ||
-    categoryHint !== "semua" ||
-    wholesaleOnly ||
-    Boolean(maxPrice) ||
-    !isStoreInfoIntent;
+  const isExplicitStoreOnlyNoProduct =
+    isStoreInfoIntent && !keywords && categoryHint === "semua" && !wholesaleOnly && !maxPrice;
+
+  const shouldSearchProducts = !isExplicitStoreOnlyNoProduct;
+
+  let returnedItems: WebProduct[] = [];
+  let suggestions: string[] = [
+    "Paket oleh-oleh < 150rb",
+    "Best seller Cap AMEN",
+    "Produk harga grosir",
+  ];
 
   if (shouldSearchProducts) {
     let items: WebProduct[] = [];
     let totalMatches = 0;
 
-    // Multi-size comparison query (e.g., "Cek Getas 250g & 500g")
     if (weightTokens.length >= 2) {
       const weightSet = new Set(weightTokens);
       const baseTokens = keywords
@@ -460,8 +579,9 @@ export async function generateSmartStoreReply(
           }
         }
       }
-      items = items.slice(0, 6);
+      items = items.slice(0, mode === "web" ? 3 : 6);
     } else {
+      const limitCount = mode === "web" ? 3 : 5;
       let searchRes = await searchWebProducts({
         q: keywords,
         category: keywords ? "semua" : categoryHint,
@@ -470,11 +590,10 @@ export async function generateSmartStoreReply(
         featuredOnly:
           !keywords && categoryHint === "semua" && !wholesaleOnly && !maxPrice,
         sort: "featured",
-        limit: 5,
+        limit: limitCount,
         offset: 0,
       });
 
-      // Broaden search if strict filter returned empty
       if (
         searchRes.items.length === 0 &&
         (wholesaleOnly || categoryHint !== "semua")
@@ -484,19 +603,18 @@ export async function generateSmartStoreReply(
           category: categoryHint,
           maxPrice,
           sort: "featured",
-          limit: 5,
+          limit: limitCount,
           offset: 0,
         });
       }
 
-      // Fallback to first/primary token if multi-token query returned 0 matches
       if (searchRes.items.length === 0 && keywords.includes(" ")) {
         const primaryToken = keywords.split(/\s+/)[0];
         searchRes = await searchWebProducts({
           q: primaryToken,
           maxPrice,
           sort: "featured",
-          limit: 5,
+          limit: limitCount,
           offset: 0,
         });
       }
@@ -505,39 +623,104 @@ export async function generateSmartStoreReply(
       totalMatches = searchRes.total;
     }
 
+    returnedItems = items;
+
     if (items.length > 0) {
-      const heading = wholesaleOnly
-        ? "🏷️ **Produk Tersedia dengan Harga Grosir:**"
-        : maxPrice
-          ? `💡 **Rekomendasi Produk ≤ ${formatRupiah(maxPrice)}:**`
-          : weightTokens.length >= 2
-            ? `🛍️ **Perbandingan Varian ${weightTokens.join(" & ")} (${items.length} pilihan teratas):**`
-            : keywords
-              ? `🛍️ **Hasil Katalog Toko (${totalMatches} ditemukan, menampilkan ${items.length} teratas):**`
-              : "⭐ **Rekomendasi Oleh-Oleh Khas Bangka Unggulan:**";
-
-      parts.push(heading);
-      parts.push(formatProductBullets(items, store.whatsappUrl));
-
       const siteCatalogUrl = keywords
         ? `/produk?q=${encodeURIComponent(keywords)}`
         : categoryHint !== "semua"
           ? `/produk?kategori=${encodeURIComponent(categoryHint)}`
           : "/produk";
-      parts.push(
-        `Ketik jumlah untuk hitung pesanan (mis. *pesan 2 ${items[0].name.split(" ").slice(0, 2).join(" ")}*) atau lihat [Semua Hasil di Katalog](${siteCatalogUrl}).`
-      );
+
+      if (mode === "web") {
+        const displayCount = Math.min(items.length, 3);
+        const leadLine = wholesaleOnly
+          ? `Berikut ${displayCount} produk pilihan dengan **harga grosir aktif** (dari ${totalMatches} item grosir).`
+          : maxPrice
+            ? `Berikut ${displayCount} rekomendasi oleh-oleh **di bawah ${formatRupiah(maxPrice)}** (${totalMatches} varian cocok).`
+            : weightTokens.length >= 2
+              ? `Perbandingan varian ukuran **${weightTokens.join(" & ")}** teratas dari katalog toko:`
+              : keywords
+                ? `Ditemukan **${totalMatches} produk** untuk "${keywords}". Ini ${displayCount} pilihan teratas:`
+                : `Berikut ${displayCount} rekomendasi oleh-oleh terlaris Toko Amen Snack:`;
+
+        parts.push(
+          `${leadLine}\nTekan **+ Tambah** pada kartu di bawah untuk menghitung estimasi total & berat, atau buka [Semua Hasil di Katalog](${siteCatalogUrl}).`
+        );
+      } else {
+        const heading = wholesaleOnly
+          ? "🏷️ **Produk Tersedia dengan Harga Grosir:**"
+          : maxPrice
+            ? `💡 **Rekomendasi Produk ≤ ${formatRupiah(maxPrice)}:**`
+            : weightTokens.length >= 2
+              ? `🛍️ **Perbandingan Varian ${weightTokens.join(" & ")} (${items.length} pilihan teratas):**`
+              : keywords
+                ? `🛍️ **Hasil Katalog Toko (${totalMatches} ditemukan, menampilkan ${items.length} teratas):**`
+                : "⭐ **Rekomendasi Oleh-Oleh Khas Bangka Unggulan:**";
+
+        parts.push(heading);
+        parts.push(formatProductBullets(items, store.whatsappUrl));
+        parts.push(
+          `Ketik jumlah untuk hitung pesanan (mis. *pesan 2 ${items[0].name.split(" ").slice(0, 2).join(" ")}*) atau lihat [Semua Hasil di Katalog](${siteCatalogUrl}).`
+        );
+      }
+
+      suggestions = buildProductFollowUps({
+        items,
+        wholesaleOnly,
+        isShippingOrStore: isStoreInfoIntent,
+        hasMultiWeights: weightTokens.length >= 2,
+      });
     } else if (!isStoreInfoIntent) {
       const waMissing = encodeWaText(
         `Halo Admin Toko Amen Snack, saya sedang mencari "${trimmed}". Apakah tersedia di toko?`
       );
       parts.push(
-        `Maaf, kata kunci **"${keywords || trimmed}"** belum ditemukan di daftar katalog aktif kami.\n\nSilakan coba kata kunci lain (mis. *kemplang*, *getas*, *ampiang*, *terasi*, *kopi*, *lempuk*) atau langsung tanyakan ke admin toko:\n• [Tanya Stok Langsung via WhatsApp](${store.whatsappUrl}?text=${waMissing})\n• [Kunjungi Shopee Toko Amen Snack](${store.shopeeUrl})`
+        `Maaf, kata kunci **"${keywords || trimmed}"** belum ditemukan di daftar katalog aktif kami.\n\nSilakan coba kata kunci lain atau tanyakan langsung ke admin:\n• [Tanya Stok via WhatsApp](${store.whatsappUrl}?text=${waMissing})\n• [Kunjungi Shopee Toko Amen Snack](${store.shopeeUrl})`
       );
+      suggestions = [
+        "Best seller Cap AMEN",
+        "Getas & Kericu Bangka",
+        "Jam buka & lokasi toko",
+      ];
     }
+  } else {
+    suggestions = [
+      "Best seller Cap AMEN",
+      "Paket oleh-oleh < 150rb",
+      "Produk harga grosir",
+    ];
   }
 
-  return parts.join("\n\n");
+  return {
+    text: parts.join("\n\n"),
+    ui: {
+      products: toChatbotProductCards(returnedItems, 3),
+      suggestions,
+    },
+  };
+}
+
+/**
+ * Deterministic Supabase-backed store assistant (text output for WhatsApp WAHA webhook).
+ */
+export async function generateSmartStoreReply(
+  userText: string,
+  history: ChatHistoryEntry[] = []
+): Promise<string> {
+  const result = await resolveSmartStoreResponse(userText, history, "whatsapp");
+  return result.text;
+}
+
+/**
+ * Structured assistant response for Web Widget (/api/chat) returning concise text,
+ * up to 3 visual product cards, and 2-3 contextual follow-up chips.
+ */
+export async function generateSmartStoreWebReply(
+  userText: string,
+  history: ChatHistoryEntry[] = []
+): Promise<SmartWebReplyResult> {
+  return resolveSmartStoreResponse(userText, history, "web");
 }
 
 /**

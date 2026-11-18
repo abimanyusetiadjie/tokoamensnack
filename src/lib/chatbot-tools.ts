@@ -44,9 +44,9 @@ export function createStoreTools(store: WebStoreProfile) {
           .number()
           .int()
           .min(1)
-          .max(10)
+          .max(6)
           .optional()
-          .describe("Jumlah maksimal hasil yang diambil (default 6)"),
+          .describe("Jumlah maksimal hasil yang diambil (default 3)"),
       }),
       execute: async ({
         query,
@@ -61,16 +61,19 @@ export function createStoreTools(store: WebStoreProfile) {
           wholesaleOnly,
           maxPrice,
           sort: "featured",
-          limit: limit || 6,
+          limit: Math.min(limit || 3, 6),
           offset: 0,
         });
         return {
           source: res.source,
           totalMatches: res.total,
           products: res.items.map((p) => ({
+            id: p.id,
             sku: p.sku,
             name: p.name,
             category: p.category,
+            categorySlug: p.categorySlug,
+            price: p.price,
             retailPrice: p.price,
             formattedPrice: p.formattedPrice,
             wholesalePrice: p.wholesalePrice,
@@ -79,6 +82,8 @@ export function createStoreTools(store: WebStoreProfile) {
             unit: p.unit,
             inStock: p.stock > 0,
             stock: p.stock,
+            imageUrl: p.imageUrl,
+            shopeeUrl: p.shopeeUrl,
           })),
         };
       },
