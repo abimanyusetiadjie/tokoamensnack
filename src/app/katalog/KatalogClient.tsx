@@ -22,7 +22,7 @@ export function KatalogClient() {
     <div className="min-h-screen bg-white overflow-x-clip">
       <PageHeroBanner
         breadcrumb={tx("Promo & Highlight", "Promos & Highlights")}
-        badge={tx("Produksi Langsung AMS & Pengiriman Nasional", "In-House Brand AMS & Nationwide Shipping")}
+        badge={tx("Dikemas Langsung AMS & Pengiriman Nasional", "Direct-Packed AMS & Nationwide Shipping")}
         title={tx("Sorotan Promo Toko Amen Snack", "Toko Amen Snack Promo Highlights")}
         subtitle={tx(
           "Klik banner di bawah untuk memperbesar detail promo unggulan produk AMS dan layanan pengiriman oleh-oleh khas Bangka ke seluruh Indonesia.",

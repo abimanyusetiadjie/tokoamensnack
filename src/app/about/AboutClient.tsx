@@ -33,10 +33,10 @@ const AMS_HIGHLIGHT_PRODUCTS = [
     id: "ams-terasi-240",
     name: "Terasi AMS Asli Bangka (240g)",
     enName: "Authentic Bangka Shrimp Paste AMS (240g)",
-    tag: "Produksi Langsung AMS",
-    enTag: "In-House AMS",
-    description: "Terasi udang rebon murni buatan Toko Amen Snack dengan aroma gurih autentik.",
-    enDescription: "Pure fermented shrimp paste crafted directly by Toko Amen Snack with rich savory aroma.",
+    tag: "Dikemas Langsung AMS",
+    enTag: "Direct-Packed AMS",
+    description: "Terasi udang rebon murni pilihan yang dikemas langsung di Toko Amen Snack dengan aroma gurih autentik.",
+    enDescription: "Pure fermented shrimp paste selected and packed directly at Toko Amen Snack with rich savory aroma.",
     imageUrl: "/images/products/shopee/shp-019-terasi-ams-240g.webp",
     shopeeUrl: "https://shopee.co.id/Terasi-AMS-240g-i.284836006.8490717110",
   },
@@ -46,8 +46,8 @@ const AMS_HIGHLIGHT_PRODUCTS = [
     enName: "Bangka Fish Cracker Getas AMS Round (250g)",
     tag: "Best Seller AMS",
     enTag: "AMS Bestseller",
-    description: "Kerupuk getas ikan tenggiri bulat renyah produksi langsung Toko Amen Snack tanpa pengawet.",
-    enDescription: "Crispy round mackerel getas crackers made in-house by Toko Amen Snack with zero preservatives.",
+    description: "Kerupuk getas ikan tenggiri bulat renyah yang dikemas langsung di Toko Amen Snack tanpa pengawet.",
+    enDescription: "Crispy round mackerel getas crackers packed directly at Toko Amen Snack with zero preservatives.",
     imageUrl: "/images/products/shopee/shp-022-getas-bangka-ams-250g-bulat.webp",
     shopeeUrl: "https://shopee.co.id/Getas-Bangka-AMS-250g-bulat-i.284836006.7242381399",
   },
@@ -55,10 +55,10 @@ const AMS_HIGHLIGHT_PRODUCTS = [
     id: "ams-getas-panjang",
     name: 'Getas Bangka "AMS" Panjang 250g',
     enName: "Bangka Fish Cracker Getas AMS Long (250g)",
-    tag: "Produksi Langsung AMS",
-    enTag: "In-House AMS",
-    description: "Kerupuk getas ikan tenggiri model panjang 250g produksi langsung Toko Amen Snack.",
-    enDescription: "Elongated mackerel getas crackers (250g) crafted directly by Toko Amen Snack.",
+    tag: "Dikemas Langsung AMS",
+    enTag: "Direct-Packed AMS",
+    description: "Kerupuk getas ikan tenggiri model panjang 250g yang dikemas langsung di Toko Amen Snack.",
+    enDescription: "Elongated mackerel getas crackers (250g) packed directly at Toko Amen Snack.",
     imageUrl: "/images/products/shopee/shp-097-getas-bangka-ams-panjang-250g.webp",
     shopeeUrl: "https://shopee.co.id/Getas-bangka-AMS-panjang-250g-i.284836006.6442376843",
   },
@@ -68,8 +68,8 @@ const AMS_HIGHLIGHT_PRODUCTS = [
     enName: "Squid-Egg Kericu Sticks AMS (250g)",
     tag: "Andalan AMS",
     enTag: "AMS Signature",
-    description: "Stik kericu telur cumi renyah & gurih olahan dapur produksi Toko Amen Snack Sungailiat.",
-    enDescription: "Savory crunchy squid-egg kericu sticks crafted by Toko Amen Snack's own production kitchen.",
+    description: "Stik kericu telur cumi renyah & gurih yang dikemas langsung di Toko Amen Snack Sungailiat.",
+    enDescription: "Savory crunchy squid-egg kericu sticks packed directly at Toko Amen Snack Sungailiat.",
     imageUrl: "/images/products/shopee/shp-058-kericu-stick-telor-cumi-ams-250g.webp",
     shopeeUrl: "https://shopee.co.id/Kericu-Stick-Telor-Cumi-AMS-250g-i.284836006.5642388968",
   },
@@ -79,15 +79,15 @@ const AMS_HIGHLIGHT_PRODUCTS = [
     enName: "Ready-to-Use Shrimp Paste Powder AMS",
     tag: "Praktis & Higienis",
     enTag: "Convenient & Pure",
-    description: "Terasi Bangka siap tabur dalam bentuk bubuk halus produksi internal bermerek AMS.",
-    enDescription: "Finely milled ready-to-cook Bangka terasi powder produced exclusively under the AMS label.",
+    description: "Terasi Bangka siap tabur dalam bentuk bubuk halus yang dikemas langsung bermerek AMS di Toko Amen Snack.",
+    enDescription: "Finely milled ready-to-cook Bangka terasi powder packed directly under the AMS label at Toko Amen Snack.",
     imageUrl: "/images/products/shopee/shp-041-terasi-bubuk-ams.webp",
     shopeeUrl: "https://shopee.co.id/Terasi-Bubuk-AMS-i.284836006.4258560015",
   },
 ] as const;
 
 /**
- * About page detailing Toko Amen Snack Bangka profile, Sisparnas status, direct AMS in-house products, and value pillars.
+ * About page detailing Toko Amen Snack Bangka profile, Sisparnas status, direct-packed AMS products, and value pillars.
  */
 export function AboutClient() {
   const { isEn, tx } = useLanguage();
@@ -125,8 +125,8 @@ export function AboutClient() {
             <div className="lg:col-span-6">
               <h2 className="font-inter font-bold text-2xl sm:text-3xl text-brand-dark leading-snug">
                 {tx(
-                  "Oleh-Oleh 100% Asli Bangka Langsung dari Pengrajin & Produksi AMS",
-                  "100% Authentic Bangka Souvenirs from Local Artisans & In-House Brand AMS"
+                  "Oleh-Oleh 100% Asli Bangka dari Pengrajin & Dikemas Langsung AMS",
+                  "100% Authentic Bangka Souvenirs from Local Artisans & Direct-Packed AMS"
                 )}
               </h2>
               <p className="text-sm sm:text-base text-slate-600 mt-4 leading-relaxed">
@@ -134,13 +134,13 @@ export function AboutClient() {
                 <strong>{tx(STORE_INFO.foundedDate, FOUNDED_DATE_EN)}</strong>,{" "}
                 <strong>{STORE_INFO.name}</strong>{" "}
                 {tx(
-                  "terdaftar sebagai salah satu Amenitas Pariwisata Resmi di Kabupaten Bangka pada Sistem Informasi Kepariwisataan Nasional (Sisparnas Kementerian Pariwisata) serta memproduksi langsung lini produk internal bermerek",
-                  "is officially listed as a Tourism Amenity in Bangka Regency on Indonesia's Ministry of Tourism Sisparnas directory and produces our in-house signature line branded"
+                  "terdaftar sebagai salah satu Amenitas Pariwisata Resmi di Kabupaten Bangka pada Sistem Informasi Kepariwisataan Nasional (Sisparnas Kementerian Pariwisata) serta memiliki lini produk bermerek",
+                  "is officially listed as a Tourism Amenity in Bangka Regency on Indonesia's Ministry of Tourism Sisparnas directory and offers our signature line branded"
                 )}{" "}
                 <strong className="text-brand-red">&ldquo;AMS&rdquo;</strong>{" "}
                 {tx(
-                  "(Amen Snack) seperti Terasi AMS, Getas AMS, dan Kericu Telor Cumi AMS.",
-                  "(Amen Snack), including AMS Shrimp Paste (Terasi), AMS Getas Crackers, and AMS Squid-Egg Kericu."
+                  "(Amen Snack) yang dikemas langsung di Toko Amen Snack, seperti Terasi AMS, Getas AMS, dan Kericu Telor Cumi AMS.",
+                  "(Amen Snack) packed directly at Toko Amen Snack, including AMS Shrimp Paste (Terasi), AMS Getas Crackers, and AMS Squid-Egg Kericu."
                 )}
               </p>
 
@@ -148,13 +148,13 @@ export function AboutClient() {
                 {(isEn
                   ? [
                       `Trusted heritage since ${FOUNDED_DATE_EN} with a 4.5★ Google Maps reputation among travelers`,
-                      "Direct In-House Brand AMS: produced directly by Toko Amen Snack for guaranteed freshness, hygiene, and consistent taste",
+                      "Direct-Packed AMS Brand: selected and packed directly at Toko Amen Snack for guaranteed freshness, hygiene, and consistent taste",
                       "Sungailiat's fullest selection: grilled/sand-roasted/fried kemplang, AMS getas & kericu, AMS terasi, coffee, and Bangka noodles",
                       "Available for walk-in shopping at Jl. Muhidin No.106 or nationwide delivery via WhatsApp & Shopee",
                     ]
                   : [
                       `Berpengalaman sejak ${STORE_INFO.foundedDate}: dipercaya wisatawan dan pelanggan oleh-oleh khas Bangka dengan reputasi 4,5★ Google Maps`,
-                      "Produk Produksi Langsung AMS: diolah langsung oleh Toko Amen Snack untuk menjaga kesegaran, kehigienisan, dan mutu rasa asli Bangka",
+                      "Produk Dikemas Langsung AMS: dipilih dan dikemas langsung di Toko Amen Snack untuk menjaga kesegaran, kehigienisan, dan mutu rasa asli Bangka",
                       "Katalog Terlengkap di Sungailiat: produk AMS (Terasi, Getas, Kericu, Rusip, Ampiang), aneka Kemplang Panggang & Pasir, kopi, dan mi khas Bangka",
                       "Melayani pembelian langsung di Jl. Muhidin No.106 maupun pengiriman nasional via WhatsApp & Shopee",
                     ]
@@ -191,22 +191,22 @@ export function AboutClient() {
         </div>
       </section>
 
-      {/* Direct Production AMS Highlight */}
+      {/* Direct-Packed AMS Highlight */}
       <section className="bg-white pb-14 sm:pb-16">
         <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-[10%]">
           <div className="rounded-3xl border border-slate-200/80 bg-brand-soft/60 p-6 sm:p-10">
             <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-7">
               <div className="max-w-2xl">
                 <span className="inline-block rounded-full bg-brand-red text-white text-[11px] font-bold uppercase tracking-wider px-3 py-1 mb-2.5">
-                  {tx("Produksi Langsung Toko Amen Snack", "In-House Production by Toko Amen Snack")}
+                  {tx("Dikemas Langsung di Toko Amen Snack", "Packed Directly at Toko Amen Snack")}
                 </span>
                 <h2 className="font-inter font-bold text-2xl sm:text-3xl text-brand-dark">
-                  {tx("Highlight Lini Produk Unggulan AMS", "Featured In-House Products: AMS Series")}
+                  {tx("Highlight Lini Produk Unggulan AMS", "Featured Products: AMS Series")}
                 </h2>
                 <p className="text-xs sm:text-sm text-slate-600 mt-1.5 leading-relaxed">
                   {tx(
-                    "Produk berlabel AMS diolah dan dikemas langsung oleh Toko Amen Snack Sungailiat — menjaga standar kesegaran harian, kebersihan kemasan, serta cita rasa otentik Bangka.",
-                    "Items carrying the AMS label are crafted and packed directly by Toko Amen Snack Sungailiat — guaranteeing daily freshness, hygienic packing, and authentic Bangka flavor."
+                    "Produk berlabel AMS dipilih dan dikemas langsung di Toko Amen Snack Sungailiat — menjaga standar kesegaran harian, kebersihan kemasan, serta cita rasa otentik Bangka.",
+                    "Items carrying the AMS label are selected and packed directly at Toko Amen Snack Sungailiat — guaranteeing daily freshness, hygienic packing, and authentic Bangka flavor."
                   )}
                 </p>
               </div>

@@ -222,7 +222,7 @@ export function HomeClient({
                 <p className="text-xs sm:text-base text-gray-600 mt-1.5">
                   {tx(
                     "Cek penawaran spesial produk unggulan AMS dan layanan kirim seluruh Indonesia.",
-                    "Explore special in-house AMS offers and nationwide souvenir shipping across Indonesia."
+                    "Explore special direct-packed AMS offers and nationwide souvenir shipping across Indonesia."
                   )}
                 </p>
               </div>

@@ -92,10 +92,10 @@ export const FLYER_EN: Record<
 > = {
   "promo-cap-amen": {
     title: "Kemplang & Signature AMS Snacks",
-    badge: "In-House AMS Production",
+    badge: "Direct-Packed AMS",
     period: "Available Daily",
     description:
-      "Getas Bangka AMS, Kericu Telor Cumi AMS, Terasi Toboali AMS & Terasi Bubuk AMS crafted directly by Toko Amen Snack.",
+      "Getas Bangka AMS, Kericu Telor Cumi AMS, Terasi Toboali AMS & Terasi Bubuk AMS packed directly at Toko Amen Snack.",
     ctaLabel: "View AMS Products",
   },
   "promo-pengiriman-nasional": {
@@ -166,29 +166,29 @@ export const PRODUCT_EN: Record<
   { badge: string; category: string; description: string }
 > = {
   "prd-01": {
-    badge: "In-House AMS",
+    badge: "Direct-Packed AMS",
     category: "Spices & Terasi",
-    description: "Authentic 240g Bangka fermented shrimp paste crafted directly by AMS (121 sold).",
+    description: "Authentic 240g Bangka fermented shrimp paste packed directly by AMS at Toko Amen Snack (121 sold).",
   },
   "prd-02": {
     badge: "AMS Bestseller (4.9★)",
     category: "Getas & Crackers",
-    description: "Crispy round Spanish mackerel getas crackers crafted in-house by AMS, 250g pack (375 sold).",
+    description: "Crispy round Spanish mackerel getas crackers packed directly by AMS, 250g pack (375 sold).",
   },
   "prd-03": {
-    badge: "In-House AMS",
+    badge: "Direct-Packed AMS",
     category: "Getas & Crackers",
-    description: "Crispy elongated Spanish mackerel getas crackers crafted in-house by AMS, 250g pack.",
+    description: "Crispy elongated Spanish mackerel getas crackers packed directly by AMS, 250g pack.",
   },
   "prd-04": {
     badge: "Convenient & Pure",
     category: "Spices & Terasi",
-    description: "Ready-to-sprinkle Bangka fermented shrimp paste powder crafted by AMS (75 sold).",
+    description: "Ready-to-sprinkle Bangka fermented shrimp paste powder packed directly by AMS (75 sold).",
   },
   "prd-05": {
     badge: "AMS Signature (4.9★)",
     category: "Kericu & Seafood",
-    description: "Savory crunchy squid-egg kericu sticks (250g) crafted by AMS with zero preservatives (145 sold).",
+    description: "Savory crunchy squid-egg kericu sticks (250g) packed directly by AMS with zero preservatives (145 sold).",
   },
   "prd-06": {
     badge: "Bestseller (4.9★)",
@@ -231,7 +231,7 @@ export const PILLAR_EN: Record<string, { title: string; description: string }> =
   "pillar-1": {
     title: "Authentic & Quality-Checked",
     description:
-      "Featuring our own direct in-house AMS snacks and condiments alongside Bangka's finest local makers.",
+      "Featuring our AMS snacks and condiments packed directly at Toko Amen Snack alongside Bangka's finest local makers.",
   },
   "pillar-2": {
     title: "Honest Retail & Wholesale Prices",
@@ -300,9 +300,9 @@ export const BLOG_EN: Record<
     excerpt:
       "Wondering what gifts to pack after visiting Sungailiat's beaches? Here are the 5 traveler favorites at Toko Amen Snack.",
     content: [
-      "1. Getas Bangka AMS & Kericu Telor Cumi AMS — Signature in-house snacks crafted directly by Toko Amen Snack.",
+      "1. Getas Bangka AMS & Kericu Telor Cumi AMS — Signature snacks packed directly at Toko Amen Snack.",
       "2. Kemplang Panggang Belinyu & JJ 2.5 Blue Tie — Crisp grilled fish crackers prized for authentic Spanish mackerel flavor.",
-      "3. Terasi AMS 240g & Terasi Bubuk AMS — Authentic Bangka fermented shrimp paste produced in-house by AMS.",
+      "3. Terasi AMS 240g & Terasi Bubuk AMS — Authentic Bangka fermented shrimp paste packed directly by AMS.",
       "4. Cap SS Bangka Soy Sauce & Shrimp Paste — Essential Bangka pantry staples for home cooks.",
       "5. No. 1 Bangka Coffee & Indomie Kaldu Udang — Unique local finds that bring Bangka flavor straight to your kitchen.",
     ],

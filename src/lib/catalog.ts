@@ -313,7 +313,7 @@ export function getDefaultStoreAndKnowledge(): {
       {
         topicKey: "sejarah_toko",
         title: "Sejarah & Kepercayaan Toko Amen Snack",
-        content: `Toko Amen Snack resmi berdiri sejak ${STORE_INFO.foundedDate} di Jl. Muhidin No.106, Sungailiat, Kabupaten Bangka. Terdaftar resmi di Sisparnas Kementerian Pariwisata RI dengan rating ${STORE_INFO.rating}★ Google Maps serta memproduksi langsung lini produk internal bermerek AMS (Amen Snack).`,
+        content: `Toko Amen Snack resmi berdiri sejak ${STORE_INFO.foundedDate} di Jl. Muhidin No.106, Sungailiat, Kabupaten Bangka. Terdaftar resmi di Sisparnas Kementerian Pariwisata RI dengan rating ${STORE_INFO.rating}★ Google Maps serta menghadirkan lini produk bermerek AMS (Amen Snack) yang dikemas langsung di Toko Amen Snack.`,
       },
       {
         topicKey: "jam_buka",

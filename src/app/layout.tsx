@@ -36,7 +36,7 @@ export const metadata: Metadata = {
     title:
       "Toko Amen Snack Sungailiat - Pusat Oleh-Oleh & Camilan Khas Bangka",
     description:
-      "Pusat oleh-oleh khas Bangka terlengkap di Sungailiat. Tersedia produk produksi langsung AMS, kemplang panggang, getas, dan camilan khas Bangka.",
+      "Pusat oleh-oleh khas Bangka terlengkap di Sungailiat. Tersedia produk bermerek AMS yang dikemas langsung di Toko Amen Snack, kemplang panggang, getas, dan camilan khas Bangka.",
   },
 };
 

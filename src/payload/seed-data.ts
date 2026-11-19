@@ -166,10 +166,10 @@ export const FLYERS_COLLECTION: FlyerItem[] = [
   {
     id: "promo-cap-amen",
     title: "Kemplang & Olahan Unggulan AMS",
-    badge: "Produksi Langsung AMS",
+    badge: "Dikemas Langsung AMS",
     period: "Tersedia Setiap Hari",
     description:
-      "Getas Bangka AMS, Kericu Telor Cumi AMS, Terasi Toboali AMS & Terasi Bubuk AMS produksi langsung Toko Amen Snack.",
+      "Getas Bangka AMS, Kericu Telor Cumi AMS, Terasi Toboali AMS & Terasi Bubuk AMS dikemas langsung di Toko Amen Snack.",
     alt: "Banner Promo Kemplang & Olahan Unggulan AMS Toko Amen Snack",
     imageUrl: "/images/banners/promo-cap-amen.webp",
     ctaLabel: "Lihat Produk Unggulan AMS",
@@ -268,10 +268,10 @@ export const PRODUCTS_COLLECTION: ProductItem[] = [
     categorySlug: "bumbu-terasi",
     price: 40000,
     formattedPrice: "Rp40.000",
-    badge: "Produksi Langsung AMS",
+    badge: "Dikemas Langsung AMS",
     rating: 5.0,
     description:
-      "Terasi udang rebon asli Pulau Bangka produksi langsung AMS 240g dengan aroma gurih autentik untuk sambal & masakan (121 terjual).",
+      "Terasi udang rebon asli Pulau Bangka kemasan 240g yang dikemas langsung oleh AMS di Toko Amen Snack dengan aroma gurih autentik untuk sambal & masakan (121 terjual).",
     imageUrl: "/images/products/shopee/shp-019-terasi-ams-240g.webp",
     shopeeUrl: "https://shopee.co.id/Terasi-AMS-240g-i.284836006.8490717110",
   },
@@ -286,7 +286,7 @@ export const PRODUCTS_COLLECTION: ProductItem[] = [
     badge: "Best Seller AMS (4.9★)",
     rating: 4.9,
     description:
-      "Getas ikan tenggiri bulat khas Bangka produksi langsung AMS kemasan 250g yang renyah dan gurih (375 terjual).",
+      "Getas ikan tenggiri bulat khas Bangka yang dikemas langsung oleh AMS dalam ukuran 250g, renyah dan gurih (375 terjual).",
     imageUrl: "/images/products/shopee/shp-022-getas-bangka-ams-250g-bulat.webp",
     shopeeUrl: "https://shopee.co.id/Getas-Bangka-AMS-250g-bulat-i.284836006.7242381399",
   },
@@ -298,10 +298,10 @@ export const PRODUCTS_COLLECTION: ProductItem[] = [
     categorySlug: "getas-kerupuk",
     price: 50000,
     formattedPrice: "Rp50.000",
-    badge: "Produksi Langsung AMS",
+    badge: "Dikemas Langsung AMS",
     rating: 4.9,
     description:
-      "Getas ikan tenggiri model panjang produksi langsung AMS kemasan 250g, renyah padat tanpa bahan pengawet.",
+      "Getas ikan tenggiri model panjang 250g yang dikemas langsung oleh AMS di Toko Amen Snack, renyah padat tanpa bahan pengawet.",
     imageUrl: "/images/products/shopee/shp-097-getas-bangka-ams-panjang-250g.webp",
     shopeeUrl: "https://shopee.co.id/Getas-bangka-AMS-panjang-250g-i.284836006.6442376843",
   },
@@ -316,7 +316,7 @@ export const PRODUCTS_COLLECTION: ProductItem[] = [
     badge: "Praktis & Higienis",
     rating: 5.0,
     description:
-      "Terasi udang Bangka bubuk siap pakai produksi langsung AMS yang praktis ditabur untuk masakan & sambal (75 terjual).",
+      "Terasi udang Bangka bubuk siap pakai yang dikemas langsung oleh AMS, praktis ditabur untuk masakan & sambal (75 terjual).",
     imageUrl: "/images/products/shopee/shp-041-terasi-bubuk-ams.webp",
     shopeeUrl: "https://shopee.co.id/Terasi-Bubuk-AMS-i.284836006.4258560015",
   },
@@ -331,7 +331,7 @@ export const PRODUCTS_COLLECTION: ProductItem[] = [
     badge: "Andalan AMS (4.9★)",
     rating: 4.9,
     description:
-      "Stik kericu telur cumi renyah & gurih produksi langsung AMS kemasan 250g bebas bahan pengawet (145 terjual).",
+      "Stik kericu telur cumi renyah & gurih ukuran 250g yang dikemas langsung oleh AMS di Toko Amen Snack bebas bahan pengawet (145 terjual).",
     imageUrl: "/images/products/shopee/shp-058-kericu-stick-telor-cumi-ams-250g.webp",
     shopeeUrl: "https://shopee.co.id/Kericu-Stick-Telor-Cumi-AMS-250g-i.284836006.5642388968",
   },
@@ -447,7 +447,7 @@ export const VALUE_PILLARS: ValuePillarItem[] = [
     id: "pillar-1",
     title: "Asli & Berkualitas",
     description:
-      "Menghadirkan kemplang, getas, kericu, dan terasi produksi langsung Toko Amen Snack bermerek AMS serta pilihan terbaik pengrajin lokal Bangka.",
+      "Menghadirkan kemplang, getas, kericu, dan terasi yang dikemas langsung di Toko Amen Snack bermerek AMS serta pilihan terbaik pengrajin lokal Bangka.",
     iconName: "award",
   },
   {
@@ -476,8 +476,8 @@ export const PROPOSITION_BANNERS: PropositionBannerItem[] = [
   },
   {
     id: "prop-2",
-    title: "Produksi Internal AMS",
-    alt: "Produk Produksi Langsung AMS Toko Amen Snack — Getas, Kericu & Terasi Khas Bangka",
+    title: "Dikemas Langsung AMS",
+    alt: "Produk Dikemas Langsung AMS di Toko Amen Snack — Getas, Kericu & Terasi Khas Bangka",
     imageUrl: "/images/banners/proposition-2.webp",
     href: "/about",
   },
@@ -592,9 +592,9 @@ export const BLOGS_COLLECTION: BlogPostItem[] = [
     excerpt:
       "Bingung memilih buah tangan sepulang dari wisata pantai di Sungailiat? Ini daftar 5 produk khas Bangka yang paling sering diborong wisatawan.",
     content: [
-      "1. Getas Bangka AMS & Kericu Telor Cumi AMS — Camilan produksi langsung Toko Amen Snack yang renyah, gurih, dan praktis dibawa perjalanan jauh.",
+      "1. Getas Bangka AMS & Kericu Telor Cumi AMS — Camilan yang dikemas langsung di Toko Amen Snack, renyah, gurih, dan praktis dibawa perjalanan jauh.",
       "2. Kemplang Panggang Belinyu & JJ 2.5 Tali Biru — Primadona pecinta kerupuk ikan panggang dengan tekstur renyah dan rasa ikan tenggiri asli.",
-      "3. Terasi AMS 240g & Terasi Bubuk AMS — Terasi udang rebon asli Bangka produksi langsung AMS yang harum untuk sambal maupun masakan.",
+      "3. Terasi AMS 240g & Terasi Bubuk AMS — Terasi udang rebon asli Bangka yang dikemas langsung oleh AMS, harum untuk sambal maupun masakan.",
       "4. Kecap Asin Asli Bangka Cap SS & Terasi Udang — Bumbu legendaris yang wajib dibawa pulang bagi penggemar masakan rumahan khas Bangka.",
       "5. Kopi Curah No. 1 & Indomie Kaldu Udang Bangka — Duo oleh-oleh unik yang menghadirkan nostalgia cita rasa Pulau Bangka di rumah.",
     ],
